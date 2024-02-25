@@ -1,0 +1,437 @@
+<svg width="1440" height="1024" viewBox="0 0 1440 1024" fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_559_9548)">
+        <rect width="1440" height="1024" fill="#F4F5FA" />
+        <g style="mix-blend-mode:color-burn" opacity="0.21">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M-112.949 517.902V479.353H-169.263V517.902H-230.061V473.235H-56.6352V479.353H-0.321518V517.902H-112.949ZM177.63 517.902H65.0024V473.235H346.571V479.353H177.63V517.902ZM927.729 517.902H815.101V479.353H871.415V473.235H1040.36V479.353H927.729V517.902ZM1621.51 517.902H1508.89V479.353H1565.2V473.235H1790.45V479.353H1621.51V517.902ZM1387.25 473.235V479.353H1443.56V517.902H1330.93V479.353H1218.31V517.902H1105.68V479.353H1161.99V473.235H1387.25ZM749.777 473.235V517.902H637.15V473.235H749.777ZM411.895 473.235H524.522V517.902H411.895V473.235Z"
+                fill="white" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M-112.949 651.902H-0.321518V607.235H-112.949V651.902ZM-169.263 607.235V651.902H-230.061V607.235H-169.263ZM65.0024 607.235V651.902H177.63V607.235H65.0024ZM468.209 607.235V651.902H693.464V607.235H468.209ZM871.415 607.235V648.294H927.729V651.902H1040.36V648.294H984.042V607.235H871.415ZM1105.68 607.235V651.902H1218.31V607.235H1105.68ZM1330.93 607.235V651.902H1443.56V607.235H1330.93ZM1508.89 607.235V651.902H1621.51V607.235H1508.89Z"
+                fill="white" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M-112.949 741.235V760.922H-169.263V741.235H-230.061V785.902H-56.6352V760.922H-0.321518V741.235H-112.949ZM65.0024 741.235V785.902H346.571V760.922H177.63V741.235H65.0024ZM524.522 741.235V785.902H637.15V741.235H524.522ZM927.729 741.235V760.922H815.101V785.902H984.042V760.922H1040.36V741.235H927.729ZM1105.68 741.235V760.922H1161.99V785.902H1387.25V760.922H1443.56V741.235H1330.93V760.922H1218.31V741.235H1105.68ZM1508.89 741.235V760.922H1565.2V785.902H1790.45V760.922H1621.51V741.235H1508.89Z"
+                fill="white" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M-145.046 411.314V692.882H-201.36V651.902H-262.073V607.235H-201.36V449.863H-262.158V405.196H-88.7327V355H-313.988V749.196H-262.073V741.235H-201.275V749.196H-144.961V741.235H-88.7327V692.882H-32.4189L-32.4189 651.902H-144.961V607.235H-32.4189L-32.4188 449.863H-145.046V411.314L-145.046 411.314ZM258.16 523.941V467.627H145.532L145.533 449.863H32.9051V405.196H314.474L314.474 355H32.905V749.196H32.99V741.235H145.617V749.196H314.474V692.882H145.532V651.902H32.99V607.235H145.532V523.941H258.16ZM436.111 636.569H436.196V607.235H661.366V523.941H717.68V449.863H605.053V405.196H717.68V355H605.052V523.941H492.425L492.425 449.863H379.798V405.196H492.425L492.425 355H379.798V523.941H436.111V636.569ZM492.425 749.196V651.902H605.052V741.235H492.51V749.196H492.425ZM839.318 580.255H895.631V607.235H952.03V648.294H1008.26V580.255H951.945V523.941H895.631L895.631 449.863H783.004L783.004 523.941H839.318V580.255ZM895.631 692.882V648.294H895.716V651.902H1008.26V692.882H951.945V741.235H895.716V749.196H783.004V692.882H895.631ZM839.318 405.196H1008.26L1008.26 355H839.318L839.318 405.196ZM1298.84 449.863L1298.84 692.882H1186.21V651.902H1073.67V607.235H1186.21L1186.21 449.863H1073.58L1073.58 692.882H1129.9V741.235H1186.3V749.196H1298.92V741.235H1355.15V692.882H1411.46V651.902H1298.92V607.235H1411.46L1411.47 449.863H1298.84ZM1355.15 405.196L1355.15 355H1129.9L1129.9 405.196H1355.15ZM1758.36 355H1533.1L1533.1 405.196H1758.36V355ZM1476.79 449.863L1476.79 692.882H1533.1V741.235H1589.5V749.196H1758.36V692.882H1589.42V651.902H1476.87V607.235H1589.42L1589.42 449.863H1476.79Z"
+                fill="white" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M-144.962 517.902V479.353H-201.275V517.902H-262.073V473.235H-88.6479V479.353H-32.3342V517.902H-144.962ZM145.617 517.902H32.9897V473.235H314.558V479.353H145.617V517.902ZM895.716 517.902H783.089V479.353H839.402V473.235H1008.34V479.353H895.716V517.902ZM1589.5 517.902H1476.87V479.353H1533.19V473.235H1758.44V479.353H1589.5V517.902ZM1355.24 473.235V479.353H1411.55V517.902H1298.92V479.353H1186.29V517.902H1073.67V479.353H1129.98V473.235H1355.24ZM717.765 473.235V517.902H605.137V473.235H717.765ZM379.882 473.235H492.51V517.902H379.882V473.235Z"
+                fill="white" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M-144.962 651.902H-32.3342V607.235H-144.962V651.902ZM-201.275 607.235V651.902H-262.073V607.235H-201.275ZM32.9897 607.235V651.902H145.617V607.235H32.9897ZM436.196 607.235V651.902H661.451V607.235H436.196ZM839.402 607.235V648.294H895.716V651.902H1008.34V648.294H952.03V607.235H839.402ZM1073.67 607.235V651.902H1186.29V607.235H1073.67ZM1298.92 607.235V651.902H1411.55V607.235H1298.92ZM1476.87 607.235V651.902H1589.5V607.235H1476.87Z"
+                fill="white" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M-144.962 741.235V760.922H-201.275V741.235H-262.073V785.902H-88.6479V760.922H-32.3342V741.235H-144.962ZM32.9897 741.235V785.902H314.558V760.922H145.617V741.235H32.9897ZM492.51 741.235V785.902H605.137V741.235H492.51ZM895.716 741.235V760.922H783.089V785.902H952.03V760.922H1008.34V741.235H895.716ZM1073.67 741.235V760.922H1129.98V785.902H1355.24V760.922H1411.55V741.235H1298.92V760.922H1186.29V741.235H1073.67ZM1476.87 741.235V760.922H1533.19V785.902H1758.44V760.922H1589.5V741.235H1476.87Z"
+                fill="white" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M-177.059 449.863V692.882H-233.373V651.902H-294.086V607.235H-233.373V411.314L-233.373 411.314V449.863H-294.171V405.196H-120.745V411.314L-120.745 411.314V355H-346V749.196H-294.086V741.235H-233.288V749.196H-176.974V741.235H-120.745V692.882H-64.4314V651.902H-176.974V607.235H-64.4314V411.314L-64.4315 449.863H-177.059ZM226.147 523.941V467.627H113.52V411.314L113.52 449.863H0.892426L0.892548 749.196H0.977264V741.235H113.605V749.196H282.461V692.882H113.52V651.902H0.977264V607.235H113.52V523.941H226.147ZM0.892426 405.196H282.461L282.461 411.314V355H0.892548L0.892426 405.196ZM404.099 636.569H404.184V607.235H629.354V523.941H685.667V355H573.04L573.04 405.196H685.667V449.863H573.04L573.04 523.941H460.413V355H347.785L347.785 405.196H460.412V449.863H347.785L347.785 523.941H404.099V636.569ZM460.413 749.196V651.902H573.04V741.235H460.497V749.196H460.413ZM807.305 580.255H863.619V607.235H920.017V648.294H976.246V580.255H919.932V523.941H863.619L863.619 449.863H750.991L750.991 523.941H807.305V580.255ZM863.619 692.882V648.294H863.703V651.902H976.246V692.882H919.932V741.235H863.703V749.196H750.991V692.882H863.619ZM807.305 405.196H976.246L976.246 355H807.305L807.305 405.196ZM1266.82 449.863L1266.83 692.882H1154.2V651.902H1041.65V607.235H1154.2L1154.2 449.863H1041.57L1041.57 692.882H1097.88V741.235H1154.28V749.196H1266.91V741.235H1323.14V692.882H1379.45V651.902H1266.91V607.235H1379.45L1379.45 449.863H1266.82ZM1323.14 405.196L1323.14 355H1097.88L1097.88 405.196H1323.14ZM1726.35 355H1501.09L1501.09 405.196H1726.34L1726.35 355ZM1444.78 449.863L1444.78 692.882H1501.09V741.235H1557.49V749.196H1726.35V692.882H1557.4V651.902H1444.86V607.235H1557.4L1557.4 449.863H1444.78Z"
+                fill="white" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M-112.949 517.902V479.353H-169.263V517.902H-230.061V473.235H-56.6352V479.353H-0.321518V517.902H-112.949ZM177.63 517.902H65.0024V473.235H346.571V479.353H177.63V517.902ZM927.729 517.902H815.101V479.353H871.415V473.235H1040.36V479.353H927.729V517.902ZM1621.51 517.902H1508.89V479.353H1565.2V473.235H1790.45V479.353H1621.51V517.902ZM1387.25 473.235V479.353H1443.56V517.902H1330.93V479.353H1218.31V517.902H1105.68V479.353H1161.99V473.235H1387.25ZM749.777 473.235V517.902H637.15V473.235H749.777ZM411.895 473.235H524.522V517.902H411.895V473.235Z"
+                fill="#B34FFF" style="mix-blend-mode:multiply" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M-112.949 651.902H-0.321518V607.235H-112.949V651.902ZM-169.263 607.235V651.902H-230.061V607.235H-169.263ZM65.0024 607.235V651.902H177.63V607.235H65.0024ZM468.209 607.235V651.902H693.464V607.235H468.209ZM871.415 607.235V648.294H927.729V651.902H1040.36V648.294H984.042V607.235H871.415ZM1105.68 607.235V651.902H1218.31V607.235H1105.68ZM1330.93 607.235V651.902H1443.56V607.235H1330.93ZM1508.89 607.235V651.902H1621.51V607.235H1508.89Z"
+                fill="#B34FFF" style="mix-blend-mode:multiply" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M-112.949 741.235V760.922H-169.263V741.235H-230.061V785.902H-56.6352V760.922H-0.321518V741.235H-112.949ZM65.0024 741.235V785.902H346.571V760.922H177.63V741.235H65.0024ZM524.522 741.235V785.902H637.15V741.235H524.522ZM927.729 741.235V760.922H815.101V785.902H984.042V760.922H1040.36V741.235H927.729ZM1105.68 741.235V760.922H1161.99V785.902H1387.25V760.922H1443.56V741.235H1330.93V760.922H1218.31V741.235H1105.68ZM1508.89 741.235V760.922H1565.2V785.902H1790.45V760.922H1621.51V741.235H1508.89Z"
+                fill="#B34FFF" style="mix-blend-mode:multiply" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M-145.046 411.314V692.882H-201.36V651.902H-262.073V607.235H-201.36V449.863H-262.158V405.196H-88.7327V355H-313.988V749.196H-262.073V741.235H-201.275V749.196H-144.961V741.235H-88.7327V692.882H-32.4189L-32.4189 651.902H-144.961V607.235H-32.4189L-32.4188 449.863H-145.046V411.314L-145.046 411.314ZM258.16 523.941V467.627H145.532L145.533 449.863H32.9051V405.196H314.474L314.474 355H32.905V749.196H32.99V741.235H145.617V749.196H314.474V692.882H145.532V651.902H32.99V607.235H145.532V523.941H258.16ZM436.111 636.569H436.196V607.235H661.366V523.941H717.68V449.863H605.053V405.196H717.68V355H605.052V523.941H492.425L492.425 449.863H379.798V405.196H492.425L492.425 355H379.798V523.941H436.111V636.569ZM492.425 749.196V651.902H605.052V741.235H492.51V749.196H492.425ZM839.318 580.255H895.631V607.235H952.03V648.294H1008.26V580.255H951.945V523.941H895.631L895.631 449.863H783.004L783.004 523.941H839.318V580.255ZM895.631 692.882V648.294H895.716V651.902H1008.26V692.882H951.945V741.235H895.716V749.196H783.004V692.882H895.631ZM839.318 405.196H1008.26L1008.26 355H839.318L839.318 405.196ZM1298.84 449.863L1298.84 692.882H1186.21V651.902H1073.67V607.235H1186.21L1186.21 449.863H1073.58L1073.58 692.882H1129.9V741.235H1186.3V749.196H1298.92V741.235H1355.15V692.882H1411.46V651.902H1298.92V607.235H1411.46L1411.47 449.863H1298.84ZM1355.15 405.196L1355.15 355H1129.9L1129.9 405.196H1355.15ZM1758.36 355H1533.1L1533.1 405.196H1758.36V355ZM1476.79 449.863L1476.79 692.882H1533.1V741.235H1589.5V749.196H1758.36V692.882H1589.42V651.902H1476.87V607.235H1589.42L1589.42 449.863H1476.79Z"
+                fill="#B34FFF" style="mix-blend-mode:multiply" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M-144.962 517.902V479.353H-201.275V517.902H-262.073V473.235H-88.6479V479.353H-32.3342V517.902H-144.962ZM145.617 517.902H32.9897V473.235H314.558V479.353H145.617V517.902ZM895.716 517.902H783.089V479.353H839.402V473.235H1008.34V479.353H895.716V517.902ZM1589.5 517.902H1476.87V479.353H1533.19V473.235H1758.44V479.353H1589.5V517.902ZM1355.24 473.235V479.353H1411.55V517.902H1298.92V479.353H1186.29V517.902H1073.67V479.353H1129.98V473.235H1355.24ZM717.765 473.235V517.902H605.137V473.235H717.765ZM379.882 473.235H492.51V517.902H379.882V473.235Z"
+                fill="#4DE6FF" style="mix-blend-mode:multiply" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M-144.962 651.902H-32.3342V607.235H-144.962V651.902ZM-201.275 607.235V651.902H-262.073V607.235H-201.275ZM32.9897 607.235V651.902H145.617V607.235H32.9897ZM436.196 607.235V651.902H661.451V607.235H436.196ZM839.402 607.235V648.294H895.716V651.902H1008.34V648.294H952.03V607.235H839.402ZM1073.67 607.235V651.902H1186.29V607.235H1073.67ZM1298.92 607.235V651.902H1411.55V607.235H1298.92ZM1476.87 607.235V651.902H1589.5V607.235H1476.87Z"
+                fill="#4DE6FF" style="mix-blend-mode:multiply" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M-144.962 741.235V760.922H-201.275V741.235H-262.073V785.902H-88.6479V760.922H-32.3342V741.235H-144.962ZM32.9897 741.235V785.902H314.558V760.922H145.617V741.235H32.9897ZM492.51 741.235V785.902H605.137V741.235H492.51ZM895.716 741.235V760.922H783.089V785.902H952.03V760.922H1008.34V741.235H895.716ZM1073.67 741.235V760.922H1129.98V785.902H1355.24V760.922H1411.55V741.235H1298.92V760.922H1186.29V741.235H1073.67ZM1476.87 741.235V760.922H1533.19V785.902H1758.44V760.922H1589.5V741.235H1476.87Z"
+                fill="#4DE6FF" style="mix-blend-mode:multiply" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M-177.059 449.863V692.882H-233.373V651.902H-294.086V607.235H-233.373V411.314L-233.373 411.314V449.863H-294.171V405.196H-120.745V411.314L-120.745 411.314V355H-346V749.196H-294.086V741.235H-233.288V749.196H-176.974V741.235H-120.745V692.882H-64.4314V651.902H-176.974V607.235H-64.4314V411.314L-64.4315 449.863H-177.059ZM226.147 523.941V467.627H113.52V411.314L113.52 449.863H0.892426L0.892548 749.196H0.977264V741.235H113.605V749.196H282.461V692.882H113.52V651.902H0.977264V607.235H113.52V523.941H226.147ZM0.892426 405.196H282.461L282.461 411.314V355H0.892548L0.892426 405.196ZM404.099 636.569H404.184V607.235H629.354V523.941H685.667V355H573.04L573.04 405.196H685.667V449.863H573.04L573.04 523.941H460.413V355H347.785L347.785 405.196H460.412V449.863H347.785L347.785 523.941H404.099V636.569ZM460.413 749.196V651.902H573.04V741.235H460.497V749.196H460.413ZM807.305 580.255H863.619V607.235H920.017V648.294H976.246V580.255H919.932V523.941H863.619L863.619 449.863H750.991L750.991 523.941H807.305V580.255ZM863.619 692.882V648.294H863.703V651.902H976.246V692.882H919.932V741.235H863.703V749.196H750.991V692.882H863.619ZM807.305 405.196H976.246L976.246 355H807.305L807.305 405.196ZM1266.82 449.863L1266.83 692.882H1154.2V651.902H1041.65V607.235H1154.2L1154.2 449.863H1041.57L1041.57 692.882H1097.88V741.235H1154.28V749.196H1266.91V741.235H1323.14V692.882H1379.45V651.902H1266.91V607.235H1379.45L1379.45 449.863H1266.82ZM1323.14 405.196L1323.14 355H1097.88L1097.88 405.196H1323.14ZM1726.35 355H1501.09L1501.09 405.196H1726.34L1726.35 355ZM1444.78 449.863L1444.78 692.882H1501.09V741.235H1557.49V749.196H1726.35V692.882H1557.4V651.902H1444.86V607.235H1557.4L1557.4 449.863H1444.78Z"
+                fill="#4DE6FF" style="mix-blend-mode:multiply" />
+        </g>
+        <g style="mix-blend-mode:exclusion" opacity="0.06">
+            <path d="M355.312 293.82L288.926 332.129V565.164H436.704V293.82H355.312Z" fill="#B5B5B5" />
+            <path d="M413.969 246.871L332.577 293.819H413.969V246.871Z" fill="#B5B5B5" />
+            <path d="M715.209 855.035V1014.18L1041.74 827.582H765.511L715.209 855.035Z"
+                fill="#B5B5B5" />
+            <path
+                d="M1113.07 565.163H675.423V570.846H988.031V684.522L725.724 827.583H1001.96L1113.07 764.095V565.163Z"
+                fill="#B5B5B5" />
+            <path d="M1135.81 457.172H823.201V293.82H698.158V565.164H1135.81V457.172Z"
+                fill="#B5B5B5" />
+            <path d="M1113.07 366.232V293.82H959.897L1113.07 366.232Z" fill="#B5B5B5" />
+            <path
+                d="M794.782 218.452L954.212 293.819H1107.39V246.871L669.739 13.8357V293.819H794.782V218.452Z"
+                fill="#B5B5B5" />
+            <path d="M413.969 565.163H266.191V671.904H413.969V565.163Z" fill="#B5B5B5" />
+            <path d="M249.139 671.906V684.524L396.918 764.097V671.906H249.139Z" fill="#B5B5B5" />
+            <path d="M58.6757 618.534H-55V872.088H58.6757V618.534Z" fill="#B5B5B5" />
+            <path
+                d="M1434.26 872.087H1320.59V873.337L698.158 1232.72L75.727 873.337V872.087H-37.9486V938.985L531.851 1267.96H864.466L1434.26 938.985V872.087Z"
+                fill="#B5B5B5" />
+            <path d="M98.4622 178.155H-15.2135V618.534H98.4622V178.155Z" fill="#B5B5B5" />
+            <path d="M1457 178.155H1314.91V618.534H1457V178.155Z" fill="#B5B5B5" />
+            <path
+                d="M70.0432 154.625L691.849 -204.363H492.916L-15.2135 88.9773L-43.6324 178.156H70.0432V154.625Z"
+                fill="#B5B5B5" />
+            <path
+                d="M1292.17 154.625V178.156H1405.85V88.9773L897.716 -204.363H670.365L1292.17 154.625Z"
+                fill="#B5B5B5" />
+            <path d="M1457 618.534H1343.32V872.088H1457V618.534Z" fill="#B5B5B5" />
+        </g>
+        <g clip-path="url(#clip1_559_9548)">
+            <circle cx="162.5" cy="218.5" r="1.5" fill="#ABABAB" />
+            <circle cx="171.5" cy="218.5" r="1.5" fill="#ABABAB" />
+            <circle cx="180.5" cy="218.5" r="1.5" fill="#ABABAB" />
+            <circle cx="189.5" cy="218.5" r="1.5" fill="#ABABAB" />
+            <circle cx="198.5" cy="218.5" r="1.5" fill="#ABABAB" />
+            <circle cx="207.5" cy="218.5" r="1.5" fill="#ABABAB" />
+            <circle cx="216.5" cy="218.5" r="1.5" fill="#ABABAB" />
+            <circle cx="225.5" cy="218.5" r="1.5" fill="#ABABAB" />
+            <circle cx="234.5" cy="218.5" r="1.5" fill="#ABABAB" />
+            <circle cx="243.5" cy="218.5" r="1.5" fill="#ABABAB" />
+            <circle cx="252.5" cy="218.5" r="1.5" fill="#ABABAB" />
+            <circle cx="261.5" cy="218.5" r="1.5" fill="#ABABAB" />
+            <circle cx="270.5" cy="218.5" r="1.5" fill="#ABABAB" />
+            <circle cx="279.5" cy="218.5" r="1.5" fill="#ABABAB" />
+            <circle cx="288.5" cy="218.5" r="1.5" fill="#ABABAB" />
+            <circle cx="162.5" cy="227.5" r="1.5" fill="#ABABAB" />
+            <circle cx="171.5" cy="227.5" r="1.5" fill="#ABABAB" />
+            <circle cx="180.5" cy="227.5" r="1.5" fill="#ABABAB" />
+            <circle cx="189.5" cy="227.5" r="1.5" fill="#ABABAB" />
+            <circle cx="198.5" cy="227.5" r="1.5" fill="#ABABAB" />
+            <circle cx="207.5" cy="227.5" r="1.5" fill="#ABABAB" />
+            <circle cx="216.5" cy="227.5" r="1.5" fill="#ABABAB" />
+            <circle cx="225.5" cy="227.5" r="1.5" fill="#ABABAB" />
+            <circle cx="234.5" cy="227.5" r="1.5" fill="#ABABAB" />
+            <circle cx="243.5" cy="227.5" r="1.5" fill="#ABABAB" />
+            <circle cx="252.5" cy="227.5" r="1.5" fill="#ABABAB" />
+            <circle cx="261.5" cy="227.5" r="1.5" fill="#ABABAB" />
+            <circle cx="270.5" cy="227.5" r="1.5" fill="#ABABAB" />
+            <circle cx="279.5" cy="227.5" r="1.5" fill="#ABABAB" />
+            <circle cx="288.5" cy="227.5" r="1.5" fill="#ABABAB" />
+            <circle cx="162.5" cy="236.5" r="1.5" fill="#ABABAB" />
+            <circle cx="171.5" cy="236.5" r="1.5" fill="#ABABAB" />
+            <circle cx="180.5" cy="236.5" r="1.5" fill="#ABABAB" />
+            <circle cx="189.5" cy="236.5" r="1.5" fill="#ABABAB" />
+            <circle cx="198.5" cy="236.5" r="1.5" fill="#ABABAB" />
+            <circle cx="207.5" cy="236.5" r="1.5" fill="#ABABAB" />
+            <circle cx="216.5" cy="236.5" r="1.5" fill="#ABABAB" />
+            <circle cx="225.5" cy="236.5" r="1.5" fill="#ABABAB" />
+            <circle cx="234.5" cy="236.5" r="1.5" fill="#ABABAB" />
+            <circle cx="243.5" cy="236.5" r="1.5" fill="#ABABAB" />
+            <circle cx="252.5" cy="236.5" r="1.5" fill="#ABABAB" />
+            <circle cx="261.5" cy="236.5" r="1.5" fill="#ABABAB" />
+            <circle cx="270.5" cy="236.5" r="1.5" fill="#ABABAB" />
+            <circle cx="279.5" cy="236.5" r="1.5" fill="#ABABAB" />
+            <circle cx="288.5" cy="236.5" r="1.5" fill="#ABABAB" />
+            <circle cx="162.5" cy="245.5" r="1.5" fill="#ABABAB" />
+            <circle cx="171.5" cy="245.5" r="1.5" fill="#ABABAB" />
+            <circle cx="180.5" cy="245.5" r="1.5" fill="#ABABAB" />
+            <circle cx="189.5" cy="245.5" r="1.5" fill="#ABABAB" />
+            <circle cx="198.5" cy="245.5" r="1.5" fill="#ABABAB" />
+            <circle cx="207.5" cy="245.5" r="1.5" fill="#ABABAB" />
+            <circle cx="216.5" cy="245.5" r="1.5" fill="#ABABAB" />
+            <circle cx="225.5" cy="245.5" r="1.5" fill="#ABABAB" />
+            <circle cx="234.5" cy="245.5" r="1.5" fill="#ABABAB" />
+            <circle cx="243.5" cy="245.5" r="1.5" fill="#ABABAB" />
+            <circle cx="252.5" cy="245.5" r="1.5" fill="#ABABAB" />
+            <circle cx="261.5" cy="245.5" r="1.5" fill="#ABABAB" />
+            <circle cx="270.5" cy="245.5" r="1.5" fill="#ABABAB" />
+            <circle cx="279.5" cy="245.5" r="1.5" fill="#ABABAB" />
+            <circle cx="288.5" cy="245.5" r="1.5" fill="#ABABAB" />
+            <rect x="161" y="217" width="12" height="12" fill="#ABABAB" />
+        </g>
+        <g clip-path="url(#clip2_559_9548)">
+            <g clip-path="url(#clip3_559_9548)">
+                <circle cx="1327.5" cy="908.5" r="1.5" transform="rotate(-180 1327.5 908.5)"
+                    fill="#ABABAB" />
+                <circle cx="1318.5" cy="908.5" r="1.5" transform="rotate(-180 1318.5 908.5)"
+                    fill="#ABABAB" />
+                <circle cx="1309.5" cy="908.5" r="1.5" transform="rotate(-180 1309.5 908.5)"
+                    fill="#ABABAB" />
+                <circle cx="1300.5" cy="908.5" r="1.5" transform="rotate(-180 1300.5 908.5)"
+                    fill="#ABABAB" />
+                <circle cx="1291.5" cy="908.5" r="1.5" transform="rotate(-180 1291.5 908.5)"
+                    fill="#ABABAB" />
+                <circle cx="1282.5" cy="908.5" r="1.5" transform="rotate(-180 1282.5 908.5)"
+                    fill="#ABABAB" />
+                <circle cx="1273.5" cy="908.5" r="1.5" transform="rotate(-180 1273.5 908.5)"
+                    fill="#ABABAB" />
+                <circle cx="1264.5" cy="908.5" r="1.5" transform="rotate(-180 1264.5 908.5)"
+                    fill="#ABABAB" />
+                <circle cx="1255.5" cy="908.5" r="1.5" transform="rotate(-180 1255.5 908.5)"
+                    fill="#ABABAB" />
+                <circle cx="1246.5" cy="908.5" r="1.5" transform="rotate(-180 1246.5 908.5)"
+                    fill="#ABABAB" />
+                <circle cx="1237.5" cy="908.5" r="1.5" transform="rotate(-180 1237.5 908.5)"
+                    fill="#ABABAB" />
+                <circle cx="1228.5" cy="908.5" r="1.5" transform="rotate(-180 1228.5 908.5)"
+                    fill="#ABABAB" />
+                <circle cx="1219.5" cy="908.5" r="1.5" transform="rotate(-180 1219.5 908.5)"
+                    fill="#ABABAB" />
+                <circle cx="1210.5" cy="908.5" r="1.5" transform="rotate(-180 1210.5 908.5)"
+                    fill="#ABABAB" />
+                <circle cx="1201.5" cy="908.5" r="1.5" transform="rotate(-180 1201.5 908.5)"
+                    fill="#ABABAB" />
+            </g>
+            <g clip-path="url(#clip4_559_9548)">
+                <circle cx="1327.5" cy="899.5" r="1.5" transform="rotate(-180 1327.5 899.5)"
+                    fill="#ABABAB" />
+                <circle cx="1318.5" cy="899.5" r="1.5" transform="rotate(-180 1318.5 899.5)"
+                    fill="#ABABAB" />
+                <circle cx="1309.5" cy="899.5" r="1.5" transform="rotate(-180 1309.5 899.5)"
+                    fill="#ABABAB" />
+                <circle cx="1300.5" cy="899.5" r="1.5" transform="rotate(-180 1300.5 899.5)"
+                    fill="#ABABAB" />
+                <circle cx="1291.5" cy="899.5" r="1.5" transform="rotate(-180 1291.5 899.5)"
+                    fill="#ABABAB" />
+                <circle cx="1282.5" cy="899.5" r="1.5" transform="rotate(-180 1282.5 899.5)"
+                    fill="#ABABAB" />
+                <circle cx="1273.5" cy="899.5" r="1.5" transform="rotate(-180 1273.5 899.5)"
+                    fill="#ABABAB" />
+                <circle cx="1264.5" cy="899.5" r="1.5" transform="rotate(-180 1264.5 899.5)"
+                    fill="#ABABAB" />
+                <circle cx="1255.5" cy="899.5" r="1.5" transform="rotate(-180 1255.5 899.5)"
+                    fill="#ABABAB" />
+                <circle cx="1246.5" cy="899.5" r="1.5" transform="rotate(-180 1246.5 899.5)"
+                    fill="#ABABAB" />
+                <circle cx="1237.5" cy="899.5" r="1.5" transform="rotate(-180 1237.5 899.5)"
+                    fill="#ABABAB" />
+                <circle cx="1228.5" cy="899.5" r="1.5" transform="rotate(-180 1228.5 899.5)"
+                    fill="#ABABAB" />
+                <circle cx="1219.5" cy="899.5" r="1.5" transform="rotate(-180 1219.5 899.5)"
+                    fill="#ABABAB" />
+                <circle cx="1210.5" cy="899.5" r="1.5" transform="rotate(-180 1210.5 899.5)"
+                    fill="#ABABAB" />
+                <circle cx="1201.5" cy="899.5" r="1.5" transform="rotate(-180 1201.5 899.5)"
+                    fill="#ABABAB" />
+            </g>
+            <g clip-path="url(#clip5_559_9548)">
+                <circle cx="1327.5" cy="890.5" r="1.5" transform="rotate(-180 1327.5 890.5)"
+                    fill="#ABABAB" />
+                <circle cx="1318.5" cy="890.5" r="1.5" transform="rotate(-180 1318.5 890.5)"
+                    fill="#ABABAB" />
+                <circle cx="1309.5" cy="890.5" r="1.5" transform="rotate(-180 1309.5 890.5)"
+                    fill="#ABABAB" />
+                <circle cx="1300.5" cy="890.5" r="1.5" transform="rotate(-180 1300.5 890.5)"
+                    fill="#ABABAB" />
+                <circle cx="1291.5" cy="890.5" r="1.5" transform="rotate(-180 1291.5 890.5)"
+                    fill="#ABABAB" />
+                <circle cx="1282.5" cy="890.5" r="1.5" transform="rotate(-180 1282.5 890.5)"
+                    fill="#ABABAB" />
+                <circle cx="1273.5" cy="890.5" r="1.5" transform="rotate(-180 1273.5 890.5)"
+                    fill="#ABABAB" />
+                <circle cx="1264.5" cy="890.5" r="1.5" transform="rotate(-180 1264.5 890.5)"
+                    fill="#ABABAB" />
+                <circle cx="1255.5" cy="890.5" r="1.5" transform="rotate(-180 1255.5 890.5)"
+                    fill="#ABABAB" />
+                <circle cx="1246.5" cy="890.5" r="1.5" transform="rotate(-180 1246.5 890.5)"
+                    fill="#ABABAB" />
+                <circle cx="1237.5" cy="890.5" r="1.5" transform="rotate(-180 1237.5 890.5)"
+                    fill="#ABABAB" />
+                <circle cx="1228.5" cy="890.5" r="1.5" transform="rotate(-180 1228.5 890.5)"
+                    fill="#ABABAB" />
+                <circle cx="1219.5" cy="890.5" r="1.5" transform="rotate(-180 1219.5 890.5)"
+                    fill="#ABABAB" />
+                <circle cx="1210.5" cy="890.5" r="1.5" transform="rotate(-180 1210.5 890.5)"
+                    fill="#ABABAB" />
+                <circle cx="1201.5" cy="890.5" r="1.5" transform="rotate(-180 1201.5 890.5)"
+                    fill="#ABABAB" />
+            </g>
+            <g clip-path="url(#clip6_559_9548)">
+                <circle cx="1327.5" cy="881.5" r="1.5" transform="rotate(-180 1327.5 881.5)"
+                    fill="#ABABAB" />
+                <circle cx="1318.5" cy="881.5" r="1.5" transform="rotate(-180 1318.5 881.5)"
+                    fill="#ABABAB" />
+                <circle cx="1309.5" cy="881.5" r="1.5" transform="rotate(-180 1309.5 881.5)"
+                    fill="#ABABAB" />
+                <circle cx="1300.5" cy="881.5" r="1.5" transform="rotate(-180 1300.5 881.5)"
+                    fill="#ABABAB" />
+                <circle cx="1291.5" cy="881.5" r="1.5" transform="rotate(-180 1291.5 881.5)"
+                    fill="#ABABAB" />
+                <circle cx="1282.5" cy="881.5" r="1.5" transform="rotate(-180 1282.5 881.5)"
+                    fill="#ABABAB" />
+                <circle cx="1273.5" cy="881.5" r="1.5" transform="rotate(-180 1273.5 881.5)"
+                    fill="#ABABAB" />
+                <circle cx="1264.5" cy="881.5" r="1.5" transform="rotate(-180 1264.5 881.5)"
+                    fill="#ABABAB" />
+                <circle cx="1255.5" cy="881.5" r="1.5" transform="rotate(-180 1255.5 881.5)"
+                    fill="#ABABAB" />
+                <circle cx="1246.5" cy="881.5" r="1.5" transform="rotate(-180 1246.5 881.5)"
+                    fill="#ABABAB" />
+                <circle cx="1237.5" cy="881.5" r="1.5" transform="rotate(-180 1237.5 881.5)"
+                    fill="#ABABAB" />
+                <circle cx="1228.5" cy="881.5" r="1.5" transform="rotate(-180 1228.5 881.5)"
+                    fill="#ABABAB" />
+                <circle cx="1219.5" cy="881.5" r="1.5" transform="rotate(-180 1219.5 881.5)"
+                    fill="#ABABAB" />
+                <circle cx="1210.5" cy="881.5" r="1.5" transform="rotate(-180 1210.5 881.5)"
+                    fill="#ABABAB" />
+                <circle cx="1201.5" cy="881.5" r="1.5" transform="rotate(-180 1201.5 881.5)"
+                    fill="#ABABAB" />
+            </g>
+            <rect x="1329" y="910" width="12" height="12" transform="rotate(-180 1329 910)"
+                fill="#ABABAB" />
+        </g>
+        <g clip-path="url(#clip7_559_9548)">
+            <circle cx="1218.5" cy="345.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1227.5" cy="345.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1236.5" cy="345.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1245.5" cy="345.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1254.5" cy="345.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1263.5" cy="345.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1272.5" cy="345.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1281.5" cy="345.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1290.5" cy="345.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1299.5" cy="345.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1308.5" cy="345.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1317.5" cy="345.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1326.5" cy="345.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1335.5" cy="345.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1344.5" cy="345.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1218.5" cy="354.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1227.5" cy="354.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1236.5" cy="354.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1245.5" cy="354.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1254.5" cy="354.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1263.5" cy="354.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1272.5" cy="354.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1281.5" cy="354.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1290.5" cy="354.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1299.5" cy="354.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1308.5" cy="354.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1317.5" cy="354.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1326.5" cy="354.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1335.5" cy="354.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1344.5" cy="354.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1218.5" cy="363.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1227.5" cy="363.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1236.5" cy="363.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1245.5" cy="363.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1254.5" cy="363.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1263.5" cy="363.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1272.5" cy="363.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1281.5" cy="363.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1290.5" cy="363.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1299.5" cy="363.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1308.5" cy="363.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1317.5" cy="363.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1326.5" cy="363.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1335.5" cy="363.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1344.5" cy="363.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1218.5" cy="372.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1227.5" cy="372.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1236.5" cy="372.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1245.5" cy="372.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1254.5" cy="372.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1263.5" cy="372.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1272.5" cy="372.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1281.5" cy="372.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1290.5" cy="372.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1299.5" cy="372.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1308.5" cy="372.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1317.5" cy="372.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1326.5" cy="372.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1335.5" cy="372.5" r="1.5" fill="#ABABAB" />
+            <circle cx="1344.5" cy="372.5" r="1.5" fill="#ABABAB" />
+            <rect x="1217" y="344" width="12" height="12" fill="#ABABAB" />
+        </g>
+        <g clip-path="url(#clip8_559_9548)">
+            <circle cx="217.5" cy="902.5" r="1.5" fill="#ABABAB" />
+            <circle cx="226.5" cy="902.5" r="1.5" fill="#ABABAB" />
+            <circle cx="235.5" cy="902.5" r="1.5" fill="#ABABAB" />
+            <circle cx="244.5" cy="902.5" r="1.5" fill="#ABABAB" />
+            <circle cx="253.5" cy="902.5" r="1.5" fill="#ABABAB" />
+            <circle cx="262.5" cy="902.5" r="1.5" fill="#ABABAB" />
+            <circle cx="271.5" cy="902.5" r="1.5" fill="#ABABAB" />
+            <circle cx="280.5" cy="902.5" r="1.5" fill="#ABABAB" />
+            <circle cx="289.5" cy="902.5" r="1.5" fill="#ABABAB" />
+            <circle cx="298.5" cy="902.5" r="1.5" fill="#ABABAB" />
+            <circle cx="307.5" cy="902.5" r="1.5" fill="#ABABAB" />
+            <circle cx="316.5" cy="902.5" r="1.5" fill="#ABABAB" />
+            <circle cx="325.5" cy="902.5" r="1.5" fill="#ABABAB" />
+            <circle cx="334.5" cy="902.5" r="1.5" fill="#ABABAB" />
+            <circle cx="343.5" cy="902.5" r="1.5" fill="#ABABAB" />
+            <circle cx="217.5" cy="911.5" r="1.5" fill="#ABABAB" />
+            <circle cx="226.5" cy="911.5" r="1.5" fill="#ABABAB" />
+            <circle cx="235.5" cy="911.5" r="1.5" fill="#ABABAB" />
+            <circle cx="244.5" cy="911.5" r="1.5" fill="#ABABAB" />
+            <circle cx="253.5" cy="911.5" r="1.5" fill="#ABABAB" />
+            <circle cx="262.5" cy="911.5" r="1.5" fill="#ABABAB" />
+            <circle cx="271.5" cy="911.5" r="1.5" fill="#ABABAB" />
+            <circle cx="280.5" cy="911.5" r="1.5" fill="#ABABAB" />
+            <circle cx="289.5" cy="911.5" r="1.5" fill="#ABABAB" />
+            <circle cx="298.5" cy="911.5" r="1.5" fill="#ABABAB" />
+            <circle cx="307.5" cy="911.5" r="1.5" fill="#ABABAB" />
+            <circle cx="316.5" cy="911.5" r="1.5" fill="#ABABAB" />
+            <circle cx="325.5" cy="911.5" r="1.5" fill="#ABABAB" />
+            <circle cx="334.5" cy="911.5" r="1.5" fill="#ABABAB" />
+            <circle cx="343.5" cy="911.5" r="1.5" fill="#ABABAB" />
+            <circle cx="217.5" cy="920.5" r="1.5" fill="#ABABAB" />
+            <circle cx="226.5" cy="920.5" r="1.5" fill="#ABABAB" />
+            <circle cx="235.5" cy="920.5" r="1.5" fill="#ABABAB" />
+            <circle cx="244.5" cy="920.5" r="1.5" fill="#ABABAB" />
+            <circle cx="253.5" cy="920.5" r="1.5" fill="#ABABAB" />
+            <circle cx="262.5" cy="920.5" r="1.5" fill="#ABABAB" />
+            <circle cx="271.5" cy="920.5" r="1.5" fill="#ABABAB" />
+            <circle cx="280.5" cy="920.5" r="1.5" fill="#ABABAB" />
+            <circle cx="289.5" cy="920.5" r="1.5" fill="#ABABAB" />
+            <circle cx="298.5" cy="920.5" r="1.5" fill="#ABABAB" />
+            <circle cx="307.5" cy="920.5" r="1.5" fill="#ABABAB" />
+            <circle cx="316.5" cy="920.5" r="1.5" fill="#ABABAB" />
+            <circle cx="325.5" cy="920.5" r="1.5" fill="#ABABAB" />
+            <circle cx="334.5" cy="920.5" r="1.5" fill="#ABABAB" />
+            <circle cx="343.5" cy="920.5" r="1.5" fill="#ABABAB" />
+            <circle cx="217.5" cy="929.5" r="1.5" fill="#ABABAB" />
+            <circle cx="226.5" cy="929.5" r="1.5" fill="#ABABAB" />
+            <circle cx="235.5" cy="929.5" r="1.5" fill="#ABABAB" />
+            <circle cx="244.5" cy="929.5" r="1.5" fill="#ABABAB" />
+            <circle cx="253.5" cy="929.5" r="1.5" fill="#ABABAB" />
+            <circle cx="262.5" cy="929.5" r="1.5" fill="#ABABAB" />
+            <circle cx="271.5" cy="929.5" r="1.5" fill="#ABABAB" />
+            <circle cx="280.5" cy="929.5" r="1.5" fill="#ABABAB" />
+            <circle cx="289.5" cy="929.5" r="1.5" fill="#ABABAB" />
+            <circle cx="298.5" cy="929.5" r="1.5" fill="#ABABAB" />
+            <circle cx="307.5" cy="929.5" r="1.5" fill="#ABABAB" />
+            <circle cx="316.5" cy="929.5" r="1.5" fill="#ABABAB" />
+            <circle cx="325.5" cy="929.5" r="1.5" fill="#ABABAB" />
+            <circle cx="334.5" cy="929.5" r="1.5" fill="#ABABAB" />
+            <circle cx="343.5" cy="929.5" r="1.5" fill="#ABABAB" />
+            <rect x="216" y="901" width="12" height="12" fill="#ABABAB" />
+        </g>
+    </g>
+    <defs>
+        <clipPath id="clip0_559_9548">
+            <rect width="1440" height="1024" fill="white" />
+        </clipPath>
+        <clipPath id="clip1_559_9548">
+            <rect width="132" height="32" fill="white" transform="translate(161 217)" />
+        </clipPath>
+        <clipPath id="clip2_559_9548">
+            <rect width="132" height="32" fill="white" transform="translate(1329 910) rotate(-180)" />
+        </clipPath>
+        <clipPath id="clip3_559_9548">
+            <rect width="150" height="9" fill="white" transform="translate(1329 910) rotate(-180)" />
+        </clipPath>
+        <clipPath id="clip4_559_9548">
+            <rect width="150" height="9" fill="white" transform="translate(1329 901) rotate(-180)" />
+        </clipPath>
+        <clipPath id="clip5_559_9548">
+            <rect width="150" height="9" fill="white" transform="translate(1329 892) rotate(-180)" />
+        </clipPath>
+        <clipPath id="clip6_559_9548">
+            <rect width="150" height="9" fill="white" transform="translate(1329 883) rotate(-180)" />
+        </clipPath>
+        <clipPath id="clip7_559_9548">
+            <rect width="132" height="32" fill="white" transform="translate(1217 344)" />
+        </clipPath>
+        <clipPath id="clip8_559_9548">
+            <rect width="132" height="32" fill="white" transform="translate(216 901)" />
+        </clipPath>
+    </defs>
+</svg>
+    
