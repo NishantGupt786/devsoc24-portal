@@ -1,4 +1,4 @@
-import { loginSchema } from "@/schemas/login";
+import { forgotSchema } from "@/schemas/password";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { type z } from "zod";
@@ -10,24 +10,21 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 // import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { EyeIcon, EyeOffIcon, LockKeyholeIcon, MailIcon } from "lucide-react";
+import { MailIcon } from "lucide-react";
 import Link from "next/link";
 
-type LoginFormValues = z.infer<typeof loginSchema>;
+type LoginFormValues = z.infer<typeof forgotSchema>;
 
-export default function LoginForm() {
+export default function ForgotForm() {
   const router = useRouter();
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const form = useForm<LoginFormValues>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(forgotSchema),
     defaultValues: {
       email: "",
-      password: "",
     },
     mode: "onChange",
   });
@@ -87,59 +84,6 @@ export default function LoginForm() {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem className="relative">
-              {/* <FormLabel>Password</FormLabel> */}
-              <FormControl>
-                <div className="relative">
-                  <Input
-                    type={isPasswordVisible ? "text" : "password"}
-                    placeholder="Password"
-                    autoComplete="password"
-                    {...field}
-                    className={`h-14 bg-gray-100 px-10 ${
-                      form.getFieldState("password").invalid
-                        ? "border-red-500 focus:border-input focus:!ring-red-500"
-                        : ""
-                    }`}
-                  />
-                  <LockKeyholeIcon
-                    color="gray"
-                    className="absolute left-2 top-1/2 -translate-y-1/2"
-                  />
-                  <div className="absolute right-2 top-1/2 -translate-y-1/2">
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      onClick={() =>
-                        setIsPasswordVisible((previousValue) => !previousValue)
-                      }
-                    >
-                      {isPasswordVisible ? (
-                        <EyeOffIcon color="gray" size={20} />
-                      ) : (
-                        <EyeIcon color="gray" size={20} />
-                      )}
-                    </Button>
-                  </div>
-                </div>
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <Link
-          href="/forgot"
-          className="-mt-1 text-right text-sm font-medium text-primary"
-        >
-          Recover password
-        </Link>
 
         <p className="text-center text-sm text-muted-foreground">
           Don&apos;t have an account?{" "}
@@ -153,7 +97,7 @@ export default function LoginForm() {
           disabled={form.formState.isSubmitting}
           className="mx-auto mt-4 w-fit px-14"
         >
-          {form.formState.isSubmitting ? "Logging in..." : "Login"}
+          {form.formState.isSubmitting ? "Sending OTP..." : "Send OTP"}
         </Button>
       </form>
     </Form>

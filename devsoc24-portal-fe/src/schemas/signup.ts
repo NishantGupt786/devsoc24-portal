@@ -28,6 +28,16 @@ export const signupSchema = z
     path: ["confirmPassword"],
   });
 
+export const verifySchema = z.object({
+  otp: z
+    .string({
+      required_error: "OTP is required",
+      invalid_type_error: "OTP must be a string",
+    })
+    .min(6, "OTP must be 6 characters long")
+    .max(6, "OTP must be 6 characters long"),
+});
+
 export const details1Schema = z.object({
   firstName: z
     .string({
@@ -61,5 +71,5 @@ export const details1Schema = z.object({
     .literal("Male")
     .or(z.literal("Female"))
     .or(z.literal("Others"))
-    .or(z.literal("Prefer Not to Say"))
+    .or(z.literal("Prefer Not to Say")),
 });
