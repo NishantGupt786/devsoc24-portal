@@ -17,14 +17,14 @@ import { useRouter } from "next/navigation";
 import { EyeIcon, EyeOffIcon, MailIcon } from "lucide-react";
 import Link from "next/link";
 
-type LoginFormValues = z.infer<typeof signupSchema>;
+type SignupFormValues = z.infer<typeof signupSchema>;
 
 export default function SignupForm() {
   const router = useRouter();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isCPasswordVisible, setIsCPasswordVisible] = useState(false);
 
-  const form = useForm<LoginFormValues>({
+  const form = useForm<SignupFormValues>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
       email: "",
@@ -34,7 +34,7 @@ export default function SignupForm() {
     mode: "onChange",
   });
 
-  async function onSubmit(data: LoginFormValues) {
+  async function onSubmit(data: SignupFormValues) {
     console.log(data);
     // const toastId = toast.loading("Logging in...", { autoClose: false });
     // const res = await loginUser(data);

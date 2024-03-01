@@ -10,7 +10,6 @@ import title2 from "@/assets/images/glitchtitle1.svg";
 import title3 from "@/assets/images/glitchtitle2.svg";
 import title4 from "@/assets/images/glitchtitle3.svg";
 import VerifyForm from "./verify-form";
-// import SignupForm from "./signup-form";
 
 export default function Page() {
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
@@ -32,11 +31,11 @@ export default function Page() {
     <main className="flex min-h-screen flex-col items-center bg-[url('/images/bg.svg')] bg-cover bg-no-repeat">
       <div className="flex h-[10%] w-full items-center justify-between bg-background px-6 py-2">
         <Logo className="h-9/10 w-auto" />
-        <ModeToggle />
+        {/* <ModeToggle /> */}
       </div>
       <div className="flex max-w-[90vw] grow items-center justify-center">
         <Card className="w-fit">
-          <CardHeader>
+          <CardHeader className="items-center">
             <Image src={titles[currentTitleIndex] as string} alt="title" />
           </CardHeader>
           <div className="mt-3 flex flex-col items-center">

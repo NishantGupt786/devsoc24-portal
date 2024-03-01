@@ -17,14 +17,14 @@ import { useRouter } from "next/navigation";
 import { EyeIcon, EyeOffIcon, KeyRoundIcon, MailIcon } from "lucide-react";
 import Link from "next/link";
 
-type LoginFormValues = z.infer<typeof resetSchema>;
+type ResetFormValues = z.infer<typeof resetSchema>;
 
 export default function ResetForm() {
   const router = useRouter();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isCPasswordVisible, setIsCPasswordVisible] = useState(false);
 
-  const form = useForm<LoginFormValues>({
+  const form = useForm<ResetFormValues>({
     resolver: zodResolver(resetSchema),
     defaultValues: {
       otp: "",
@@ -34,7 +34,7 @@ export default function ResetForm() {
     mode: "onChange",
   });
 
-  async function onSubmit(data: LoginFormValues) {
+  async function onSubmit(data: ResetFormValues) {
     console.log(data);
     // const toastId = toast.loading("Logging in...", { autoClose: false });
     // const res = await loginUser(data);

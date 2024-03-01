@@ -1,4 +1,5 @@
-import { details1Schema } from "@/schemas/signup";
+import countries from "@/../public/countries.json";
+import { personalDetailsSchema } from "@/schemas/signup";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { type z } from "zod";
@@ -23,18 +24,23 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-type LoginFormValues = z.infer<typeof details1Schema>;
+type PersonalDetailsFormValues = z.infer<typeof personalDetailsSchema>;
 
-export default function Detail1Form() {
+export default function PersonalDetails({
+  setForm,
+}: {
+  setForm: React.Dispatch<React.SetStateAction<number>>;
+}) {
   const router = useRouter();
 
-  const form = useForm<LoginFormValues>({
-    resolver: zodResolver(details1Schema),
+  const form = useForm<PersonalDetailsFormValues>({
+    resolver: zodResolver(personalDetailsSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
       email: "",
       phoneNumber: "",
+      country: "+91",
       gender: undefined,
     },
     mode: "onChange",
@@ -45,7 +51,7 @@ export default function Detail1Form() {
     if (email) form.setValue("email", email);
   }, []);
 
-  async function onSubmit(data: LoginFormValues) {
+  async function onSubmit(data: PersonalDetailsFormValues) {
     console.log(data);
     // const toastId = toast.loading("Logging in...", { autoClose: false });
     // const res = await loginUser(data);
@@ -69,7 +75,7 @@ export default function Detail1Form() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="mt-4 flex w-1/3 flex-col gap-4 py-4 text-primary"
+        className="mt-4 flex w-9/12 flex-col gap-4 py-4 text-primary md:w-1/3"
       >
         <FormField
           control={form.control}
@@ -84,7 +90,7 @@ export default function Detail1Form() {
                     placeholder="First Name"
                     autoComplete="First Name"
                     {...field}
-                    className={`h-14  ${
+                    className={` ${
                       form.getFieldState("firstName").invalid
                         ? "border-red-500 focus:border-input focus:!ring-red-500"
                         : ""
@@ -109,7 +115,7 @@ export default function Detail1Form() {
                     placeholder="Last Name"
                     autoComplete="Last Name"
                     {...field}
-                    className={`h-14  ${
+                    className={` ${
                       form.getFieldState("lastName").invalid
                         ? "border-red-500 focus:border-input focus:!ring-red-500"
                         : ""
@@ -136,8 +142,58 @@ export default function Detail1Form() {
                     autoComplete="email"
                     disabled
                     {...field}
-                    className={`h-14  ${
+                    className={` ${
                       form.getFieldState("email").invalid
+                        ? "border-red-500 focus:border-input focus:!ring-red-500"
+                        : ""
+                    }`}
+                  />
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="phoneNumber"
+          render={({ field }) => (
+            <FormItem className="grow">
+              <FormLabel>Phone Number</FormLabel>
+              <FormControl>
+                <div className="relative">
+                  <Select
+                    onValueChange={(value: string) =>
+                      form.setValue("country", value)
+                    }
+                    value={form.getValues().country}
+                  >
+                    <SelectTrigger
+                      className={`absolute w-[70px] rounded-r-none px-2 transition-all duration-500 `}
+                    >
+                      <SelectValue>{form.getValues().country}</SelectValue>
+                    </SelectTrigger>
+                    <SelectContent>
+                      {countries.map((country, index) => (
+                        <SelectItem
+                          key={index}
+                          value={country.code}
+                          className="rounded-none border-b border-border/30"
+                        >
+                          <span>{country.name}</span>{" "}
+                          <span className="opacity-70">{country.code}</span>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Input
+                    type="text"
+                    placeholder="Phone Number"
+                    autoComplete="phone"
+                    {...field}
+                    className={`pl-[80px] ${
+                      form.getFieldState("phoneNumber").invalid
                         ? "border-red-500 focus:border-input focus:!ring-red-500"
                         : ""
                     }`}
@@ -179,8 +235,9 @@ export default function Detail1Form() {
           type="submit"
           disabled={form.formState.isSubmitting}
           className="mx-auto mt-4 w-fit px-14"
+          onClick={() => void setForm(1)}
         >
-          {form.formState.isSubmitting ? "Signing up..." : "Signup"}
+          Next
         </Button>
       </form>
     </Form>

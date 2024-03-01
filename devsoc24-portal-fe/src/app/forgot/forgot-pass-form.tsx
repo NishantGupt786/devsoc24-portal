@@ -16,12 +16,12 @@ import { useRouter } from "next/navigation";
 import { MailIcon } from "lucide-react";
 import Link from "next/link";
 
-type LoginFormValues = z.infer<typeof forgotSchema>;
+type ForgotFormValues = z.infer<typeof forgotSchema>;
 
 export default function ForgotForm() {
   const router = useRouter();
 
-  const form = useForm<LoginFormValues>({
+  const form = useForm<ForgotFormValues>({
     resolver: zodResolver(forgotSchema),
     defaultValues: {
       email: "",
@@ -29,7 +29,7 @@ export default function ForgotForm() {
     mode: "onChange",
   });
 
-  async function onSubmit(data: LoginFormValues) {
+  async function onSubmit(data: ForgotFormValues) {
     console.log(data);
     // const toastId = toast.loading("Logging in...", { autoClose: false });
     // const res = await loginUser(data);

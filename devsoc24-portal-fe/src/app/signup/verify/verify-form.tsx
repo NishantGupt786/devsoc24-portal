@@ -1,119 +1,183 @@
-import { verifySchema } from "@/schemas/signup";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { type z } from "zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+"use client";
+
 import { Button } from "@/components/ui/button";
-// import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
-import { KeyRoundIcon } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { useFormik } from "formik";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { getTime } from "@/lib/utils";
+import React, { useEffect, useState } from "react";
+import * as Yup from "yup";
+import { secondsToHms } from "@/lib/utils";
 
-type LoginFormValues = z.infer<typeof verifySchema>;
+export default function Form() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [timer, setTimer] = useState(120);
+  const input1 = React.useRef<HTMLInputElement>(null);
+  const input2 = React.useRef<HTMLInputElement>(null);
+  const input3 = React.useRef<HTMLInputElement>(null);
+  const input4 = React.useRef<HTMLInputElement>(null);
+  const input5 = React.useRef<HTMLInputElement>(null);
+  const input6 = React.useRef<HTMLInputElement>(null);
 
-export default function VerifyForm() {
-  const [timer, setTimer] = useState(11);
-  const router = useRouter();
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const formik = useFormik({
+    initialValues: {
+      0: "",
+      1: "",
+      2: "",
+      3: "",
+      4: "",
+      5: "",
+    },
+    validationSchema: Yup.object({
+      0: Yup.string()
+        .required("Required")
+        .matches(/^[0-9]$/, "Must be a number"),
+      1: Yup.string()
+        .required("Required")
+        .matches(/^[0-9]$/, "Must be a number"),
+      2: Yup.string()
+        .required("Required")
+        .matches(/^[0-9]$/, "Must be a number"),
+      3: Yup.string()
+        .required("Required")
+        .matches(/^[0-9]$/, "Must be a number"),
+      4: Yup.string()
+        .required("Required")
+        .matches(/^[0-9]$/, "Must be a number"),
+      5: Yup.string()
+        .required("Required")
+        .matches(/^[0-9]$/, "Must be a number"),
+    }),
+    validateOnChange: true,
+    onSubmit: (values) => {
+      console.log(values);
+
+      //   setSubmitting(true);
+      //   const formData = new FormData();
+      //   formData.append("email", values.email);
+      //   formData.append("password", values.password);
+      //   const response = await fetch("/forms", {
+      //     method: "POST",
+      //     body: formData,
+      //   });
+      //   setSubmitting(false);
+      //   if (response.ok) {
+      //     setSubmitted({ open: true, status: true });
+      //     formik.resetForm();
+      //   } else {
+      //     setSubmitted({ open: true, status: false });
+      //   }
+    },
+  });
+  const { values, handleChange, handleBlur, handleSubmit } = formik;
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimer((prev) => prev - 1);
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const form = useForm<LoginFormValues>({
-    resolver: zodResolver(verifySchema),
-    defaultValues: {
-      otp: "",
-    },
-    mode: "onChange",
-  });
-
-  async function onSubmit(data: LoginFormValues) {
-    console.log(data);
-    // const toastId = toast.loading("Logging in...", { autoClose: false });
-    // const res = await loginUser(data);
-
-    // toast.update(toastId, {
-    //   render:
-    //     res === 200 ? "Login successful!" : res !== 500 ? res : <ServerError />,
-    //   type: res === 200 ? "success" : "error",
-    //   isLoading: false,
-    //   autoClose: 2000,
-    // });
-
-    // if (res === 200) {
-    //   setTimeout(() => {
-    //     void router.push("/overview");
-    //   }, 2000);
-    // }
-  }
+    if (timer > 0) {
+      setTimeout(() => setTimer(timer - 1), 1000);
+    }
+  }, [timer]);
 
   return (
-    <Form {...form}>
+    <>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 py-4"
+        className="mx-auto mt-4 flex w-full flex-col gap-2"
+        onSubmit={handleSubmit}
       >
-        <FormField
-          control={form.control}
-          name="otp"
-          render={({ field }) => (
-            <FormItem>
-              {/* <FormLabel>Username</FormLabel> */}
-              <FormControl>
-                <div className="relative">
-                  <Input
-                    type="text"
-                    placeholder="OTP"
-                    maxLength={6}
-                    {...field}
-                    className={`h-14 bg-gray-100 pl-10 ${
-                      form.getFieldState("otp").invalid
-                        ? "border-red-500 focus:border-input focus:!ring-red-500"
-                        : ""
-                    }`}
-                  />
-                  <KeyRoundIcon
-                    color="gray"
-                    className="absolute left-2 top-1/2 -translate-y-1/2"
-                  />
-                </div>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
+        <div className="flex items-center justify-center gap-6">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <Input
+              key={i}
+              ref={
+                i === 0
+                  ? input1
+                  : i === 1
+                    ? input2
+                    : i === 2
+                      ? input3
+                      : i === 3
+                        ? input4
+                        : i === 4
+                          ? input5
+                          : input6
+              }
+              type="text"
+              id={i.toString()}
+              name={i.toString()}
+              minLength={1}
+              maxLength={1}
+              autoComplete="off"
+              required
+              onChange={handleChange}
+              onBlur={handleBlur}
+              onKeyDown={(e) => {
+                if (e.key === "Backspace") {
+                  const x = (e.target as HTMLInputElement).id;
+                  void formik.setFieldValue(x, "");
+                  if (x !== "0") {
+                    const y = (parseInt(x) - 1).toString();
+                    y === "0"
+                      ? input1.current?.focus()
+                      : y === "1"
+                        ? input2.current?.focus()
+                        : y === "2"
+                          ? input3.current?.focus()
+                          : y === "3"
+                            ? input4.current?.focus()
+                            : y === "4"
+                              ? input5.current?.focus()
+                              : input6.current?.focus();
+                  }
+                } else {
+                  const x = (e.target as HTMLInputElement).id;
+                  if (e.key.match(/^[0-9]$/) ?? e.key.match(/^[a-zA-Z]$/)) {
+                    if (e.key.match(/^[a-zA-Z]$/)) {
+                      e.key = e.key.toUpperCase();
+                    }
+                    void formik.setFieldValue(x, e.key);
+                    if (x !== "5") {
+                      const y = (parseInt(x) + 1).toString();
+                      y === "1"
+                        ? input2.current?.focus()
+                        : y === "2"
+                          ? input3.current?.focus()
+                          : y === "3"
+                            ? input4.current?.focus()
+                            : y === "4"
+                              ? input5.current?.focus()
+                              : input6.current?.focus();
+                    }
+                    e.preventDefault();
+                  } else if (e.key !== "Tab") {
+                    e.preventDefault();
+                  }
+                }
+              }}
+              value={values[i.toString() as unknown as keyof typeof values]}
+              className="h-16 w-12 text-center text-2xl"
+            />
+          ))}
+        </div>
         <p className="text-center text-sm text-muted-foreground">
           Haven&apos;t received OTP?{" "}
           <Link
             href="/login"
             className={`font-medium ${timer <= 0 ? "text-primary" : ""}`}
           >
-            {timer <= 0 ? "Resend" : `Resend in ${getTime(timer)}`}
+            {timer <= 0 ? "Resend" : `Resend in ${secondsToHms(timer)}`}
           </Link>
         </p>
 
         <Button
           type="submit"
-          disabled={form.formState.isSubmitting}
+          disabled={isSubmitting}
           className="mx-auto mt-4 w-fit px-14"
         >
-          {form.formState.isSubmitting ? "Signing up..." : "Signup"}
+          {isSubmitting ? "Signing up..." : "Signup"}
         </Button>
       </form>
-    </Form>
+    </>
   );
 }
