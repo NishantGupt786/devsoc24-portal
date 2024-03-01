@@ -28,17 +28,17 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd devsoc24-landing
+        cd devsoc24-portal-fe
         pnpm install
 
     - name: Build project
       run: |
-        cd devsoc24-landing
+        cd devsoc24-portal-fe
         pnpm run build
 
     - name: Check for build errors
       run: |
-        if [ -d "devsoc24-landing/.next" ]; then
+        if [ -d "devsoc24-portal-fe/.next" ]; then
           echo "Build successful"
         else
           echo "Build failed"
