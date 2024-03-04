@@ -1,11 +1,10 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import "@/styles/globals.css";
+import { Poppins } from "next/font/google";
 
-import { Inter } from "next/font/google";
-
-const inter = Inter({
+const inter = Poppins({
   subsets: ["latin"],
-  variable: "--font-sans",
+  weight: "200",
 });
 
 export const metadata = {
@@ -21,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>
+      <body className={`font-sans ${inter.className}`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
