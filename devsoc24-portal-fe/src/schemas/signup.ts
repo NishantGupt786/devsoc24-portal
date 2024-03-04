@@ -98,7 +98,10 @@ export const vitianDetails = z.object({
       required_error: "Required",
       invalid_type_error: "Registration number must be a string",
     })
-    .regex(/^[0-9]{2}[A-Za-z]{3}[0-9]{4}$/, "Enter a valid registration number"),
+    .regex(
+      /^[0-9]{2}[A-Za-z]{3}[0-9]{4}$/,
+      "Enter a valid registration number",
+    ),
   vitEmail: z
     .string({
       required_error: "Required",
@@ -198,4 +201,23 @@ export const externalDetails = z.object({
       invalid_type_error: "College roll number must be a string",
     })
     .max(50, "Enter a valid college roll number"),
+});
+
+export const joinTeamSchema = z.object({
+  teamCode: z
+    .string({
+      required_error: "Required",
+      invalid_type_error: "Team code must be a string",
+    })
+    .min(6, "Enter a valid team code")
+    .max(6, "Enter a valid team code"),
+});
+
+export const createTeamSchema = z.object({
+  teamName: z
+    .string({
+      required_error: "Required",
+      invalid_type_error: "Team name must be a string",
+    })
+    .max(50, "Enter a valid team name"),
 });

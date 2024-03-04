@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import React, { useState } from "react";
 import VitianForm from "./vitian-form";
-import ExternalForm from "./external-form";
+import ExternalForm from "../../app/signup/details/external-form";
 
 export default function CollegeDetailsForm({
   setForm,
