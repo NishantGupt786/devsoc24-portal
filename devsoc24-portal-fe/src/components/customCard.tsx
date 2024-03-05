@@ -17,7 +17,7 @@ function CustomCard(props: CardProps) {
 
   return (
     <>
-      <div className="h-fit w-screen rounded-xl bg-white md:w-fit">
+      <div className="h-fit rounded-xl bg-white w-full md:w-fit">
         <div className="pl-3 pt-2 font-semibold text-[#45464E]">{title}</div>
         <div className="flex flex-col items-center justify-center p-8">
           <div className="rounded-full border-[#E1E2E9] bg-[#F4F5FA] p-8">
@@ -39,17 +39,16 @@ function CustomCard(props: CardProps) {
                   <DialogTrigger
                     key={index}
                     className="w-36 rounded-md bg-primary p-2 font-semibold text-white"
-                    onClick={() => handleDialogTriggerClick(button.modalType!)} // Handle click event
+                    onClick={() => handleDialogTriggerClick(button.modalType!)}
                   >
                     {button.text}
                   </DialogTrigger>
                 ) : (
-                  <Button key={index} className="w-28">
+                  <Button key={index} className="w-28" >
                     {button.text}
                   </Button>
                 ),
               )}
-              {/* Render the appropriate DialogContent based on selectedModal */}
               {showModal === "JoinTeam" && <JoinTeam />}
               {showModal === "CreateTeam" && <CreateTeam />}
             </Dialog>
