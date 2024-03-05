@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import Logo from "@/components/logo";
 import Dashtitle from "@/assets/images/titleDashboard.svg";
 import CustomCard from "@/components/customCard";
+import TeamCard from "@/components/teamCard";
 
 export default function HomePage() {
   const noTeamCard = [
@@ -35,12 +36,12 @@ export default function HomePage() {
   //   }
   // });
   return (
-    <main className="flex min-h-screen flex-col items-start bg-[#F4F5FA]">
+    <main className="flex min-h-screen flex-col items-start bg-[#F4F5FA] overflow-x-hidden">
       <div className="flex h-[10%] w-full items-center gap-x-8 bg-background px-6 py-2">
         <Logo className="h-9/10 w-auto" />
         <Image src={Dashtitle as HTMLImageElement} alt="title" />
       </div>
-      <div className="ml-4 mt-4 flex flex-col md:flex-row gap-4">
+      <div className="mt-4 flex flex-col md:flex-row md:flex-wrap gap-4 w-full px-4">
         <CustomCard
           title="Your Devsoc Team"
           cardImage="teamCardImg"
@@ -55,6 +56,7 @@ export default function HomePage() {
           cardDesc="Submit Your Idea Before < date > < time >"
           buttonDetails={ideaCard}
         />
+        <TeamCard />
       </div>
     </main>
   );
