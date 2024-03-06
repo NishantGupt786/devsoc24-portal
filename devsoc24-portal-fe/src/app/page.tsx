@@ -22,7 +22,8 @@ export default function HomePage() {
   ];
   const ideaCard = [{
     text: "Submit An Idea",
-    showModal: false,
+    showModal: true,
+    modalType:"IdeaSubmit",
     routeTo: "/submit-idea",
   }]
   const router = useRouter();
