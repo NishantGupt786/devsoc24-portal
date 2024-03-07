@@ -149,7 +149,7 @@ export default function SubmitProjectForm() {
 
 
                     <Button className='bg-[#0019FF] my-5' type="submit" disabled={isSubmitting }>
-                       <Image src={send} alt='b'/><span className='pl-2'>Submit Project</span> 
+                       <Image src={send as HTMLImageElement} alt='b'/><span className='pl-2'>Submit Project</span> 
                     </Button>
                 </Form>
             )}
