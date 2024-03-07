@@ -2,15 +2,17 @@
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { type CardProps } from "@/interfaces";
 import JoinTeam from "@/components/team/joinTeam";
-import IdeaSubmission from "@/components/submission/submission"
+import IdeaSubmission from "@/components/submission/submission";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import CreateTeam from "./team/createTeam";
+import { useRouter } from "next/navigation";
 
 function CustomCard(props: CardProps) {
+  const router = useRouter();
   const { title, cardImage, cardContent, cardDesc, buttonDetails } = props;
-  const [ showModal, setShowModal ] = useState("");
+  const [showModal, setShowModal] = useState("");
 
   const handleDialogTriggerClick = (modalType: string) => {
     setShowModal(modalType);
@@ -18,7 +20,7 @@ function CustomCard(props: CardProps) {
 
   return (
     <>
-      <div className="h-fit rounded-xl bg-white w-full md:w-fit">
+      <div className="h-fit w-full rounded-xl bg-white md:w-fit">
         <div className="pl-3 pt-2 font-semibold text-[#45464E]">{title}</div>
         <div className="flex flex-col items-center justify-center p-8">
           <div className="rounded-full border-[#E1E2E9] bg-[#F4F5FA] p-8">
@@ -45,7 +47,11 @@ function CustomCard(props: CardProps) {
                     {button.text}
                   </DialogTrigger>
                 ) : (
-                  <Button key={index} className="w-28" >
+                  <Button
+                    key={index}
+                    className="w-36"
+                    onClick={() => void router.push(button.routeTo ?? "")}
+                  >
                     {button.text}
                   </Button>
                 ),

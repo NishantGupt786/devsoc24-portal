@@ -20,12 +20,18 @@ export default function HomePage() {
       modalType: "JoinTeam",
     },
   ];
-  const ideaCard = [{
-    text: "Submit An Idea",
-    showModal: true,
-    modalType:"IdeaSubmit",
-    routeTo: "/submit-idea",
-  }]
+  const ideaCard = [
+    {
+      text: "View Idea",
+      showModal: true,
+      modalType: "IdeaSubmit",
+    },
+    {
+      text: "Submit Idea",
+      showModal: false,
+      routeTo: "/submit-idea",
+    },
+  ];
   const router = useRouter();
 
   // useEffect(() => {
@@ -37,12 +43,12 @@ export default function HomePage() {
   //   }
   // });
   return (
-    <main className="flex min-h-screen flex-col items-start bg-[#F4F5FA] overflow-x-hidden">
+    <main className="flex min-h-screen flex-col items-start overflow-x-hidden bg-[#F4F5FA]">
       <div className="flex h-[10%] w-full items-center gap-x-8 bg-background px-6 py-2">
         <Logo className="h-9/10 w-auto" />
         <Image src={Dashtitle as HTMLImageElement} alt="title" />
       </div>
-      <div className="mt-4 flex flex-col md:flex-row md:flex-wrap gap-4 w-full px-4">
+      <div className="mt-4 flex w-full flex-col gap-4 px-4 md:flex-row md:flex-wrap">
         <CustomCard
           title="Your Devsoc Team"
           cardImage="teamCardImg"
