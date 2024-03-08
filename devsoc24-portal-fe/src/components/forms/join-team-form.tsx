@@ -4,14 +4,7 @@ import { joinTeamSchema } from "@/schemas/signup";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { type z } from "zod";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { z } from "zod"; // Change this line from { type z } to { z }
 import {
   Form,
   FormControl,
@@ -22,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import axios from "axios"; // Removed AxiosResponse import
 
 type CreateTeamFormValues = z.infer<typeof joinTeamSchema>;
 
@@ -36,6 +30,7 @@ export default function JoinTeamForm() {
 
   async function onSubmit(data: CreateTeamFormValues) {
     console.log(data);
+    console.log("submittt")
     // const toastId = toast.loading("Logging in...", { autoClose: false });
     // const res = await loginUser(data);
 
@@ -53,6 +48,33 @@ export default function JoinTeamForm() {
     //   }, 2000);
     // }
   }
+
+  const handleJoinTeam = async (e: string) => {
+    console.log("clicked");
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/team/join`,
+        {
+          code: e,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+      console.log("FETCH IDEA: ", response);
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        switch (e.response?.status) {
+          // case 404:
+          //   console.log("no team");
+          // case 417:
+          //   console.log("team no idea");
+          default:
+            console.log(e);
+        }
+      }
+    }
+  };
 
   return (
     <Form {...createTeamForm}>
@@ -73,14 +95,19 @@ export default function JoinTeamForm() {
                     placeholder="Team Code"
                     {...field}
                     className={` ${
-                      createTeamForm.getFieldState("teamCode").invalid
+                      createTeamForm.formState.errors.teamCode
                         ? "border-red-500 focus:border-input focus:!ring-red-500"
                         : ""
                     }`}
                   />
                 </div>
               </FormControl>
-              <FormMessage />
+              {/* Display error message */}
+              {createTeamForm.formState.errors.teamCode && (
+                <FormMessage>
+                  {createTeamForm.formState.errors.teamCode.message}
+                </FormMessage>
+              )}
             </FormItem>
           )}
         />

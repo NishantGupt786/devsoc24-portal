@@ -1,13 +1,18 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Logo from "@/components/logo";
 import Dashtitle from "@/assets/images/titleDashboard.svg";
 import CustomCard from "@/components/customCard";
 import TeamCard from "@/components/teamCard";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { useIdeaStore, useTeamStore } from "@/store/store";
+import {
+  useIdeaStore,
+  useTeamStore,
+  useUserStore,
+  userProps,
+} from "@/store/store";
 import Loading from "./loading";
 
 interface ideaProps {
@@ -31,9 +36,46 @@ interface teamProps {
   status: string;
 }
 
+interface teamDataUserProps {
+  name: string;
+  reg_no: string;
+  email: string;
+}
+
+interface teamDataProps {
+  message?: string;
+  status?: string;
+  team?: {
+    team_name: string;
+    team_code: string;
+    leaderid: string;
+    round: 0;
+    users: teamDataUserProps[];
+    idea: {
+      title: string;
+      description: string;
+      track: string;
+      github_link: string;
+      figma_link: string;
+      others: string;
+    };
+    project: {
+      name: string;
+      description: string;
+      track: string;
+      github_link: string;
+      figma_link: string;
+      others: string;
+    };
+  };
+}
+
 export default function HomePage() {
   const { idea, setIdea } = useIdeaStore();
   const { team, setTeam } = useTeamStore();
+  const { user, setUser } = useUserStore();
+  const [teamData, setTeamData] = useState<teamDataProps | null>(null);
+
   const login = async () => {
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/login`,
@@ -49,13 +91,13 @@ export default function HomePage() {
 
   const fetchData = async () => {
     try {
-      const response: AxiosResponse<ideaProps> = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/idea`,
+      const response: AxiosResponse<userProps> = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/user/me`,
         {
           withCredentials: true,
         },
       );
-      console.log(response);
+      setUser(response.data);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
@@ -69,15 +111,17 @@ export default function HomePage() {
         }
       }
     }
-    //Team Get
+  };
+
+  const fetchTeam = async () => {
     try {
-      const response: AxiosResponse<teamProps> = await axios.get(
+      const response: AxiosResponse<teamDataProps> = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}/team`,
         {
           withCredentials: true,
         },
       );
-      console.log(response);
+      setTeamData(response.data);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
@@ -93,13 +137,46 @@ export default function HomePage() {
     }
   };
 
+  const fetchIdea = async () => {
+    try {
+      const response: AxiosResponse<ideaProps> = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/idea`,
+        {
+          withCredentials: true,
+        },
+      );
+      console.log("FETCH IDEA: ", response);
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        switch (e.response?.status) {
+          case 404:
+            console.log("no team");
+          case 417:
+            console.log("team no idea");
+          default:
+            console.log(e);
+        }
+      }
+    }
+  };
+
   useEffect(() => {
     const fetchDataAndLogin = async () => {
       await login();
       await fetchData();
+      await fetchIdea();
     };
     void fetchDataAndLogin();
   }, []);
+
+  useEffect(() => {
+    if (user.data.team_id === "00000000-0000-0000-0000-000000000000") {
+      console.log("Loner saala");
+      setTeam(true);
+    } else {
+      void fetchTeam();
+    }
+  }, [user]);
 
   const noTeamCard = [
     {
@@ -123,14 +200,6 @@ export default function HomePage() {
   ];
   const router = useRouter();
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     router.push("./login");
-  //   } else {
-  //     router.push("./signup");
-  //   }
-  // });
   return (
     <Suspense fallback={<Loading />}>
       <main className="flex min-h-screen flex-col items-start overflow-x-hidden bg-[#F4F5FA]">
@@ -148,7 +217,7 @@ export default function HomePage() {
               buttonDetails={noTeamCard}
             />
           ) : (
-            <TeamCard />
+            <TeamCard {...teamData} />
           )}
           <CustomCard
             title="Idea Submission"
