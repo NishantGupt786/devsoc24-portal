@@ -17,7 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { EyeIcon, EyeOffIcon, LockKeyholeIcon, MailIcon } from "lucide-react";
 import Link from "next/link";
-import { type LoginResponse } from "@/schemas/api";
+import { type APIResponse, type LoginResponse } from "@/schemas/api";
 import axios, { type AxiosError } from "axios";
 import { BadRequest, ServerError } from "@/components/toast";
 
@@ -39,7 +39,7 @@ export default function LoginForm() {
   async function onSubmit(formVal: LoginFormValues) {
     const toastId = toast.loading("Logging in...", { autoClose: false });
     try {
-      const { data } = await axios.post<LoginResponse>(
+      const { data } = await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/login`,
         { email: formVal.email, password: formVal.password },
       );
@@ -54,8 +54,10 @@ export default function LoginForm() {
         isLoading: false,
         autoClose: 2000,
       });
+      const res = data.data as LoginResponse;
+
       setTimeout(() => {
-        if (data.profile_complete) {
+        if (res.profile_complete) {
           void router.push("/");
         } else {
           void router.push("/signup/details?email=" + formVal.email);
@@ -101,6 +103,9 @@ export default function LoginForm() {
             isLoading: false,
             autoClose: 2000,
           });
+          setTimeout(() => {
+            void router.push("/signup/verify?email=" + formVal.email);
+          }, 1500);
         } else if (error.response?.status === 400) {
           toast.update(toastId, {
             render: <BadRequest />,

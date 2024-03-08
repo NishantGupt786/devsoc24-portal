@@ -13,7 +13,7 @@ import { DiscordIcon } from "@/assets/images/discord";
 import TeamDetailsForm from "./team-form";
 
 export default function Page() {
-  const [form, setForm] = useState(0);
+  const [form, setForm] = useState(2);
   const [isBannerVisible, setIsBannerVisible] = useState(true);
 
   return (
@@ -64,7 +64,7 @@ export default function Page() {
         </p>
         {form === 0 && <PersonalDetails setForm={setForm} />}
         {form === 1 && <CollegeDetailsForm setForm={setForm} />}
-        {form === 2 && <TeamDetailsForm setForm={setForm} />}
+        {form === 2 && <TeamDetailsForm />}
       </div>
     </main>
   );

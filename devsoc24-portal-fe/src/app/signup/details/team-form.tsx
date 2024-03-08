@@ -6,12 +6,10 @@ import React, { useState } from "react";
 import CreateTeamForm from "@/components/forms/create-team-form";
 import JoinTeamForm from "@/components/forms/join-team-form";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
-export default function TeamDetailsForm({
-  setForm,
-}: {
-  setForm: React.Dispatch<React.SetStateAction<number>>;
-}) {
+export default function TeamDetailsForm() {
+  const router = useRouter();
   const [isNewTeam, setisNewTeam] = useState(false);
 
   return (
@@ -35,7 +33,12 @@ export default function TeamDetailsForm({
         </p>
       </div>
       {isNewTeam ? <CreateTeamForm /> : <JoinTeamForm />}
-      <Button className="mx-auto mt-10 w-fit">Skip</Button>
+      <Button
+        className="mx-auto mt-10 w-fit"
+        onClick={() => void router.push("/")}
+      >
+        Skip
+      </Button>
       <p className="text-muted-primary mx-auto pt-2">
         You can join / create a team later!
       </p>

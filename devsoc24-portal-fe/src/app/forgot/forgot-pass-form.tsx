@@ -31,22 +31,7 @@ export default function ForgotForm() {
 
   async function onSubmit(data: ForgotFormValues) {
     console.log(data);
-    // const toastId = toast.loading("Logging in...", { autoClose: false });
-    // const res = await loginUser(data);
-
-    // toast.update(toastId, {
-    //   render:
-    //     res === 200 ? "Login successful!" : res !== 500 ? res : <ServerError />,
-    //   type: res === 200 ? "success" : "error",
-    //   isLoading: false,
-    //   autoClose: 2000,
-    // });
-
-    // if (res === 200) {
-    //   setTimeout(() => {
-    //     void router.push("/overview");
-    //   }, 2000);
-    // }
+  
   }
 
   return (

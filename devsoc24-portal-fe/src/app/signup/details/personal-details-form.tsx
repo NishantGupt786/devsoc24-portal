@@ -52,30 +52,18 @@ export default function PersonalDetails({
   useEffect(() => {
     form.setValue("firstName", localStorage.getItem("first_name") ?? "");
     form.setValue("lastName", localStorage.getItem("last_name") ?? "");
+    form.setValue("email", email ?? "");
     form.setValue("phoneNumber", localStorage.getItem("phone_number") ?? "");
     form.setValue("country", localStorage.getItem("country") ?? "+91");
-    const gender = localStorage.getItem("gender");
-    console.log(gender);
-
-    switch (gender) {
-      case "Male": {
-        form.setValue("gender", "Male");
-        break;
-      }
-      case "Female": {
-        form.setValue("gender", "Female");
-        break;
-      }
-      case "Others": {
-        form.setValue("gender", "Others");
-        break;
-      }
-      case "Prefer Not to Say": {
-        form.setValue("gender", "Prefer Not to Say");
-        break;
-      }
-    }
-  });
+    form.setValue(
+      "gender",
+      (localStorage.getItem("gender") as
+        | "Male"
+        | "Female"
+        | "Others"
+        | "Prefer Not to Say") ?? undefined,
+    );
+  }, []);
 
   async function onSubmit(data: PersonalDetailsFormValues) {
     localStorage.setItem("first_name", data.firstName);
@@ -104,6 +92,7 @@ export default function PersonalDetails({
                     type="text"
                     placeholder="First Name"
                     autoComplete="First Name"
+                    required
                     {...field}
                     className={` ${
                       form.getFieldState("firstName").invalid
@@ -155,6 +144,7 @@ export default function PersonalDetails({
                     type="email"
                     placeholder="Email Address"
                     autoComplete="email"
+                    required
                     disabled
                     {...field}
                     className={` ${
@@ -206,6 +196,7 @@ export default function PersonalDetails({
                     type="text"
                     placeholder="Phone Number"
                     autoComplete="phone"
+                    required
                     {...field}
                     className={`pl-[80px] ${
                       form.getFieldState("phoneNumber").invalid
