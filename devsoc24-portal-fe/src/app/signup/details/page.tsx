@@ -1,27 +1,25 @@
 "use client";
 import Logo from "@/components/logo";
-import { ModeToggle } from "@/components/theme-toggle";
 import Image, { type StaticImageData } from "next/image";
 import React, { useState } from "react";
 import details1 from "@/assets/images/details1.svg";
 import details2 from "@/assets/images/details2.svg";
 import details3 from "@/assets/images/details3.svg";
 import PersonalDetails from "./personal-details-form";
-import CollegeDetailsForm from "../../../components/forms/college-details-form";
-import { AlertTriangle, X, XIcon } from "lucide-react";
+import CollegeDetailsForm from "./college-details-form";
+import { AlertTriangle, XIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DiscordIcon } from "@/assets/images/discord";
 import TeamDetailsForm from "./team-form";
 
 export default function Page() {
-  const [form, setForm] = useState(2);
+  const [form, setForm] = useState(0);
   const [isBannerVisible, setIsBannerVisible] = useState(true);
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-[url('/images/bg.svg')] bg-cover bg-no-repeat">
       <div className="flex h-[10%] w-full items-center justify-between bg-background px-6 py-2">
         <Logo className="h-9/10 w-auto" />
-        {/* <ModeToggle /> */}
       </div>
       {form === 2 && isBannerVisible && (
         <div className="flex w-full items-center justify-between bg-[#0019FF] p-2">

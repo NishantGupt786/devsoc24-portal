@@ -1,78 +1,233 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { verifyOTPSchema } from "@/schemas/signup";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { type z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useFormik } from "formik";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import * as Yup from "yup";
+import { Button } from "@/components/ui/button";
+// import { toast } from "react-toastify";
+import { useRouter, useSearchParams } from "next/navigation";
+import { KeyIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios, { type AxiosError } from "axios";
+import { type APIResponse } from "@/schemas/api";
+import { BadRequest, ServerError } from "@/components/toast";
 import { secondsToHms } from "@/lib/utils";
 
-export default function Form() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [timer, setTimer] = useState(120);
-  const input1 = React.useRef<HTMLInputElement>(null);
-  const input2 = React.useRef<HTMLInputElement>(null);
-  const input3 = React.useRef<HTMLInputElement>(null);
-  const input4 = React.useRef<HTMLInputElement>(null);
-  const input5 = React.useRef<HTMLInputElement>(null);
-  const input6 = React.useRef<HTMLInputElement>(null);
+type VerifyFormValues = z.infer<typeof verifyOTPSchema>;
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const formik = useFormik({
-    initialValues: {
-      0: "",
-      1: "",
-      2: "",
-      3: "",
-      4: "",
-      5: "",
-    },
-    validationSchema: Yup.object({
-      0: Yup.string()
-        .required("Required")
-        .matches(/^[0-9]$/, "Must be a number"),
-      1: Yup.string()
-        .required("Required")
-        .matches(/^[0-9]$/, "Must be a number"),
-      2: Yup.string()
-        .required("Required")
-        .matches(/^[0-9]$/, "Must be a number"),
-      3: Yup.string()
-        .required("Required")
-        .matches(/^[0-9]$/, "Must be a number"),
-      4: Yup.string()
-        .required("Required")
-        .matches(/^[0-9]$/, "Must be a number"),
-      5: Yup.string()
-        .required("Required")
-        .matches(/^[0-9]$/, "Must be a number"),
-    }),
-    validateOnChange: true,
-    onSubmit: (values) => {
-      console.log(values);
+export default function ForgotForm() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
+  const [timer, setTimer] = useState(0);
 
-      //   setSubmitting(true);
-      //   const formData = new FormData();
-      //   formData.append("email", values.email);
-      //   formData.append("password", values.password);
-      //   const response = await fetch("/forms", {
-      //     method: "POST",
-      //     body: formData,
-      //   });
-      //   setSubmitting(false);
-      //   if (response.ok) {
-      //     setSubmitted({ open: true, status: true });
-      //     formik.resetForm();
-      //   } else {
-      //     setSubmitted({ open: true, status: false });
-      //   }
+  const form = useForm<VerifyFormValues>({
+    resolver: zodResolver(verifyOTPSchema),
+    defaultValues: {
+      otp: "",
     },
+    mode: "onChange",
   });
-  const { values, handleChange, handleBlur, handleSubmit } = formik;
+
+  async function onSubmit(data: VerifyFormValues) {
+    console.log(data);
+    const toastId = toast.loading("Verifying OTP...", {
+      autoClose: false,
+    });
+
+    try {
+      const res = await axios.post<APIResponse>(
+        `${process.env.NEXT_PUBLIC_API_URL}/verify`,
+        {
+          email: email,
+          otp: data.otp,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+      toast.update(toastId, {
+        render: (
+          <div className="">
+            <h2 className="font-semibold">
+              {res.status === 200
+                ? "Account verified successfully!"
+                : "User already verified!"}
+            </h2>
+            <p>
+              {res.status === 200
+                ? "Please complete profile."
+                : "Please login."}
+            </p>
+          </div>
+        ),
+        type: "success",
+        isLoading: false,
+        autoClose: 2000,
+      });
+      setTimeout(() => {
+        if (res.status === 200) {
+          void router.push("/signup/details?email=" + email);
+        } else {
+          void router.push("/login");
+        }
+      }, 1500);
+      return;
+    } catch (err) {
+      console.log(err);
+      if (axios.isAxiosError(err)) {
+        const error = err as AxiosError;
+        if (error.response?.status === 404) {
+          toast.update(toastId, {
+            render: (
+              <div className="">
+                <h2 className="font-semibold">No account found!</h2>
+                <p>Please create an account.</p>
+              </div>
+            ),
+            type: "error",
+            isLoading: false,
+            autoClose: 2000,
+          });
+          setTimeout(() => {
+            void router.push("/signup");
+          }, 1500);
+        } else if (error.response?.status === 401) {
+          toast.update(toastId, {
+            render: (
+              <div className="">
+                <h2 className="font-semibold">Invalid OTP!</h2>
+                <p>Please enter a valid OTP.</p>
+              </div>
+            ),
+            type: "error",
+            isLoading: false,
+            autoClose: 2000,
+          });
+        } else if (error.response?.status === 403) {
+          toast.update(toastId, {
+            render: (
+              <div className="">
+                <h2 className="font-semibold">OTP Expired!</h2>
+                <p>Please resend OTP.</p>
+              </div>
+            ),
+            type: "error",
+            isLoading: false,
+            autoClose: 2000,
+          });
+        } else if (error.response?.status === 400) {
+          toast.update(toastId, {
+            render: <BadRequest />,
+            type: "error",
+            isLoading: false,
+            autoClose: 2000,
+          });
+        }
+        return;
+      }
+      toast.update(toastId, {
+        render: <ServerError />,
+        type: "error",
+        isLoading: false,
+        autoClose: 2000,
+      });
+      return;
+    }
+  }
+
+  const resendOTP = async () => {
+    const toastId = toast.loading("Sending OTP...", {
+      autoClose: false,
+    });
+
+    try {
+      await axios.post<APIResponse>(
+        `${process.env.NEXT_PUBLIC_API_URL}/resend`,
+        {
+          email: email,
+          type: "verification",
+        },
+        {
+          withCredentials: true,
+        },
+      );
+      toast.update(toastId, {
+        render: (
+          <div className="">
+            <h2 className="font-semibold">OTP sent successfully!</h2>
+            <p>Please check your email for the OTP.</p>
+          </div>
+        ),
+        type: "success",
+        isLoading: false,
+        autoClose: 2000,
+      });
+      return;
+    } catch (err) {
+      console.log(err);
+      if (axios.isAxiosError(err)) {
+        const error = err as AxiosError;
+        if (error.response?.status === 404) {
+          toast.update(toastId, {
+            render: (
+              <div className="">
+                <h2 className="font-semibold">No account found!</h2>
+                <p>Please create an account.</p>
+              </div>
+            ),
+            type: "error",
+            isLoading: false,
+            autoClose: 2000,
+          });
+          setTimeout(() => {
+            void router.push("./signup");
+          }, 1500);
+        } else if (error.response?.status === 403) {
+          toast.update(toastId, {
+            render: (
+              <div className="">
+                <h2 className="font-semibold">User is already verified!</h2>
+                <p>Please login.</p>
+              </div>
+            ),
+            type: "error",
+            isLoading: false,
+            autoClose: 2000,
+          });
+          setTimeout(() => {
+            void router.push("./login");
+          }, 1500);
+        } else if (error.response?.status === 400) {
+          toast.update(toastId, {
+            render: <BadRequest />,
+            type: "error",
+            isLoading: false,
+            autoClose: 2000,
+          });
+        }
+        return;
+      }
+      toast.update(toastId, {
+        render: <ServerError />,
+        type: "error",
+        isLoading: false,
+        autoClose: 2000,
+      });
+      return;
+    }
+  };
 
   useEffect(() => {
     if (timer > 0) {
@@ -82,102 +237,68 @@ export default function Form() {
 
   return (
     <>
-      <form
-        className="mx-auto mt-4 flex w-full flex-col gap-2"
-        onSubmit={handleSubmit}
-      >
-        <div className="flex items-center justify-center gap-6">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <Input
-              key={i}
-              ref={
-                i === 0
-                  ? input1
-                  : i === 1
-                    ? input2
-                    : i === 2
-                      ? input3
-                      : i === 3
-                        ? input4
-                        : i === 4
-                          ? input5
-                          : input6
-              }
-              type="text"
-              id={i.toString()}
-              name={i.toString()}
-              minLength={1}
-              maxLength={1}
-              autoComplete="off"
-              required
-              onChange={handleChange}
-              onBlur={handleBlur}
-              onKeyDown={(e) => {
-                if (e.key === "Backspace") {
-                  const x = (e.target as HTMLInputElement).id;
-                  void formik.setFieldValue(x, "");
-                  if (x !== "0") {
-                    const y = (parseInt(x) - 1).toString();
-                    y === "0"
-                      ? input1.current?.focus()
-                      : y === "1"
-                        ? input2.current?.focus()
-                        : y === "2"
-                          ? input3.current?.focus()
-                          : y === "3"
-                            ? input4.current?.focus()
-                            : y === "4"
-                              ? input5.current?.focus()
-                              : input6.current?.focus();
-                  }
-                } else {
-                  const x = (e.target as HTMLInputElement).id;
-                  if (e.key.match(/^[0-9]$/) ?? e.key.match(/^[a-zA-Z]$/)) {
-                    if (e.key.match(/^[a-zA-Z]$/)) {
-                      e.key = e.key.toUpperCase();
-                    }
-                    void formik.setFieldValue(x, e.key);
-                    if (x !== "5") {
-                      const y = (parseInt(x) + 1).toString();
-                      y === "1"
-                        ? input2.current?.focus()
-                        : y === "2"
-                          ? input3.current?.focus()
-                          : y === "3"
-                            ? input4.current?.focus()
-                            : y === "4"
-                              ? input5.current?.focus()
-                              : input6.current?.focus();
-                    }
-                    e.preventDefault();
-                  } else if (e.key !== "Tab") {
-                    e.preventDefault();
-                  }
-                }
-              }}
-              value={values[i.toString() as unknown as keyof typeof values]}
-              className="h-16 w-12 text-center text-2xl"
-            />
-          ))}
-        </div>
-        <p className="text-center text-sm text-muted-foreground">
-          Haven&apos;t received OTP?{" "}
-          <Link
-            href="/login"
-            className={`font-medium ${timer <= 0 ? "text-primary" : ""}`}
-          >
-            {timer <= 0 ? "Resend" : `Resend in ${secondsToHms(timer)}`}
-          </Link>
-        </p>
-
-        <Button
-          type="submit"
-          disabled={isSubmitting}
-          className="mx-auto mt-4 w-fit px-14"
+      <ToastContainer />
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col gap-4 py-4"
         >
-          {isSubmitting ? "Signing up..." : "Signup"}
-        </Button>
-      </form>
+          <FormField
+            control={form.control}
+            name="otp"
+            render={({ field }) => (
+              <FormItem>
+                {/* <FormLabel>Username</FormLabel> */}
+                <FormControl>
+                  <div className="relative">
+                    <Input
+                      type="text"
+                      placeholder="OTP"
+                      autoComplete="otp"
+                      maxLength={6}
+                      {...field}
+                      className={`h-14 bg-gray-100 pl-10 text-lg tracking-wider ${
+                        form.getFieldState("otp").invalid
+                          ? "border-red-500 focus:border-input focus:!ring-red-500"
+                          : ""
+                      }`}
+                    />
+                    <KeyIcon
+                      color="gray"
+                      className="absolute left-2 top-1/2 -translate-y-1/2"
+                    />
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <p className="text-center text-sm text-muted-foreground">
+            Haven&apos;t received OTP?{" "}
+            {timer <= 0 ? (
+              <span
+                onClick={resendOTP}
+                className="cursor-pointer font-medium text-primary hover:underline"
+              >
+                Resend
+              </span>
+            ) : (
+              <span className="font-medium">
+                Resend in {secondsToHms(timer)}
+              </span>
+            )}
+          </p>
+
+          <Button
+            type="submit"
+            disabled={form.formState.isSubmitting}
+            className="mx-auto mt-4 w-fit px-14"
+          >
+            {form.formState.isSubmitting ? "Verifying OTP..." : "Verify OTP"}
+          </Button>
+        </form>
+      </Form>
     </>
   );
 }

@@ -26,7 +26,11 @@ import { Input } from "@/components/ui/input";
 
 type ExternalDetailsFormValues = z.infer<typeof externalDetails>;
 
-export default function ExternalForm() {
+export default function ExternalForm({
+  setForm,
+}: {
+  setForm: React.Dispatch<React.SetStateAction<number>>;
+}) {
   const externalForm = useForm<ExternalDetailsFormValues>({
     resolver: zodResolver(externalDetails),
     defaultValues: {
@@ -73,7 +77,7 @@ export default function ExternalForm() {
                 <div className="relative">
                   <Input
                     type="text"
-                    placeholder="Registration Number"
+                    placeholder="College Name"
                     {...field}
                     className={` ${
                       externalForm.getFieldState("collegeName").invalid
@@ -172,13 +176,21 @@ export default function ExternalForm() {
             </FormItem>
           )}
         />
-        <Button
-          type="submit"
-          disabled={externalForm.formState.isSubmitting}
-          className="mx-auto mt-4 w-fit px-14"
-        >
-          {externalForm.formState.isSubmitting ? "Submitting..." : "Submit"}
-        </Button>
+        <div className="flex items-center justify-between">
+          <Button
+            className="mx-auto mt-4 w-fit px-14"
+            onClick={() => setForm(0)}
+          >
+            Back
+          </Button>
+          <Button
+            type="submit"
+            disabled={externalForm.formState.isSubmitting}
+            className="mx-auto mt-4 w-fit px-14"
+          >
+            {externalForm.formState.isSubmitting ? "Submitting..." : "Submit"}
+          </Button>
+        </div>
       </form>
     </Form>
   );

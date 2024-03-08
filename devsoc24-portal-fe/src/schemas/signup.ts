@@ -1,7 +1,6 @@
 "use client";
 
 import * as z from "zod";
-import * as Yup from "yup";
 
 export const signupSchema = z
   .object({
@@ -29,25 +28,13 @@ export const signupSchema = z
     path: ["confirmPassword"],
   });
 
-export const validationSchema = Yup.object().shape({
-  0: Yup.string()
-    .required("Required")
-    .matches(/^[0-9]$/, "Must be a number"),
-  1: Yup.string()
-    .required("Required")
-    .matches(/^[0-9]$/, "Must be a number"),
-  2: Yup.string()
-    .required("Required")
-    .matches(/^[0-9]$/, "Must be a number"),
-  3: Yup.string()
-    .required("Required")
-    .matches(/^[0-9]$/, "Must be a number"),
-  4: Yup.string()
-    .required("Required")
-    .matches(/^[0-9]$/, "Must be a number"),
-  5: Yup.string()
-    .required("Required")
-    .matches(/^[0-9]$/, "Must be a number"),
+export const verifyOTPSchema = z.object({
+  otp: z
+    .string({
+      required_error: "OTP is required",
+      invalid_type_error: "OTP must be a string",
+    })
+    .length(6, "OTP must be 6 characters long"),
 });
 
 export const personalDetailsSchema = z.object({

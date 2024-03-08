@@ -26,7 +26,11 @@ import { Input } from "@/components/ui/input";
 
 type VitianDetailsFormValues = z.infer<typeof vitianDetails>;
 
-export default function VitianForm() {
+export default function VitianForm({
+  setForm,
+}: {
+  setForm: React.Dispatch<React.SetStateAction<number>>;
+}) {
   const vitianForm = useForm<VitianDetailsFormValues>({
     resolver: zodResolver(vitianDetails),
     defaultValues: {
@@ -87,7 +91,6 @@ export default function VitianForm() {
             </FormItem>
           )}
         />
-
         <FormField
           control={vitianForm.control}
           name="vitEmail"
@@ -112,7 +115,6 @@ export default function VitianForm() {
             </FormItem>
           )}
         />
-
         <FormField
           control={vitianForm.control}
           name="block"
@@ -148,7 +150,6 @@ export default function VitianForm() {
             </FormItem>
           )}
         />
-
         <FormField
           control={vitianForm.control}
           name="roomNumber"
@@ -173,13 +174,21 @@ export default function VitianForm() {
             </FormItem>
           )}
         />
-        <Button
-          type="submit"
-          disabled={vitianForm.formState.isSubmitting}
-          className="mx-auto mt-4 w-fit px-14"
-        >
-          {vitianForm.formState.isSubmitting ? "Submitting..." : "Submit"}
-        </Button>
+        <div className="flex items-center justify-between">
+          <Button
+            className="mx-auto mt-4 w-fit px-14"
+            onClick={() => setForm(0)}
+          >
+            Prev
+          </Button>
+          <Button
+            type="submit"
+            disabled={vitianForm.formState.isSubmitting}
+            className="mx-auto mt-4 w-fit px-14"
+          >
+            {vitianForm.formState.isSubmitting ? "Submitting..." : "Submit"}
+          </Button>
+        </div>
       </form>
     </Form>
   );

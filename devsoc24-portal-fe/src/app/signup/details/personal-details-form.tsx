@@ -12,10 +12,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-// import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   Select,
   SelectContent,
@@ -23,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useEffect } from "react";
 
 type PersonalDetailsFormValues = z.infer<typeof personalDetailsSchema>;
 
@@ -32,13 +31,17 @@ export default function PersonalDetails({
   setForm: React.Dispatch<React.SetStateAction<number>>;
 }) {
   const router = useRouter();
-
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
+  if (!email) {
+    router.push("/signup");
+  }
   const form = useForm<PersonalDetailsFormValues>({
     resolver: zodResolver(personalDetailsSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
-      email: "",
+      email: email ?? "",
       phoneNumber: "",
       country: "+91",
       gender: undefined,
@@ -47,28 +50,40 @@ export default function PersonalDetails({
   });
 
   useEffect(() => {
-    const email = localStorage.getItem("email");
-    if (email) form.setValue("email", email);
-  }, []);
+    form.setValue("firstName", localStorage.getItem("first_name") ?? "");
+    form.setValue("lastName", localStorage.getItem("last_name") ?? "");
+    form.setValue("phoneNumber", localStorage.getItem("phone_number") ?? "");
+    form.setValue("country", localStorage.getItem("country") ?? "+91");
+    const gender = localStorage.getItem("gender");
+    console.log(gender);
+
+    switch (gender) {
+      case "Male": {
+        form.setValue("gender", "Male");
+        break;
+      }
+      case "Female": {
+        form.setValue("gender", "Female");
+        break;
+      }
+      case "Others": {
+        form.setValue("gender", "Others");
+        break;
+      }
+      case "Prefer Not to Say": {
+        form.setValue("gender", "Prefer Not to Say");
+        break;
+      }
+    }
+  });
 
   async function onSubmit(data: PersonalDetailsFormValues) {
-    console.log(data);
-    // const toastId = toast.loading("Logging in...", { autoClose: false });
-    // const res = await loginUser(data);
-
-    // toast.update(toastId, {
-    //   render:
-    //     res === 200 ? "Login successful!" : res !== 500 ? res : <ServerError />,
-    //   type: res === 200 ? "success" : "error",
-    //   isLoading: false,
-    //   autoClose: 2000,
-    // });
-
-    // if (res === 200) {
-    //   setTimeout(() => {
-    //     void router.push("/overview");
-    //   }, 2000);
-    // }
+    localStorage.setItem("first_name", data.firstName);
+    localStorage.setItem("last_name", data.lastName);
+    localStorage.setItem("phone_number", data.phoneNumber);
+    localStorage.setItem("country", data.country);
+    localStorage.setItem("gender", data.gender);
+    setForm(1);
   }
 
   return (
@@ -235,7 +250,6 @@ export default function PersonalDetails({
           type="submit"
           disabled={form.formState.isSubmitting}
           className="mx-auto mt-4 w-fit px-14"
-          onClick={() => void setForm(1)}
         >
           Next
         </Button>
