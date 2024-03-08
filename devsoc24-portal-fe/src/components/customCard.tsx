@@ -7,12 +7,15 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import CreateTeam from "./team/createTeam";
+import { useIdeaStore } from "@/store/store";
+import Choice from "./team/Option";
 import { useRouter } from "next/navigation";
 
 function CustomCard(props: CardProps) {
   const router = useRouter();
   const { title, cardImage, cardContent, cardDesc, buttonDetails } = props;
   const [showModal, setShowModal] = useState("");
+  const { idea, setIdea } = useIdeaStore();
 
   const handleDialogTriggerClick = (modalType: string) => {
     setShowModal(modalType);
@@ -42,7 +45,9 @@ function CustomCard(props: CardProps) {
                   <DialogTrigger
                     key={index}
                     className="w-36 rounded-md bg-primary p-2 font-semibold text-white"
-                    onClick={() => handleDialogTriggerClick(button.modalType!)}
+                    onClick={() => {
+                      handleDialogTriggerClick(button.modalType!);
+                    }}
                   >
                     {button.text}
                   </DialogTrigger>
@@ -56,6 +61,7 @@ function CustomCard(props: CardProps) {
                   </Button>
                 ),
               )}
+              {showModal === "Choice" && <Choice />}
               {showModal === "JoinTeam" && <JoinTeam />}
               {showModal === "CreateTeam" && <CreateTeam />}
               {showModal === "IdeaSubmit" && <IdeaSubmission />}
