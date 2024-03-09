@@ -1,7 +1,6 @@
 "use client";
 
 import * as z from "zod";
-import * as Yup from "yup";
 
 export const signupSchema = z
   .object({
@@ -29,25 +28,13 @@ export const signupSchema = z
     path: ["confirmPassword"],
   });
 
-export const validationSchema = Yup.object().shape({
-  0: Yup.string()
-    .required("Required")
-    .matches(/^[0-9]$/, "Must be a number"),
-  1: Yup.string()
-    .required("Required")
-    .matches(/^[0-9]$/, "Must be a number"),
-  2: Yup.string()
-    .required("Required")
-    .matches(/^[0-9]$/, "Must be a number"),
-  3: Yup.string()
-    .required("Required")
-    .matches(/^[0-9]$/, "Must be a number"),
-  4: Yup.string()
-    .required("Required")
-    .matches(/^[0-9]$/, "Must be a number"),
-  5: Yup.string()
-    .required("Required")
-    .matches(/^[0-9]$/, "Must be a number"),
+export const verifyOTPSchema = z.object({
+  otp: z
+    .string({
+      required_error: "OTP is required",
+      invalid_type_error: "OTP must be a string",
+    })
+    .length(6, "OTP must be 6 characters long"),
 });
 
 export const personalDetailsSchema = z.object({
@@ -60,10 +47,10 @@ export const personalDetailsSchema = z.object({
     .max(50, "First Name cannot be longer than 50 characters"),
   lastName: z
     .string({
-      required_error: "First Name is required",
-      invalid_type_error: "First Name must be a string",
+      required_error: "Last Name is required",
+      invalid_type_error: "Last Name must be a string",
     })
-    .max(50, "First Name cannot be longer than 50 characters"),
+    .max(50, "Last Name cannot be longer than 50 characters"),
   email: z
     .string({
       required_error: "Email is required",
@@ -108,39 +95,39 @@ export const vitianDetails = z.object({
       invalid_type_error: "VIT Email must be a string",
     })
     .regex(/^[a-zA-Z0-9._-]+@vitstudent.ac.in$/, "Enter a valid VIT email"),
-  block: z.union([
-    z.literal("Ladies' Hostel - A Block"),
-    z.literal("Ladies' Hostel - B Block"),
-    z.literal("Ladies' Hostel - C Block"),
-    z.literal("Ladies' Hostel - D Block"),
-    z.literal("Ladies' Hostel - E Block"),
-    z.literal("Ladies' Hostel - F Block"),
-    z.literal("Ladies' Hostel - G Block"),
-    z.literal("Ladies' Hostel - H Block"),
-    z.literal("Men's Hostel - A Block"),
-    z.literal("Men's Hostel - B Block"),
-    z.literal("Men's Hostel - B Annex"),
-    z.literal("Men's Hostel - C Block"),
-    z.literal("Men's Hostel - D Block"),
-    z.literal("Men's Hostel - D Annex"),
-    z.literal("Men's Hostel - E Block"),
-    z.literal("Men's Hostel - F Block"),
-    z.literal("Men's Hostel - G Block"),
-    z.literal("Men's Hostel - H Block"),
-    z.literal("Men's Hostel - J Block"),
-    z.literal("Men's Hostel - K Block"),
-    z.literal("Men's Hostel - L Block"),
-    z.literal("Men's Hostel - M Block"),
-    z.literal("Men's Hostel - N Block"),
-    z.literal("Men's Hostel - P Block"),
-    z.literal("Men's Hostel - Q Block"),
-    z.literal("Men's Hostel - R Block"),
-  ]),
+  block: z
+    .literal("Ladies' Hostel - A Block")
+    .or(z.literal("Ladies' Hostel - B Block"))
+    .or(z.literal("Ladies' Hostel - C Block"))
+    .or(z.literal("Ladies' Hostel - D Block"))
+    .or(z.literal("Ladies' Hostel - E Block"))
+    .or(z.literal("Ladies' Hostel - F Block"))
+    .or(z.literal("Ladies' Hostel - G Block"))
+    .or(z.literal("Ladies' Hostel - H Block"))
+    .or(z.literal("Men's Hostel - A Block"))
+    .or(z.literal("Men's Hostel - B Block"))
+    .or(z.literal("Men's Hostel - B Annex"))
+    .or(z.literal("Men's Hostel - C Block"))
+    .or(z.literal("Men's Hostel - D Block"))
+    .or(z.literal("Men's Hostel - D Annex"))
+    .or(z.literal("Men's Hostel - E Block"))
+    .or(z.literal("Men's Hostel - F Block"))
+    .or(z.literal("Men's Hostel - G Block"))
+    .or(z.literal("Men's Hostel - H Block"))
+    .or(z.literal("Men's Hostel - J Block"))
+    .or(z.literal("Men's Hostel - K Block"))
+    .or(z.literal("Men's Hostel - L Block"))
+    .or(z.literal("Men's Hostel - M Block"))
+    .or(z.literal("Men's Hostel - N Block"))
+    .or(z.literal("Men's Hostel - P Block"))
+    .or(z.literal("Men's Hostel - Q Block"))
+    .or(z.literal("Men's Hostel - R Block")),
   roomNumber: z
     .string({
       required_error: "Required",
       invalid_type_error: "Room number must be a string",
     })
+    .min(1, "Enter a valid room number")
     .max(10, "Enter a valid room number"),
 });
 
@@ -150,56 +137,58 @@ export const externalDetails = z.object({
       required_error: "Required",
       invalid_type_error: "College name must be a string",
     })
+    .min(1, "Enter a valid college name")
     .max(50, "Enter a valid college name"),
   collegeCity: z
     .string({
       required_error: "Required",
       invalid_type_error: "College city must be a string",
     })
+    .min(1, "Enter a valid college city")
     .max(50, "Enter a valid college city"),
-  collegeState: z.union([
-    z.literal("Andaman and Nicobar Islands"),
-    z.literal("Andhra Pradesh"),
-    z.literal("Arunachal Pradesh"),
-    z.literal("Assam"),
-    z.literal("Bihar"),
-    z.literal("Chandigarh"),
-    z.literal("Chhattisgarh"),
-    z.literal("Dadra and Nagar Haveli"),
-    z.literal("Daman and Diu"),
-    z.literal("Delhi"),
-    z.literal("Goa"),
-    z.literal("Gujarat"),
-    z.literal("Haryana"),
-    z.literal("Himachal Pradesh"),
-    z.literal("Jammu and Kashmir"),
-    z.literal("Jharkhand"),
-    z.literal("Karnataka"),
-    z.literal("Kerala"),
-    z.literal("Lakshadweep"),
-    z.literal("Madhya Pradesh"),
-    z.literal("Maharashtra"),
-    z.literal("Manipur"),
-    z.literal("Meghalaya"),
-    z.literal("Mizoram"),
-    z.literal("Nagaland"),
-    z.literal("Odisha"),
-    z.literal("Puducherry"),
-    z.literal("Punjab"),
-    z.literal("Rajasthan"),
-    z.literal("Sikkim"),
-    z.literal("Tamil Nadu"),
-    z.literal("Telangana"),
-    z.literal("Tripura"),
-    z.literal("Uttar Pradesh"),
-    z.literal("Uttarakhand"),
-    z.literal("West Bengal"),
-  ]),
+  collegeState: z
+    .literal("Andaman and Nicobar Islands")
+    .or(z.literal("Andhra Pradesh"))
+    .or(z.literal("Arunachal Pradesh"))
+    .or(z.literal("Assam"))
+    .or(z.literal("Bihar"))
+    .or(z.literal("Chandigarh"))
+    .or(z.literal("Chhattisgarh"))
+    .or(z.literal("Dadra and Nagar Haveli"))
+    .or(z.literal("Daman and Diu"))
+    .or(z.literal("Delhi"))
+    .or(z.literal("Goa"))
+    .or(z.literal("Gujarat"))
+    .or(z.literal("Haryana"))
+    .or(z.literal("Himachal Pradesh"))
+    .or(z.literal("Jammu and Kashmir"))
+    .or(z.literal("Jharkhand"))
+    .or(z.literal("Karnataka"))
+    .or(z.literal("Kerala"))
+    .or(z.literal("Lakshadweep"))
+    .or(z.literal("Madhya Pradesh"))
+    .or(z.literal("Maharashtra"))
+    .or(z.literal("Manipur"))
+    .or(z.literal("Meghalaya"))
+    .or(z.literal("Mizoram"))
+    .or(z.literal("Nagaland"))
+    .or(z.literal("Odisha"))
+    .or(z.literal("Puducherry"))
+    .or(z.literal("Punjab"))
+    .or(z.literal("Rajasthan"))
+    .or(z.literal("Sikkim"))
+    .or(z.literal("Tamil Nadu"))
+    .or(z.literal("Telangana"))
+    .or(z.literal("Tripura"))
+    .or(z.literal("Uttar Pradesh"))
+    .or(z.literal("Uttarakhand"))
+    .or(z.literal("West Bengal")),
   collegeRollNumber: z
     .string({
       required_error: "Required",
       invalid_type_error: "College roll number must be a string",
     })
+    .min(1, "Enter a valid college roll number")
     .max(50, "Enter a valid college roll number"),
 });
 

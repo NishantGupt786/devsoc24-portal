@@ -1,7 +1,7 @@
 "use client";
 
-import blocks from "@/../public/hostels.json";
-import { vitianDetails } from "@/schemas/signup";
+import states from "@/../public/states.json";
+import { externalDetails } from "@/schemas/signup";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,32 +25,32 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useSearchParams } from "next/navigation";
-import { BadRequest, ServerError } from "@/components/toast";
 import axios, { type AxiosError } from "axios";
 import { type APIResponse } from "@/schemas/api";
+import { BadRequest, ServerError } from "@/components/toast";
+import { useSearchParams } from "next/navigation";
 
-type VitianDetailsFormValues = z.infer<typeof vitianDetails>;
+type ExternalDetailsFormValues = z.infer<typeof externalDetails>;
 
-export default function VitianForm({
+export default function ExternalForm({
   setForm,
 }: {
   setForm: React.Dispatch<React.SetStateAction<number>>;
 }) {
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
-  const vitianForm = useForm<VitianDetailsFormValues>({
-    resolver: zodResolver(vitianDetails),
+  const externalForm = useForm<ExternalDetailsFormValues>({
+    resolver: zodResolver(externalDetails),
     defaultValues: {
-      regNumber: "",
-      vitEmail: "",
-      block: undefined,
-      roomNumber: "",
+      collegeName: "",
+      collegeCity: "",
+      collegeState: undefined,
+      collegeRollNumber: "",
     },
     mode: "onChange",
   });
 
-  async function onSubmit(data: VitianDetailsFormValues) {
+  async function onSubmit(data: ExternalDetailsFormValues) {
     const toastId = toast.loading("Saving...", { autoClose: false });
     const updatedData = {
       first_name: localStorage.getItem("first_name"),
@@ -58,15 +58,12 @@ export default function VitianForm({
       phone: localStorage.getItem("phone_number"),
       gender: localStorage.getItem("gender"),
       country: localStorage.getItem("country"),
-      is_vitian: true,
+      is_vitian: false,
       email: email,
-      college: "VIT Vellore",
-      city: "Vellore",
-      state: "Tamil Nadu",
-      reg_no: data.regNumber,
-      block: data.block,
-      room: data.roomNumber,
-      vit_email: data.vitEmail,
+      college: data.collegeName,
+      city: data.collegeCity,
+      state: data.collegeState,
+      reg_no: data.collegeRollNumber,
     };
     console.log(updatedData);
 
@@ -122,9 +119,6 @@ export default function VitianForm({
                 <p>Please sign up.</p>
               </div>
             ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
           });
         }
         return;
@@ -137,43 +131,30 @@ export default function VitianForm({
       });
       return;
     }
-
-    // toast.update(toastId, {
-    //   render:
-    //     res === 200 ? "Login successful!" : res !== 500 ? res : <ServerError />,
-    //   type: res === 200 ? "success" : "error",
-    //   isLoading: false,
-    //   autoClose: 2000,
-    // });
-
-    // if (res === 200) {
-    //   setTimeout(() => {
-    //     void router.push("/overview");
-    //   }, 2000);
-    // }
   }
   return (
     <>
       <ToastContainer />
-      <Form {...vitianForm}>
+      <Form {...externalForm}>
         <form
-          onSubmit={vitianForm.handleSubmit(onSubmit)}
+          onSubmit={externalForm.handleSubmit(onSubmit)}
           className="mx-auto mt-4 flex w-9/12 flex-col gap-4 py-4 text-primary md:w-1/3"
         >
           <FormField
-            control={vitianForm.control}
-            name="regNumber"
+            control={externalForm.control}
+            name="collegeName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Registration Number</FormLabel>
+                <FormLabel>College Name</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
                       type="text"
-                      placeholder="Registration Number"
+                      placeholder="College Name"
+                      required
                       {...field}
                       className={` ${
-                        vitianForm.getFieldState("regNumber").invalid
+                        externalForm.getFieldState("collegeName").invalid
                           ? "border-red-500 focus:border-input focus:!ring-red-500"
                           : ""
                       }`}
@@ -184,36 +165,13 @@ export default function VitianForm({
               </FormItem>
             )}
           />
+
           <FormField
-            control={vitianForm.control}
-            name="vitEmail"
+            control={externalForm.control}
+            name="collegeState"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>VIT Email Address</FormLabel>
-                <FormControl>
-                  <div className="relative">
-                    <Input
-                      type="email"
-                      placeholder="VIT Email Address"
-                      {...field}
-                      className={` ${
-                        vitianForm.getFieldState("vitEmail").invalid
-                          ? "border-red-500 focus:border-input focus:!ring-red-500"
-                          : ""
-                      }`}
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={vitianForm.control}
-            name="block"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Block</FormLabel>
+                <FormLabel>College Location</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Select
@@ -222,17 +180,17 @@ export default function VitianForm({
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select your block" />
+                          <SelectValue placeholder="Select State" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {blocks.map((block, index) => (
+                        {states.map((state, index) => (
                           <SelectItem
                             key={index}
-                            value={block}
+                            value={state}
                             className="rounded-none border-b border-border/30"
                           >
-                            <span>{block}</span>
+                            <span>{state}</span>
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -244,19 +202,45 @@ export default function VitianForm({
             )}
           />
           <FormField
-            control={vitianForm.control}
-            name="roomNumber"
+            control={externalForm.control}
+            name="collegeCity"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Room Number</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
                       type="text"
-                      placeholder="Room Number"
+                      placeholder="College City"
+                      required
                       {...field}
                       className={` ${
-                        vitianForm.getFieldState("roomNumber").invalid
+                        externalForm.getFieldState("collegeCity").invalid
+                          ? "border-red-500 focus:border-input focus:!ring-red-500"
+                          : ""
+                      }`}
+                    />
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={externalForm.control}
+            name="collegeRollNumber"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>College Identification Number</FormLabel>
+                <FormControl>
+                  <div className="relative">
+                    <Input
+                      type="text"
+                      placeholder="College Identification Number"
+                      required
+                      {...field}
+                      className={` ${
+                        externalForm.getFieldState("collegeRollNumber").invalid
                           ? "border-red-500 focus:border-input focus:!ring-red-500"
                           : ""
                       }`}
@@ -272,14 +256,14 @@ export default function VitianForm({
               className="mx-auto mt-4 w-fit px-14"
               onClick={() => setForm(0)}
             >
-              Prev
+              Back
             </Button>
             <Button
               type="submit"
-              disabled={vitianForm.formState.isSubmitting}
+              disabled={externalForm.formState.isSubmitting}
               className="mx-auto mt-4 w-fit px-14"
             >
-              {vitianForm.formState.isSubmitting ? "Submitting..." : "Submit"}
+              {externalForm.formState.isSubmitting ? "Submitting..." : "Submit"}
             </Button>
           </div>
         </form>

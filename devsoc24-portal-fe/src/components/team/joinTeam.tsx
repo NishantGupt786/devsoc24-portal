@@ -16,7 +16,7 @@ function JoinTeam() {
         </DialogHeader>
         <div className="flex flex-col gap-y-2 py-4">
           <Label htmlFor="name" className="text-sm font-normal text-[#53545C]">
-            Enter team code
+            Enter Team Code
           </Label>
           <Input id="name" placeholder="Team code" className="col-span-3" />
         </div>
