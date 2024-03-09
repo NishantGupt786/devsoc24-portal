@@ -8,31 +8,30 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios, { AxiosResponse } from "axios";
 import z from "zod";
+import { useRef } from "react";
 
 const teamNameSchema = z.object({
   name: z.string(),
 });
 
 function CreateTeam() {
-  const createTeam = async () => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const handleClick = async () => {
     try {
-      const response: AxiosResponse<{ name: string }> = await axios.post(
+      const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/team/create`,
         {
-          name: "",
+          name: inputRef.current?.value,
         },
         {
           withCredentials: true,
         },
       );
-      console.log(response);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
-          case 201:
-            console.log("Created");
-          case 409:
-            console.log("Not in team");
+          case 202:
+            console.log("Accepted");
           default:
             console.log(e);
         }
@@ -49,10 +48,15 @@ function CreateTeam() {
           <Label htmlFor="name" className="text-sm font-normal text-[#53545C]">
             Enter team name
           </Label>
-          <Input id="name" placeholder="Team name" className="col-span-3" />
+          <Input
+            id="name"
+            placeholder="Team name"
+            className="col-span-3"
+            ref={inputRef}
+          />
         </div>
         <div className="flex justify-center">
-          <Button type="submit" className="bg-[#458B71]">
+          <Button type="submit" className="bg-[#458B71]" onClick={handleClick}>
             Confirm
           </Button>
         </div>

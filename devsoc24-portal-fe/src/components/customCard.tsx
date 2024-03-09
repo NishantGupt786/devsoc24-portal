@@ -23,7 +23,7 @@ function CustomCard(props: CardProps) {
 
   return (
     <>
-      <div className="h-fit w-full rounded-xl bg-white md:w-fit">
+      <div className="h-fit w-full rounded-xl bg-white md:w-[32vw]">
         <div className="pl-3 pt-2 font-semibold text-[#45464E]">{title}</div>
         <div className="flex flex-col items-center justify-center p-8">
           <div className="rounded-full border-[#E1E2E9] bg-[#F4F5FA] p-8">
