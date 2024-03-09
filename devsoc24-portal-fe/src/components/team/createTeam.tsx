@@ -11,7 +11,9 @@ import { Input } from "@/components/ui/input";
 import axios, { AxiosResponse } from "axios";
 import z from "zod";
 import { useRef } from "react";
-import { useTeamStore } from "@/store/store";
+import { useIdeaStore, useTeamStore, useUserStore } from "@/store/store";
+import { userProps } from "@/interfaces";
+import { useRouter } from "next/navigation";
 
 const teamNameSchema = z.object({
   name: z.string(),
@@ -20,6 +22,10 @@ const teamNameSchema = z.object({
 function CreateTeam() {
   const { team, setTeam } = useTeamStore();
   const inputRef = useRef<HTMLInputElement>(null);
+  const { user, setUser } = useUserStore();
+  const { idea, setIdea } = useIdeaStore();
+
+  const router = useRouter();
   const handleClick = async () => {
     try {
       const response = await axios.post(
@@ -44,6 +50,34 @@ function CreateTeam() {
       }
     }
   };
+  const fetchTeam = async () => {
+    try {
+      const response: AxiosResponse<userProps> = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/user/me`,
+        {
+          withCredentials: true,
+        },
+      );
+      setUser(response.data);
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        switch (e.response?.status) {
+          case 401:
+            void router.push("/login");
+            break;
+          case 404:
+            console.log("Idea Not found, but in a team");
+            break;
+          case 409:
+            console.log("Not in team");
+            break;
+          default:
+            console.log(e);
+            break;
+        }
+      }
+    }
+  };
   return (
     <>
       <DialogContent className="sm:max-w-[425px]">
@@ -56,14 +90,14 @@ function CreateTeam() {
           </Label>
           <Input
             id="name"
-            placeholder="Team name"
+            placeholder="Team Name"
             className="col-span-3"
             ref={inputRef}
           />
         </div>
         <div className="flex justify-center">
           <DialogFooter className="sm:justify-start">
-            <DialogClose asChild>
+            <DialogClose asChild onClick={fetchTeam}>
               <Button
                 type="submit"
                 className="bg-[#458B71]"

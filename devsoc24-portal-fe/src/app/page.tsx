@@ -46,48 +46,6 @@ export default function HomePage() {
   const { user, setUser } = useUserStore();
   const { teamData, setTeamData } = useTeamDataStore();
 
-  // const login = async () => {
-  //   const response = await axios.post(
-  //     `${process.env.NEXT_PUBLIC_API_URL}/login`,
-  //     {
-  //       email: "abhinav@gmail.com",
-  //       password: "123456",
-  //     },
-  //     {
-  //       withCredentials: true,
-  //     },
-  //   );
-  // };
-  
-  // const FetchTeam = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `${process.env.NEXT_PUBLIC_API_URL}/team`,
-  //       {
-  //         withCredentials: true,
-  //       },
-  //     );
-  //     setTeamData(response.data);
-  //   } catch (e) {
-  //     if (axios.isAxiosError(e)) {
-  //       switch (e.response?.status) {
-  //         case 401:
-  //           router.push("/login");
-  //           break;
-  //         case 417:
-  //           setTeam(true);
-  //           console.log("no team");
-  //           break;
-  //         case 200:
-  //           setTeam(true);
-  //           break;
-  //         default:
-  //           console.log(e);
-  //           break;
-  //       }
-  //     }
-  //   }
-  // };
   const handleLogout = async () => {
     const toastId = toast.loading("Loading...", { autoClose: false });
     try {
@@ -113,7 +71,6 @@ export default function HomePage() {
         isLoading: false,
         autoClose: 2000,
       });
-      // window.location.reload();
       router.push("/login");
     } catch (e) {
       if (axios.isAxiosError(e)) {
@@ -151,6 +108,36 @@ export default function HomePage() {
           case 409:
             setIdea(409);
             console.log("Not in team");
+            break;
+          default:
+            console.log(e);
+            break;
+        }
+      }
+    }
+  };
+  
+  const fetchTeam = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/team`,
+        {
+          withCredentials: true,
+        },
+      );
+      setTeamData(response.data);
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        switch (e.response?.status) {
+          case 401:
+            router.push("/login");
+            break;
+          case 417:
+            setTeam(true);
+            console.log("no team");
+            break;
+          case 200:
+            setTeam(true);
             break;
           default:
             console.log(e);
@@ -203,7 +190,7 @@ export default function HomePage() {
       console.log("Loner saala");
       setTeam(true);
     } else {
-      void FetchTeam(setTeamData, setTeam);
+      void fetchTeam();
     }
   }, [user]);
 

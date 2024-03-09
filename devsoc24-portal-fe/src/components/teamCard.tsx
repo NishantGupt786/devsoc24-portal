@@ -3,40 +3,7 @@ import { useEffect, useState } from "react";
 import { Crown, BadgeMinus, Files, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-
-interface teamDataUserProps {
-  name: string;
-  reg_no: string;
-  id: string;
-}
-
-interface teamDataProps {
-  message?: string;
-  status?: string;
-  team?: {
-    team_name: string;
-    team_code: string;
-    leader_id: string;
-    round: 0;
-    users: teamDataUserProps[];
-    idea: {
-      title: string;
-      description: string;
-      track: string;
-      github_link: string;
-      figma_link: string;
-      others: string;
-    };
-    project: {
-      name: string;
-      description: string;
-      track: string;
-      github_link: string;
-      figma_link: string;
-      others: string;
-    };
-  };
-}
+import { teamDataProps } from "@/interfaces";
 
 interface keyProps {
   message: string;
