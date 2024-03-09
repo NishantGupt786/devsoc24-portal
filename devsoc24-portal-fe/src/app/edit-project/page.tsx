@@ -2,10 +2,9 @@
 import Image from "next/image";
 import Logo from "@/components/logo";
 import Dashtitle from "@/assets/images/titleDashboard.svg";
-import { ToastContainer, toast } from "react-toastify";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import EditIdeaForm from "./edit-idea-form";
+import EditProjectForm from "./edit-subject-form";
 
 export default function Page() {
   return (
@@ -22,9 +21,9 @@ export default function Page() {
         </div>
         <div className="absolute ml-[4.7rem] mt-[11vh] flex w-[91.9vw] flex-col bg-[#F4F5FA] pl-5 pt-5 max-[931px]:justify-center max-[445px]:ml-[3.7rem]  ">
           <p className="mb-4 text-4xl font-medium text-black">
-            Idea Updation For Devsoc24
+            Project Updation For Devsoc24
           </p>
-          <EditIdeaForm />
+          <EditProjectForm />
         </div>
       </main>
     </>
