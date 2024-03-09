@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type PersonalDetailsFormValues = z.infer<typeof personalDetailsSchema>;
 
@@ -47,23 +47,32 @@ export default function PersonalDetails({
       gender: undefined,
     },
     mode: "onChange",
+    shouldUnregister: false,
   });
-
+  const [gender, setGender] = useState("");
   useEffect(() => {
     form.setValue("firstName", localStorage.getItem("first_name") ?? "");
     form.setValue("lastName", localStorage.getItem("last_name") ?? "");
     form.setValue("email", email ?? "");
     form.setValue("phoneNumber", localStorage.getItem("phone_number") ?? "");
     form.setValue("country", localStorage.getItem("country") ?? "+91");
+    const temp = localStorage.getItem("gender") as
+      | "Male"
+      | "Female"
+      | "Others"
+      | "Prefer Not to Say";
+
+    setGender(temp);
+  }, []);
+
+  useEffect(() => {
     form.setValue(
       "gender",
-      (localStorage.getItem("gender") as
-        | "Male"
-        | "Female"
-        | "Others"
-        | "Prefer Not to Say") ?? undefined,
+      gender as "Male" | "Female" | "Others" | "Prefer Not to Say",
     );
-  }, []);
+    setGender(form.getValues("gender"));
+    console.log("Form Values:", form.getValues());
+  }, [gender]);
 
   async function onSubmit(data: PersonalDetailsFormValues) {
     localStorage.setItem("first_name", data.firstName);
@@ -217,7 +226,10 @@ export default function PersonalDetails({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Gender</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={form.getValues("gender")}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Gender" />

@@ -49,7 +49,7 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
   return (
     <>
       <div>
-        <div className="h-fit w-full rounded-xl bg-white md:w-[400px]">
+        <div className="h-fit w-full rounded-xl bg-white md:w-[32vw]">
           <div className="pl-3 pt-2 font-semibold text-[#45464E]">
             Your Devsoc Team
           </div>

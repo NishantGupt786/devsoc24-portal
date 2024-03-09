@@ -14,6 +14,7 @@ import {
   userProps,
 } from "@/store/store";
 import Loading from "./loading";
+import TrackComponent from "@/components/track/TrackComponent";
 
 interface ideaProps {
   message: string;
@@ -76,18 +77,18 @@ export default function HomePage() {
   const { user, setUser } = useUserStore();
   const [teamData, setTeamData] = useState<teamDataProps | null>(null);
 
-  const login = async () => {
-    const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/login`,
-      {
-        email: "abhinav@gmail.com",
-        password: "123456",
-      },
-      {
-        withCredentials: true,
-      },
-    );
-  };
+  // const login = async () => {
+  //   const response = await axios.post(
+  //     `${process.env.NEXT_PUBLIC_API_URL}/login`,
+  //     {
+  //       email: "abhinav@gmail.com",
+  //       password: "123456",
+  //     },
+  //     {
+  //       withCredentials: true,
+  //     },
+  //   );
+  // };
 
   const fetchData = async () => {
     try {
@@ -162,7 +163,7 @@ export default function HomePage() {
 
   useEffect(() => {
     const fetchDataAndLogin = async () => {
-      await login();
+      // await login();
       await fetchData();
       await fetchIdea();
     };
@@ -201,33 +202,32 @@ export default function HomePage() {
   const router = useRouter();
 
   return (
-    <Suspense fallback={<Loading />}>
-      <main className="flex min-h-screen flex-col items-start overflow-x-hidden bg-[#F4F5FA]">
-        <div className="flex h-[10%] w-full items-center gap-x-8 bg-background px-6 py-2">
-          <Logo className="h-9/10 w-auto" />
-          <Image src={Dashtitle as HTMLImageElement} alt="title" />
-        </div>
-        <div className="mt-4 flex w-full flex-col gap-4 px-4 md:flex-row md:flex-wrap">
-          {team ? (
-            <CustomCard
-              title="Your Devsoc Team"
-              cardImage="teamCardImg"
-              cardContent="No Team Members Yet?"
-              cardDesc="Start A New Team or Join One"
-              buttonDetails={noTeamCard}
-            />
-          ) : (
-            <TeamCard {...teamData} />
-          )}
+    <main className="flex h-fit lg:h-screen flex-col items-start overflow-y-auto overflow-x-hidden bg-[#F4F5FA]">
+      <div className="flex h-[10%] w-full items-center gap-x-8 bg-background px-6 py-2">
+        <Logo className="h-9/10 w-auto" />
+        <Image src={Dashtitle as HTMLImageElement} alt="title" />
+      </div>
+      <div className="mt-4 flex h-fit w-full flex-col justify-evenly gap-4 overflow-y-auto px-4 md:flex-row lg:h-[85%]">
+        {team ? (
           <CustomCard
-            title="Idea Submission"
-            cardImage="ideaSubmissionImg"
-            cardContent="No Idea Submitted yet"
-            cardDesc="Submit Your Idea Before < date > <div time >"
-            buttonDetails={ideaCard}
+            title="Your Devsoc Team"
+            cardImage="teamCardImg"
+            cardContent="No Team Members Yet?"
+            cardDesc="Start A New Team or Join One"
+            buttonDetails={noTeamCard}
           />
-        </div>
-      </main>
-    </Suspense>
+        ) : (
+          <TeamCard {...teamData} />
+        )}
+        <CustomCard
+          title="Idea Submission"
+          cardImage="ideaSubmissionImg"
+          cardContent="No Idea Submitted yet"
+          cardDesc="Submit Your Idea Before < date > <div time >"
+          buttonDetails={ideaCard}
+        />
+        <TrackComponent />
+      </div>
+    </main>
   );
 }
