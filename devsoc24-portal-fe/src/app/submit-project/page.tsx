@@ -22,8 +22,6 @@ export default function Page() {
                 <p className="text-black text-4xl font-medium mb-4">Project Submission For Devsoc24</p>
                 <SubmitProjectForm />
             </div>
-
-
         </main>
     )
 }

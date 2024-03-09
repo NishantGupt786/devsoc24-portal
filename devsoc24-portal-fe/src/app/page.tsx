@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Logo from "@/components/logo";
 import Dashtitle from "@/assets/images/titleDashboard.svg";
 import CustomCard from "@/components/customCard";
@@ -50,11 +50,12 @@ interface teamProps {
 }
 
 export default function HomePage() {
+  const router = useRouter();
   const { idea, setIdea } = useIdeaStore();
   const { team, setTeam } = useTeamStore();
   const { user, setUser } = useUserStore();
+  const [getIdea, SetIdea] = useState("");
   const { teamData, setTeamData } = useTeamDataStore();
-  
 
   const handleLogout = async () => {
     const toastId = toast.loading("Loading...", { autoClose: false });
@@ -81,7 +82,7 @@ export default function HomePage() {
         isLoading: false,
         autoClose: 2000,
       });
-      router.push("/login");
+      void router.push("/login");
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
@@ -110,7 +111,7 @@ export default function HomePage() {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
           case 401:
-            router.push("/login");
+            void router.push("/login");
             break;
           case 404:
             console.log("Idea Not found, but in a team");
@@ -140,7 +141,7 @@ export default function HomePage() {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
           case 401:
-            router.push("/login");
+            void router.push("/login");
             break;
           case 417:
             setTeam(true);
@@ -151,6 +152,7 @@ export default function HomePage() {
             break;
           default:
             console.log(e);
+            SetIdea("idea found");
             break;
         }
       }
@@ -202,7 +204,7 @@ export default function HomePage() {
     } else {
       void fetchTeam();
     }
-  }, [user]);
+  }, []);
 
   const noTeamCard = [
     {
@@ -219,12 +221,25 @@ export default function HomePage() {
   const ideaCard = [
     {
       text: "Submit An Idea",
-      showModal: true,
+      showModal: false,
+      modalType: idea === 409 ? "Choice" : "JoinTeam",
+      routeTo: "/submit-idea",
+    },
+    {
+      text: "Edit idea",
+      showModal: false,
+      modalType: "EditIdea",
+      routeTo: "/edit-idea",
+    },
+  ];
+  const ideaTherecard = [
+    {
+      text: "Submit An Idea",
+      showModal: false,
       modalType: idea === 409 ? "Choice" : "JoinTeam",
       routeTo: "/submit-idea",
     },
   ];
-  const router = useRouter();
 
   return (
     <>
@@ -280,7 +295,7 @@ export default function HomePage() {
             cardImage="ideaSubmissionImg"
             cardContent="No Idea Submitted yet"
             cardDesc="Submit Your Idea Before < date > <div time >"
-            buttonDetails={ideaCard}
+            buttonDetails={getIdea === "idea found" ? ideaTherecard : ideaCard}
           />
           <TrackComponent />
         </div>
