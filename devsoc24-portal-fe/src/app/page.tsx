@@ -250,19 +250,17 @@ export default function HomePage() {
             <Logo className="h-9/10 w-auto" />
             <Image src={Dashtitle as HTMLImageElement} alt="title" />
           </div>
-          {/* <Image
-            src={logout as HTMLImageElement}
-            alt="logout"
-            height={0}
-            width={0}
-            className="h-[50px] w-[50px] hover:cursor-pointer"
-            onClick={handleLogout}
-          /> */}
           <DropdownMenu>
             <DropdownMenuTrigger className="mr-10">
-              <Button variant="ghost" size="icon">
+              {/* This bkl is causing Hydration Error */}
+              {/* <Button variant="ghost" size="icon">
                 <User />
-              </Button>
+              </Button> */}
+
+
+              <div>
+                <User />
+              </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel className="cursor-pointer">
