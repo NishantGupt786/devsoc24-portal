@@ -32,7 +32,7 @@ function JoinTeam() {
           withCredentials: true,
         },
       );
-
+      fetchTeam();
       setTeam(false);
     } catch (e) {
       if (axios.isAxiosError(e)) {
