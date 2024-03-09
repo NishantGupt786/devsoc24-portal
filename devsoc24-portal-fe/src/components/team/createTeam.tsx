@@ -50,7 +50,7 @@ function CreateTeam() {
       }
     }
   };
-  const fetchData = async () => {
+  const fetchTeam = async () => {
     try {
       const response: AxiosResponse<userProps> = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}/user/me`,
@@ -69,7 +69,6 @@ function CreateTeam() {
             console.log("Idea Not found, but in a team");
             break;
           case 409:
-            setIdea(409);
             console.log("Not in team");
             break;
           default:
@@ -91,14 +90,14 @@ function CreateTeam() {
           </Label>
           <Input
             id="name"
-            placeholder="Team name"
+            placeholder="Team Name"
             className="col-span-3"
             ref={inputRef}
           />
         </div>
         <div className="flex justify-center">
           <DialogFooter className="sm:justify-start">
-            <DialogClose asChild onClick={fetchData}>
+            <DialogClose asChild onClick={fetchTeam}>
               <Button
                 type="submit"
                 className="bg-[#458B71]"

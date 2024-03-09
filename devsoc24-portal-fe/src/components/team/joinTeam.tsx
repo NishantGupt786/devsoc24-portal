@@ -1,5 +1,7 @@
 import {
+  DialogClose,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -7,15 +9,22 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRef } from "react";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import { useIdeaStore, useTeamStore, useUserStore } from "@/store/store";
+import { userProps } from "@/interfaces";
+import { useRouter } from "next/navigation";
 
 function JoinTeam() {
   const inputRef = useRef<HTMLInputElement>(null);
+  const { team, setTeam } = useTeamStore();
+  const { idea, setIdea } = useIdeaStore();
+  const { user, setUser } = useUserStore();
+
+  const router = useRouter();
   const handleClick = async () => {
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/idea`,
-
+        `${process.env.NEXT_PUBLIC_API_URL}/team/join`,
         {
           code: inputRef.current?.value,
         },
@@ -23,15 +32,43 @@ function JoinTeam() {
           withCredentials: true,
         },
       );
+
+      setTeam(false);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
-          case 409:
-            console.log("Already has Idea");
           case 202:
             console.log("Accepted");
           default:
             console.log(e);
+        }
+      }
+    }
+  };
+  const fetchTeam = async () => {
+    try {
+      const response: AxiosResponse<userProps> = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/user/me`,
+        {
+          withCredentials: true,
+        },
+      );
+      setUser(response.data);
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        switch (e.response?.status) {
+          case 401:
+            router.push("/login");
+            break;
+          case 404:
+            console.log("Idea Not found, but in a team");
+            break;
+          case 409:
+            console.log("Not in team");
+            break;
+          default:
+            console.log(e);
+            break;
         }
       }
     }
@@ -54,9 +91,17 @@ function JoinTeam() {
           />
         </div>
         <div className="flex justify-center">
-          <Button type="submit" className="bg-[#458B71]" onClick={handleClick}>
-            Confirm
-          </Button>
+          <DialogFooter className="sm:justify-start">
+            <DialogClose asChild onClick={fetchTeam}>
+              <Button
+                type="submit"
+                className="bg-[#458B71]"
+                onClick={handleClick}
+              >
+                Confirm
+              </Button>
+            </DialogClose>
+          </DialogFooter>
         </div>
       </DialogContent>
     </>
