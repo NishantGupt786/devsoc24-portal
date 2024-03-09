@@ -1,5 +1,7 @@
 import {
+  DialogClose,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -9,12 +11,14 @@ import { Input } from "@/components/ui/input";
 import axios, { AxiosResponse } from "axios";
 import z from "zod";
 import { useRef } from "react";
+import { useTeamStore } from "@/store/store";
 
 const teamNameSchema = z.object({
   name: z.string(),
 });
 
 function CreateTeam() {
+  const { team, setTeam } = useTeamStore();
   const inputRef = useRef<HTMLInputElement>(null);
   const handleClick = async () => {
     try {
@@ -27,6 +31,8 @@ function CreateTeam() {
           withCredentials: true,
         },
       );
+
+      setTeam(false);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
@@ -56,9 +62,17 @@ function CreateTeam() {
           />
         </div>
         <div className="flex justify-center">
-          <Button type="submit" className="bg-[#458B71]" onClick={handleClick}>
-            Confirm
-          </Button>
+          <DialogFooter className="sm:justify-start">
+            <DialogClose asChild>
+              <Button
+                type="submit"
+                className="bg-[#458B71]"
+                onClick={handleClick}
+              >
+                Confirm
+              </Button>
+            </DialogClose>
+          </DialogFooter>
         </div>
       </DialogContent>
     </>
