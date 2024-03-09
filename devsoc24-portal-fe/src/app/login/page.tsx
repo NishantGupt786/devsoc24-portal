@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import Logo from "@/components/logo";
-import { ModeToggle } from "@/components/theme-toggle";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
 import title from "@/assets/images/title.svg";
@@ -31,7 +30,6 @@ export default function Page() {
     <main className="flex min-h-screen flex-col items-center bg-[url('/images/bg.svg')] bg-cover bg-no-repeat">
       <div className="flex h-[10%] w-full items-center justify-between bg-background px-6 py-2">
         <Logo className="h-9/10 w-auto" />
-        {/* <ModeToggle /> */}
       </div>
       <div className="flex max-w-[90vw] grow items-center justify-center">
         <Card className="w-fit">

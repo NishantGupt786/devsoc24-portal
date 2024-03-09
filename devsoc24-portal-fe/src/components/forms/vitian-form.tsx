@@ -26,7 +26,7 @@ import { Input } from "@/components/ui/input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSearchParams } from "next/navigation";
-import { BadRequest, ServerError } from "../toast";
+import { BadRequest, ServerError } from "@/components/toast";
 import axios, { type AxiosError } from "axios";
 import { type APIResponse } from "@/schemas/api";
 
@@ -57,6 +57,7 @@ export default function VitianForm({
       last_name: localStorage.getItem("last_name"),
       phone: localStorage.getItem("phone_number"),
       gender: localStorage.getItem("gender"),
+      country: localStorage.getItem("country"),
       is_vitian: true,
       email: email,
       college: "VIT Vellore",

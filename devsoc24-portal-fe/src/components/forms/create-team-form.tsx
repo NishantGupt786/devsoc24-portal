@@ -20,7 +20,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios, { type AxiosError } from "axios";
 import { type APIResponse } from "@/schemas/api";
 import { useRouter } from "next/navigation";
-import { BadRequest, ServerError } from "../toast";
+import { BadRequest, ServerError } from "@/components/toast";
 
 type CreateTeamFormValues = z.infer<typeof createTeamSchema>;
 

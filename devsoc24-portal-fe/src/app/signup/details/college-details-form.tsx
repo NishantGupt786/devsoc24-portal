@@ -3,8 +3,8 @@
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import React, { useState } from "react";
-import VitianForm from "../../../components/forms/vitian-form";
-import ExternalForm from "../../../components/forms/external-form";
+import VitianForm from "@/components/forms/vitian-form";
+import ExternalForm from "@/components/forms/external-form";
 
 export default function CollegeDetailsForm({
   setForm,
@@ -33,7 +33,11 @@ export default function CollegeDetailsForm({
             : "External Students and Participants Only"}
         </p>
       </div>
-      {isVitian ? <VitianForm setForm={setForm} /> : <ExternalForm setForm={setForm}/>}
+      {isVitian ? (
+        <VitianForm setForm={setForm} />
+      ) : (
+        <ExternalForm setForm={setForm} />
+      )}
     </div>
   );
 }

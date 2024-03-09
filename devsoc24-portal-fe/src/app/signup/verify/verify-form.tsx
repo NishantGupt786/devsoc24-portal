@@ -13,9 +13,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-// import { toast } from "react-toastify";
 import { useRouter, useSearchParams } from "next/navigation";
-import { KeyIcon } from "lucide-react";
+import { KeyRoundIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -77,11 +76,7 @@ export default function ForgotForm() {
         autoClose: 2000,
       });
       setTimeout(() => {
-        if (res.status === 200) {
-          void router.push("/signup/details?email=" + email);
-        } else {
-          void router.push("/login");
-        }
+        void router.push("/login");
       }, 1500);
       return;
     } catch (err) {
@@ -263,7 +258,7 @@ export default function ForgotForm() {
                           : ""
                       }`}
                     />
-                    <KeyIcon
+                    <KeyRoundIcon
                       color="gray"
                       className="absolute left-2 top-1/2 -translate-y-1/2"
                     />

@@ -4,7 +4,7 @@ import { joinTeamSchema } from "@/schemas/signup";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { type z } from "zod"; 
+import { type z } from "zod";
 import {
   Form,
   FormControl,
@@ -20,7 +20,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { type APIResponse } from "@/schemas/api";
 import { useRouter } from "next/navigation";
-import { BadRequest, ServerError } from "../toast";
+import { BadRequest, ServerError } from "@/components/toast";
 
 type CreateTeamFormValues = z.infer<typeof joinTeamSchema>;
 
@@ -38,6 +38,13 @@ export default function JoinTeamForm() {
     const toastId = toast.loading("Joining...", { autoClose: false });
     console.log(data);
     try {
+      await axios.post<APIResponse>(
+        `${process.env.NEXT_PUBLIC_API_URL}/refresh`,
+        {},
+        {
+          withCredentials: true,
+        },
+      );
       await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/team/join`,
         { code: data.teamCode },

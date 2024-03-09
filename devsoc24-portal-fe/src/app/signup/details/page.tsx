@@ -1,4 +1,5 @@
 "use client";
+
 import Logo from "@/components/logo";
 import Image, { type StaticImageData } from "next/image";
 import React, { useState } from "react";
@@ -13,7 +14,7 @@ import { DiscordIcon } from "@/assets/images/discord";
 import TeamDetailsForm from "./team-form";
 
 export default function Page() {
-  const [form, setForm] = useState(2);
+  const [form, setForm] = useState(0);
   const [isBannerVisible, setIsBannerVisible] = useState(true);
 
   return (

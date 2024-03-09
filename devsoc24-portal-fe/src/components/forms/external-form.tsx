@@ -27,7 +27,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios, { type AxiosError } from "axios";
 import { type APIResponse } from "@/schemas/api";
-import { BadRequest, ServerError } from "../toast";
+import { BadRequest, ServerError } from "@/components/toast";
 import { useSearchParams } from "next/navigation";
 
 type ExternalDetailsFormValues = z.infer<typeof externalDetails>;
@@ -57,6 +57,7 @@ export default function ExternalForm({
       last_name: localStorage.getItem("last_name"),
       phone: localStorage.getItem("phone_number"),
       gender: localStorage.getItem("gender"),
+      country: localStorage.getItem("country"),
       is_vitian: false,
       email: email,
       college: data.collegeName,
@@ -85,7 +86,7 @@ export default function ExternalForm({
         isLoading: false,
         autoClose: 2000,
       });
-      setForm(2);
+      setTimeout(() => setForm(2), 1500);
       return;
     } catch (err) {
       console.log(err);

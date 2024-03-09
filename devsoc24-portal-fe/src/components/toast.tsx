@@ -1,12 +1,3 @@
-export const InvalidCredentials = () => {
-  return (
-    <div className="">
-      <h2 className="font-semibold">Unable to login</h2>
-      <p>Please check your credentials and try again!</p>
-    </div>
-  );
-};
-
 export const ServerError = () => {
   return (
     <div className="">
