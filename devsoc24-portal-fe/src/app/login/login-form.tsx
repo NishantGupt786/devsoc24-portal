@@ -42,6 +42,9 @@ export default function LoginForm() {
       const { data } = await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/login`,
         { email: formVal.email, password: formVal.password },
+        {
+          withCredentials: true,
+        },
       );
       toast.update(toastId, {
         render: (
