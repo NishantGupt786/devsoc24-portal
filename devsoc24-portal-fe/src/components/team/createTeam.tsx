@@ -37,8 +37,8 @@ function CreateTeam() {
           withCredentials: true,
         },
       );
-
       setTeam(false);
+      fetchTeam();
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {

@@ -93,6 +93,9 @@ export default function CreateTeamForm() {
                 <p>Please choose a different name for your team.</p>
               </div>
             ),
+            type: "error",
+            isLoading: false,
+            autoClose: 2000,
           });
           return;
         }

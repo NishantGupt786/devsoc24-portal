@@ -1,12 +1,12 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect } from "react";
 import Logo from "@/components/logo";
 import Dashtitle from "@/assets/images/titleDashboard.svg";
 import CustomCard from "@/components/customCard";
 import TeamCard from "@/components/teamCard";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { type AxiosResponse } from "axios";
 import {
   useIdeaStore,
   useTeamDataStore,
@@ -15,9 +15,18 @@ import {
 } from "@/store/store";
 import Loading from "./loading";
 import TrackComponent from "@/components/track/TrackComponent";
-import logout from "../assets/images/logout.svg";
 import { ToastContainer, toast } from "react-toastify";
-import { refresh, teamDataProps, userProps } from "@/interfaces";
+import { refresh, type userProps } from "@/interfaces";
+import { type APIResponse } from "@/schemas/api";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { User } from "lucide-react";
 
 interface ideaProps {
   message: string;
@@ -45,6 +54,7 @@ export default function HomePage() {
   const { team, setTeam } = useTeamStore();
   const { user, setUser } = useUserStore();
   const { teamData, setTeamData } = useTeamDataStore();
+  
 
   const handleLogout = async () => {
     const toastId = toast.loading("Loading...", { autoClose: false });
@@ -116,10 +126,10 @@ export default function HomePage() {
       }
     }
   };
-  
+
   const fetchTeam = async () => {
     try {
-      const response = await axios.get(
+      const response = await axios.get<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/team`,
         {
           withCredentials: true,
@@ -225,14 +235,33 @@ export default function HomePage() {
             <Logo className="h-9/10 w-auto" />
             <Image src={Dashtitle as HTMLImageElement} alt="title" />
           </div>
-          <Image
+          {/* <Image
             src={logout as HTMLImageElement}
             alt="logout"
             height={0}
             width={0}
             className="h-[50px] w-[50px] hover:cursor-pointer"
             onClick={handleLogout}
-          />
+          /> */}
+          <DropdownMenu>
+            <DropdownMenuTrigger className="mr-10">
+              <Button variant="ghost" size="icon">
+                <User />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel className="cursor-pointer">
+                Profile
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuLabel
+                className="cursor-pointer text-red-500"
+                onClick={handleLogout}
+              >
+                Logout
+              </DropdownMenuLabel>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
         <div className="mt-4 flex h-fit w-full flex-col justify-evenly gap-4 overflow-y-auto px-4 md:flex-row lg:h-[85%]">
           {team ? (
