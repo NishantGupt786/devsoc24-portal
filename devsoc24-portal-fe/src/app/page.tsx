@@ -9,14 +9,15 @@ import TeamCard from "@/components/teamCard";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import {
   useIdeaStore,
+  useTeamDataStore,
   useTeamStore,
   useUserStore,
-  userProps,
 } from "@/store/store";
 import Loading from "./loading";
 import TrackComponent from "@/components/track/TrackComponent";
 import logout from "../assets/images/logout.svg";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import { refresh, teamDataProps, userProps } from "@/interfaces";
 
 interface ideaProps {
   message: string;
@@ -39,45 +40,11 @@ interface teamProps {
   status: string;
 }
 
-interface teamDataUserProps {
-  name: string;
-  reg_no: string;
-  id: string;
-}
-
-interface teamDataProps {
-  message?: string;
-  status?: string;
-  team?: {
-    team_name: string;
-    team_code: string;
-    leader_id: string;
-    round: 0;
-    users: teamDataUserProps[];
-    idea: {
-      title: string;
-      description: string;
-      track: string;
-      github_link: string;
-      figma_link: string;
-      others: string;
-    };
-    project: {
-      name: string;
-      description: string;
-      track: string;
-      github_link: string;
-      figma_link: string;
-      others: string;
-    };
-  };
-}
-
 export default function HomePage() {
   const { idea, setIdea } = useIdeaStore();
   const { team, setTeam } = useTeamStore();
   const { user, setUser } = useUserStore();
-  const [teamData, setTeamData] = useState<teamDataProps | null>(null);
+  const { teamData, setTeamData } = useTeamDataStore();
 
   // const login = async () => {
   //   const response = await axios.post(
@@ -91,40 +58,73 @@ export default function HomePage() {
   //     },
   //   );
   // };
-
+  
+  // const FetchTeam = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `${process.env.NEXT_PUBLIC_API_URL}/team`,
+  //       {
+  //         withCredentials: true,
+  //       },
+  //     );
+  //     setTeamData(response.data);
+  //   } catch (e) {
+  //     if (axios.isAxiosError(e)) {
+  //       switch (e.response?.status) {
+  //         case 401:
+  //           router.push("/login");
+  //           break;
+  //         case 417:
+  //           setTeam(true);
+  //           console.log("no team");
+  //           break;
+  //         case 200:
+  //           setTeam(true);
+  //           break;
+  //         default:
+  //           console.log(e);
+  //           break;
+  //       }
+  //     }
+  //   }
+  // };
   const handleLogout = async () => {
-    localStorage.clear();
-    const toastId = toast.loading("Sending...", { autoClose: false });
+    const toastId = toast.loading("Loading...", { autoClose: false });
     try {
-      const response: AxiosResponse<userProps> = await axios.post(
+      const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/logout`,
+        {
+          nallaData: "",
+        },
         {
           withCredentials: true,
         },
       );
+
+      localStorage.clear();
+      toast.update(toastId, {
+        render: (
+          <div className="">
+            <h2 className="font-semibold">Logged Out successfully!</h2>
+            <p>Redirecting...</p>
+          </div>
+        ),
+        type: "success",
+        isLoading: false,
+        autoClose: 2000,
+      });
+      // window.location.reload();
+      router.push("/login");
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
-          case 200:
-            router.push("/login");
-            toast.update(toastId, {
-              render: (
-                <div className="">
-                  <h2 className="font-semibold">Logged Out successfully!</h2>
-                  <p>Redirecting...</p>
-                </div>
-              ),
-              type: "success",
-              isLoading: false,
-              autoClose: 2000,
-            });
-          case 404:
-            console.log("Idea Not found, but in a team");
-          case 409:
-            setIdea(409);
-            console.log("Not in team");
+          case 401:
+            await refresh();
+            console.log("401");
+            break;
           default:
             console.log(e);
+            break;
         }
       }
     }
@@ -144,39 +144,17 @@ export default function HomePage() {
         switch (e.response?.status) {
           case 401:
             router.push("/login");
+            break;
           case 404:
             console.log("Idea Not found, but in a team");
+            break;
           case 409:
             setIdea(409);
             console.log("Not in team");
+            break;
           default:
             console.log(e);
-        }
-      }
-    }
-  };
-
-  const fetchTeam = async () => {
-    try {
-      const response: AxiosResponse<teamDataProps> = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/team`,
-        {
-          withCredentials: true,
-        },
-      );
-      setTeamData(response.data);
-    } catch (e) {
-      if (axios.isAxiosError(e)) {
-        switch (e.response?.status) {
-          case 401:
-            router.push("/login");
-          case 417:
-            setTeam(false);
-            console.log("no team");
-          case 200:
-            setTeam(true);
-          default:
-            console.log(e);
+            break;
         }
       }
     }
@@ -196,12 +174,16 @@ export default function HomePage() {
         switch (e.response?.status) {
           case 401:
             router.push("/login");
+            break;
           case 404:
             console.log("no team");
+            break;
           case 417:
             console.log("team no idea");
+            break;
           default:
             console.log(e);
+            break;
         }
       }
     }
@@ -221,7 +203,7 @@ export default function HomePage() {
       console.log("Loner saala");
       setTeam(true);
     } else {
-      void fetchTeam();
+      void FetchTeam(setTeamData, setTeam);
     }
   }, [user]);
 
@@ -248,42 +230,45 @@ export default function HomePage() {
   const router = useRouter();
 
   return (
-    <main className="flex h-fit flex-col items-start overflow-y-auto overflow-x-hidden bg-[#F4F5FA] lg:h-screen">
-      <div className="flex h-[10%] w-full items-center justify-between gap-x-8 bg-background px-6 py-2">
-        <div className="flex flex-row gap-8">
-          <Logo className="h-9/10 w-auto" />
-          <Image src={Dashtitle as HTMLImageElement} alt="title" />
-        </div>
-        <Image
-          src={logout}
-          alt="logout"
-          height={0}
-          width={0}
-          className="h-[50px] w-[50px] hover:cursor-pointer"
-          onClick={handleLogout}
-        />
-      </div>
-      <div className="mt-4 flex h-fit w-full flex-col justify-evenly gap-4 overflow-y-auto px-4 md:flex-row lg:h-[85%]">
-        {team ? (
-          <CustomCard
-            title="Your Devsoc Team"
-            cardImage="teamCardImg"
-            cardContent="No Team Members Yet?"
-            cardDesc="Start A New Team or Join One"
-            buttonDetails={noTeamCard}
+    <>
+      <ToastContainer />
+      <main className="flex h-fit flex-col items-start overflow-y-auto overflow-x-hidden bg-[#F4F5FA] lg:h-screen">
+        <div className="flex h-[10%] w-full items-center justify-between gap-x-8 bg-background px-6 py-2">
+          <div className="flex flex-row gap-8">
+            <Logo className="h-9/10 w-auto" />
+            <Image src={Dashtitle as HTMLImageElement} alt="title" />
+          </div>
+          <Image
+            src={logout as HTMLImageElement}
+            alt="logout"
+            height={0}
+            width={0}
+            className="h-[50px] w-[50px] hover:cursor-pointer"
+            onClick={handleLogout}
           />
-        ) : (
-          <TeamCard {...teamData} />
-        )}
-        <CustomCard
-          title="Idea Submission"
-          cardImage="ideaSubmissionImg"
-          cardContent="No Idea Submitted yet"
-          cardDesc="Submit Your Idea Before < date > <div time >"
-          buttonDetails={ideaCard}
-        />
-        <TrackComponent />
-      </div>
-    </main>
+        </div>
+        <div className="mt-4 flex h-fit w-full flex-col justify-evenly gap-4 overflow-y-auto px-4 md:flex-row lg:h-[85%]">
+          {team ? (
+            <CustomCard
+              title="Your Devsoc Team"
+              cardImage="teamCardImg"
+              cardContent="No Team Members Yet?"
+              cardDesc="Start A New Team or Join One"
+              buttonDetails={noTeamCard}
+            />
+          ) : (
+            <TeamCard {...teamData} />
+          )}
+          <CustomCard
+            title="Idea Submission"
+            cardImage="ideaSubmissionImg"
+            cardContent="No Idea Submitted yet"
+            cardDesc="Submit Your Idea Before < date > <div time >"
+            buttonDetails={ideaCard}
+          />
+          <TrackComponent />
+        </div>
+      </main>
+    </>
   );
 }

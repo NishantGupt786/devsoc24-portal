@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { type joinTeamModal } from "@/interfaces";
+import { userProps, type joinTeamModal, teamDataProps } from "@/interfaces";
 
 export const useJoinModalStore = create<joinTeamModal>((set) => ({
   showModal: "",
@@ -18,32 +18,13 @@ export const useIdeaStore = create<ideaStore>((set) => ({
 
 interface teamStore {
   team: boolean;
-  setTeam: (setIdea: boolean) => void;
+  setTeam: (setTeam: boolean) => void;
 }
 
 export const useTeamStore = create<teamStore>((set) => ({
   team: false,
   setTeam: (team: boolean) => set({ team }),
 }));
-
-export interface userProps {
-  data: {
-    id: string;
-    first_name: string;
-    last_name: string;
-    reg_no: string;
-    email: string;
-    phone: string;
-    college: string;
-    city: string;
-    state: string;
-    gender: string;
-    role: string;
-    team_id: string;
-  };
-  message: string;
-  status: string;
-}
 
 interface userStore {
   user: userProps;
@@ -73,5 +54,45 @@ export const useUserStore = create<userStore>((set) => ({
     set((state) => ({
       ...state,
       user: userData,
+    })),
+}));
+
+interface teamDataStore {
+  teamData: teamDataProps;
+  setTeamData: (setTeamData: teamDataProps) => void;
+}
+
+export const useTeamDataStore = create<teamDataStore>((set) => ({
+  teamData: {
+    message: "",
+    status: "",
+    team: {
+      team_name: "",
+      team_code: "",
+      leader_id: "",
+      round: 0,
+      users: [{ name: "", reg_no: "", id: "" }],
+      idea: {
+        title: "",
+        description: "",
+        track: "",
+        github_link: "",
+        figma_link: "",
+        others: "",
+      },
+      project: {
+        name: "",
+        description: "",
+        track: "",
+        github_link: "",
+        figma_link: "",
+        others: "",
+      },
+    },
+  },
+  setTeamData: (teamDataTemp: teamDataProps) =>
+    set((state) => ({
+      ...state,
+      user: teamDataTemp,
     })),
 }));
