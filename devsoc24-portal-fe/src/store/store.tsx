@@ -93,6 +93,6 @@ export const useTeamDataStore = create<teamDataStore>((set) => ({
   setTeamData: (teamDataTemp: teamDataProps) =>
     set((state) => ({
       ...state,
-      user: teamDataTemp,
+      teamData: teamDataTemp,
     })),
 }));
