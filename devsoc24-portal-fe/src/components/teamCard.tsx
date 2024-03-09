@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Crown, BadgeMinus, Files, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -7,7 +7,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 interface teamDataUserProps {
   name: string;
   reg_no: string;
-  email: string;
+  id: string;
 }
 
 interface teamDataProps {
@@ -16,7 +16,7 @@ interface teamDataProps {
   team?: {
     team_name: string;
     team_code: string;
-    leaderid: string;
+    leader_id: string;
     round: 0;
     users: teamDataUserProps[];
     idea: {
@@ -38,14 +38,29 @@ interface teamDataProps {
   };
 }
 
+interface keyProps {
+  message: string;
+  status: string;
+  team: teamDataProps;
+}
+
 const TeamCard: React.FC<teamDataProps> = (props) => {
   const [isCopied, setIsCopied] = useState(false);
+  const [Leader, setLeader] = useState("");
   const onCopyText = () => {
     setIsCopied(true);
     setTimeout(() => {
       setIsCopied(false);
     }, 1000);
   };
+  useEffect(() => {
+    const leader = props.team?.users.find(
+      (item) => item.id === props.team?.leader_id,
+    );
+    if (leader) {
+      setLeader(leader.name);
+    }
+  }, [props.team]);
   return (
     <>
       <div>
@@ -56,21 +71,13 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
           <div className="flex flex-col items-center justify-center p-8">
             <p className="text-2xl font-semibold">{props.team?.team_name}</p>
             <p className="pb-4 text-sm text-[#8B8D97]">Team Members</p>
-            <div className="mb-2 flex w-full items-center justify-between rounded-lg border-2 border-[#B6B6B6] p-3">
-              {props.team?.users[0]?.name}
-              {/* {team.isLeader && (
-                <span className="text-[#FFBE3D]">
-                  <Crown />
-                </span>
-              )} */}
-            </div>
             {props.team?.users.map((member, index) => (
               <div
                 key={index}
                 className="mb-2 flex w-full items-center justify-between rounded-lg border-2 border-[#B6B6B6] p-3"
               >
                 <span>{member.name}</span>
-                {/* {member.isLeader ? (
+                {member.name === Leader ? (
                   <span className="text-[#FFBE3D]">
                     <Crown />
                   </span>
@@ -78,7 +85,7 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
                   <span className="text-[#AD1136]">
                     <BadgeMinus />
                   </span>
-                )} */}
+                )}
               </div>
             ))}
             {props.team && (
