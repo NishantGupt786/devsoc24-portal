@@ -100,6 +100,9 @@ export default function JoinTeamForm() {
                 <p>Please check the team code and try again.</p>
               </div>
             ),
+            type: "error",
+            isLoading: false,
+            autoClose: 2000,
           });
           return;
         } else if (error.response?.status === 424) {
@@ -110,6 +113,9 @@ export default function JoinTeamForm() {
                 <p>Try joining another team.</p>
               </div>
             ),
+            type: "error",
+            isLoading: false,
+            autoClose: 2000,
           });
           return;
         }
