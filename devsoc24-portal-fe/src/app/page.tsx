@@ -15,6 +15,8 @@ import {
 } from "@/store/store";
 import Loading from "./loading";
 import TrackComponent from "@/components/track/TrackComponent";
+import logout from "../assets/images/logout.svg";
+import { toast } from "react-toastify";
 
 interface ideaProps {
   message: string;
@@ -40,7 +42,7 @@ interface teamProps {
 interface teamDataUserProps {
   name: string;
   reg_no: string;
-  email: string;
+  id: string;
 }
 
 interface teamDataProps {
@@ -49,7 +51,7 @@ interface teamDataProps {
   team?: {
     team_name: string;
     team_code: string;
-    leaderid: string;
+    leader_id: string;
     round: 0;
     users: teamDataUserProps[];
     idea: {
@@ -90,6 +92,44 @@ export default function HomePage() {
   //   );
   // };
 
+  const handleLogout = async () => {
+    localStorage.clear();
+    const toastId = toast.loading("Sending...", { autoClose: false });
+    try {
+      const response: AxiosResponse<userProps> = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/logout`,
+        {
+          withCredentials: true,
+        },
+      );
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        switch (e.response?.status) {
+          case 200:
+            router.push("/login");
+            toast.update(toastId, {
+              render: (
+                <div className="">
+                  <h2 className="font-semibold">Logged Out successfully!</h2>
+                  <p>Redirecting...</p>
+                </div>
+              ),
+              type: "success",
+              isLoading: false,
+              autoClose: 2000,
+            });
+          case 404:
+            console.log("Idea Not found, but in a team");
+          case 409:
+            setIdea(409);
+            console.log("Not in team");
+          default:
+            console.log(e);
+        }
+      }
+    }
+  };
+
   const fetchData = async () => {
     try {
       const response: AxiosResponse<userProps> = await axios.get(
@@ -102,6 +142,8 @@ export default function HomePage() {
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
+          case 401:
+            router.push("/login");
           case 404:
             console.log("Idea Not found, but in a team");
           case 409:
@@ -126,6 +168,8 @@ export default function HomePage() {
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
+          case 401:
+            router.push("/login");
           case 417:
             setTeam(false);
             console.log("no team");
@@ -150,6 +194,8 @@ export default function HomePage() {
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
+          case 401:
+            router.push("/login");
           case 404:
             console.log("no team");
           case 417:
@@ -195,17 +241,27 @@ export default function HomePage() {
     {
       text: "Submit An Idea",
       showModal: true,
-      modalType: idea === 409 ? "Choice" : "IdeaSubmit",
+      modalType: idea === 409 ? "Choice" : "JoinTeam",
       routeTo: "/submit-idea",
     },
   ];
   const router = useRouter();
 
   return (
-    <main className="flex h-fit lg:h-screen flex-col items-start overflow-y-auto overflow-x-hidden bg-[#F4F5FA]">
-      <div className="flex h-[10%] w-full items-center gap-x-8 bg-background px-6 py-2">
-        <Logo className="h-9/10 w-auto" />
-        <Image src={Dashtitle as HTMLImageElement} alt="title" />
+    <main className="flex h-fit flex-col items-start overflow-y-auto overflow-x-hidden bg-[#F4F5FA] lg:h-screen">
+      <div className="flex h-[10%] w-full items-center justify-between gap-x-8 bg-background px-6 py-2">
+        <div className="flex flex-row gap-8">
+          <Logo className="h-9/10 w-auto" />
+          <Image src={Dashtitle as HTMLImageElement} alt="title" />
+        </div>
+        <Image
+          src={logout}
+          alt="logout"
+          height={0}
+          width={0}
+          className="h-[50px] w-[50px] hover:cursor-pointer"
+          onClick={handleLogout}
+        />
       </div>
       <div className="mt-4 flex h-fit w-full flex-col justify-evenly gap-4 overflow-y-auto px-4 md:flex-row lg:h-[85%]">
         {team ? (
