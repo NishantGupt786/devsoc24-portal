@@ -47,13 +47,13 @@ export default function LoginForm() {
       );
     };
 
-    toast.promise(submitForm(), {
-      loading: "Logging In",
+    void toast.promise(submitForm(), {
+      loading: "Loading...",
       success: (temp) => {
         void router.push("/");
         return `Logged In`;
       },
-      error: (err) => {
+      error: (err: AxiosError) => {
         switch (err.response?.status) {
           case 404:
             return `Account Not Found`;

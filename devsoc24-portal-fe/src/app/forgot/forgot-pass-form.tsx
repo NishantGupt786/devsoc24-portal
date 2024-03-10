@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { MailIcon } from "lucide-react";
 import Link from "next/link";
@@ -35,75 +35,41 @@ export default function ForgotForm() {
 
   async function onSubmit(form: ForgotFormValues) {
     console.log(form);
-    // const toastId = toast.loading("Sending...", { autoClose: false });
-    try {
+    const handleSubmit = async () => {
       await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/reset-password`,
         { email: form.email },
+        {
+          withCredentials: true,
+        },
       );
-      // toast.update(toastId, {
-      //   render: (
-      //     <div className="">
-      //       <h2 className="font-semibold">OTP sent successfully!</h2>
-      //       <p>Redirecting...</p>
-      //     </div>
-      //   ),
-      //   type: "success",
-      //   isLoading: false,
-      //   autoClose: 2000,
-      // });
-      setTimeout(() => {
-        void router.push("/reset?email=" + form.email);
-      }, 1500);
-    } catch (err) {
-      console.log(err);
-      if (axios.isAxiosError(err)) {
-        const error = err as AxiosError;
-        if (error.response?.status === 404) {
-          // toast.update(toastId, {
-          //   render: (
-          //     <div className="">
-          //       <h2 className="font-semibold">Account not found!</h2>
-          //       <p>Please signup.</p>
-          //     </div>
-          //   ),
-          //   type: "error",
-          //   isLoading: false,
-          //   autoClose: 2000,
-          // });
-        } else if (error.response?.status === 403) {
-          // toast.update(toastId, {
-          //   render: (
-          //     <div className="">
-          //       <h2 className="font-semibold">Email not verified!</h2>
-          //       <p>Please verify your email.</p>
-          //     </div>
-          //   ),
-          //   type: "error",
-          //   isLoading: false,
-          //   autoClose: 2000,
-          // });
-          setTimeout(() => {
-            void router.push("/signup/verify?email=" + form.email);
-          }, 1500);
-        } else if (error.response?.status === 400) {
-          // toast.update(toastId, {
-            // render: <BadRequest />,
-          //   type: "error",
-          //   isLoading: false,
-          //   autoClose: 2000,
-          // });
+    };
+    void toast.promise(handleSubmit(), {
+      loading: "Loading...",
+      success: (temp) => {
+        setTimeout(() => {
+          void router.push("/reset?email=" + form.email);
+        }, 1500);
+        return `OTP sent successfully!\nRedirecting...`;
+      },
+      error: (err: AxiosError) => {
+        switch (err.response?.status) {
+          case 404:
+            return `Account Not Found`;
+          case 409:
+            return `Incorrect Credentials`;
+          case 403:
+            setTimeout(() => {
+              void router.push("/signup/verify?email=" + form.email);
+            }, 1500);
+            return `Email Not Verified`;
+          case 400:
+            return `Please check your input and try again`;
+          default:
+            return `Something went wrong`;
         }
-        return;
-      }
-      // toast.update(toastId, {
-      //   render: <ServerError />,
-      //   type: "error",
-      //   isLoading: false,
-      //   autoClose: 2000,
-      // });
-      return;
-    }
+      },
+    });
   }
 
   return (

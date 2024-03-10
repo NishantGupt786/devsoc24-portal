@@ -90,7 +90,7 @@ export default function HomePage() {
   };
 
   const handleLogout = async () => {
-    toast.promise(logout(), {
+    void toast.promise(logout(), {
       loading: "Logging Out...",
       success: "Logged Out",
       error: "Something went wrong",

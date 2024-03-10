@@ -15,8 +15,8 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import axios, { type AxiosError } from "axios";
-import toast, { Toaster } from 'react-hot-toast';
+import axios, { Axios, type AxiosError } from "axios";
+import toast, { Toaster } from "react-hot-toast";
 import { type APIResponse } from "@/schemas/api";
 import { useRouter } from "next/navigation";
 import { BadRequest, ServerError } from "@/components/toast";
@@ -35,12 +35,13 @@ export default function JoinTeamForm() {
   });
 
   async function onSubmit(data: CreateTeamFormValues) {
-    // const toastId = toast.loading("Joining...", { autoClose: false });
     console.log(data);
-    try {
+    const handleSubmit = async () => {
       await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/refresh`,
-        {},
+        {
+          nallaData: "",
+        },
         {
           withCredentials: true,
         },
@@ -52,82 +53,30 @@ export default function JoinTeamForm() {
           withCredentials: true,
         },
       );
-      // toast.update(toastId, {
-      //   render: (
-      //     <div className="">
-      //       <h2 className="font-semibold">Success!</h2>
-      //       <p>Team joined successfully.</p>
-      //     </div>
-      //   ),
-      //   type: "success",
-      //   isLoading: false,
-      //   autoClose: 2000,
-      // });
-      setTimeout(() => {
+    };
+    void toast.promise(handleSubmit(), {
+      loading: "Loading...",
+      success: (temp) => {
         void router.push("/");
-      }, 1500);
-      return;
-    } catch (err) {
-      console.log(err);
-      if (axios.isAxiosError(err)) {
-        const error = err as AxiosError;
-        if (error.response?.status === 400) {
-          // toast.update(toastId, {
-          //   render: <BadRequest />,
-          //   type: "error",
-          //   isLoading: false,
-          //   autoClose: 2000,
-          // });
-          return;
-        } else if (error.response?.status === 417) {
-          // toast.update(toastId, {
-          //   render: (
-          //     <div className="">
-          //       <h2 className="font-semibold">User is already in a team!</h2>
-          //       <p>Leave the team to create a new one.</p>
-          //     </div>
-          //   ),
-          //   type: "error",
-          //   isLoading: false,
-          //   autoClose: 2000,
-          // });
-          return;
-        } else if (error.response?.status === 409) {
-          // toast.update(toastId, {
-          //   render: (
-          //     <div className="">
-          //       <h2 className="font-semibold">Invalid team code!</h2>
-          //       <p>Please check the team code and try again.</p>
-          //     </div>
-          //   ),
-          //   type: "error",
-          //   isLoading: false,
-          //   autoClose: 2000,
-          // });
-          return;
-        } else if (error.response?.status === 424) {
-          // toast.update(toastId, {
-          //   render: (
-          //     <div className="">
-          //       <h2 className="font-semibold">Team is full!</h2>
-          //       <p>Try joining another team.</p>
-          //     </div>
-          //   ),
-          //   type: "error",
-          //   isLoading: false,
-          //   autoClose: 2000,
-          // });
-          return;
+        return `Team joined successfully.`;
+      },
+      error: (err: AxiosError) => {
+        switch (err.response?.status) {
+          case 404:
+            return `Account Not Found`;
+          case 417:
+            return `User Already in a team`;
+          case 409:
+            return `Invalid Team Code`;
+          case 424:
+            return `Team is full`;
+          case 400:
+            return `Please check your input and try again`;
+          default:
+            return `Something went wrong`;
         }
-      }
-      // toast.update(toastId, {
-      //   render: <ServerError />,
-      //   type: "error",
-      //   isLoading: false,
-      //   autoClose: 2000,
-      // });
-      return;
-    }
+      },
+    });
   }
 
   return (

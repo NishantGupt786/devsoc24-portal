@@ -14,11 +14,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { EyeIcon, EyeOffIcon, LockKeyholeIcon, MailIcon } from "lucide-react";
 import Link from "next/link";
-import { toast, ToastContainer } from "react-toastify";
+import toast, { Toaster } from "react-hot-toast";
 import { type APIResponse } from "@/schemas/api";
 import axios, { type AxiosError } from "axios";
 import { BadRequest, ServerError } from "@/components/toast";
 import { useRouter } from "next/navigation";
+import ToastContainer from "@/components/ToastContainer";
 
 type SignupFormValues = z.infer<typeof signupSchema>;
 
@@ -38,9 +39,7 @@ export default function SignupForm() {
   });
 
   async function onSubmit(formVal: SignupFormValues) {
-    const toastId = toast.loading("Creating Account...", { autoClose: false });
-
-    try {
+    const handleSubmit = async () => {
       await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/signup`,
         {
@@ -51,58 +50,32 @@ export default function SignupForm() {
           withCredentials: true,
         },
       );
-      toast.update(toastId, {
-        render: (
-          <div className="">
-            <h2 className="font-semibold">Account Created Successfully!</h2>
-            <p>Please verify your email.</p>
-          </div>
-        ),
-        type: "success",
-        isLoading: false,
-        autoClose: 2000,
-      });
-      setTimeout(() => {
-        void router.push("./signup/verify?email=" + formVal.email);
-      }, 1500);
-      return;
-    } catch (err) {
-      console.log(err);
-      if (axios.isAxiosError(err)) {
-        const error = err as AxiosError;
-        if (error.response?.status === 409) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">Account already exists!</h2>
-                <p>Please login.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
-          setTimeout(() => {
-            void router.push("./login");
-          }, 1500);
-        } else if (error.response?.status === 400) {
-          toast.update(toastId, {
-            render: <BadRequest />,
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+    };
+
+    void toast.promise(handleSubmit(), {
+      loading: "Loading...",
+      success: (temp) => {
+        setTimeout(() => {
+          void router.push("./signup/verify?email=" + formVal.email);
+        }, 1500);
+        return `Account Created Successfully!\nPlease verify your email.`;
+      },
+      error: (err: AxiosError) => {
+        switch (err.response?.status) {
+          case 404:
+            return `Account Not Found`;
+          case 409:
+            setTimeout(() => {
+              void router.push("/login");
+            }, 1500);
+            return `Account already exists!`;
+          case 400:
+            return `Please check your input and try again`;
+          default:
+            return `Something went wrong`;
         }
-        return;
-      }
-      toast.update(toastId, {
-        render: <ServerError />,
-        type: "error",
-        isLoading: false,
-        autoClose: 2000,
-      });
-      return;
-    }
+      },
+    });
   }
 
   return (

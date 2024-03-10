@@ -13,9 +13,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { ideaSchema } from "@/schemas/idea";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 
 interface FormValues {
@@ -35,6 +35,7 @@ interface SubmitProjectResponse {
 
 import send from "@/assets/images/Send.svg";
 import Image from "next/image";
+import ToastContainer from "@/components/ToastContainer";
 const tracks = ["Track 1", "Track 2", "Track 3"];
 
 export default function SubmitIdeaForm() {
@@ -53,9 +54,7 @@ export default function SubmitIdeaForm() {
   });
 
   async function onSubmit(data: FormValues) {
-    try {
-      console.log(data);
-      const toastId = toast.loading("Idea Submitted", { autoClose: false });
+    const handleSubmit = async () => {
       const res = await axios.post<SubmitProjectResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/idea/create`,
         data,
@@ -63,40 +62,26 @@ export default function SubmitIdeaForm() {
           withCredentials: true,
         },
       );
-
-      if (res.data.status === "success") {
-        toast.update(toastId, {
-          render: (
-            <div className="">
-              <h2 className="font-semibold">Idea Submitted</h2>
-              <p>Redirecting...</p>
-            </div>
-          ),
-          type: "success",
-          isLoading: false,
-          autoClose: 2000,
-        });
-
-        setTimeout(() => {
-          router.push("/");
-        }, 2000);
-      } else {
-        toast.update(toastId, {
-          render: (
-            <div className="">
-              <h2 className="font-semibold">Failed to submit idea</h2>
-              <p>Please try again.</p>
-            </div>
-          ),
-          type: "error",
-          isLoading: false,
-          autoClose: 2000,
-        });
-      }
-    } catch (error) {
-      console.error("Error submitting idea:", error);
-      toast.error("Failed to submit idea");
-    }
+    };
+    void toast.promise(handleSubmit(), {
+      loading: "Loading...",
+      success: (temp) => {
+        void router.push("/");
+        return `Logged In`;
+      },
+      error: (err: AxiosError) => {
+        switch (err.response?.status) {
+          case 404:
+            return `Account Not Found`;
+          case 409:
+            return `Incorrect Credentials`;
+          case 400:
+            return `Please check your input and try again`;
+          default:
+            return `Something went wrong`;
+        }
+      },
+    });
   }
 
   return (
