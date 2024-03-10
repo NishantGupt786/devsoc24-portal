@@ -12,14 +12,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { EyeIcon, EyeOffIcon, LockKeyholeIcon, MailIcon } from "lucide-react";
 import Link from "next/link";
 import { type APIResponse, type LoginResponse } from "@/schemas/api";
 import axios, { type AxiosError } from "axios";
 import { BadRequest, ServerError } from "@/components/toast";
+import ToastContainer from "@/components/ToastContainer";
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
@@ -37,8 +37,7 @@ export default function LoginForm() {
   });
 
   async function onSubmit(formVal: LoginFormValues) {
-    const toastId = toast.loading("Logging in...", { autoClose: false });
-    try {
+    const submitForm = async () => {
       const { data } = await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/login`,
         { email: formVal.email, password: formVal.password },
@@ -46,87 +45,32 @@ export default function LoginForm() {
           withCredentials: true,
         },
       );
-      toast.update(toastId, {
-        render: (
-          <div className="">
-            <h2 className="font-semibold">Logged in successfully!</h2>
-            <p>Redirecting...</p>
-          </div>
-        ),
-        type: "success",
-        isLoading: false,
-        autoClose: 2000,
-      });
-      const res = data.data as LoginResponse;
+    };
 
-      setTimeout(() => {
-        if (res.profile_complete) {
-          void router.push("/");
-        } else {
-          void router.push("/signup/details?email=" + formVal.email);
+    toast.promise(submitForm(), {
+      loading: "Logging In",
+      success: (temp) => {
+        void router.push("/");
+        return `Logged In`;
+      },
+      error: (err) => {
+        switch (err.response?.status) {
+          case 404:
+            return `Account Not Found`;
+          case 409:
+            return `Incorrect Credentials`;
+          case 403:
+            setTimeout(() => {
+              void router.push("/signup/verify?email=" + formVal.email);
+            }, 1500);
+            return `Email Not Verified`;
+          case 400:
+            return `Please check your input and try again`;
+          default:
+            return `Something went wrong`;
         }
-      }, 1500);
-    } catch (err) {
-      console.log(err);
-      if (axios.isAxiosError(err)) {
-        const error = err as AxiosError;
-        if (error.response?.status === 409) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">Incorrect password!</h2>
-                <p>Please try again.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
-        } else if (error.response?.status === 404) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">Account not found!</h2>
-                <p>Please signup.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
-        } else if (error.response?.status === 403) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">Email not verified!</h2>
-                <p>Please verify your email.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
-          setTimeout(() => {
-            void router.push("/signup/verify?email=" + formVal.email);
-          }, 1500);
-        } else if (error.response?.status === 400) {
-          toast.update(toastId, {
-            render: <BadRequest />,
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
-        }
-        return;
-      }
-      toast.update(toastId, {
-        render: <ServerError />,
-        type: "error",
-        isLoading: false,
-        autoClose: 2000,
-      });
-      return;
-    }
+      },
+    });
   }
 
   return (

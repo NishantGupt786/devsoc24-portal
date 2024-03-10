@@ -16,12 +16,12 @@ import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { KeyRoundIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast, { Toaster } from 'react-hot-toast';
 import axios, { type AxiosError } from "axios";
 import { type APIResponse } from "@/schemas/api";
 import { BadRequest, ServerError } from "@/components/toast";
 import { secondsToHms } from "@/lib/utils";
+import ToastContainer from "@/components/ToastContainer";
 
 type VerifyFormValues = z.infer<typeof verifyOTPSchema>;
 
@@ -41,9 +41,9 @@ export default function ForgotForm() {
 
   async function onSubmit(data: VerifyFormValues) {
     console.log(data);
-    const toastId = toast.loading("Verifying OTP...", {
-      autoClose: false,
-    });
+    // const toastId = toast.loading("Verifying OTP...", {
+    //   autoClose: false,
+    // });
 
     try {
       const res = await axios.post<APIResponse>(
@@ -56,25 +56,25 @@ export default function ForgotForm() {
           withCredentials: true,
         },
       );
-      toast.update(toastId, {
-        render: (
-          <div className="">
-            <h2 className="font-semibold">
-              {res.status === 200
-                ? "Account verified successfully!"
-                : "User already verified!"}
-            </h2>
-            <p>
-              {res.status === 200
-                ? "Please complete profile."
-                : "Please login."}
-            </p>
-          </div>
-        ),
-        type: "success",
-        isLoading: false,
-        autoClose: 2000,
-      });
+      // toast.update(toastId, {
+      //   render: (
+      //     <div className="">
+      //       <h2 className="font-semibold">
+      //         {res.status === 200
+      //           ? "Account verified successfully!"
+      //           : "User already verified!"}
+      //       </h2>
+      //       <p>
+      //         {res.status === 200
+      //           ? "Please complete profile."
+      //           : "Please login."}
+      //       </p>
+      //     </div>
+      //   ),
+      //   type: "success",
+      //   isLoading: false,
+      //   autoClose: 2000,
+      // });
       setTimeout(() => {
         void router.push("/login");
       }, 1500);
@@ -84,68 +84,68 @@ export default function ForgotForm() {
       if (axios.isAxiosError(err)) {
         const error = err as AxiosError;
         if (error.response?.status === 404) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">No account found!</h2>
-                <p>Please create an account.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: (
+          //     <div className="">
+          //       <h2 className="font-semibold">No account found!</h2>
+          //       <p>Please create an account.</p>
+          //     </div>
+          //   ),
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
           setTimeout(() => {
             void router.push("/signup");
           }, 1500);
         } else if (error.response?.status === 401) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">Invalid OTP!</h2>
-                <p>Please enter a valid OTP.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: (
+          //     <div className="">
+          //       <h2 className="font-semibold">Invalid OTP!</h2>
+          //       <p>Please enter a valid OTP.</p>
+          //     </div>
+          //   ),
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
         } else if (error.response?.status === 403) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">OTP Expired!</h2>
-                <p>Please resend OTP.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: (
+          //     <div className="">
+          //       <h2 className="font-semibold">OTP Expired!</h2>
+          //       <p>Please resend OTP.</p>
+          //     </div>
+          //   ),
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
         } else if (error.response?.status === 400) {
-          toast.update(toastId, {
-            render: <BadRequest />,
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: <BadRequest />,
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
         }
         return;
       }
-      toast.update(toastId, {
-        render: <ServerError />,
-        type: "error",
-        isLoading: false,
-        autoClose: 2000,
-      });
+      // toast.update(toastId, {
+      //   render: <ServerError />,
+      //   type: "error",
+      //   isLoading: false,
+      //   autoClose: 2000,
+      // });
       return;
     }
   }
 
   const resendOTP = async () => {
-    const toastId = toast.loading("Sending OTP...", {
-      autoClose: false,
-    });
+    // const toastId = toast.loading("Sending OTP...", {
+    //   autoClose: false,
+    // });
 
     try {
       await axios.post<APIResponse>(
@@ -158,68 +158,68 @@ export default function ForgotForm() {
           withCredentials: true,
         },
       );
-      toast.update(toastId, {
-        render: (
-          <div className="">
-            <h2 className="font-semibold">OTP sent successfully!</h2>
-            <p>Please check your email for the OTP.</p>
-          </div>
-        ),
-        type: "success",
-        isLoading: false,
-        autoClose: 2000,
-      });
+      // toast.update(toastId, {
+      //   render: (
+      //     <div className="">
+      //       <h2 className="font-semibold">OTP sent successfully!</h2>
+      //       <p>Please check your email for the OTP.</p>
+      //     </div>
+      //   ),
+      //   type: "success",
+      //   isLoading: false,
+      //   autoClose: 2000,
+      // });
       return;
     } catch (err) {
       console.log(err);
       if (axios.isAxiosError(err)) {
         const error = err as AxiosError;
         if (error.response?.status === 404) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">No account found!</h2>
-                <p>Please create an account.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: (
+          //     <div className="">
+          //       <h2 className="font-semibold">No account found!</h2>
+          //       <p>Please create an account.</p>
+          //     </div>
+          //   ),
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
           setTimeout(() => {
             void router.push("./signup");
           }, 1500);
         } else if (error.response?.status === 403) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">User is already verified!</h2>
-                <p>Please login.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: (
+          //     <div className="">
+          //       <h2 className="font-semibold">User is already verified!</h2>
+          //       <p>Please login.</p>
+          //     </div>
+          //   ),
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
           setTimeout(() => {
             void router.push("./login");
           }, 1500);
         } else if (error.response?.status === 400) {
-          toast.update(toastId, {
-            render: <BadRequest />,
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: <BadRequest />,
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
         }
         return;
       }
-      toast.update(toastId, {
-        render: <ServerError />,
-        type: "error",
-        isLoading: false,
-        autoClose: 2000,
-      });
+      // toast.update(toastId, {
+      //   render: <ServerError />,
+      //   type: "error",
+      //   isLoading: false,
+      //   autoClose: 2000,
+      // });
       return;
     }
   };

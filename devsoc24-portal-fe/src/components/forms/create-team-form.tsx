@@ -16,7 +16,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import axios, { type AxiosError } from "axios";
 import { type APIResponse } from "@/schemas/api";
 import { useRouter } from "next/navigation";

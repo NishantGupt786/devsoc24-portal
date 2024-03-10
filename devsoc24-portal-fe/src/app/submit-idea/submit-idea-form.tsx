@@ -13,7 +13,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { ideaSchema } from "@/schemas/idea";
-import { ToastContainer, toast } from "react-toastify";
+import toast, { Toaster } from 'react-hot-toast';
+
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
