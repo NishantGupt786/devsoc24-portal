@@ -15,10 +15,11 @@ import { Button } from "@/components/ui/button";
 import { ideaSchema } from "@/schemas/idea";
 import send from "@/assets/images/Send.svg";
 import Image from "next/image";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
+import ToastContainer from "@/components/ToastContainer";
 
 interface FormValues {
   title: string;
@@ -53,9 +54,7 @@ export default function SubmitProjectForm() {
   });
 
   async function onSubmit(data: FormValues) {
-    try {
-      console.log(data);
-      const toastId = toast.loading("Project Submitted", { autoClose: 3 });
+    const handleSubmit = async () => {
       const res = await axios.post<SubmitProjectResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/project/create`,
         data,
@@ -63,28 +62,21 @@ export default function SubmitProjectForm() {
           withCredentials: true,
         },
       );
-
-      if (res.data.status = "success") {
-        toast.update(toastId, {
-          render: "Project Submitted Successfully",
-          type: "success",
-          autoClose: 2000,
-        });
-
-        setTimeout(() => {
-          router.push("/");
-        }, 2000);
-      } else {
-        toast.update(toastId, {
-          render: "Failed to submit project",
-          type: "error",
-          autoClose: 2000,
-        });
-      }
-    } catch (error) {
-      console.error("Error submitting project:", error);
-      toast.error("Failed to submit project");
-    }
+    };
+    void toast.promise(handleSubmit(), {
+      loading: "Loading...",
+      success: (temp) => {
+        return `Project Submitted Successfully`;
+      },
+      error: (err: AxiosError) => {
+        switch (err.response?.status) {
+          case 404:
+            return `Account Not Found`;
+          default:
+            return `Failed to submit project`;
+        }
+      },
+    });
   }
 
   return (

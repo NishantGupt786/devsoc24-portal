@@ -13,14 +13,9 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
-import {
-  EyeIcon,
-  EyeOffIcon,
-  KeyRoundIcon,
-  LockKeyhole,
-} from "lucide-react";
+import { EyeIcon, EyeOffIcon, KeyRoundIcon, LockKeyhole } from "lucide-react";
 import Link from "next/link";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 import axios, { type AxiosError } from "axios";
 import { type APIResponse } from "@/schemas/api";
 import { BadRequest, ServerError } from "@/components/toast";
@@ -48,8 +43,7 @@ export default function ResetForm() {
   async function onSubmit(form: ResetFormValues) {
     console.log(form);
     // const toastId = toast.loading("Reseting...", { autoClose: false });
-
-    try {
+    const handleSubmit = async () => {
       await axios.patch<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/reset-password`,
         {
@@ -61,94 +55,35 @@ export default function ResetForm() {
           withCredentials: true,
         },
       );
-      // toast.update(toastId, {
-      //   render: (
-      //     <div className="">
-      //       <h2 className="font-semibold">Password reset successfully!</h2>
-      //       <p>Please login with your new password.</p>
-      //     </div>
-      //   ),
-      //   type: "success",
-      //   isLoading: false,
-      //   autoClose: 2000,
-      // });
-
-      setTimeout(() => {
-        void router.push("/login");
-      }, 1500);
-    } catch (err) {
-      console.log(err);
-      if (axios.isAxiosError(err)) {
-        const error = err as AxiosError;
-        if (error.response?.status === 409) {
-          // toast.update(toastId, {
-          //   render: (
-          //     <div className="">
-          //       <h2 className="font-semibold">Incorrect password!</h2>
-          //       <p>Please try again.</p>
-          //     </div>
-          //   ),
-          //   type: "error",
-          //   isLoading: false,
-          //   autoClose: 2000,
-          // });
-        } else if (error.response?.status === 404) {
-          // toast.update(toastId, {
-          //   render: (
-          //     <div className="">
-          //       <h2 className="font-semibold">Account not found!</h2>
-          //       <p>Please signup.</p>
-          //     </div>
-          //   ),
-          //   type: "error",
-          //   isLoading: false,
-          //   autoClose: 2000,
-          // });
-        } else if (error.response?.status === 403) {
-          // toast.update(toastId, {
-          //   render: (
-          //     <div className="">
-          //       <h2 className="font-semibold">OTP expired!</h2>
-          //       <p>Please request a new OTP.</p>
-          //     </div>
-          //   ),
-          //   type: "error",
-          //   isLoading: false,
-          //   autoClose: 2000,
-          // });
-          setTimeout(() => {
-            void router.push("/reset");
-          }, 1500);
-        } else if (error.response?.status === 401) {
-          // toast.update(toastId, {
-          //   render: (
-          //     <div className="">
-          //       <h2 className="font-semibold">Invalid OTP!</h2>
-          //       <p>Please try again.</p>
-          //     </div>
-          //   ),
-          //   type: "error",
-          //   isLoading: false,
-          //   autoClose: 2000,
-          // });
-        } else if (error.response?.status === 400) {
-          // toast.update(toastId, {
-          //   render: <BadRequest />,
-          //   type: "error",
-          //   isLoading: false,
-          //   autoClose: 2000,
-          // });
+    };
+    void toast.promise(handleSubmit(), {
+      loading: "Loading...",
+      success: (temp) => {
+        setTimeout(() => {
+          void router.push("/login");
+        }, 1500);
+        return `Password reset successfully!`;
+      },
+      error: (err: AxiosError) => {
+        switch (err.response?.status) {
+          case 404:
+            return `Account Not Found`;
+          case 409:
+            return `Incorrect Credentials`;
+          case 401:
+            return `Invalid OTP!`;
+          case 403:
+            setTimeout(() => {
+              void router.push("/reset");
+            }, 1500);
+            return `OTP expired\nPlease request a new OTP`;
+          case 400:
+            return `Please check your input and try again`;
+          default:
+            return `Something went wrong`;
         }
-        return;
-      }
-      // toast.update(toastId, {
-      //   render: <ServerError />,
-      //   type: "error",
-      //   isLoading: false,
-      //   autoClose: 2000,
-      // });
-      return;
-    }
+      },
+    });
   }
 
   return (
