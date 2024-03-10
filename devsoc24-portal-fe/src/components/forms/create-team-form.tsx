@@ -15,11 +15,12 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { toast, ToastContainer } from "react-toastify";
+import toast, { Toaster } from "react-hot-toast";
 import axios, { type AxiosError } from "axios";
 import { type APIResponse } from "@/schemas/api";
 import { useRouter } from "next/navigation";
 import { BadRequest, ServerError } from "@/components/toast";
+import ToastContainer from "../ToastContainer";
 
 type CreateTeamFormValues = z.infer<typeof createTeamSchema>;
 
@@ -34,9 +35,7 @@ export default function CreateTeamForm() {
   });
 
   async function onSubmit(data: CreateTeamFormValues) {
-    const toastId = toast.loading("Creating...", { autoClose: false });
-    console.log(data);
-    try {
+    const handleSubmit = async () => {
       await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/team/create`,
         { name: data.teamName },
@@ -44,69 +43,29 @@ export default function CreateTeamForm() {
           withCredentials: true,
         },
       );
-      toast.update(toastId, {
-        render: (
-          <div className="">
-            <h2 className="font-semibold">Success!</h2>
-            <p>Team created successfully.</p>
-          </div>
-        ),
-        type: "success",
-        isLoading: false,
-        autoClose: 2000,
-      });
-      setTimeout(() => {
+    };
+
+    void toast.promise(handleSubmit(), {
+      loading: "Loading...",
+      success: (temp) => {
         void router.push("/");
-      }, 1500);
-      return;
-    } catch (err) {
-      console.log(err);
-      if (axios.isAxiosError(err)) {
-        const error = err as AxiosError;
-        if (error.response?.status === 400) {
-          toast.update(toastId, {
-            render: <BadRequest />,
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
-          return;
-        } else if (error.response?.status === 417) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">User is already in a team!</h2>
-                <p>Leave the team to create a new one.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
-          return;
-        } else if (error.response?.status === 409) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">Team name already exists!</h2>
-                <p>Please choose a different name for your team.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
-          return;
+        return `Team created successfully.`;
+      },
+      error: (err: AxiosError) => {
+        switch (err.response?.status) {
+          case 404:
+            return `Account Not Found`;
+          case 417:
+            return `User is already in team`;
+          case 409:
+            return `Teamname already exists`;
+          case 400:
+            return `Please check your input and try again`;
+          default:
+            return `Something went wrong`;
         }
-      }
-      toast.update(toastId, {
-        render: <ServerError />,
-        type: "error",
-        isLoading: false,
-        autoClose: 2000,
-      });
-      return;
-    }
+      },
+    });
   }
 
   return (

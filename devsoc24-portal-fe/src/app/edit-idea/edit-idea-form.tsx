@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { ideaSchema } from "@/schemas/idea";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -33,7 +33,7 @@ interface SubmitProjectResponse {
   data: unknown;
 }
 
-interface GetIdea{
+interface GetIdea {
   data: FormValues;
   message: string;
   status: string;
@@ -42,19 +42,23 @@ interface GetIdea{
 import send from "@/assets/images/Send.svg";
 import Image from "next/image";
 import { useEffect } from "react";
+import ToastContainer from "@/components/ToastContainer";
 const tracks = ["Track 1", "Track 2", "Track 3"];
 
 export default function EditIdeaForm() {
   useEffect(() => {
     async function getIdeaSubmission() {
       try {
-        const res = await axios.get<GetIdea>(`${process.env.NEXT_PUBLIC_API_URL}/idea`, {
-          withCredentials: true,
-        });
+        const res = await axios.get<GetIdea>(
+          `${process.env.NEXT_PUBLIC_API_URL}/idea`,
+          {
+            withCredentials: true,
+          },
+        );
         console.log(res.data.data);
         form.reset(res.data.data);
       } catch (error) {
-        console.log("Error getting idea submission:", error)
+        console.log("Error getting idea submission:", error);
       }
     }
     void getIdeaSubmission();
@@ -74,9 +78,7 @@ export default function EditIdeaForm() {
   });
 
   async function onSubmit(data: FormValues) {
-    try {
-      console.log(data);
-      const toastId = toast.loading("Idea Submitted", { autoClose: false });
+    const handleSubmit = async () => {
       const res = await axios.patch<SubmitProjectResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/idea/update`,
         data,
@@ -84,40 +86,18 @@ export default function EditIdeaForm() {
           withCredentials: true,
         },
       );
+    };
 
-      if (res.data.status === "success") {
-        toast.update(toastId, {
-          render: (
-            <div className="">
-              <h2 className="font-semibold">Idea Submitted</h2>
-            </div>
-          ),
-          type: "success",
-          isLoading: false,
-          autoClose: 2000,
-        });
-      } else {
-        toast.update(toastId, {
-          render: (
-            <div className="">
-              <h2 className="font-semibold">Failed to submit idea</h2>
-              <p>Please try again.</p>
-            </div>
-          ),
-          type: "error",
-          isLoading: false,
-          autoClose: 2000,
-        });
-      }
-    } catch (error) {
-      console.error("Error submitting idea:", error);
-      toast.error("Failed to submit idea");
-    }
+    void toast.promise(handleSubmit(), {
+      loading: `Loading`,
+      success: `Idea Submitted`,
+      error: `Something went wrong`,
+    });
   }
 
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="flex justify-start gap-16 max-[931px]:flex-col max-[931px]:gap-6">

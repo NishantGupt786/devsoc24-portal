@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 import { useSearchParams } from "next/navigation";
 import { BadRequest, ServerError } from "@/components/toast";
 import axios, { type AxiosError } from "axios";
@@ -69,8 +69,7 @@ export default function VitianForm({
       vit_email: data.vitEmail,
     };
     console.log(updatedData);
-
-    try {
+    const handleSubmit = async () => {
       await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/user/complete-profile`,
         updatedData,
@@ -78,79 +77,28 @@ export default function VitianForm({
           withCredentials: true,
         },
       );
-      // toast.update(toastId, {
-      //   render: (
-      //     <div className="">
-      //       <h2 className="font-semibold">Success!</h2>
-      //       <p>Account details saved successfully.</p>
-      //     </div>
-      //   ),
-      //   type: "success",
-      //   isLoading: false,
-      //   autoClose: 2000,
-      // });
-      setTimeout(() => setForm(2), 1500);
-      return;
-    } catch (err) {
-      console.log(err);
-      if (axios.isAxiosError(err)) {
-        const error = err as AxiosError;
-        if (error.response?.status === 400) {
-          // toast.update(toastId, {
-          //   render: <BadRequest />,
-          //   type: "error",
-          //   isLoading: false,
-          //   autoClose: 2000,
-          // });
-        } else if (error.response?.status === 403) {
-          // toast.update(toastId, {
-          //   render: (
-          //     <div className="">
-          //       <h2 className="font-semibold">Email not verified!</h2>
-          //       <p>Please verify your email.</p>
-          //     </div>
-          //   ),
-          //   type: "error",
-          //   isLoading: false,
-          //   autoClose: 2000,
-          // });
-        } else if (error.response?.status === 404) {
-          // toast.update(toastId, {
-          //   render: (
-          //     <div className="">
-          //       <h2 className="font-semibold">User not found!</h2>
-          //       <p>Please sign up.</p>
-          //     </div>
-          //   ),
-          //   type: "error",
-          //   isLoading: false,
-          //   autoClose: 2000,
-          // });
+    };
+    void toast.promise(handleSubmit(), {
+      loading: "Loading...",
+      success: (temp) => {
+        setTimeout(() => setForm(2), 1500);
+        return `Success`;
+      },
+      error: (err: AxiosError) => {
+        switch (err.response?.status) {
+          case 403:
+            return `Email not verified`;
+          case 404:
+            return `Account Not Found`;
+          case 409:
+            return `Incorrect Credentials`;
+          case 400:
+            return `Please check your input and try again`;
+          default:
+            return `Something went wrong`;
         }
-        return;
-      }
-      // toast.update(toastId, {
-      //   render: <ServerError />,
-      //   type: "error",
-      //   isLoading: false,
-      //   autoClose: 2000,
-      // });
-      return;
-    }
-
-    // toast.update(toastId, {
-    //   render:
-    //     res === 200 ? "Login successful!" : res !== 500 ? res : <ServerError />,
-    //   type: res === 200 ? "success" : "error",
-    //   isLoading: false,
-    //   autoClose: 2000,
-    // });
-
-    // if (res === 200) {
-    //   setTimeout(() => {
-    //     void router.push("/overview");
-    //   }, 2000);
-    // }
+      },
+    });
   }
   return (
     <>
