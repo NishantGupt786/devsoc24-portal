@@ -11,9 +11,15 @@ import { Input } from "@/components/ui/input";
 import axios, { AxiosResponse } from "axios";
 import z from "zod";
 import { useRef } from "react";
-import { useIdeaStore, useTeamStore, useUserStore } from "@/store/store";
+import {
+  useIdeaStore,
+  useTeamDataStore,
+  useTeamStore,
+  useUserStore,
+} from "@/store/store";
 import { userProps } from "@/interfaces";
 import { useRouter } from "next/navigation";
+import { APIResponse } from "@/schemas/api";
 
 const teamNameSchema = z.object({
   name: z.string(),
@@ -24,6 +30,7 @@ function CreateTeam() {
   const inputRef = useRef<HTMLInputElement>(null);
   const { user, setUser } = useUserStore();
   const { idea, setIdea } = useIdeaStore();
+  const { teamData, setTeamData } = useTeamDataStore();
 
   const router = useRouter();
   const handleClick = async () => {
@@ -38,7 +45,6 @@ function CreateTeam() {
         },
       );
       setTeam(false);
-      void fetchTeam();
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
@@ -48,28 +54,30 @@ function CreateTeam() {
             console.log(e);
         }
       }
+      await fetchTeam();
     }
   };
   const fetchTeam = async () => {
     try {
-      const response: AxiosResponse<userProps> = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/user/me`,
+      const response = await axios.get<APIResponse>(
+        `${process.env.NEXT_PUBLIC_API_URL}/team`,
         {
           withCredentials: true,
         },
       );
-      setUser(response.data);
+      setTeamData(response.data);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
           case 401:
             void router.push("/login");
             break;
-          case 404:
-            console.log("Idea Not found, but in a team");
+          case 417:
+            setTeam(true);
+            console.log("no team");
             break;
-          case 409:
-            console.log("Not in team");
+          case 200:
+            setTeam(true);
             break;
           default:
             console.log(e);
@@ -97,11 +105,14 @@ function CreateTeam() {
         </div>
         <div className="flex justify-center">
           <DialogFooter className="sm:justify-start">
-            <DialogClose asChild onClick={fetchTeam}>
+            <DialogClose>
               <Button
                 type="submit"
                 className="bg-[#458B71]"
-                onClick={handleClick}
+                onClick={async () => {
+                  await handleClick();
+                  await fetchTeam();
+                }}
               >
                 Confirm
               </Button>

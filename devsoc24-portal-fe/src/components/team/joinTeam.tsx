@@ -10,15 +10,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRef } from "react";
 import axios, { AxiosResponse } from "axios";
-import { useIdeaStore, useTeamStore, useUserStore } from "@/store/store";
+import { useIdeaStore, useTeamDataStore, useTeamStore, useUserStore } from "@/store/store";
 import { userProps } from "@/interfaces";
 import { useRouter } from "next/navigation";
+import { APIResponse } from "@/schemas/api";
 
 function JoinTeam() {
   const inputRef = useRef<HTMLInputElement>(null);
   const { team, setTeam } = useTeamStore();
   const { idea, setIdea } = useIdeaStore();
   const { user, setUser } = useUserStore();
+  const { teamData, setTeamData } = useTeamDataStore();
 
   const router = useRouter();
   const handleClick = async () => {
@@ -47,24 +49,25 @@ function JoinTeam() {
   };
   const fetchTeam = async () => {
     try {
-      const response: AxiosResponse<userProps> = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/user/me`,
+      const response = await axios.get<APIResponse>(
+        `${process.env.NEXT_PUBLIC_API_URL}/team`,
         {
           withCredentials: true,
         },
       );
-      setUser(response.data);
+      setTeamData(response.data);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
           case 401:
-            router.push("/login");
+            void router.push("/login");
             break;
-          case 404:
-            console.log("Idea Not found, but in a team");
+          case 417:
+            setTeam(true);
+            console.log("no team");
             break;
-          case 409:
-            console.log("Not in team");
+          case 200:
+            setTeam(true);
             break;
           default:
             console.log(e);

@@ -20,11 +20,11 @@ import {
   LockKeyhole,
 } from "lucide-react";
 import Link from "next/link";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast, { Toaster } from 'react-hot-toast';
 import axios, { type AxiosError } from "axios";
 import { type APIResponse } from "@/schemas/api";
 import { BadRequest, ServerError } from "@/components/toast";
+import ToastContainer from "@/components/ToastContainer";
 
 type ResetFormValues = z.infer<typeof resetSchema>;
 
@@ -47,7 +47,7 @@ export default function ResetForm() {
 
   async function onSubmit(form: ResetFormValues) {
     console.log(form);
-    const toastId = toast.loading("Reseting...", { autoClose: false });
+    // const toastId = toast.loading("Reseting...", { autoClose: false });
 
     try {
       await axios.patch<APIResponse>(
@@ -61,17 +61,17 @@ export default function ResetForm() {
           withCredentials: true,
         },
       );
-      toast.update(toastId, {
-        render: (
-          <div className="">
-            <h2 className="font-semibold">Password reset successfully!</h2>
-            <p>Please login with your new password.</p>
-          </div>
-        ),
-        type: "success",
-        isLoading: false,
-        autoClose: 2000,
-      });
+      // toast.update(toastId, {
+      //   render: (
+      //     <div className="">
+      //       <h2 className="font-semibold">Password reset successfully!</h2>
+      //       <p>Please login with your new password.</p>
+      //     </div>
+      //   ),
+      //   type: "success",
+      //   isLoading: false,
+      //   autoClose: 2000,
+      // });
 
       setTimeout(() => {
         void router.push("/login");
@@ -81,72 +81,72 @@ export default function ResetForm() {
       if (axios.isAxiosError(err)) {
         const error = err as AxiosError;
         if (error.response?.status === 409) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">Incorrect password!</h2>
-                <p>Please try again.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: (
+          //     <div className="">
+          //       <h2 className="font-semibold">Incorrect password!</h2>
+          //       <p>Please try again.</p>
+          //     </div>
+          //   ),
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
         } else if (error.response?.status === 404) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">Account not found!</h2>
-                <p>Please signup.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: (
+          //     <div className="">
+          //       <h2 className="font-semibold">Account not found!</h2>
+          //       <p>Please signup.</p>
+          //     </div>
+          //   ),
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
         } else if (error.response?.status === 403) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">OTP expired!</h2>
-                <p>Please request a new OTP.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: (
+          //     <div className="">
+          //       <h2 className="font-semibold">OTP expired!</h2>
+          //       <p>Please request a new OTP.</p>
+          //     </div>
+          //   ),
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
           setTimeout(() => {
             void router.push("/reset");
           }, 1500);
         } else if (error.response?.status === 401) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">Invalid OTP!</h2>
-                <p>Please try again.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: (
+          //     <div className="">
+          //       <h2 className="font-semibold">Invalid OTP!</h2>
+          //       <p>Please try again.</p>
+          //     </div>
+          //   ),
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
         } else if (error.response?.status === 400) {
-          toast.update(toastId, {
-            render: <BadRequest />,
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: <BadRequest />,
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
         }
         return;
       }
-      toast.update(toastId, {
-        render: <ServerError />,
-        type: "error",
-        isLoading: false,
-        autoClose: 2000,
-      });
+      // toast.update(toastId, {
+      //   render: <ServerError />,
+      //   type: "error",
+      //   isLoading: false,
+      //   autoClose: 2000,
+      // });
       return;
     }
   }

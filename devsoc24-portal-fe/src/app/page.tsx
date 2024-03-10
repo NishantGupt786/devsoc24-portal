@@ -15,7 +15,8 @@ import {
 } from "@/store/store";
 import Loading from "./loading";
 import TrackComponent from "@/components/track/TrackComponent";
-import { ToastContainer, toast } from "react-toastify";
+import toast, { Toaster } from "react-hot-toast";
+
 import { refresh, type userProps } from "@/interfaces";
 import { type APIResponse } from "@/schemas/api";
 import {
@@ -27,6 +28,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { User } from "lucide-react";
+import ToastContainer from "@/components/ToastContainer";
 
 interface ideaProps {
   message: string;
@@ -57,8 +59,7 @@ export default function HomePage() {
   const [getIdea, SetIdea] = useState("");
   const { teamData, setTeamData } = useTeamDataStore();
 
-  const handleLogout = async () => {
-    const toastId = toast.loading("Loading...", { autoClose: false });
+  const logout = async () => {
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/logout`,
@@ -69,19 +70,7 @@ export default function HomePage() {
           withCredentials: true,
         },
       );
-
       localStorage.clear();
-      toast.update(toastId, {
-        render: (
-          <div className="">
-            <h2 className="font-semibold">Logged Out successfully!</h2>
-            <p>Redirecting...</p>
-          </div>
-        ),
-        type: "success",
-        isLoading: false,
-        autoClose: 2000,
-      });
       void router.push("/login");
     } catch (e) {
       if (axios.isAxiosError(e)) {
@@ -96,6 +85,14 @@ export default function HomePage() {
         }
       }
     }
+  };
+
+  const handleLogout = async () => {
+    toast.promise(logout(), {
+      loading: "Logging Out...",
+      success: "Logged Out",
+      error: "Something went wrong",
+    });
   };
 
   const fetchData = async () => {
@@ -152,7 +149,6 @@ export default function HomePage() {
             break;
           default:
             console.log(e);
-            SetIdea("idea found");
             break;
         }
       }
@@ -256,7 +252,6 @@ export default function HomePage() {
               {/* <Button variant="ghost" size="icon">
                 <User />
               </Button> */}
-
 
               <div>
                 <User />

@@ -15,7 +15,8 @@ import { Button } from "@/components/ui/button";
 import { ideaSchema } from "@/schemas/idea";
 import send from "@/assets/images/Send.svg";
 import Image from "next/image";
-import { ToastContainer, toast } from "react-toastify";
+import toast, { Toaster } from 'react-hot-toast';
+
 import axios from "axios";
 import { useRouter } from "next/navigation";
 

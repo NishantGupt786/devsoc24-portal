@@ -16,11 +16,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios, { type AxiosError } from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast, { Toaster } from 'react-hot-toast';
 import { type APIResponse } from "@/schemas/api";
 import { useRouter } from "next/navigation";
 import { BadRequest, ServerError } from "@/components/toast";
+import ToastContainer from "../ToastContainer";
 
 type CreateTeamFormValues = z.infer<typeof joinTeamSchema>;
 
@@ -35,7 +35,7 @@ export default function JoinTeamForm() {
   });
 
   async function onSubmit(data: CreateTeamFormValues) {
-    const toastId = toast.loading("Joining...", { autoClose: false });
+    // const toastId = toast.loading("Joining...", { autoClose: false });
     console.log(data);
     try {
       await axios.post<APIResponse>(
@@ -52,17 +52,17 @@ export default function JoinTeamForm() {
           withCredentials: true,
         },
       );
-      toast.update(toastId, {
-        render: (
-          <div className="">
-            <h2 className="font-semibold">Success!</h2>
-            <p>Team joined successfully.</p>
-          </div>
-        ),
-        type: "success",
-        isLoading: false,
-        autoClose: 2000,
-      });
+      // toast.update(toastId, {
+      //   render: (
+      //     <div className="">
+      //       <h2 className="font-semibold">Success!</h2>
+      //       <p>Team joined successfully.</p>
+      //     </div>
+      //   ),
+      //   type: "success",
+      //   isLoading: false,
+      //   autoClose: 2000,
+      // });
       setTimeout(() => {
         void router.push("/");
       }, 1500);
@@ -72,60 +72,60 @@ export default function JoinTeamForm() {
       if (axios.isAxiosError(err)) {
         const error = err as AxiosError;
         if (error.response?.status === 400) {
-          toast.update(toastId, {
-            render: <BadRequest />,
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: <BadRequest />,
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
           return;
         } else if (error.response?.status === 417) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">User is already in a team!</h2>
-                <p>Leave the team to create a new one.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: (
+          //     <div className="">
+          //       <h2 className="font-semibold">User is already in a team!</h2>
+          //       <p>Leave the team to create a new one.</p>
+          //     </div>
+          //   ),
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
           return;
         } else if (error.response?.status === 409) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">Invalid team code!</h2>
-                <p>Please check the team code and try again.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: (
+          //     <div className="">
+          //       <h2 className="font-semibold">Invalid team code!</h2>
+          //       <p>Please check the team code and try again.</p>
+          //     </div>
+          //   ),
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
           return;
         } else if (error.response?.status === 424) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">Team is full!</h2>
-                <p>Try joining another team.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: (
+          //     <div className="">
+          //       <h2 className="font-semibold">Team is full!</h2>
+          //       <p>Try joining another team.</p>
+          //     </div>
+          //   ),
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
           return;
         }
       }
-      toast.update(toastId, {
-        render: <ServerError />,
-        type: "error",
-        isLoading: false,
-        autoClose: 2000,
-      });
+      // toast.update(toastId, {
+      //   render: <ServerError />,
+      //   type: "error",
+      //   isLoading: false,
+      //   autoClose: 2000,
+      // });
       return;
     }
   }

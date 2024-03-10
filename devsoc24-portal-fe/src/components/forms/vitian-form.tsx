@@ -23,12 +23,12 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast, { Toaster } from 'react-hot-toast';
 import { useSearchParams } from "next/navigation";
 import { BadRequest, ServerError } from "@/components/toast";
 import axios, { type AxiosError } from "axios";
 import { type APIResponse } from "@/schemas/api";
+import ToastContainer from "../ToastContainer";
 
 type VitianDetailsFormValues = z.infer<typeof vitianDetails>;
 
@@ -51,7 +51,7 @@ export default function VitianForm({
   });
 
   async function onSubmit(data: VitianDetailsFormValues) {
-    const toastId = toast.loading("Saving...", { autoClose: false });
+    // const toastId = toast.loading("Saving...", { autoClose: false });
     const updatedData = {
       first_name: localStorage.getItem("first_name"),
       last_name: localStorage.getItem("last_name"),
@@ -78,17 +78,17 @@ export default function VitianForm({
           withCredentials: true,
         },
       );
-      toast.update(toastId, {
-        render: (
-          <div className="">
-            <h2 className="font-semibold">Success!</h2>
-            <p>Account details saved successfully.</p>
-          </div>
-        ),
-        type: "success",
-        isLoading: false,
-        autoClose: 2000,
-      });
+      // toast.update(toastId, {
+      //   render: (
+      //     <div className="">
+      //       <h2 className="font-semibold">Success!</h2>
+      //       <p>Account details saved successfully.</p>
+      //     </div>
+      //   ),
+      //   type: "success",
+      //   isLoading: false,
+      //   autoClose: 2000,
+      // });
       setTimeout(() => setForm(2), 1500);
       return;
     } catch (err) {
@@ -96,45 +96,45 @@ export default function VitianForm({
       if (axios.isAxiosError(err)) {
         const error = err as AxiosError;
         if (error.response?.status === 400) {
-          toast.update(toastId, {
-            render: <BadRequest />,
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: <BadRequest />,
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
         } else if (error.response?.status === 403) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">Email not verified!</h2>
-                <p>Please verify your email.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: (
+          //     <div className="">
+          //       <h2 className="font-semibold">Email not verified!</h2>
+          //       <p>Please verify your email.</p>
+          //     </div>
+          //   ),
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
         } else if (error.response?.status === 404) {
-          toast.update(toastId, {
-            render: (
-              <div className="">
-                <h2 className="font-semibold">User not found!</h2>
-                <p>Please sign up.</p>
-              </div>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
+          // toast.update(toastId, {
+          //   render: (
+          //     <div className="">
+          //       <h2 className="font-semibold">User not found!</h2>
+          //       <p>Please sign up.</p>
+          //     </div>
+          //   ),
+          //   type: "error",
+          //   isLoading: false,
+          //   autoClose: 2000,
+          // });
         }
         return;
       }
-      toast.update(toastId, {
-        render: <ServerError />,
-        type: "error",
-        isLoading: false,
-        autoClose: 2000,
-      });
+      // toast.update(toastId, {
+      //   render: <ServerError />,
+      //   type: "error",
+      //   isLoading: false,
+      //   autoClose: 2000,
+      // });
       return;
     }
 
