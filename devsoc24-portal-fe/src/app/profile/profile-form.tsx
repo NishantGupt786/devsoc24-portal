@@ -10,13 +10,13 @@ import {
 } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { profileSchema } from "@/schemas/profile";
 import toast, { Toaster } from "react-hot-toast";
 import blocks from "@/../public/hostels.json";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+import axios, { type AxiosResponse } from "axios";
+import { type userProps } from "@/interfaces";
+import ToastContainer from "@/components/ToastContainer";
 
 interface FormValues {
   first_name: string;
@@ -39,35 +39,29 @@ interface SubmitProjectResponse {
   data: unknown;
 }
 
-interface GetIdea {
-  data: FormValues;
-  message: string;
-  status: string;
-}
-
 import send from "@/assets/images/Send.svg";
 import Image from "next/image";
 import { useEffect } from "react";
 const tracks = ["Track 1", "Track 2", "Track 3"];
 
 export default function Profile() {
-  // useEffect(() => {
-  //   async function getIdeaSubmission() {
-  //     try {
-  //       const res = await axios.get<GetIdea>(
-  //         `${process.env.NEXT_PUBLIC_API_URL}/idea`,
-  //         {
-  //           withCredentials: true,
-  //         },
-  //       );
-  //       console.log(res.data.data);
-  //       form.reset(res.data.data);
-  //     } catch (error) {
-  //       console.log("Error getting idea submission:", error);
-  //     }
-  //   }
-  //   void getIdeaSubmission();
-  // }, []);
+  useEffect(() => {
+    async function getIdeaSubmission() {
+      try {
+        const response: AxiosResponse<userProps> = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/user/me`,
+          {
+            withCredentials: true,
+          },
+        );
+        console.log(response.data.data);
+        form.reset(response.data.data);
+      } catch (error) {
+        console.log("Error getting idea submission:", error);
+      }
+    }
+    void getIdeaSubmission();
+  }, []);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(profileSchema),
@@ -84,49 +78,27 @@ export default function Profile() {
   });
 
   async function onSubmit(data: FormValues) {
-    // try {
-      console.log(data);
-      //   const toastId = toast.loading("Idea Submitted", { autoClose: false });
-      // const res = await axios.patch<SubmitProjectResponse>(
-      //   `${process.env.NEXT_PUBLIC_API_URL}/idea/update`,
-      //   data,
-      //   {
-      //     withCredentials: true,
-      //   },
-      // );
-
-      // if (res.data.status === "success") {
-        // toast.update(toastId, {
-        //   render: (
-        //     <div className="">
-        //       <h2 className="font-semibold">Idea Submitted</h2>
-        //     </div>
-        //   ),
-        //   type: "success",
-        //   isLoading: false,
-        //   autoClose: 2000,
-        // });
-      // } else {
-        // toast.update(toastId, {
-        //   render: (
-        //     <div className="">
-        //       <h2 className="font-semibold">Failed to submit idea</h2>
-        //       <p>Please try again.</p>
-        //     </div>
-        //   ),
-        //   type: "error",
-        //   isLoading: false,
-        //   autoClose: 2000,
-        // });
-    //   }
-    // } catch (error) {
-    //   console.error("Error submitting idea:", error);
-    //   toast.error("Failed to submit idea");
-    // }
+    console.log(data);
+    const handleSubmit = async () => {
+      const res = await axios.patch<SubmitProjectResponse>(
+        `${process.env.NEXT_PUBLIC_API_URL}/idea/update`,
+        data,
+        {
+          withCredentials: true,
+        },
+      );
+      console.log(res.data);
+    };
+    void toast.promise(handleSubmit(), {
+      loading: `Loading`,
+      success: `Profile updated`,
+      error: `Something went wrong`,
+    });
   }
 
   return (
     <>
+      <ToastContainer />
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -213,6 +185,7 @@ export default function Profile() {
                             type="text"
                             id="vit_email"
                             {...field}
+                            disabled
                             placeholder="vitstudent.ac.in"
                             className={`h-10 bg-white pl-5 ${
                               form.getFieldState("vit_email").invalid
@@ -259,7 +232,7 @@ export default function Profile() {
               </div>
             </div>
             <div className="flex w-96 flex-col gap-6 max-[445px]:w-[87vw]">
-            <div>
+              <div>
                 <FormField
                   control={form.control}
                   name="reg_no"
