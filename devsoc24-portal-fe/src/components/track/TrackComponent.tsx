@@ -1,41 +1,68 @@
+/* eslint-disable react/jsx-key */
 import React from "react";
 import TrackCard from "./TrackCard";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const tracks = [
   {
     imgsrc: "/images/trackImg1.svg",
-    name: "Secret Track 1",
+    name: "Interactive Engagement",
+    title: "Interactive Engagement (Gamified Solutions)",
+    description: `This track is all about engaging applications with gamified mechanisms. Create solutions which promote enhanced interaction and user-retention with the help of immersive technologies and reward systems.`,
   },
   {
     imgsrc: "/images/trackImg1.svg",
-    name: "Secret Track 2",
+    name: "Eco-Innovations",
+    title: "Eco-Innovations (Sustainable Technology)",
+    description: `Technology is all about problem solving and enriching the life of users. Provide technical solutions which promote sustainability and a better environment. Improve the current technologies to make them more sustainable or develop brand new solutions.`,
   },
   {
     imgsrc: "/images/trackImg1.svg",
-    name: "Secret Track 3",
+    name: "Community Building",
+    title: "Community Building",
+    description: `This track focuses on fostering stronger, more connected communities. Participants are tasked with creating platforms or tools that promote unity and communal engagement.`,
   },
   {
     imgsrc: "/images/trackImg1.svg",
-    name: "Secret Track 4",
+    name: "Future of Work",
+    title: "Future of Work",
+    description: `This track explores the evolving nature of work in the digital era. Participants are encouraged to develop solutions that enhance productivity and redefine traditional work models. Participants can also build solutions that fine-tune LLMs or use vector databases to change the work landscape.`,
   },
   {
     imgsrc: "/images/trackImg1.svg",
-    name: "Secret Track 5",
+    name: "Ethical Technology",
+    title: "Ethical Technology",
+    description: `This track focuses on developing solutions promoting responsible innovation, privacy, fairness, and transparency in the tech industry. Participants are tasked with addressing societal concerns such as data privacy and security. Participants can also focus on combating unethical use of tech and emphasise integrity and accountability in technology design and deployment.`,
   },
   {
     imgsrc: "/images/trackImg1.svg",
-    name: "Secret Track 6",
+    name: "Open Innovation",
+    title: "Open Innovation",
+    description: `This track focuses on embracing creativity to solve diverse challenges. Participants are encouraged to explore groundbreaking ideas across sectors and implement interdisciplinary approaches and collaborative problem-solving. If you have any idea that doesn’t fit in any of the other tracks, this track is for you.`,
   },
 ];
 const TrackComponent = () => {
   return (
-    <div className="trackComponent h-full overflow-auto rounded-xl w-full md:w-[32vw] bg-white px-6">
-      <div className="pl-3 pt-2 font-semibold text-[#45464E]">
-        Track Details
-      </div>
+    <div className="trackComponent h-full w-full overflow-auto rounded-xl bg-white px-6 md:w-[32vw]">
+      <div className="pt-3 font-semibold text-[#45464E]">Track Details</div>
       <div className="my-6 flex w-full flex-col items-center gap-6">
         {tracks.map((item, index) => (
-          <TrackCard imagesrc={item.imgsrc} name={item.name} key={index} />
+          <Dialog>
+            <DialogTrigger key={index}>
+              <TrackCard imagesrc={item.imgsrc} name={item.name} key={index} />
+            </DialogTrigger>
+            <DialogContent>
+              <DialogTitle>{item.title}</DialogTitle>
+              <DialogDescription>{item.description}</DialogDescription>
+            </DialogContent>
+          </Dialog>
         ))}
       </div>
     </div>

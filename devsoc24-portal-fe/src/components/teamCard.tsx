@@ -32,7 +32,7 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
     <>
       <div>
         <div className="h-fit w-full rounded-xl bg-white md:w-[32vw]">
-          <div className="pl-3 pt-2 font-semibold text-[#45464E]">
+          <div className="pl-6 pt-4 font-semibold text-[#45464E]">
             Your Devsoc Team
           </div>
           <div className="flex flex-col items-center justify-center p-8">

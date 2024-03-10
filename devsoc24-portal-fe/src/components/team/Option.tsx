@@ -10,16 +10,16 @@ import {
       <>
         <DialogContent className="sm:max-w-[425px] min-h-[200px]">
           <DialogHeader>
-            <DialogTitle>Join or Create a team</DialogTitle>
+            <DialogTitle>You must join or create a team first.</DialogTitle>
           </DialogHeader>
-          <div className="flex justify-evenly w-full ">
+          {/* <div className="flex justify-evenly w-full ">
             <Button type="submit" className="bg-[#458B71] w-[30%]">
               Create Team
             </Button>
             <Button type="submit" className="bg-[#458B71] w-[30%]">
               Join Team
             </Button>
-          </div>
+          </div> */}
         </DialogContent>
       </>
     );

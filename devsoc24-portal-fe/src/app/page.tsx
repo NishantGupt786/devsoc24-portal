@@ -29,6 +29,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { User } from "lucide-react";
 import ToastContainer from "@/components/ToastContainer";
+import Link from "next/link";
 
 interface ideaProps {
   message: string;
@@ -58,6 +59,7 @@ export default function HomePage() {
   const { user, setUser } = useUserStore();
   const [getIdea, SetIdea] = useState("");
   const { teamData, setTeamData } = useTeamDataStore();
+  const [isLeader, setIsLeader] = useState(false);
 
   const logout = async () => {
     try {
@@ -114,7 +116,6 @@ export default function HomePage() {
             console.log("Idea Not found, but in a team");
             break;
           case 409:
-            setIdea(409);
             console.log("Not in team");
             break;
           default:
@@ -163,6 +164,7 @@ export default function HomePage() {
           withCredentials: true,
         },
       );
+      SetIdea("idea found");
       console.log("FETCH IDEA: ", response);
     } catch (e) {
       if (axios.isAxiosError(e)) {
@@ -176,6 +178,8 @@ export default function HomePage() {
           case 417:
             console.log("team no idea");
             break;
+          case 409:
+            setIdea(409);
           default:
             console.log(e);
             break;
@@ -200,6 +204,9 @@ export default function HomePage() {
     } else {
       void fetchTeam();
     }
+    if (user.data.id === teamData.team?.leader_id) {
+      setIsLeader(true);
+    }
   }, []);
 
   const noTeamCard = [
@@ -214,12 +221,11 @@ export default function HomePage() {
       modalType: "JoinTeam",
     },
   ];
-  const ideaCard = [
+  const ideaTherecard = [
     {
-      text: "Submit An Idea",
-      showModal: false,
-      modalType: idea === 409 ? "Choice" : "JoinTeam",
-      routeTo: "/submit-idea",
+      text: "View Idea",
+      showModal: true,
+      modalType: "IdeaSubmit",
     },
     {
       text: "Edit idea",
@@ -228,12 +234,20 @@ export default function HomePage() {
       routeTo: "/edit-idea",
     },
   ];
-  const ideaTherecard = [
+  const ideaCard = [
     {
       text: "Submit An Idea",
-      showModal: false,
+      showModal: true,
       modalType: idea === 409 ? "Choice" : "JoinTeam",
       routeTo: "/submit-idea",
+    },
+  ];
+
+  const notLeader = [
+    {
+      text: "View Idea",
+      showModal: true,
+      modalType: "IdeaSubmit",
     },
   ];
 
@@ -258,9 +272,11 @@ export default function HomePage() {
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuLabel className="cursor-pointer">
-                Profile
-              </DropdownMenuLabel>
+              <Link href="/profile">
+                <DropdownMenuLabel className="cursor-pointer">
+                  Profile
+                </DropdownMenuLabel>
+              </Link>
               <DropdownMenuSeparator />
               <DropdownMenuLabel
                 className="cursor-pointer text-red-500"
@@ -286,9 +302,19 @@ export default function HomePage() {
           <CustomCard
             title="Idea Submission"
             cardImage="ideaSubmissionImg"
-            cardContent="No Idea Submitted yet"
-            cardDesc="Submit Your Idea Before < date > <div time >"
-            buttonDetails={getIdea === "idea found" ? ideaTherecard : ideaCard}
+            cardContent={
+              getIdea === "idea found" ? "Idea Submitted" : "No Idea Yet"
+            }
+            cardDesc={
+              getIdea === "idea found" ? "Edit or View Idea" : "Submit an Idea"
+            }
+            buttonDetails={
+              getIdea === "idea found"
+                ? isLeader
+                  ? ideaTherecard
+                  : notLeader
+                : ideaCard
+            }
           />
           <TrackComponent />
         </div>

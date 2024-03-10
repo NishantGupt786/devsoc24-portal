@@ -4,7 +4,28 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
+interface FormValues {
+  title: string;
+  track: string;
+  description: string;
+  figma_link?: string;
+  github_link?: string;
+  others: string;
+}
+interface GetIdea{
+  data: FormValues;
+  message: string;
+  status: string;
+}
+
+interface SubmitProjectResponse {
+  message: string;
+  status: string;
+  data: unknown;
+}
 
 const projectTracks = [
   { id: "track1", name: "Track 1" },
@@ -23,6 +44,21 @@ const projectInfo = {
 };
 
 function Submission() {
+  const [ideaDetails, setIdeaDetails] = useState<FormValues>()
+  useEffect(() => {
+    async function getIdeaSubmission() {
+      try {
+        const res = await axios.get<GetIdea>(`${process.env.NEXT_PUBLIC_API_URL}/idea`, {
+          withCredentials: true,
+        });
+        console.log(res.data.data);
+        setIdeaDetails(res.data.data);
+      } catch (error) {
+        console.log("Error getting idea submission:", error)
+      }
+    }
+    void getIdeaSubmission();
+  }, []);
   return (
     <>
       <DialogContent className="sm:max-w-[425px]">
@@ -35,14 +71,14 @@ function Submission() {
               Project Name
             </Label>
             <div id="projectName" className="p-2 rounded-md bg-[#F1F1F1]  text-[#ABAFB1]">
-              {projectInfo.projectName}
+              {ideaDetails?.title}
             </div>
 
             <Label htmlFor="projectTrack" className="text-xs font-semibold">
               Project Track
             </Label>
             <div id="projectTrack" className="p-2 rounded-md bg-[#F1F1F1]  text-[#ABAFB1]">
-              {projectTracks.find(track => track.id === projectInfo.projectTrack)?.name ?? "Track not found"}
+              {ideaDetails?.track}
             </div>
 
             <Label htmlFor="description" className="text-xs font-semibold">
@@ -50,31 +86,29 @@ function Submission() {
             </Label>
             <div
               id="description"
-              className="p-2 rounded-md bg-[#F1F1F1]  text-[#ABAFB1]"
-              style={{ minHeight: '100px' }}
+              className="p-2 rounded-md bg-[#F1F1F1] text-[#ABAFB1] text-wrap break-words" 
             >
-              {projectInfo.description}
+              {ideaDetails?.description}
             </div>
-
             <Label htmlFor="figmaLink" className="text-xs font-semibold">
               Figma Link
             </Label>
             <div id="figmaLink" className="p-2 rounded-md bg-[#F1F1F1]  text-[#ABAFB1]">
-              {projectInfo.figmaLink}
+              {ideaDetails?.figma_link}
             </div>
 
             <Label htmlFor="githubLink" className="text-xs font-semibold">
               Github Link
             </Label>
             <div id="githubLink" className="p-2 rounded-md bg-[#F1F1F1]  text-[#ABAFB1]">
-              {projectInfo.githubLink}
+              {ideaDetails?.github_link}
             </div>
 
             <Label htmlFor="otherLinks" className="text-xs font-semibold">
               Other Links
             </Label>
             <div id="otherLinks" className="p-2 rounded-md bg-[#F1F1F1]  text-[#ABAFB1]">
-              {projectInfo.otherLinks}
+              {ideaDetails?.others}
             </div>
           </div>
         </div>
