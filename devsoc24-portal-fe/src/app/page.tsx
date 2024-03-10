@@ -16,7 +16,6 @@ import {
 import Loading from "./loading";
 import TrackComponent from "@/components/track/TrackComponent";
 import toast, { Toaster } from "react-hot-toast";
-
 import { refresh, type userProps } from "@/interfaces";
 import { type APIResponse } from "@/schemas/api";
 import {
@@ -95,6 +94,7 @@ export default function HomePage() {
       success: "Logged Out",
       error: "Something went wrong",
     });
+    void router.push("/login");
   };
 
   const fetchData = async () => {
