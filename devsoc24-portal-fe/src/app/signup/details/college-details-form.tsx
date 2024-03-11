@@ -11,11 +11,11 @@ export default function CollegeDetailsForm({
 }: {
   setForm: React.Dispatch<React.SetStateAction<number>>;
 }) {
-  const [isVitian, setIsVitian] = useState(false);
+  const [isVitian, setIsVitian] = useState(true);
 
   return (
     <div className="flex w-full flex-col">
-      <div className="flex flex-col items-center pt-5">
+      {/* <div className="flex flex-col items-center pt-5">
         <p className="text-center text-base font-semibold text-primary">
           Are You From Vellore Institute Of Technology, Vellore?
         </p>
@@ -32,7 +32,7 @@ export default function CollegeDetailsForm({
             ? "VIT Vellore Students Only"
             : "External Students and Participants Only"}
         </p>
-      </div>
+      </div> */}
       {isVitian ? (
         <VitianForm setForm={setForm} />
       ) : (
