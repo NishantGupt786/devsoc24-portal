@@ -205,6 +205,14 @@ export default function HomePage() {
     } else {
       void fetchTeam();
     }
+    if (user.data.is_leader) {
+      console.log("Leader saala");
+      setIsLeader(true);
+    }
+    if (user.data.is_leader)
+      if (user.data.id === teamData.team?.leader_id) {
+        setIsLeader(true);
+      }
   }, []);
 
   const noTeamCard = [
