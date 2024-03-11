@@ -90,7 +90,7 @@ export default function EditIdeaForm() {
 
     void toast.promise(handleSubmit(), {
       loading: `Loading`,
-      success: `Idea Submitted`,
+      success: `Idea Updated`,
       error: `Something went wrong`,
     });
   }

@@ -16,9 +16,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   useEffect(() => {
-    const refresh = async () => {
-      try {
-        const response = await axios.post(
+    setInterval(() => {
+      const a = "s";
+      axios
+        .post(
           `${process.env.NEXT_PUBLIC_API_URL}/refresh`,
           {
             nallaData: "",
@@ -26,24 +27,13 @@ export default function RootLayout({
           {
             withCredentials: true,
           },
-        );
-      } catch (e) {
-        if (axios.isAxiosError(e)) {
-          switch (e.response?.status) {
-            case 401:
-              try {
-                await refresh();
-              } catch (e) {
-                console.log("REFESH: ", e);
-              }
-            default:
-              console.log(e);
-          }
-        }
-      }
-    };
-    setInterval(() => {
-      void refresh();
+        )
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     }, 270000);
   }, []);
 

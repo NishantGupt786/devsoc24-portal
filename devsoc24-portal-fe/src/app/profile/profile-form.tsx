@@ -81,7 +81,7 @@ export default function Profile() {
     console.log(data);
     const handleSubmit = async () => {
       const res = await axios.patch<SubmitProjectResponse>(
-        `${process.env.NEXT_PUBLIC_API_URL}/idea/update`,
+        `${process.env.NEXT_PUBLIC_API_URL}/user/update`,
         data,
         {
           withCredentials: true,

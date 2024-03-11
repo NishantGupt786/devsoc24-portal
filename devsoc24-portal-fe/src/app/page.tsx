@@ -60,7 +60,6 @@ export default function HomePage() {
   const [getIdea, SetIdea] = useState("");
   const { teamData, setTeamData } = useTeamDataStore();
   const { isLeader, setIsLeader } = useLeaderStore();
-
   const logout = async () => {
     try {
       const response = await axios.post(
@@ -107,6 +106,7 @@ export default function HomePage() {
         },
       );
       setUser(response.data);
+      setIsLeader(response?.data.is_leader);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
@@ -205,9 +205,6 @@ export default function HomePage() {
     } else {
       void fetchTeam();
     }
-    if (user.data.id === teamData.team?.leader_id) {
-      setIsLeader(true);
-    }
   }, []);
 
   const noTeamCard = [
@@ -238,7 +235,7 @@ export default function HomePage() {
   const ideaCard = [
     {
       text: "Submit An Idea",
-      showModal: true,
+      showModal: false,
       modalType: idea === 409 ? "Choice" : "JoinTeam",
       routeTo: "/submit-idea",
     },
