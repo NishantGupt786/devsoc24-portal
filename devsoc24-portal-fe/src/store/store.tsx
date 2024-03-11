@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { userProps, type joinTeamModal, teamDataProps } from "@/interfaces";
+import { type userProps, type joinTeamModal, type teamDataProps } from "@/interfaces";
 
 export const useJoinModalStore = create<joinTeamModal>((set) => ({
   showModal: "",
@@ -53,6 +53,7 @@ interface userStore {
 
 export const useUserStore = create<userStore>((set) => ({
   user: {
+    is_leader: false,
     data: {
       id: "",
       first_name: "",
@@ -66,6 +67,7 @@ export const useUserStore = create<userStore>((set) => ({
       gender: "",
       role: "",
       team_id: "",
+      is_leader: false,
     },
     message: "",
     status: "",

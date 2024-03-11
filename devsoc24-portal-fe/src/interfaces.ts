@@ -46,6 +46,7 @@ export const refresh = async () => {
 };
 
 export interface userProps {
+  is_leader: boolean;
   data: {
     id: string;
     first_name: string;
@@ -59,6 +60,7 @@ export interface userProps {
     gender: string;
     role: string;
     team_id: string;
+    is_leader: boolean;
   };
   message: string;
   status: string;

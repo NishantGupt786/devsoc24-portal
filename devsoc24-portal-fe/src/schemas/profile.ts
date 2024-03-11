@@ -17,10 +17,8 @@ export const profileSchema = z.object({
     .max(50, "Last Name cannot be longer than 50 characters"),
   vit_email: z
     .string({
-      required_error: "Required",
       invalid_type_error: "VIT Email must be a string",
-    })
-    .regex(/^[a-zA-Z0-9._-]+@vitstudent.ac.in$/, "Enter a valid VIT email"),
+    }),
   phone: z
     .string({
       required_error: "Required",

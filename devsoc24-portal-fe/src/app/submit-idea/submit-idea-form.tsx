@@ -67,7 +67,7 @@ export default function SubmitIdeaForm() {
       loading: "Loading...",
       success: (temp) => {
         void router.push("/");
-        return `Logged In`;
+        return `Idea submitted successfully!`;
       },
       error: (err: AxiosError) => {
         switch (err.response?.status) {
