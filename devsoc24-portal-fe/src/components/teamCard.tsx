@@ -68,7 +68,7 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
         },
       );
       setTeam(false);
-      fetchTeam();
+      void fetchTeam();
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
