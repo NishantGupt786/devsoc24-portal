@@ -56,9 +56,6 @@ export default function ForgotForm() {
     void toast.promise(handleSubmit(), {
       loading: "Loading...",
       success: (temp) => {
-        setTimeout(() => {
-          void router.push("/login");
-        }, 1500);
         return `Success`;
       },
       error: (err: AxiosError) => {
@@ -78,6 +75,12 @@ export default function ForgotForm() {
         }
       },
     });
+    setTimeout(() => {
+      toast.dismiss();
+    }, 1000);
+    setTimeout(() => {
+      router.push("/");
+    }, 1500);
   }
 
   const resendOTP = async () => {
@@ -93,11 +96,10 @@ export default function ForgotForm() {
         },
       );
     };
-    
+
     void toast.promise(handleResentOTP(), {
       loading: "Loading...",
       success: (temp) => {
-        void router.push("/");
         return `OTP Sent`;
       },
       error: (err: AxiosError) => {

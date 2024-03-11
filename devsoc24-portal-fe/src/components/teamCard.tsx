@@ -3,7 +3,10 @@ import { useEffect, useState } from "react";
 import { Crown, BadgeMinus, Files, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { teamDataProps } from "@/interfaces";
+import { teamDataProps, userProps } from "@/interfaces";
+import axios, { AxiosResponse } from "axios";
+import { useIdeaStore, useTeamStore, useUserStore } from "@/store/store";
+import { useRouter } from "next/navigation";
 
 interface keyProps {
   message: string;
@@ -14,12 +17,70 @@ interface keyProps {
 const TeamCard: React.FC<teamDataProps> = (props) => {
   const [isCopied, setIsCopied] = useState(false);
   const [Leader, setLeader] = useState("");
+  const { team, setTeam } = useTeamStore();
+  const { user, setUser } = useUserStore();
+  const { idea, setIdea } = useIdeaStore();
+
+  const router = useRouter();
+
   const onCopyText = () => {
     setIsCopied(true);
     setTimeout(() => {
       setIsCopied(false);
     }, 1000);
   };
+
+  const fetchTeam = async () => {
+    try {
+      const response: AxiosResponse<userProps> = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/user/me`,
+        {
+          withCredentials: true,
+        },
+      );
+      setUser(response.data);
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        switch (e.response?.status) {
+          case 401:
+            void router.push("/login");
+            break;
+          case 404:
+            console.log("Idea Not found, but in a team");
+            break;
+          case 409:
+            console.log("Not in team");
+            break;
+          default:
+            console.log(e);
+            break;
+        }
+      }
+    }
+  };
+
+  const leaveTeam = async () => {
+    try {
+      const response = await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_URL}/team/leave`,
+        {
+          withCredentials: true,
+        },
+      );
+      setTeam(false);
+      fetchTeam();
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        switch (e.response?.status) {
+          case 202:
+            console.log("Accepted");
+          default:
+            console.log(e);
+        }
+      }
+    }
+  };
+
   useEffect(() => {
     const leader = props.team?.users.find(
       (item) => item.id === props.team?.leader_id,
@@ -28,6 +89,7 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
       setLeader(leader.name);
     }
   }, [props.team]);
+
   return (
     <>
       <div>
@@ -48,10 +110,15 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
                   <span className="text-[#FFBE3D]">
                     <Crown />
                   </span>
-                ) : (
-                  <span className="text-[#AD1136]">
+                ) : member.id === user.data.id ? (
+                  <span
+                    className="text-[#AD1136] hover:scale-[1.05] hover:cursor-pointer"
+                    onClick={leaveTeam}
+                  >
                     <BadgeMinus />
                   </span>
+                ) : (
+                  <></>
                 )}
               </div>
             ))}

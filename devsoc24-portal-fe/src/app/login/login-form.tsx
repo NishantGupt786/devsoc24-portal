@@ -16,7 +16,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { EyeIcon, EyeOffIcon, LockKeyholeIcon, MailIcon } from "lucide-react";
 import Link from "next/link";
-import { type APIResponse, type LoginResponse } from "@/schemas/api";
+import { type LoginResponse } from "@/schemas/api";
 import axios, { type AxiosError } from "axios";
 import { BadRequest, ServerError } from "@/components/toast";
 import ToastContainer from "@/components/ToastContainer";
@@ -35,7 +35,13 @@ export default function LoginForm() {
     },
     mode: "onChange",
   });
-
+  interface APIResponse {
+    message: string;
+    status: string;
+    data?: {
+      profile_complete: boolean;
+    };
+  }
   async function onSubmit(formVal: LoginFormValues) {
     const submitForm = async () => {
       const { data } = await axios.post<APIResponse>(
@@ -54,6 +60,7 @@ export default function LoginForm() {
         return `Logged In`;
       },
       error: (err: AxiosError) => {
+        console.log("ERR", err);
         switch (err.response?.status) {
           case 404:
             return `Account Not Found`;
@@ -61,9 +68,20 @@ export default function LoginForm() {
             return `Incorrect Credentials`;
           case 403:
             setTimeout(() => {
+              toast.dismiss();
+            }, 1200);
+            setTimeout(() => {
               void router.push("/signup/verify?email=" + formVal.email);
             }, 1500);
-            return `Email Not Verified`;
+            return `Email Not Verified\nRedirecting...`;
+          case 423:
+            setTimeout(() => {
+              toast.dismiss();
+            }, 1200);
+            setTimeout(() => {
+              void router.push("/signup/details?email=" + formVal.email);
+            }, 1500);
+            return `Complete your profile\nRedirecting..`;
           case 400:
             return `Please check your input and try again`;
           default:
