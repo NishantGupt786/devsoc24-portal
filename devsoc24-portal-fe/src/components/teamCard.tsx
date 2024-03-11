@@ -116,7 +116,7 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
                 onClick={toggleEdit}
               >
                 <Image
-                  src={editImg}
+                  src={editImg as HTMLImageElement}
                   alt="edit"
                   height={0}
                   width={0}

@@ -79,7 +79,7 @@ export default function ForgotForm() {
       toast.dismiss();
     }, 1000);
     setTimeout(() => {
-      router.push("/");
+      router.push(`/signup/verify?email=${email}`);
     }, 1500);
   }
 
