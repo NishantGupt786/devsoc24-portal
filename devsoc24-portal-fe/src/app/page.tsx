@@ -9,6 +9,7 @@ import TeamCard from "@/components/teamCard";
 import axios, { type AxiosResponse } from "axios";
 import {
   useIdeaStore,
+  useLeaderStore,
   useTeamDataStore,
   useTeamStore,
   useUserStore,
@@ -58,7 +59,7 @@ export default function HomePage() {
   const { user, setUser } = useUserStore();
   const [getIdea, SetIdea] = useState("");
   const { teamData, setTeamData } = useTeamDataStore();
-  const [isLeader, setIsLeader] = useState(false);
+  const { isLeader, setIsLeader } = useLeaderStore();
 
   const logout = async () => {
     try {

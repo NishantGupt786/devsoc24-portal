@@ -5,8 +5,16 @@ import { Button } from "@/components/ui/button";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { teamDataProps, userProps } from "@/interfaces";
 import axios, { AxiosResponse } from "axios";
-import { useIdeaStore, useTeamStore, useUserStore } from "@/store/store";
+import {
+  useIdeaStore,
+  useLeaderStore,
+  useTeamEditStore,
+  useTeamStore,
+  useUserStore,
+} from "@/store/store";
 import { useRouter } from "next/navigation";
+import editImg from "@/assets/images/edit.svg";
+import Image from "next/image";
 
 interface keyProps {
   message: string;
@@ -20,6 +28,8 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
   const { team, setTeam } = useTeamStore();
   const { user, setUser } = useUserStore();
   const { idea, setIdea } = useIdeaStore();
+  const { edit, setEdit } = useTeamEditStore();
+  const { isLeader, setIsLeader } = useLeaderStore();
 
   const router = useRouter();
 
@@ -90,12 +100,33 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
     }
   }, [props.team]);
 
+  const toggleEdit = () => {
+    setEdit(!edit);
+  };
+
   return (
     <>
       <div>
         <div className="h-fit w-full rounded-xl bg-white md:w-[32vw]">
-          <div className="pl-6 pt-4 font-semibold text-[#45464E]">
-            Your Devsoc Team
+          <div className="flex w-full items-center justify-between pl-6 pt-4 font-semibold text-[#45464E]">
+            <p>Your Devsoc Team</p>
+            {isLeader ? (
+              <div
+                className="mx-2 flex flex-row items-center justify-between gap-3 rounded-lg border-2 border-[#53545C] px-2 py-1 transition-all duration-150 ease-in-out hover:cursor-pointer hover:bg-black/10"
+                onClick={toggleEdit}
+              >
+                <Image
+                  src={editImg}
+                  alt="edit"
+                  height={0}
+                  width={0}
+                  className="h-fit w-fit"
+                />
+                Edit
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
           <div className="flex flex-col items-center justify-center p-8">
             <p className="text-2xl font-semibold">{props.team?.team_name}</p>

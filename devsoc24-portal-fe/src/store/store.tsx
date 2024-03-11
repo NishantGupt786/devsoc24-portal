@@ -26,6 +26,26 @@ export const useTeamStore = create<teamStore>((set) => ({
   setTeam: (team: boolean) => set({ team }),
 }));
 
+interface leaderStore {
+  isLeader: boolean;
+  setIsLeader: (isLeader: boolean) => void;
+}
+
+export const useLeaderStore = create<leaderStore>((set) => ({
+  isLeader: false,
+  setIsLeader: (isLeader: boolean) => set({ isLeader }),
+}));
+
+interface teamEditStore {
+  edit: boolean;
+  setEdit: (setTeam: boolean) => void;
+}
+
+export const useTeamEditStore = create<teamEditStore>((set) => ({
+  edit: false,
+  setEdit: (edit: boolean) => set({ edit }),
+}));
+
 interface userStore {
   user: userProps;
   setUser: (setUser: userProps) => void;
