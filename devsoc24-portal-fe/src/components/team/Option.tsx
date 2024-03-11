@@ -1,18 +1,17 @@
 import {
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-  } from "@/components/ui/dialog";
-  import { Button } from "@/components/ui/button";
-  
-  function Choice() {
-    return (
-      <>
-        <DialogContent className="sm:max-w-[425px] min-h-[200px]">
-          <DialogHeader>
-            <DialogTitle>You must join or create a team first.</DialogTitle>
-          </DialogHeader>
-          {/* <div className="flex justify-evenly w-full ">
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+
+function Choice() {
+  return (
+    <>
+      <DialogContent className="min-h-[100px] sm:max-w-[425px] flex flex-col justify-center items-center">
+        <DialogTitle>You must join or create a team first.</DialogTitle>
+
+        {/* <div className="flex justify-evenly w-full ">
             <Button type="submit" className="bg-[#458B71] w-[30%]">
               Create Team
             </Button>
@@ -20,10 +19,9 @@ import {
               Join Team
             </Button>
           </div> */}
-        </DialogContent>
-      </>
-    );
-  }
-  
-  export default Choice;
-  
+      </DialogContent>
+    </>
+  );
+}
+
+export default Choice;
