@@ -87,7 +87,7 @@ export default function VitianForm({
       error: (err: AxiosError) => {
         switch (err.response?.status) {
           case 403:
-            return `Email not verified`;
+            return `Email not verified\nVerify your email`;
           case 404:
             return `Account Not Found`;
           case 409:

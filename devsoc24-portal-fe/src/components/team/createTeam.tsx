@@ -44,6 +44,7 @@ function CreateTeam() {
           withCredentials: true,
         },
       );
+
       setTeam(false);
     } catch (e) {
       if (axios.isAxiosError(e)) {

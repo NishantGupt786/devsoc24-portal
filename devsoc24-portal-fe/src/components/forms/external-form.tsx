@@ -90,7 +90,7 @@ export default function ExternalForm({
           case 409:
             return `Incorrect Credentials`;
           case 403:
-            return `Email Not Verified`;
+            return `Email Not Verified\nVerify your email`;
           case 400:
             return `Please check your input and try again`;
           default:
