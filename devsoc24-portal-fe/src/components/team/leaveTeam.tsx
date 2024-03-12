@@ -32,14 +32,14 @@ const LeaveTeam = () => {
                 <Button
                   type="submit"
                   className="bg-[#458B71]"
-                  onClick={async () => {}}
+                  // onClick={async () => {}}
                 >
                   Yes
                 </Button>
                 <Button
                   type="submit"
                   className="bg-[#458B71]"
-                  onClick={async () => {}}
+                  // onClick={async () => {}}
                 >
                   No
                 </Button>

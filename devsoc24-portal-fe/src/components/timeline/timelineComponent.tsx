@@ -31,9 +31,9 @@ const TimelineComponent = (props: { count: number }) => {
         <div className="flex h-full flex-row  items-center">
           {timelineData.slice(0, props.count).map((item, index) => {
             return (
-              <div className="relative flex h-fit w-fit ">
+              <div className="relative flex h-fit w-fit " key={index}>
                 <Image
-                  src={img1}
+                  src={img1 as HTMLImageElement}
                   alt="completed"
                   height={0}
                   width={0}
@@ -48,7 +48,7 @@ const TimelineComponent = (props: { count: number }) => {
 
           <div className="relative flex h-fit w-fit ">
             <Image
-              src={img2}
+              src={img2 as HTMLImageElement}
               alt="completed"
               height={0}
               width={0}
@@ -61,9 +61,9 @@ const TimelineComponent = (props: { count: number }) => {
 
           {timelineData.slice(0, props.count).map((item, index) => {
             return (
-              <div className="relative flex h-fit w-fit ">
+              <div className="relative flex h-fit w-fit " key={index}>
                 <Image
-                  src={img3}
+                  src={img3 as HTMLImageElement}
                   alt="completed"
                   height={0}
                   width={0}
