@@ -50,7 +50,7 @@ const tracks = [
 ];
 const TrackComponent = () => {
   return (
-    <div className="trackComponent h-full w-full overflow-auto rounded-xl bg-white px-6 md:w-[32vw]">
+    <div className="trackComponent h-fit w-full rounded-xl bg-white px-6 md:w-[32vw] lg:h-[52vh] lg:overflow-auto">
       <div className="pt-3 font-semibold text-[#45464E]">Track Details</div>
       <div className="my-6 flex w-full flex-col items-center gap-y-6">
         {tracks.map((item, index) => (

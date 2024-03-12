@@ -8,7 +8,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import z from "zod";
 import { useRef } from "react";
 import {
@@ -20,6 +20,7 @@ import {
 import { userProps } from "@/interfaces";
 import { useRouter } from "next/navigation";
 import { APIResponse } from "@/schemas/api";
+import toast from "react-hot-toast";
 
 const teamNameSchema = z.object({
   name: z.string(),
@@ -34,30 +35,38 @@ function CreateTeam() {
 
   const router = useRouter();
   const handleClick = async () => {
-    try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/team/create`,
-        {
-          name: inputRef.current?.value,
-        },
-        {
-          withCredentials: true,
-        },
-      );
-
-      setTeam(false);
-    } catch (e) {
-      if (axios.isAxiosError(e)) {
-        switch (e.response?.status) {
-          case 202:
-            console.log("Accepted");
-          default:
-            console.log(e);
-        }
-      }
-      await fetchTeam();
-    }
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/team/create`,
+      {
+        name: inputRef.current?.value,
+      },
+      {
+        withCredentials: true,
+      },
+    );
   };
+
+  void toast.promise(handleClick(), {
+    loading: "Cooking...",
+    success: (temp) => {
+      setTeam(false);
+      void fetchTeam();
+      return `Team created successfully!`;
+    },
+    error: (err: AxiosError) => {
+      console.log("ERR", err);
+      switch (err.response?.status) {
+        case 404:
+          return `Account not found!`;
+        case 409:
+          return `Incorrect credentials`;
+        case 400:
+          return `Please check your input and try again!`;
+        default:
+          return `Something went wrong!`;
+      }
+    },
+  });
   const fetchTeam = async () => {
     try {
       const response = await axios.get<APIResponse>(
@@ -108,7 +117,6 @@ function CreateTeam() {
           <DialogFooter className="sm:justify-start">
             <DialogClose>
               <Button
-                type="submit"
                 className="bg-[#458B71]"
                 onClick={async () => {
                   await handleClick();
