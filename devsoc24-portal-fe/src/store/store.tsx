@@ -135,3 +135,13 @@ export const showModalStore = create<showModalStore>((set) => ({
   showModal: "",
   setShowModal: (showModal: string) => set({ showModal }),
 })); 
+
+interface kickStore {
+  kickMate: string;
+  setKickMate: (kickMate: string) => void;
+}
+
+export const showkickStore = create<kickStore>((set) => ({
+  kickMate: "",
+  setKickMate: (kickMate: string) => set({ kickMate }),
+})); 

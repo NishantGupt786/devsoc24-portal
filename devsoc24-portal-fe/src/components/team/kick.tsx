@@ -8,14 +8,16 @@ import { Label } from "@radix-ui/react-label";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { DialogHeader, DialogFooter } from "../ui/dialog";
-import { Input } from "../ui/input";
+import { type APIResponse } from "@/schemas/api";
 import {
   useTeamStore,
   useUserStore,
   useIdeaStore,
   useTeamEditStore,
-  useTeamDataStore,
+  useLeaderStore,
   showModalStore,
+  showkickStore,
+  useTeamDataStore,
 } from "@/store/store";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -23,18 +25,18 @@ import { userProps } from "@/interfaces";
 import router from "next/navigation";
 import { useRouter } from "next/navigation";
 
-const LeaveTeam = () => {
+const Kick = () => {
   const { team, setTeam } = useTeamStore();
-  const { user, setUser } = useUserStore();
   const { showModal, setShowModal } = showModalStore();
+  const { kickMate, setKickMate } = showkickStore();
   const { teamData, setTeamData } = useTeamDataStore();
 
   const router = useRouter();
 
   const fetchTeam = async () => {
     try {
-      console.log("fetching team")
-      const response = await axios.get<userProps>(
+      console.log("fetch team");
+      const response = await axios.get<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/team`,
         {
           withCredentials: true,
@@ -63,27 +65,28 @@ const LeaveTeam = () => {
 
   const leaveTeam = async () => {
     const handleClick = async () => {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/team/leave`, {
-        withCredentials: true,
-      });
-      setShowModal("")
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/team/kick`,
+        { id: kickMate },
+        {
+          withCredentials: true,
+        },
+      );
+      setShowModal("");
     };
 
     await toast.promise(handleClick(), {
       loading: "Loading...",
       success: (temp) => {
-        setTeam(true);
-        void fetchTeam();
         return `Accepted`;
       },
       error: `Something went wrong`,
     });
-
-    
+    await fetchTeam();
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm backdrop-filter backdrop-brightness-50 z-[60]">
+    <div className="fixed inset-0 z-[60] flex items-center justify-center backdrop-blur-sm backdrop-brightness-50 backdrop-filter">
       <div className="rounded-lg bg-white p-8">
         <button
           className="absolute right-0 top-0 p-2 text-gray-500"
@@ -104,7 +107,7 @@ const LeaveTeam = () => {
           </svg>
         </button>
         <h2 className="text-xl font-semibold text-gray-800">
-          Are you sure you want to leave the team?
+          Are you sure you want to kick your team mate?
         </h2>
         <div className="mt-4 flex justify-center">
           <button
@@ -125,4 +128,4 @@ const LeaveTeam = () => {
   );
 };
 
-export default LeaveTeam;
+export default Kick;

@@ -33,6 +33,7 @@ import ToastContainer from "@/components/ToastContainer";
 import Link from "next/link";
 import TimelineComponent from "@/components/timeline/timelineComponent";
 import LeaveTeam from "@/components/team/leaveTeam";
+import Kick from "@/components/team/kick";
 
 interface ideaProps {
   message: string;
@@ -311,8 +312,9 @@ export default function HomePage() {
         </div>
         <div className="flex flex-col">
           {showModal === "leave" && <LeaveTeam />}
+          {showModal === "kick" && <Kick />}
           <div className="my-8 px-4">
-            <TimelineComponent count={2} />
+            <TimelineComponent count={4} />
           </div>
           <div className="mt-4 flex h-fit w-full flex-col justify-between gap-4 overflow-y-auto px-4 md:flex-row lg:h-[85%]">
             {team ? (

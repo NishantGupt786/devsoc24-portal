@@ -12,7 +12,8 @@ import {
   useTeamEditStore,
   useTeamStore,
   useUserStore,
-  showModalStore
+  showModalStore,
+  showkickStore,
 } from "@/store/store";
 import { useRouter } from "next/navigation";
 import editImg from "@/assets/images/edit.svg";
@@ -34,7 +35,8 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
   const { idea, setIdea } = useIdeaStore();
   const { edit, setEdit } = useTeamEditStore();
   const { isLeader, setIsLeader } = useLeaderStore();
-  const {showModal, setShowModal} = showModalStore();
+  const { showModal, setShowModal } = showModalStore();
+  const { kickMate, setKickMate } = showkickStore();
 
   const handleDialogTriggerClick = (modalType: string) => {
     setShowModal(modalType);
@@ -113,7 +115,6 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
   return (
     <>
       <div>
-        
         <div className="h-fit w-full rounded-xl bg-white md:w-[32vw]">
           <div className="flex w-full items-center justify-between pl-6 pt-4 font-semibold text-[#45464E]">
             <p>Your Devsoc Team</p>
@@ -164,7 +165,12 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
                 >
                   <span>{member.name}</span>
 
-                  <div onClick={() => handleDialogTriggerClick("leave")}>
+                  <div
+                    onClick={() => {
+                      handleDialogTriggerClick("kick");
+                      setKickMate(member.id);
+                    }}
+                  >
                     <span className="text-[#AD1136] hover:scale-[1.05] hover:cursor-pointer">
                       {edit ? <BadgeMinus /> : <></>}
                     </span>
