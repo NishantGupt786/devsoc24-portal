@@ -10,10 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios, { AxiosError } from "axios";
 import { useRef } from "react";
-import {
-  useTeamDataStore,
-  useTeamStore,
-} from "@/store/store";
+import { useTeamDataStore, useTeamStore } from "@/store/store";
 import { useRouter } from "next/navigation";
 import { APIResponse } from "@/schemas/api";
 import toast from "react-hot-toast";
@@ -24,39 +21,41 @@ function CreateTeam() {
   const { teamData, setTeamData } = useTeamDataStore();
 
   const router = useRouter();
+
   const handleClick = async () => {
- await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/team/create`,
-      {
-        name: inputRef.current?.value,
-      },
-      {
-        withCredentials: true,
-      },
-    );
+    try {
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/team/create`,
+        {
+          name: inputRef.current?.value,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+      toast.success("Team created successfully!");
+      await fetchTeam();
+      setTeam(false);
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        switch (err.response?.status) {
+          case 404:
+            toast.error("Account not found!");
+            break;
+          case 409:
+            toast.error("Team name already exists!");
+            break;
+          case 400:
+            toast.error("Please check your input and try again!");
+            break;
+          default:
+            toast.error("Something went wrong!");
+            break;
+        }
+      }
+    }
   };
 
-  void toast.promise(handleClick(), {
-    loading: "Cooking...",
-    success: () => {
-      setTeam(false);
-      void fetchTeam();
-      return `Team created successfully!`;
-    },
-    error: (err: AxiosError) => {
-      // console.log("ERR", err);
-      switch (err.response?.status) {
-        case 404:
-          return `Account not found!`;
-        case 409:
-          return `Incorrect credentials`;
-        case 400:
-          return `Please check your input and try again!`;
-        default:
-          return `Something went wrong!`;
-      }
-    },
-  });
   const fetchTeam = async () => {
     try {
       const response = await axios.get<APIResponse>(
@@ -66,26 +65,24 @@ function CreateTeam() {
         },
       );
       setTeamData(response.data);
+      setTeam(true);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
           case 401:
-            void router.push("/");
+            router.push("/");
             break;
           case 417:
-            setTeam(true);
-            // console.log("no team");
-            break;
-          case 200:
-            setTeam(true);
+            setTeam(false);
             break;
           default:
-            console.log(e);
+            console.error(e);
             break;
         }
       }
     }
   };
+
   return (
     <>
       <DialogContent className="sm:max-w-[425px]">
@@ -106,13 +103,7 @@ function CreateTeam() {
         <div className="flex justify-center">
           <DialogFooter className="sm:justify-start">
             <DialogClose>
-              <Button
-                className="bg-[#458B71]"
-                onClick={async () => {
-                  await handleClick();
-                  await fetchTeam();
-                }}
-              >
+              <Button className="bg-[#458B71]" onClick={handleClick}>
                 Confirm
               </Button>
             </DialogClose>
