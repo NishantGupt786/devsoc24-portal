@@ -125,3 +125,13 @@ export const useTeamDataStore = create<teamDataStore>((set) => ({
       teamData: teamDataTemp,
     })),
 }));
+
+interface showModalStore {
+  showModal: string;
+  setShowModal: (showModal: string) => void;
+}
+
+export const showModalStore = create<showModalStore>((set) => ({
+  showModal: "",
+  setShowModal: (showModal: string) => set({ showModal }),
+})); 

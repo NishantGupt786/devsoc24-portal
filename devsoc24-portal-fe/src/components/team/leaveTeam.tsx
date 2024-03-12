@@ -15,6 +15,7 @@ import {
   useIdeaStore,
   useTeamEditStore,
   useLeaderStore,
+  showModalStore,
 } from "@/store/store";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -25,6 +26,7 @@ import { useRouter } from "next/navigation";
 const LeaveTeam = () => {
   const { team, setTeam } = useTeamStore();
   const { user, setUser } = useUserStore();
+  const { showModal, setShowModal } = showModalStore();
 
   const router = useRouter();
 
@@ -74,28 +76,47 @@ const LeaveTeam = () => {
       error: `Something went wrong`,
     });
   };
+
   return (
-    <DialogContent className="sm:max-w-[425px]">
-      <DialogHeader>
-        <DialogTitle>Are you sure you want to leave the team?</DialogTitle>
-      </DialogHeader>
-      <div className="flex justify-center">
-        <DialogFooter className="sm:justify-start">
-          <DialogClose asChild onClick={fetchTeam}>
-            <Button type="submit" className="bg-[#458B71]" onClick={leaveTeam}>
-              Yes
-            </Button>
-          </DialogClose>
-        </DialogFooter>
-        <DialogFooter className="sm:justify-start">
-          <DialogClose asChild onClick={fetchTeam}>
-            <Button type="submit" className="bg-[#458B71]">
-              No
-            </Button>
-          </DialogClose>
-        </DialogFooter>
+    <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm backdrop-filter backdrop-brightness-50 z-[60]">
+      <div className="rounded-lg bg-white p-8">
+        <button
+          className="absolute right-0 top-0 p-2 text-gray-500"
+          onClick={() => setShowModal("")}
+        >
+          <svg
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+        <h2 className="text-xl font-semibold text-gray-800">
+          Are you sure you want to leave the team?
+        </h2>
+        <div className="mt-4 flex justify-center">
+          <button
+            onClick={leaveTeam}
+            className="mr-4 rounded-md bg-[#458B71] px-4 py-2 text-white"
+          >
+            Yes
+          </button>
+          <button
+            onClick={() => setShowModal("")}
+            className="rounded-md bg-[#458B71] px-4 py-2 text-white"
+          >
+            No
+          </button>
+        </div>
       </div>
-    </DialogContent>
+    </div>
   );
 };
 

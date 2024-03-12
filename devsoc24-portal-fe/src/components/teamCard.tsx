@@ -12,6 +12,7 @@ import {
   useTeamEditStore,
   useTeamStore,
   useUserStore,
+  showModalStore
 } from "@/store/store";
 import { useRouter } from "next/navigation";
 import editImg from "@/assets/images/edit.svg";
@@ -33,7 +34,7 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
   const { idea, setIdea } = useIdeaStore();
   const { edit, setEdit } = useTeamEditStore();
   const { isLeader, setIsLeader } = useLeaderStore();
-  const [showModal, setShowModal] = useState("");
+  const {showModal, setShowModal} = showModalStore();
 
   const handleDialogTriggerClick = (modalType: string) => {
     setShowModal(modalType);
@@ -112,6 +113,7 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
   return (
     <>
       <div>
+        
         <div className="h-fit w-full rounded-xl bg-white md:w-[32vw]">
           <div className="flex w-full items-center justify-between pl-6 pt-4 font-semibold text-[#45464E]">
             <p>Your Devsoc Team</p>
@@ -130,23 +132,18 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
                 Edit
               </div>
             ) : (
-              <Dialog>
-                <DialogTrigger
-                  onClick={() => handleDialogTriggerClick("leave")}
-                >
-                  <div className="mx-2 flex flex-row items-center justify-between gap-3 rounded-lg border-2 border-[#AD1136] px-2 py-1 text-[#AD1136] transition-all duration-150 ease-in-out hover:cursor-pointer hover:bg-black/10">
-                    <Image
-                      src={editImg as HTMLImageElement}
-                      alt="edit"
-                      height={0}
-                      width={0}
-                      className="h-fit w-fit"
-                    />
-                    Leave Team
-                  </div>
-                  {showModal === "leave" && <LeaveTeam />}
-                </DialogTrigger>
-              </Dialog>
+              <div onClick={() => handleDialogTriggerClick("leave")}>
+                <div className="mx-2 flex flex-row items-center justify-between gap-3 rounded-lg border-2 border-[#AD1136] px-2 py-1 text-[#AD1136] transition-all duration-150 ease-in-out hover:cursor-pointer hover:bg-black/10">
+                  <Image
+                    src={editImg as HTMLImageElement}
+                    alt="edit"
+                    height={0}
+                    width={0}
+                    className="h-fit w-fit"
+                  />
+                  Leave Team
+                </div>
+              </div>
             )}
           </div>
           <div className="flex flex-col items-center justify-center p-8">
@@ -166,16 +163,12 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
                   className="mb-2 flex w-full items-center justify-between rounded-lg border-2 border-[#B6B6B6] p-3"
                 >
                   <span>{member.name}</span>
-                  <Dialog>
-                    <DialogTrigger
-                      onClick={() => handleDialogTriggerClick("leave")}
-                    >
-                      <span className="text-[#AD1136] hover:scale-[1.05] hover:cursor-pointer">
-                        {edit ? <BadgeMinus /> : <></>}
-                      </span>
-                    </DialogTrigger>
-                    {showModal === "leave" && <LeaveTeam />}
-                  </Dialog>
+
+                  <div onClick={() => handleDialogTriggerClick("leave")}>
+                    <span className="text-[#AD1136] hover:scale-[1.05] hover:cursor-pointer">
+                      {edit ? <BadgeMinus /> : <></>}
+                    </span>
+                  </div>
                 </div>
               ))}
             <div className="flex w-full flex-row items-center justify-evenly ">
@@ -193,8 +186,8 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
                 </CopyToClipboard>
               )}
               {edit ? (
-                <Dialog>
-                  <DialogTrigger
+                <>
+                  <div
                     onClick={() => {
                       handleDialogTriggerClick("leave");
                       console.log("MODAL: ", showModal);
@@ -203,9 +196,8 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
                     <Button className="mt-4 flex items-center gap-x-2 self-center bg-[#AD1136] hover:bg-[#AD1136]/80">
                       Delete Team
                     </Button>
-                  </DialogTrigger>
-                  {showModal === "leave" && <LeaveTeam />}
-                </Dialog>
+                  </div>
+                </>
               ) : (
                 <></>
               )}

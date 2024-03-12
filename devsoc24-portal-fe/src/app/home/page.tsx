@@ -13,6 +13,7 @@ import {
   useTeamDataStore,
   useTeamStore,
   useUserStore,
+  showModalStore,
 } from "@/store/store";
 import Loading from "../loading";
 import TrackComponent from "@/components/track/TrackComponent";
@@ -31,6 +32,7 @@ import { User } from "lucide-react";
 import ToastContainer from "@/components/ToastContainer";
 import Link from "next/link";
 import TimelineComponent from "@/components/timeline/timelineComponent";
+import LeaveTeam from "@/components/team/leaveTeam";
 
 interface ideaProps {
   message: string;
@@ -61,6 +63,7 @@ export default function HomePage() {
   const [getIdea, SetIdea] = useState("");
   const { teamData, setTeamData } = useTeamDataStore();
   const { isLeader, setIsLeader } = useLeaderStore();
+  const { showModal, setShowModal } = showModalStore();
   const logout = async () => {
     try {
       const response = await axios.post(
@@ -307,6 +310,7 @@ export default function HomePage() {
           </DropdownMenu>
         </div>
         <div className="flex flex-col">
+          {showModal === "leave" && <LeaveTeam />}
           <div className="my-8 px-4">
             <TimelineComponent count={2} />
           </div>
