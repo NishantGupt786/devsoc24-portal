@@ -2,37 +2,20 @@ import { useEffect, useState } from "react";
 import { Crown, BadgeMinus, Files, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { teamDataProps, userProps } from "@/interfaces";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { teamDataProps } from "@/interfaces";
 
-import axios from "axios";
 import {
-  useIdeaStore,
   useLeaderStore,
   useTeamEditStore,
-  useTeamStore,
-  useUserStore,
   showModalStore,
   showkickStore,
 } from "@/store/store";
-import { useRouter } from "next/navigation";
 import editImg from "@/assets/images/edit.svg";
 import Image from "next/image";
-import toast from "react-hot-toast";
-import LeaveTeam from "./team/leaveTeam";
-
-interface keyProps {
-  message: string;
-  status: string;
-  team: teamDataProps;
-}
 
 const TeamCard: React.FC<teamDataProps> = (props) => {
   const [isCopied, setIsCopied] = useState(false);
   const [Leader, setLeader] = useState("");
-  const { team, setTeam } = useTeamStore();
-  const { user, setUser } = useUserStore();
-  const { idea, setIdea } = useIdeaStore();
   const { edit, setEdit } = useTeamEditStore();
   const { isLeader, setIsLeader } = useLeaderStore();
   const { showModal, setShowModal } = showModalStore();
@@ -42,8 +25,6 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
     setShowModal(modalType);
   };
 
-  const router = useRouter();
-
   const onCopyText = () => {
     setIsCopied(true);
     setTimeout(() => {
@@ -51,64 +32,17 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
     }, 1000);
   };
 
-  const fetchTeam = async () => {
-    try {
-      const response = await axios.get<userProps>(
-        `${process.env.NEXT_PUBLIC_API_URL}/team`,
-        {
-          withCredentials: true,
-        },
-      );
-      setUser(response.data);
-    } catch (e) {
-      if (axios.isAxiosError(e)) {
-        switch (e.response?.status) {
-          case 401:
-            void router.push("/");
-            break;
-          case 404:
-            console.log("Idea Not found, but in a team");
-            break;
-          case 409:
-            console.log("Not in team");
-            break;
-          default:
-            console.log(e);
-            break;
-        }
-      }
-    }
-  };
-
-  const leaveTeam = async () => {
-    const handleClick = async () => {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/team/leave`, {
-        withCredentials: true,
-      });
-    };
-
-    void toast.promise(handleClick(), {
-      loading: "Loading...",
-      success: (temp) => {
-        setTeam(true);
-        void fetchTeam();
-        return `Accepted`;
-      },
-      error: `Something went wrong`,
-    });
-  };
-
   useEffect(() => {
     const leader = props.team?.users.find(
       (item) => item.id === props.team?.leader_id,
     );
     if (leader) {
-      console.log("NAME:", leader.name);
+      // console.log("NAME:", leader.name);
       setLeader(leader.name);
     }
   }, [props.team]);
   const toggleEdit = () => {
-    console.log("EDIT:", edit);
+    // console.log("EDIT:", edit);
     setEdit(!edit);
   };
 
@@ -196,7 +130,7 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
                   <div
                     onClick={() => {
                       handleDialogTriggerClick("leave");
-                      console.log("MODAL: ", showModal);
+                      // console.log("MODAL: ", showModal);
                     }}
                   >
                     <Button className="mt-4 flex items-center gap-x-2 self-center bg-[#AD1136] hover:bg-[#AD1136]/80">

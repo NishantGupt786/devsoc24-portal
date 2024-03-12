@@ -71,7 +71,7 @@ export default function PersonalDetails({
       gender as "Male" | "Female" | "Others" | "Prefer Not to Say",
     );
     setGender(form.getValues("gender"));
-    console.log("Form Values:", form.getValues());
+    // console.log("Form Values:", form.getValues());
   }, [gender]);
 
   async function onSubmit(data: PersonalDetailsFormValues) {

@@ -14,10 +14,9 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { EyeIcon, EyeOffIcon, LockKeyholeIcon, MailIcon } from "lucide-react";
 import Link from "next/link";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { type APIResponse } from "@/schemas/api";
 import axios, { type AxiosError } from "axios";
-import { BadRequest, ServerError } from "@/components/toast";
 import { useRouter } from "next/navigation";
 import ToastContainer from "@/components/ToastContainer";
 
@@ -54,7 +53,7 @@ export default function SignupForm() {
 
     void toast.promise(handleSubmit(), {
       loading: "Cooking...",
-      success: (temp) => {
+      success: () => {
         setTimeout(() => {
           void router.push("./signup/verify?email=" + formVal.email);
         }, 1500);

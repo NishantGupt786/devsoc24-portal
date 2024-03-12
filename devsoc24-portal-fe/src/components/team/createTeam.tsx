@@ -8,34 +8,24 @@ import {
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import axios, { AxiosError, AxiosResponse } from "axios";
-import z from "zod";
+import axios, { AxiosError } from "axios";
 import { useRef } from "react";
 import {
-  useIdeaStore,
   useTeamDataStore,
   useTeamStore,
-  useUserStore,
 } from "@/store/store";
-import { userProps } from "@/interfaces";
 import { useRouter } from "next/navigation";
 import { APIResponse } from "@/schemas/api";
 import toast from "react-hot-toast";
 
-const teamNameSchema = z.object({
-  name: z.string(),
-});
-
 function CreateTeam() {
   const { team, setTeam } = useTeamStore();
   const inputRef = useRef<HTMLInputElement>(null);
-  const { user, setUser } = useUserStore();
-  const { idea, setIdea } = useIdeaStore();
   const { teamData, setTeamData } = useTeamDataStore();
 
   const router = useRouter();
   const handleClick = async () => {
-    const response = await axios.post(
+ await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/team/create`,
       {
         name: inputRef.current?.value,
@@ -48,13 +38,13 @@ function CreateTeam() {
 
   void toast.promise(handleClick(), {
     loading: "Cooking...",
-    success: (temp) => {
+    success: () => {
       setTeam(false);
       void fetchTeam();
       return `Team created successfully!`;
     },
     error: (err: AxiosError) => {
-      console.log("ERR", err);
+      // console.log("ERR", err);
       switch (err.response?.status) {
         case 404:
           return `Account not found!`;
@@ -84,7 +74,7 @@ function CreateTeam() {
             break;
           case 417:
             setTeam(true);
-            console.log("no team");
+            // console.log("no team");
             break;
           case 200:
             setTeam(true);

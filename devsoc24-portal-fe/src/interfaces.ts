@@ -20,7 +20,7 @@ export interface joinTeamModal {
 
 export const refresh = async () => {
   try {
-    const response = await axios.post(
+ await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/refresh`,
       {
         nallaData: "",
@@ -36,7 +36,7 @@ export const refresh = async () => {
           try {
             await refresh();
           } catch (e) {
-            console.log("REFESH: ", e);
+            // console.log("REFESH: ", e);
           }
         default:
           console.log(e);

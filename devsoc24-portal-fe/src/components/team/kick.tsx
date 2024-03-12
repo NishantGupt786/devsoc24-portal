@@ -1,32 +1,15 @@
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogTitle,
-} from "@radix-ui/react-dialog";
-import { Label } from "@radix-ui/react-label";
-import React, { useState } from "react";
-import { Button } from "../ui/button";
-import { DialogHeader, DialogFooter } from "../ui/dialog";
+import React from "react";
 import { type APIResponse } from "@/schemas/api";
 import {
-  useTeamStore,
-  useUserStore,
-  useIdeaStore,
-  useTeamEditStore,
-  useLeaderStore,
   showModalStore,
   showkickStore,
   useTeamDataStore,
 } from "@/store/store";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { userProps } from "@/interfaces";
-import router from "next/navigation";
 import { useRouter } from "next/navigation";
 
 const Kick = () => {
-  const { team, setTeam } = useTeamStore();
   const { showModal, setShowModal } = showModalStore();
   const { kickMate, setKickMate } = showkickStore();
   const { teamData, setTeamData } = useTeamDataStore();
@@ -35,7 +18,7 @@ const Kick = () => {
 
   const fetchTeam = async () => {
     try {
-      console.log("fetch team");
+      // console.log("fetch team");
       const response = await axios.get<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/team`,
         {
@@ -50,10 +33,10 @@ const Kick = () => {
             void router.push("/");
             break;
           case 404:
-            console.log("Idea Not found, but in a team");
+            // console.log("Idea Not found, but in a team");
             break;
           case 409:
-            console.log("Not in team");
+            // console.log("Not in team");
             break;
           default:
             console.log(e);
@@ -77,7 +60,7 @@ const Kick = () => {
 
     await toast.promise(handleClick(), {
       loading: "Loading...",
-      success: (temp) => {
+      success: () => {
         return `Accepted`;
       },
       error: `Something went wrong`,

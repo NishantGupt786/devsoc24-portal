@@ -2,8 +2,6 @@
 import Image from "next/image";
 import Logo from "@/components/logo";
 import Dashtitle from "@/assets/images/titleDashboard.svg";
-import toast, { Toaster } from 'react-hot-toast';
-
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import EditIdeaForm from "./edit-idea-form";

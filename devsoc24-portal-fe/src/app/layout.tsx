@@ -17,7 +17,6 @@ export default function RootLayout({
 }) {
   useEffect(() => {
     setInterval(() => {
-      const a = "s";
       axios
         .post(
           `${process.env.NEXT_PUBLIC_API_URL}/refresh`,
@@ -29,7 +28,7 @@ export default function RootLayout({
           },
         )
         .then((res) => {
-          console.log(res);
+          // console.log(res);
         })
         .catch((e) => {
           console.log(e);

@@ -21,27 +21,6 @@ interface GetIdea{
   status: string;
 }
 
-interface SubmitProjectResponse {
-  message: string;
-  status: string;
-  data: unknown;
-}
-
-const projectTracks = [
-  { id: "track1", name: "Track 1" },
-  { id: "track2", name: "Track 2" },
-  { id: "track3", name: "Track 3" },
-  { id: "track4", name: "Track 4" },
-];
-
-const projectInfo = {
-  projectName: "lorem ipsum",
-  projectTrack: "jndcjskdcnsjck",
-  description: "This is a detailed description of the project",
-  figmaLink: "https://www.figma.com/",
-  githubLink: "https://www.github.com/",
-  otherLinks: "https://www.otherlink.com",
-};
 
 function Submission() {
   const [ideaDetails, setIdeaDetails] = useState<FormValues>()
@@ -51,7 +30,7 @@ function Submission() {
         const res = await axios.get<GetIdea>(`${process.env.NEXT_PUBLIC_API_URL}/idea`, {
           withCredentials: true,
         });
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setIdeaDetails(res.data.data);
       } catch (error) {
         console.log("Error getting idea submission:", error)

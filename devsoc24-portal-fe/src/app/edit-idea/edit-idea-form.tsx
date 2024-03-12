@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, Controller } from "react-hook-form";
-import { type z } from "zod";
 import {
   Form,
   FormControl,
@@ -13,10 +12,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { ideaSchema } from "@/schemas/idea";
-import toast, { Toaster } from "react-hot-toast";
-
+import toast from "react-hot-toast";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 
 interface FormValues {
   title: string;
@@ -55,7 +52,7 @@ export default function EditIdeaForm() {
             withCredentials: true,
           },
         );
-        console.log(res.data.data);
+        // console.log(res.data.data);
         form.reset(res.data.data);
       } catch (error) {
         console.log("Error getting idea submission:", error);
@@ -79,7 +76,7 @@ export default function EditIdeaForm() {
 
   async function onSubmit(data: FormValues) {
     const handleSubmit = async () => {
-      const res = await axios.patch<SubmitProjectResponse>(
+      await axios.patch<SubmitProjectResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/idea/update`,
         data,
         {

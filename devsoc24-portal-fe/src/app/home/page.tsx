@@ -15,9 +15,8 @@ import {
   useUserStore,
   showModalStore,
 } from "@/store/store";
-import Loading from "../loading";
 import TrackComponent from "@/components/track/TrackComponent";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { refresh, type userProps } from "@/interfaces";
 import { type APIResponse } from "@/schemas/api";
 import {
@@ -27,7 +26,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 import { User } from "lucide-react";
 import ToastContainer from "@/components/ToastContainer";
 import Link from "next/link";
@@ -48,14 +46,6 @@ interface ideaProps {
   };
 }
 
-interface teamProps {
-  data: {
-    token_expired?: boolean;
-  };
-  message: string;
-  status: string;
-}
-
 export default function HomePage() {
   const router = useRouter();
   const { idea, setIdea } = useIdeaStore();
@@ -67,7 +57,7 @@ export default function HomePage() {
   const { showModal, setShowModal } = showModalStore();
   const logout = async () => {
     try {
-      const response = await axios.post(
+      await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/logout`,
         {
           nallaData: "",
@@ -83,7 +73,7 @@ export default function HomePage() {
         switch (e.response?.status) {
           case 401:
             await refresh();
-            console.log("401");
+            // console.log("401");
             break;
           default:
             console.log(e);
@@ -110,9 +100,9 @@ export default function HomePage() {
           withCredentials: true,
         },
       );
-      console.log(response.data.data.is_leader);
+      // console.log(response.data.data.is_leader);
       setIsLeader(response.data.data.is_leader);
-      console.log(isLeader);
+      // console.log(isLeader);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
@@ -120,10 +110,10 @@ export default function HomePage() {
             void router.push("/");
             break;
           case 404:
-            console.log("no team");
+            // console.log("no team");
             break;
           case 409:
-            console.log("Not in team");
+            // console.log("Not in team");
             break;
           default:
             console.log(e);
@@ -156,7 +146,7 @@ export default function HomePage() {
             break;
           case 417:
             setTeam(true);
-            console.log("no team");
+            // console.log("no team");
             break;
           case 200:
             setTeam(true);
@@ -178,7 +168,7 @@ export default function HomePage() {
         },
       );
       SetIdea("idea found");
-      console.log("FETCH IDEA: ", response);
+      // console.log("FETCH IDEA: ", response);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         const axiosError = e as AxiosError<APIResponse>;
@@ -190,10 +180,10 @@ export default function HomePage() {
             if (axiosError.response?.data.message === "user does not exist") {
               router.push("/");
             }
-            console.log("no team");
+            // console.log("no team");
             break;
           case 417:
-            console.log("team no idea");
+            // console.log("team no idea");
             break;
           case 409:
             setIdea(409);
@@ -217,13 +207,13 @@ export default function HomePage() {
 
   useEffect(() => {
     if (user.data.team_id === "00000000-0000-0000-0000-000000000000") {
-      console.log("Loner saala");
+      // console.log("Loner saala");
       setTeam(true);
     } else {
       void fetchTeam();
     }
     if (user.data.is_leader) {
-      console.log("Leader saala");
+      // console.log("Leader saala");
       setIsLeader(true);
     }
     if (user.data.is_leader)

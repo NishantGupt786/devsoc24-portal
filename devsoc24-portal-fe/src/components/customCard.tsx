@@ -7,7 +7,6 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import CreateTeam from "./team/createTeam";
-import { useIdeaStore } from "@/store/store";
 import Choice from "./team/Option";
 import { useRouter } from "next/navigation";
 
@@ -15,7 +14,6 @@ function CustomCard(props: CardProps) {
   const router = useRouter();
   const { title, cardImage, cardContent, cardDesc, buttonDetails } = props;
   const [showModal, setShowModal] = useState("");
-  const { idea, setIdea } = useIdeaStore();
 
   const handleDialogTriggerClick = (modalType: string) => {
     setShowModal(modalType);

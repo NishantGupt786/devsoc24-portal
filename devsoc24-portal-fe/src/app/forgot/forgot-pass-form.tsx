@@ -11,13 +11,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { MailIcon } from "lucide-react";
 import Link from "next/link";
 import { type APIResponse } from "@/schemas/api";
 import axios, { type AxiosError } from "axios";
-import { BadRequest, ServerError } from "@/components/toast";
 import ToastContainer from "@/components/ToastContainer";
 
 type ForgotFormValues = z.infer<typeof forgotSchema>;
@@ -34,7 +33,7 @@ export default function ForgotForm() {
   });
 
   async function onSubmit(form: ForgotFormValues) {
-    console.log(form);
+    // console.log(form);
     const handleSubmit = async () => {
       await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/reset-password`,
@@ -46,7 +45,7 @@ export default function ForgotForm() {
     };
     void toast.promise(handleSubmit(), {
       loading: "Cooking...",
-      success: (temp) => {
+      success: () => {
         setTimeout(() => {
           void router.push("/reset?email=" + form.email);
         }, 1500);

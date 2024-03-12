@@ -15,11 +15,10 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import axios, { type AxiosError } from "axios";
 import { type APIResponse } from "@/schemas/api";
 import { useRouter } from "next/navigation";
-import { BadRequest, ServerError } from "@/components/toast";
 import ToastContainer from "../ToastContainer";
 
 type CreateTeamFormValues = z.infer<typeof createTeamSchema>;
@@ -47,7 +46,7 @@ export default function CreateTeamForm() {
 
     void toast.promise(handleSubmit(), {
       loading: "Cooking...",
-      success: (temp) => {
+      success: () => {
         void router.push("/home");
         return `Team created successfully!`;
       },

@@ -9,7 +9,6 @@ import title2 from "@/assets/images/glitchtitle1.svg";
 import title3 from "@/assets/images/glitchtitle2.svg";
 import title4 from "@/assets/images/glitchtitle3.svg";
 import SignupForm from "./signup-form";
-import toast from "react-hot-toast";
 
 export default function Page() {
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);

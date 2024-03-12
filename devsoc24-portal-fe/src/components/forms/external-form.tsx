@@ -23,10 +23,9 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import axios, { type AxiosError } from "axios";
 import { type APIResponse } from "@/schemas/api";
-import { BadRequest, ServerError } from "@/components/toast";
 import { useSearchParams } from "next/navigation";
 import ToastContainer from "../ToastContainer";
 
@@ -65,7 +64,7 @@ export default function ExternalForm({
       state: data.collegeState,
       reg_no: data.collegeRollNumber,
     };
-    console.log(updatedData);
+    // console.log(updatedData);
 
     const handleSubmit = async () => {
       await axios.post<APIResponse>(
@@ -79,7 +78,7 @@ export default function ExternalForm({
 
     void toast.promise(handleSubmit(), {
       loading: "Cooking...",
-      success: (temp) => {
+      success: () => {
         setTimeout(() => setForm(2), 1500);
         return `Logged in successfully!`;
       },
