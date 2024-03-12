@@ -13,7 +13,7 @@ import axios, { AxiosResponse } from "axios";
 import { useIdeaStore, useTeamDataStore, useTeamStore, useUserStore } from "@/store/store";
 import { userProps } from "@/interfaces";
 import { useRouter } from "next/navigation";
-import { APIResponse } from "@/schemas/api";
+import { type APIResponse } from "@/schemas/api";
 
 function JoinTeam() {
   const inputRef = useRef<HTMLInputElement>(null);
