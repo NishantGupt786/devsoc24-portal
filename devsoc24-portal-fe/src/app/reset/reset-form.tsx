@@ -60,7 +60,7 @@ export default function ResetForm() {
       loading: "Cooking...",
       success: (temp) => {
         setTimeout(() => {
-          void router.push("/login");
+          void router.push("/");
         }, 1500);
         return `Password reset successfully!`;
       },

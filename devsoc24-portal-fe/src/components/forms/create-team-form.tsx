@@ -48,7 +48,7 @@ export default function CreateTeamForm() {
     void toast.promise(handleSubmit(), {
       loading: "Cooking...",
       success: (temp) => {
-        void router.push("/");
+        void router.push("/home");
         return `Team created successfully!`;
       },
       error: (err: AxiosError) => {

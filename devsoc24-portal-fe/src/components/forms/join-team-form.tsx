@@ -57,7 +57,7 @@ export default function JoinTeamForm() {
     void toast.promise(handleSubmit(), {
       loading: "Cooking...",
       success: (temp) => {
-        void router.push("/");
+        void router.push("/home");
         return `Team joined successfully!`;
       },
       error: (err: AxiosError) => {

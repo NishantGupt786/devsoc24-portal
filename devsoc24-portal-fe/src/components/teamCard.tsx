@@ -3,12 +3,21 @@ import { Crown, BadgeMinus, Files, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { teamDataProps, userProps } from "@/interfaces";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+
 import axios from "axios";
-import { useIdeaStore, useLeaderStore, useTeamEditStore, useTeamStore, useUserStore } from "@/store/store";
+import {
+  useIdeaStore,
+  useLeaderStore,
+  useTeamEditStore,
+  useTeamStore,
+  useUserStore,
+} from "@/store/store";
 import { useRouter } from "next/navigation";
 import editImg from "@/assets/images/edit.svg";
 import Image from "next/image";
 import toast from "react-hot-toast";
+import LeaveTeam from "./team/leaveTeam";
 
 interface keyProps {
   message: string;
@@ -24,7 +33,11 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
   const { idea, setIdea } = useIdeaStore();
   const { edit, setEdit } = useTeamEditStore();
   const { isLeader, setIsLeader } = useLeaderStore();
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState("");
+
+  const handleDialogTriggerClick = (modalType: string) => {
+    setShowModal(modalType);
+  };
 
   const router = useRouter();
 
@@ -41,14 +54,14 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
         `${process.env.NEXT_PUBLIC_API_URL}/user/me`,
         {
           withCredentials: true,
-        }
+        },
       );
       setUser(response.data);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
           case 401:
-            void router.push("/login");
+            void router.push("/");
             break;
           case 404:
             console.log("Idea Not found, but in a team");
@@ -84,7 +97,7 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
 
   useEffect(() => {
     const leader = props.team?.users.find(
-      (item) => item.id === props.team?.leader_id
+      (item) => item.id === props.team?.leader_id,
     );
     if (leader) {
       console.log("NAME:", leader.name);
@@ -96,100 +109,100 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
     setEdit(!edit);
   };
 
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
-
   return (
     <>
       <div>
         <div className="h-fit w-full rounded-xl bg-white md:w-[32vw]">
-          <div className="flex w-full items-center justify-between pl-6 pt-4 font-semibold text-[#45464E]">
-            <p>Your Devsoc Team</p>
-            {isLeader ? (
-              <div
-                className="mx-2 flex flex-row items-center justify-between gap-3 rounded-lg border-2 border-[#53545C] px-2 py-1 transition-all duration-150 ease-in-out hover:cursor-pointer hover:bg-black/10"
-                onClick={toggleEdit}
-              >
-                <Image
-                  src={editImg as HTMLImageElement}
-                  alt="edit"
-                  height={0}
-                  width={0}
-                  className="h-fit w-fit"
-                />
-                Edit
-              </div>
-            ) : (
-              <div
-                className="mx-2 flex flex-row items-center justify-between gap-3 rounded-lg border-2 border-[#AD1136] px-2 py-1 text-[#AD1136] transition-all duration-150 ease-in-out hover:cursor-pointer hover:bg-black/10"
-                onClick={leaveTeam}
-              >
-                <Image
-                  src={editImg as HTMLImageElement}
-                  alt="edit"
-                  height={0}
-                  width={0}
-                  className="h-fit w-fit"
-                />
-                Leave Team
-              </div>
-            )}
-          </div>
-          <div className="flex flex-col items-center justify-center p-8">
-            <p className="text-2xl font-semibold">{props.team?.team_name}</p>
-            <p className="pb-4 text-sm text-[#8B8D97]">Team Members</p>
-            <div
-              className="mb-2 flex w-full items-center justify-between rounded-lg border-2 border-[#B6B6B6] p-3"
-            >
-              <span>{Leader}</span>
-              <span className="text-[#FFBE3D]">
-                <Crown />
-              </span>
-            </div>
-            {props.team?.users
-              .filter((member) => member.name !== Leader)
-              .map((member, index) => (
+          <Dialog>
+            <div className="flex w-full items-center justify-between pl-6 pt-4 font-semibold text-[#45464E]">
+              <p>Your Devsoc Team</p>
+              {isLeader ? (
                 <div
-                  key={index}
-                  className="mb-2 flex w-full items-center justify-between rounded-lg border-2 border-[#B6B6B6] p-3"
+                  className="mx-2 flex flex-row items-center justify-between gap-3 rounded-lg border-2 border-[#53545C] px-2 py-1 transition-all duration-150 ease-in-out hover:cursor-pointer hover:bg-black/10"
+                  onClick={toggleEdit}
                 >
-                  <span>{member.name}</span>
-                  <span
-                    className="text-[#AD1136] hover:scale-[1.05] hover:cursor-pointer"
-                    onClick={leaveTeam}
-                  >
-                    {}
-                    {edit ? <BadgeMinus /> : <></>}
-                  </span>
+                  <Image
+                    src={editImg as HTMLImageElement}
+                    alt="edit"
+                    height={0}
+                    width={0}
+                    className="h-fit w-fit"
+                  />
+                  Edit
                 </div>
-              ))}
-            <div className="flex w-full flex-row items-center justify-evenly ">
-              {props.team && (
-                <CopyToClipboard
-                  text={props.team?.team_code}
-                  onCopy={onCopyText}
-                >
-                  <Button className="mt-4 flex items-center gap-x-2 self-center">
-                    <span className="text-white">
-                      {isCopied ? <Check size={20} /> : <Files size={20} />}
-                    </span>
-                    {props.team?.team_code}
-                  </Button>
-                </CopyToClipboard>
-              )}
-              {edit ? (
-                <Button
-                  className="mt-4 flex items-center gap-x-2 self-center bg-[#AD1136] hover:bg-[#AD1136]/80"
-                  onClick={leaveTeam}
-                >
-                  Delete Team
-                </Button>
               ) : (
-                <></>
+                <DialogTrigger
+                  onClick={() => handleDialogTriggerClick("leave")}
+                >
+                  <div className="mx-2 flex flex-row items-center justify-between gap-3 rounded-lg border-2 border-[#AD1136] px-2 py-1 text-[#AD1136] transition-all duration-150 ease-in-out hover:cursor-pointer hover:bg-black/10">
+                    <Image
+                      src={editImg as HTMLImageElement}
+                      alt="edit"
+                      height={0}
+                      width={0}
+                      className="h-fit w-fit"
+                    />
+                    Leave Team
+                  </div>
+                </DialogTrigger>
               )}
             </div>
-          </div>
+            <div className="flex flex-col items-center justify-center p-8">
+              <p className="text-2xl font-semibold">{props.team?.team_name}</p>
+              <p className="pb-4 text-sm text-[#8B8D97]">Team Members</p>
+              <div className="mb-2 flex w-full items-center justify-between rounded-lg border-2 border-[#B6B6B6] p-3">
+                <span>{Leader}</span>
+                <span className="text-[#FFBE3D]">
+                  <Crown />
+                </span>
+              </div>
+              {props.team?.users
+                .filter((member) => member.name !== Leader)
+                .map((member, index) => (
+                  <div
+                    key={index}
+                    className="mb-2 flex w-full items-center justify-between rounded-lg border-2 border-[#B6B6B6] p-3"
+                  >
+                    <span>{member.name}</span>
+
+                    <DialogTrigger
+                      onClick={() => handleDialogTriggerClick("leave")}
+                    >
+                      <span className="text-[#AD1136] hover:scale-[1.05] hover:cursor-pointer">
+                        {edit ? <BadgeMinus /> : <></>}
+                      </span>
+                    </DialogTrigger>
+                  </div>
+                ))}
+              <div className="flex w-full flex-row items-center justify-evenly ">
+                {props.team && (
+                  <CopyToClipboard
+                    text={props.team?.team_code}
+                    onCopy={onCopyText}
+                  >
+                    <Button className="mt-4 flex items-center gap-x-2 self-center">
+                      <span className="text-white">
+                        {isCopied ? <Check size={20} /> : <Files size={20} />}
+                      </span>
+                      {props.team?.team_code}
+                    </Button>
+                  </CopyToClipboard>
+                )}
+                {edit ? (
+                  <DialogTrigger
+                    onClick={() => handleDialogTriggerClick("leave")}
+                  >
+                    <Button className="mt-4 flex items-center gap-x-2 self-center bg-[#AD1136] hover:bg-[#AD1136]/80">
+                      Delete Team
+                    </Button>
+                  </DialogTrigger>
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+            {showModal === "leave" && <LeaveTeam />}
+          </Dialog>
         </div>
       </div>
     </>

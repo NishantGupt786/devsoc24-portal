@@ -66,7 +66,7 @@ export default function SubmitIdeaForm() {
     void toast.promise(handleSubmit(), {
       loading: "Cooking...",
       success: (temp) => {
-        void router.push("/");
+        void router.push("/home");
         return `Idea submitted successfully!`;
       },
       error: (err: AxiosError) => {

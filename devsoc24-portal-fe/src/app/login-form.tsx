@@ -56,7 +56,7 @@ export default function LoginForm() {
     void toast.promise(submitForm(), {
       loading: "Cooking...",
       success: (temp) => {
-        void router.push("/");
+        void router.push("/home");
         return `Logged in successfully!`;
       },
       error: (err: AxiosError) => {

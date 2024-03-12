@@ -60,7 +60,7 @@ function JoinTeam() {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
           case 401:
-            void router.push("/login");
+            void router.push("/");
             break;
           case 417:
             setTeam(true);
