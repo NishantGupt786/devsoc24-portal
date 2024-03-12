@@ -66,7 +66,7 @@ export default function SignupForm() {
             return `Account not found!`;
           case 409:
             setTimeout(() => {
-              void router.push("/login");
+              void router.push("/");
             }, 1500);
             return `Account already exists!`;
           case 400:
