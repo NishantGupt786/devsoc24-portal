@@ -65,7 +65,7 @@ export default function JoinTeamForm() {
           case 404:
             return `Account not found!`;
           case 417:
-            return `User already in a team!`;
+            return `User is already in a team!`;
           case 409:
             return `Invalid Team Code!`;
           case 424:

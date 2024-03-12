@@ -82,7 +82,7 @@ export default function VitianForm({
       loading: "Cooking...",
       success: (temp) => {
         setTimeout(() => setForm(2), 1500);
-        return `Profile completed successfully`;
+        return `Profile completed successfully!`;
       },
       error: (err: AxiosError) => {
         switch (err.response?.status) {

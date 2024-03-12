@@ -60,7 +60,7 @@ export default function CreateTeamForm() {
           case 409:
             return `Teamname already exists!`;
           case 400:
-            return `Please check your input and try again1`;
+            return `Please check your input and try again!`;
           default:
             return `Something went wrong!`;
         }
