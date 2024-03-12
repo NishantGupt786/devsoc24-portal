@@ -53,26 +53,26 @@ export default function SignupForm() {
     };
 
     void toast.promise(handleSubmit(), {
-      loading: "Loading...",
+      loading: "Cooking...",
       success: (temp) => {
         setTimeout(() => {
           void router.push("./signup/verify?email=" + formVal.email);
         }, 1500);
-        return `Account Created Successfully!\nPlease verify your email.`;
+        return `Account created successfully!\nPlease verify your email`;
       },
       error: (err: AxiosError) => {
         switch (err.response?.status) {
           case 404:
-            return `Account Not Found`;
+            return `Account not found!`;
           case 409:
             setTimeout(() => {
               void router.push("/login");
             }, 1500);
             return `Account already exists!`;
           case 400:
-            return `Please check your input and try again`;
+            return `Please check your input and try again!`;
           default:
-            return `Something went wrong`;
+            return `Something went wrong!`;
         }
       },
     });

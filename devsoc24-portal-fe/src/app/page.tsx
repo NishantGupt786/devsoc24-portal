@@ -90,9 +90,9 @@ export default function HomePage() {
 
   const handleLogout = async () => {
     void toast.promise(logout(), {
-      loading: "Logging Out...",
-      success: "Logged Out",
-      error: "Something went wrong",
+      loading: "Logging out...",
+      success: "Logged out successfully!",
+      error: "Something went wrong!",
     });
     void router.push("/login");
   };

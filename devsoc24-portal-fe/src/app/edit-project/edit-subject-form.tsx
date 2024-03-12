@@ -88,9 +88,9 @@ export default function EditProjectForm() {
       );
     };
     void toast.promise(handleSubmit(), {
-      loading: "Loading...",
-      success: `Project Submitted Successfully`,
-      error: `Something went wrong`,
+      loading: "Cooking...",
+      success: `Project submitted successfully!`,
+      error: `Something went wrong!`,
     });
   }
 

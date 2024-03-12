@@ -78,23 +78,23 @@ export default function ExternalForm({
     };
 
     void toast.promise(handleSubmit(), {
-      loading: "Loading...",
+      loading: "Cooking...",
       success: (temp) => {
         setTimeout(() => setForm(2), 1500);
-        return `Logged In`;
+        return `Logged in successfully!`;
       },
       error: (err: AxiosError) => {
         switch (err.response?.status) {
           case 404:
-            return `Account Not Found`;
+            return `Account not found!`;
           case 409:
-            return `Incorrect Credentials`;
+            return `Incorrect credentials`;
           case 403:
-            return `Email Not Verified\nVerify your email`;
+            return `Email not verified\nRedirecting...`;
           case 400:
-            return `Please check your input and try again`;
+            return `Please check your input and try again1`;
           default:
-            return `Something went wrong`;
+            return `Something went wrong!`;
         }
       },
     });

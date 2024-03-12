@@ -46,23 +46,23 @@ export default function CreateTeamForm() {
     };
 
     void toast.promise(handleSubmit(), {
-      loading: "Loading...",
+      loading: "Cooking...",
       success: (temp) => {
         void router.push("/");
-        return `Team created successfully.`;
+        return `Team created successfully!`;
       },
       error: (err: AxiosError) => {
         switch (err.response?.status) {
           case 404:
-            return `Account Not Found`;
+            return `Account not found!`;
           case 417:
-            return `User is already in team`;
+            return `User is already in a team!`;
           case 409:
-            return `Teamname already exists`;
+            return `Teamname already exists!`;
           case 400:
-            return `Please check your input and try again`;
+            return `Please check your input and try again1`;
           default:
-            return `Something went wrong`;
+            return `Something went wrong!`;
         }
       },
     });

@@ -54,24 +54,24 @@ export default function ForgotForm() {
       );
     };
     void toast.promise(handleSubmit(), {
-      loading: "Loading...",
+      loading: "Cooking...",
       success: (temp) => {
-        return `Success`;
+        return `Email verified successfully!`;
       },
       error: (err: AxiosError) => {
         switch (err.response?.status) {
           case 404:
-            return `Account Not Found`;
+            return `Account not found!`;
           case 401:
             return `Invalid OTP!\nPlease enter a valid OTP`;
           case 409:
-            return `Incorrect Credentials`;
+            return `Incorrect credentials`;
           case 403:
             return `OTP Expired!\nPlease resend OTP`;
           case 400:
-            return `Please check your input and try again`;
+            return `Please check your input and try again!`;
           default:
-            return `Something went wrong`;
+            return `Something went wrong!`;
         }
       },
     });

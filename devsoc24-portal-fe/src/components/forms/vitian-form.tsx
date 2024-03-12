@@ -79,23 +79,23 @@ export default function VitianForm({
       );
     };
     void toast.promise(handleSubmit(), {
-      loading: "Loading...",
+      loading: "Cooking...",
       success: (temp) => {
         setTimeout(() => setForm(2), 1500);
-        return `Success`;
+        return `Profile completed successfully`;
       },
       error: (err: AxiosError) => {
         switch (err.response?.status) {
           case 403:
-            return `Email not verified\nVerify your email`;
+            return `Email not verified\nRedirecting...`;
           case 404:
-            return `Account Not Found`;
+            return `Account not found!`;
           case 409:
-            return `Incorrect Credentials`;
+            return `Incorrect credentials`;
           case 400:
-            return `Please check your input and try again`;
+            return `Please check your input and try again!`;
           default:
-            return `Something went wrong`;
+            return `Something went wrong!`;
         }
       },
     });

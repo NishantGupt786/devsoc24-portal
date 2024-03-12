@@ -57,7 +57,7 @@ export default function ResetForm() {
       );
     };
     void toast.promise(handleSubmit(), {
-      loading: "Loading...",
+      loading: "Cooking...",
       success: (temp) => {
         setTimeout(() => {
           void router.push("/login");
@@ -67,20 +67,20 @@ export default function ResetForm() {
       error: (err: AxiosError) => {
         switch (err.response?.status) {
           case 404:
-            return `Account Not Found`;
+            return `Account not found!`;
           case 409:
-            return `Incorrect Credentials`;
+            return `Incorrect credentials`;
           case 401:
-            return `Invalid OTP!`;
+            return `Invalid OTP!\nPlease enter a valid OTP`;
           case 403:
             setTimeout(() => {
               void router.push("/reset");
             }, 1500);
-            return `OTP expired\nPlease request a new OTP`;
+            return `OTP expired\nPlease resend OTP`;
           case 400:
-            return `Please check your input and try again`;
+            return `Please check your input and try again!`;
           default:
-            return `Something went wrong`;
+            return `Something went wrong!`;
         }
       },
     });

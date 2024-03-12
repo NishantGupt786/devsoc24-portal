@@ -64,16 +64,16 @@ export default function SubmitProjectForm() {
       );
     };
     void toast.promise(handleSubmit(), {
-      loading: "Loading...",
+      loading: "Cooking...",
       success: (temp) => {
-        return `Project Submitted Successfully`;
+        return `Project submitted successfully!`;
       },
       error: (err: AxiosError) => {
         switch (err.response?.status) {
           case 404:
-            return `Account Not Found`;
+            return `Account not found!`;
           default:
-            return `Failed to submit project`;
+            return `Project Submission failed!`;
         }
       },
     });
