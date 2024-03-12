@@ -12,12 +12,6 @@ const timelineData = [
   "label4",
   "label5",
   "label6",
-  "label7",
-  "label8",
-  "label9",
-  "label10",
-  "label11",
-  "label11",
 ];
 
 const TimelineComponent = (props: { count: number }) => {

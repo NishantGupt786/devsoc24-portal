@@ -303,7 +303,7 @@ export default function HomePage() {
         <div className="flex flex-col">
           {showModal === "leave" && <LeaveTeam />}
           {showModal === "kick" && <Kick />}
-          <div className="my-8 px-4">
+          <div className="mt-5 mb-1 px-4">
             <TimelineComponent count={4} />
           </div>
           <div className="mt-4 flex h-fit w-full flex-col justify-between gap-4 overflow-y-auto px-4 md:flex-row lg:h-[85%]">
