@@ -12,37 +12,37 @@ import {
 
 const tracks = [
   {
-    imgsrc: "/images/trackImg1.svg",
+    imgsrc: "/images/1-interactive-engagement.svg",
     name: "Interactive Engagement",
     title: "Interactive Engagement (Gamified Solutions)",
     description: `This track is all about engaging applications with gamified mechanisms. Create solutions which promote enhanced interaction and user-retention with the help of immersive technologies and reward systems.`,
   },
   {
-    imgsrc: "/images/trackImg1.svg",
+    imgsrc: "/images/2-eco-innovations.svg",
     name: "Eco-Innovations",
     title: "Eco-Innovations (Sustainable Technology)",
     description: `Technology is all about problem solving and enriching the life of users. Provide technical solutions which promote sustainability and a better environment. Improve the current technologies to make them more sustainable or develop brand new solutions.`,
   },
   {
-    imgsrc: "/images/trackImg1.svg",
+    imgsrc: "/images/3-community-building.svg",
     name: "Community Building",
     title: "Community Building",
     description: `This track focuses on fostering stronger, more connected communities. Participants are tasked with creating platforms or tools that promote unity and communal engagement.`,
   },
   {
-    imgsrc: "/images/trackImg1.svg",
+    imgsrc: "/images/4-future-work.svg",
     name: "Future of Work",
     title: "Future of Work",
     description: `This track explores the evolving nature of work in the digital era. Participants are encouraged to develop solutions that enhance productivity and redefine traditional work models. Participants can also build solutions that fine-tune LLMs or use vector databases to change the work landscape.`,
   },
   {
-    imgsrc: "/images/trackImg1.svg",
+    imgsrc: "/images/5-ethical-tech.svg",
     name: "Ethical Technology",
     title: "Ethical Technology",
     description: `This track focuses on developing solutions promoting responsible innovation, privacy, fairness, and transparency in the tech industry. Participants are tasked with addressing societal concerns such as data privacy and security. Participants can also focus on combating unethical use of tech and emphasise integrity and accountability in technology design and deployment.`,
   },
   {
-    imgsrc: "/images/trackImg1.svg",
+    imgsrc: "/images/6-open-innovation.svg",
     name: "Open Innovation",
     title: "Open Innovation",
     description: `This track focuses on embracing creativity to solve diverse challenges. Participants are encouraged to explore groundbreaking ideas across sectors and implement interdisciplinary approaches and collaborative problem-solving. If you have any idea that doesn’t fit in any of the other tracks, this track is for you.`,

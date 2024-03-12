@@ -90,9 +90,9 @@ export default function Profile() {
       console.log(res.data);
     };
     void toast.promise(handleSubmit(), {
-      loading: `Loading`,
-      success: `Profile updated`,
-      error: `Something went wrong`,
+      loading: `Cooking...`,
+      success: `Profile updated successfully!`,
+      error: `Something went wrong!`,
     });
   }
 

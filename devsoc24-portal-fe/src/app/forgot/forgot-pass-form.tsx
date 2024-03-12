@@ -45,7 +45,7 @@ export default function ForgotForm() {
       );
     };
     void toast.promise(handleSubmit(), {
-      loading: "Loading...",
+      loading: "Cooking...",
       success: (temp) => {
         setTimeout(() => {
           void router.push("/reset?email=" + form.email);
@@ -55,18 +55,18 @@ export default function ForgotForm() {
       error: (err: AxiosError) => {
         switch (err.response?.status) {
           case 404:
-            return `Account Not Found`;
+            return `Account not found!`;
           case 409:
-            return `Incorrect Credentials`;
+            return `Incorrect credentials`;
           case 403:
             setTimeout(() => {
               void router.push("/signup/verify?email=" + form.email);
             }, 1500);
-            return `Email Not Verified`;
+            return `Email not verified\nRedirecting...`;
           case 400:
-            return `Please check your input and try again`;
+            return `Please check your input and try again!`;
           default:
-            return `Something went wrong`;
+            return `Something went wrong!`;
         }
       },
     });

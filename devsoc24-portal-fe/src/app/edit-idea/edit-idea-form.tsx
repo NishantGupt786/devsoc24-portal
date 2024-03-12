@@ -89,9 +89,9 @@ export default function EditIdeaForm() {
     };
 
     void toast.promise(handleSubmit(), {
-      loading: `Loading`,
-      success: `Idea Updated`,
-      error: `Something went wrong`,
+      loading: `Cooking..`,
+      success: `Idea updated successfully!`,
+      error: `Something went wrong!`,
     });
   }
 

@@ -55,25 +55,25 @@ export default function JoinTeamForm() {
       );
     };
     void toast.promise(handleSubmit(), {
-      loading: "Loading...",
+      loading: "Cooking...",
       success: (temp) => {
         void router.push("/");
-        return `Team joined successfully.`;
+        return `Team joined successfully!`;
       },
       error: (err: AxiosError) => {
         switch (err.response?.status) {
           case 404:
-            return `Account Not Found`;
+            return `Account not found!`;
           case 417:
-            return `User Already in a team`;
+            return `User is already in a team!`;
           case 409:
-            return `Invalid Team Code`;
+            return `Invalid Team Code!`;
           case 424:
-            return `Team is full`;
+            return `Team is full!`;
           case 400:
-            return `Please check your input and try again`;
+            return `Please check your input and try again!`;
           default:
-            return `Something went wrong`;
+            return `Something went wrong!`;
         }
       },
     });

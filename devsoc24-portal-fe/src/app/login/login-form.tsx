@@ -54,18 +54,18 @@ export default function LoginForm() {
     };
 
     void toast.promise(submitForm(), {
-      loading: "Loading...",
+      loading: "Cooking...",
       success: (temp) => {
         void router.push("/");
-        return `Logged In`;
+        return `Logged in successfully!`;
       },
       error: (err: AxiosError) => {
         console.log("ERR", err);
         switch (err.response?.status) {
           case 404:
-            return `Account Not Found`;
+            return `Account not found!`;
           case 409:
-            return `Incorrect Credentials`;
+            return `Incorrect credentials`;
           case 403:
             setTimeout(() => {
               toast.dismiss();
@@ -73,7 +73,7 @@ export default function LoginForm() {
             setTimeout(() => {
               void router.push("/signup/verify?email=" + formVal.email);
             }, 1500);
-            return `Email Not Verified\nRedirecting...`;
+            return `Email not verified\nRedirecting...`;
           case 423:
             setTimeout(() => {
               toast.dismiss();
@@ -81,11 +81,11 @@ export default function LoginForm() {
             setTimeout(() => {
               void router.push("/signup/details?email=" + formVal.email);
             }, 1500);
-            return `Complete your profile\nRedirecting..`;
+            return `Complete your profile\nRedirecting...`;
           case 400:
-            return `Please check your input and try again`;
+            return `Please check your input and try again!`;
           default:
-            return `Something went wrong`;
+            return `Something went wrong!`;
         }
       },
     });
