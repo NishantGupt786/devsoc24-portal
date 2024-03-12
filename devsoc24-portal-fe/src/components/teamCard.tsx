@@ -4,7 +4,7 @@ import { Crown, BadgeMinus, Files, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { teamDataProps, userProps } from "@/interfaces";
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import {
   useIdeaStore,
   useLeaderStore,
@@ -15,6 +15,8 @@ import {
 import { useRouter } from "next/navigation";
 import editImg from "@/assets/images/edit.svg";
 import Image from "next/image";
+import toast from "react-hot-toast";
+import LeaveTeam from "./team/leaveTeam";
 
 interface keyProps {
   message: string;
@@ -30,6 +32,7 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
   const { idea, setIdea } = useIdeaStore();
   const { edit, setEdit } = useTeamEditStore();
   const { isLeader, setIsLeader } = useLeaderStore();
+  const [showModal, setShowModal] = useState(false);
 
   const router = useRouter();
 
@@ -70,25 +73,24 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
   };
 
   const leaveTeam = async () => {
-    try {
+    const handleClick = async () => {
       const response = await axios.delete(
         `${process.env.NEXT_PUBLIC_API_URL}/team/leave`,
         {
           withCredentials: true,
         },
       );
-      setTeam(false);
-      void fetchTeam();
-    } catch (e) {
-      if (axios.isAxiosError(e)) {
-        switch (e.response?.status) {
-          case 202:
-            console.log("Accepted");
-          default:
-            console.log(e);
-        }
-      }
-    }
+    };
+
+    void toast.promise(handleClick(), {
+      loading: "Loading...",
+      success: (temp) => {
+        setTeam(true);
+        void fetchTeam();
+        return `Accepted`;
+      },
+      error: `Something went wrong`,
+    });
   };
 
   useEffect(() => {
@@ -96,12 +98,17 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
       (item) => item.id === props.team?.leader_id,
     );
     if (leader) {
+      console.log("NAME:", leader.name);
       setLeader(leader.name);
     }
   }, [props.team]);
-
   const toggleEdit = () => {
+    console.log("EDIT:", edit);
     setEdit(!edit);
+  };
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
   };
 
   return (
@@ -125,7 +132,19 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
                 Edit
               </div>
             ) : (
-              <></>
+              <div
+                className="mx-2 flex flex-row items-center justify-between gap-3 rounded-lg border-2 border-[#AD1136] px-2 py-1 text-[#AD1136] transition-all duration-150 ease-in-out hover:cursor-pointer hover:bg-black/10"
+                onClick={leaveTeam}
+              >
+                <Image
+                  src={editImg as HTMLImageElement}
+                  alt="edit"
+                  height={0}
+                  width={0}
+                  className="h-fit w-fit"
+                />
+                Leave Team
+              </div>
             )}
           </div>
           <div className="flex flex-col items-center justify-center p-8">
@@ -141,15 +160,14 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
                   <span className="text-[#FFBE3D]">
                     <Crown />
                   </span>
-                ) : member.id === user.data.id ? (
+                ) : (
                   <span
                     className="text-[#AD1136] hover:scale-[1.05] hover:cursor-pointer"
                     onClick={leaveTeam}
                   >
-                    <BadgeMinus />
+                    {}
+                    {edit ? <BadgeMinus /> : <></>}
                   </span>
-                ) : (
-                  <></>
                 )}
               </div>
             ))}

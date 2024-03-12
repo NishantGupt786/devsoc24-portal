@@ -105,8 +105,9 @@ export default function HomePage() {
           withCredentials: true,
         },
       );
-      setUser(response.data);
-      setIsLeader(response?.data.is_leader);
+      console.log(response.data.data.is_leader);
+      setIsLeader(response.data.data.is_leader);
+      console.log(isLeader);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
@@ -297,7 +298,7 @@ export default function HomePage() {
           {team ? (
             <CustomCard
               title="Your Devsoc Team"
-              cardImage="teamCardImg"
+              cardImage="user"
               cardContent="No Team Members Yet?"
               cardDesc="Start A New Team or Join One"
               buttonDetails={noTeamCard}
