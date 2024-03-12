@@ -5,43 +5,54 @@ import img2 from "@/assets/images/timeline/half.svg";
 import img3 from "@/assets/images/timeline/none.svg";
 import Image from "next/image";
 
-const timelineData = ["label1", "label1", "label1", "label1", "label1"];
+const timelineData = [
+  "label1",
+  "label2",
+  "label3",
+  "label4",
+  "label5",
+  "label6",
+  "label7",
+  "label8",
+  "label9",
+  "label10",
+  "label11",
+  "label11",
+];
 
 const TimelineComponent = (props: { count: number }) => {
   return (
-    <div className="flex  h-[25vh] w-full rounded-xl bg-white">
-      <div className="flex w-full flex-col items-center  justify-between  pl-6 pt-4 font-semibold text-[#45464E]">
+    <div className="flex h-[25vh] w-full rounded-xl bg-white">
+      <div className="flex w-full flex-col items-center justify-between pl-6 pt-4 font-semibold text-[#45464E]">
         <p className="self-start">Timeline</p>
         <div className="trackComponent flex h-full w-full flex-row items-center overflow-x-auto">
           {timelineData.slice(0, props.count).map((item, index) => {
             return (
               <div
-                className=" flex h-fit flex-col items-center justify-center "
+                className="flex h-fit flex-col items-center justify-center"
                 key={index}
               >
                 <Image
                   src={img1 as HTMLImageElement}
                   alt="completed"
-                  height={0}
-                  width={0}
-                  className="min-h-auto min-w-max "
+                  height={50}
+                  width={50}
+                  className="h-auto w-fit"
                 />
-                <p className=" m-1 w-full text-center ">
-                  {timelineData[index]}
-                </p>
+                <p className="m-1 w-full text-center">{timelineData[index]}</p>
               </div>
             );
           })}
 
-          <div className=" flex h-fit flex-col items-center justify-center ">
+          <div className="flex h-fit flex-col items-center justify-center">
             <Image
               src={img2 as HTMLImageElement}
               alt="completed"
-              height={0}
-              width={0}
-              className="min-h-auto min-w-max "
+              height={50}
+              width={50}
+              className="h-auto w-fit"
             />
-            <p className=" m-1 w-full text-center ">
+            <p className="m-1 w-full text-center">
               {timelineData[props.count]}
             </p>
           </div>
@@ -49,19 +60,17 @@ const TimelineComponent = (props: { count: number }) => {
           {timelineData.slice(props.count).map((item, index) => {
             return (
               <div
-                className=" flex h-fit flex-col items-center justify-center "
+                className="flex h-fit flex-col items-center justify-center"
                 key={index}
               >
                 <Image
                   src={img3 as HTMLImageElement}
                   alt="completed"
-                  height={0}
-                  width={0}
-                  className="min-h-auto min-w-max "
+                  height={50}
+                  width={50}
+                  className="h-auto w-fit"
                 />
-                <p className=" m-1 w-full text-center ">
-                  {timelineData[index]}
-                </p>
+                <p className="m-1 w-full text-center">{timelineData[index]}</p>
               </div>
             );
           })}
