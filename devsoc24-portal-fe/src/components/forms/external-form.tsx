@@ -92,7 +92,7 @@ export default function ExternalForm({
           case 403:
             return `Email not verified\nRedirecting...`;
           case 400:
-            return `Please check your input and try again1`;
+            return `Please check your input and try again!`;
           default:
             return `Something went wrong!`;
         }
