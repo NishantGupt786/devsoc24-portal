@@ -1,22 +1,14 @@
-"use client";
 import { useEffect, useState } from "react";
 import { Crown, BadgeMinus, Files, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { teamDataProps, userProps } from "@/interfaces";
-import axios, { AxiosError, AxiosResponse } from "axios";
-import {
-  useIdeaStore,
-  useLeaderStore,
-  useTeamEditStore,
-  useTeamStore,
-  useUserStore,
-} from "@/store/store";
+import axios from "axios";
+import { useIdeaStore, useLeaderStore, useTeamEditStore, useTeamStore, useUserStore } from "@/store/store";
 import { useRouter } from "next/navigation";
 import editImg from "@/assets/images/edit.svg";
 import Image from "next/image";
 import toast from "react-hot-toast";
-import LeaveTeam from "./team/leaveTeam";
 
 interface keyProps {
   message: string;
@@ -45,11 +37,11 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
 
   const fetchTeam = async () => {
     try {
-      const response: AxiosResponse<userProps> = await axios.get(
+      const response = await axios.get<userProps>(
         `${process.env.NEXT_PUBLIC_API_URL}/user/me`,
         {
           withCredentials: true,
-        },
+        }
       );
       setUser(response.data);
     } catch (e) {
@@ -74,12 +66,9 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
 
   const leaveTeam = async () => {
     const handleClick = async () => {
-      const response = await axios.delete(
-        `${process.env.NEXT_PUBLIC_API_URL}/team/leave`,
-        {
-          withCredentials: true,
-        },
-      );
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/team/leave`, {
+        withCredentials: true,
+      });
     };
 
     void toast.promise(handleClick(), {
@@ -95,7 +84,7 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
 
   useEffect(() => {
     const leader = props.team?.users.find(
-      (item) => item.id === props.team?.leader_id,
+      (item) => item.id === props.team?.leader_id
     );
     if (leader) {
       console.log("NAME:", leader.name);
@@ -150,17 +139,22 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
           <div className="flex flex-col items-center justify-center p-8">
             <p className="text-2xl font-semibold">{props.team?.team_name}</p>
             <p className="pb-4 text-sm text-[#8B8D97]">Team Members</p>
-            {props.team?.users.map((member, index) => (
-              <div
-                key={index}
-                className="mb-2 flex w-full items-center justify-between rounded-lg border-2 border-[#B6B6B6] p-3"
-              >
-                <span>{member.name}</span>
-                {member.name === Leader ? (
-                  <span className="text-[#FFBE3D]">
-                    <Crown />
-                  </span>
-                ) : (
+            <div
+              className="mb-2 flex w-full items-center justify-between rounded-lg border-2 border-[#B6B6B6] p-3"
+            >
+              <span>{Leader}</span>
+              <span className="text-[#FFBE3D]">
+                <Crown />
+              </span>
+            </div>
+            {props.team?.users
+              .filter((member) => member.name !== Leader)
+              .map((member, index) => (
+                <div
+                  key={index}
+                  className="mb-2 flex w-full items-center justify-between rounded-lg border-2 border-[#B6B6B6] p-3"
+                >
+                  <span>{member.name}</span>
                   <span
                     className="text-[#AD1136] hover:scale-[1.05] hover:cursor-pointer"
                     onClick={leaveTeam}
@@ -168,19 +162,33 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
                     {}
                     {edit ? <BadgeMinus /> : <></>}
                   </span>
-                )}
-              </div>
-            ))}
-            {props.team && (
-              <CopyToClipboard text={props.team?.team_code} onCopy={onCopyText}>
-                <Button className="mt-4 flex items-center gap-x-2 self-center">
-                  <span className="text-white">
-                    {isCopied ? <Check size={20} /> : <Files size={20} />}
-                  </span>
-                  {props.team?.team_code}
+                </div>
+              ))}
+            <div className="flex w-full flex-row items-center justify-evenly ">
+              {props.team && (
+                <CopyToClipboard
+                  text={props.team?.team_code}
+                  onCopy={onCopyText}
+                >
+                  <Button className="mt-4 flex items-center gap-x-2 self-center">
+                    <span className="text-white">
+                      {isCopied ? <Check size={20} /> : <Files size={20} />}
+                    </span>
+                    {props.team?.team_code}
+                  </Button>
+                </CopyToClipboard>
+              )}
+              {edit ? (
+                <Button
+                  className="mt-4 flex items-center gap-x-2 self-center bg-[#AD1136] hover:bg-[#AD1136]/80"
+                  onClick={leaveTeam}
+                >
+                  Delete Team
                 </Button>
-              </CopyToClipboard>
-            )}
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
         </div>
       </div>

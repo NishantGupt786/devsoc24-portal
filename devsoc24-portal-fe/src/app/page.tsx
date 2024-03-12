@@ -262,7 +262,7 @@ export default function HomePage() {
   return (
     <>
       <ToastContainer />
-      <main className="flex h-fit flex-col items-start overflow-y-auto overflow-x-hidden bg-[#F4F5FA] lg:h-screen">
+      <main className="flex h-fit flex-col items-start overflow-x-hidden bg-[#F4F5FA] lg:h-screen">
         <div className="flex h-[10%] w-full items-center justify-between gap-x-8 bg-background px-6 py-2">
           <div className="flex flex-row gap-8">
             <Logo className="h-9/10 w-auto" />
@@ -296,10 +296,10 @@ export default function HomePage() {
           </DropdownMenu>
         </div>
         <div className="flex flex-col">
-          <div className="m-8">
-            <TimelineComponent count={5} />
+          <div className="my-8 px-4">
+            <TimelineComponent count={2} />
           </div>
-          <div className="mt-4 flex h-fit w-full flex-col justify-evenly gap-4 overflow-y-auto px-4 md:flex-row lg:h-[85%]">
+          <div className="mt-4 flex h-fit w-full flex-col justify-between gap-4 overflow-y-auto px-4 md:flex-row lg:h-[85%]">
             {team ? (
               <CustomCard
                 title="Your Devsoc Team"
