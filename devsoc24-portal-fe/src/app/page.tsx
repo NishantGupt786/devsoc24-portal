@@ -30,6 +30,7 @@ import { Button } from "@/components/ui/button";
 import { User } from "lucide-react";
 import ToastContainer from "@/components/ToastContainer";
 import Link from "next/link";
+import TimelineComponent from "@/components/timeline/timelineComponent";
 
 interface ideaProps {
   message: string;
@@ -105,8 +106,9 @@ export default function HomePage() {
           withCredentials: true,
         },
       );
-      setUser(response.data);
-      setIsLeader(response?.data.is_leader);
+      console.log(response.data.data.is_leader);
+      setIsLeader(response.data.data.is_leader);
+      console.log(isLeader);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
@@ -293,36 +295,43 @@ export default function HomePage() {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-        <div className="mt-4 flex h-fit w-full flex-col justify-evenly gap-4 overflow-y-auto px-4 md:flex-row lg:h-[85%]">
-          {team ? (
+        <div className="flex flex-col">
+          <div className="m-8">
+            <TimelineComponent count={5} />
+          </div>
+          <div className="mt-4 flex h-fit w-full flex-col justify-evenly gap-4 overflow-y-auto px-4 md:flex-row lg:h-[85%]">
+            {team ? (
+              <CustomCard
+                title="Your Devsoc Team"
+                cardImage="user"
+                cardContent="No Team Members Yet?"
+                cardDesc="Start A New Team or Join One"
+                buttonDetails={noTeamCard}
+              />
+            ) : (
+              <TeamCard {...teamData} />
+            )}
             <CustomCard
-              title="Your Devsoc Team"
-              cardImage="teamCardImg"
-              cardContent="No Team Members Yet?"
-              cardDesc="Start A New Team or Join One"
-              buttonDetails={noTeamCard}
+              title="Idea Submission"
+              cardImage="ideaSubmissionImg"
+              cardContent={
+                getIdea === "idea found" ? "Idea Submitted" : "No Idea Yet"
+              }
+              cardDesc={
+                getIdea === "idea found"
+                  ? "Edit or View Idea"
+                  : "Submit an Idea"
+              }
+              buttonDetails={
+                getIdea === "idea found"
+                  ? isLeader
+                    ? ideaTherecard
+                    : notLeader
+                  : ideaCard
+              }
             />
-          ) : (
-            <TeamCard {...teamData} />
-          )}
-          <CustomCard
-            title="Idea Submission"
-            cardImage="ideaSubmissionImg"
-            cardContent={
-              getIdea === "idea found" ? "Idea Submitted" : "No Idea Yet"
-            }
-            cardDesc={
-              getIdea === "idea found" ? "Edit or View Idea" : "Submit an Idea"
-            }
-            buttonDetails={
-              getIdea === "idea found"
-                ? isLeader
-                  ? ideaTherecard
-                  : notLeader
-                : ideaCard
-            }
-          />
-          <TrackComponent />
+            <TrackComponent />
+          </div>
         </div>
       </main>
     </>

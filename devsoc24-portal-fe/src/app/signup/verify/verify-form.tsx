@@ -56,7 +56,13 @@ export default function ForgotForm() {
     void toast.promise(handleSubmit(), {
       loading: "Cooking...",
       success: (temp) => {
-        return `Email verified successfully!`;
+        setTimeout(() => {
+          toast.dismiss();
+        }, 1000);
+        setTimeout(() => {
+          router.push(`/signup/details?email=${email}`);
+        }, 1500);
+        return `Success`;
       },
       error: (err: AxiosError) => {
         switch (err.response?.status) {
@@ -75,12 +81,6 @@ export default function ForgotForm() {
         }
       },
     });
-    setTimeout(() => {
-      toast.dismiss();
-    }, 1000);
-    setTimeout(() => {
-      router.push(`/signup/verify?email=${email}`);
-    }, 1500);
   }
 
   const resendOTP = async () => {

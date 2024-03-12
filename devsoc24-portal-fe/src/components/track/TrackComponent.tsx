@@ -52,10 +52,10 @@ const TrackComponent = () => {
   return (
     <div className="trackComponent h-full w-full overflow-auto rounded-xl bg-white px-6 md:w-[32vw]">
       <div className="pt-3 font-semibold text-[#45464E]">Track Details</div>
-      <div className="my-6 flex w-full flex-col items-center gap-6">
+      <div className="my-6 flex w-full flex-col items-center gap-y-6">
         {tracks.map((item, index) => (
           <Dialog>
-            <DialogTrigger key={index}>
+            <DialogTrigger key={index} className="w-full">
               <TrackCard imagesrc={item.imgsrc} name={item.name} key={index} />
             </DialogTrigger>
             <DialogContent>
