@@ -213,7 +213,7 @@ export default function SignupForm() {
 
           <p className="text-center text-sm text-muted-foreground">
             Already have an account?{" "}
-            <Link href="/login" className="font-medium text-primary">
+            <Link href="/" className="font-medium text-primary">
               Login
             </Link>
           </p>

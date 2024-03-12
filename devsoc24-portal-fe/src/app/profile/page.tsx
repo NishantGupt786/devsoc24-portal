@@ -15,7 +15,7 @@ export default function Page() {
           <Image src={Dashtitle as HTMLImageElement} alt="title" />
         </div>
         <div className="flex h-[100vh] w-[4.7rem] items-start justify-center gap-x-8  bg-background px-6 py-2 pt-12 max-[445px]:w-[3.7rem]">
-          <Link href="/">
+          <Link href="/home">
             <ArrowLeft className="text-[#0019FF]" />
           </Link>
         </div>
