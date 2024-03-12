@@ -1,3 +1,4 @@
+"use client"
 import TimelineComponent from "@/components/timeline/timelineComponent";
 import TrackComponent from "@/components/track/TrackComponent";
 import React from "react";
@@ -5,7 +6,7 @@ import React from "react";
 const Page = () => {
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-black">
-      <TimelineComponent count={1} />
+      <TimelineComponent count={5} />
     </div>
   );
 };
