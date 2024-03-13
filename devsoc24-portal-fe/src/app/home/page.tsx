@@ -250,7 +250,7 @@ export default function HomePage() {
   const ideaCard = [
     {
       text: "Submit An Idea",
-      showModal: false,
+      showModal: getIdea !== "idea found",
       modalType: idea === 409 ? "Choice" : "JoinTeam",
       routeTo: "/submit-idea",
     },
