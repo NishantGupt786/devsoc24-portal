@@ -68,6 +68,9 @@ function CreateTeam() {
           case 404:
             toast.error("Account not found!");
             break;
+          case 401:
+            router.push("/");
+            break;
           case 409:
             toast.error("Team name already exists!");
             break;

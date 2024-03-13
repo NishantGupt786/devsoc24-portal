@@ -21,11 +21,11 @@ export const ideaSchema = z.object({
     figma_link: z
     .string({
       invalid_type_error: "Figma Link be a string",
-    }).url("Figma link must be a url"),
+    }).url("Figma link must be a url").optional().or(z.literal('')),
     github_link: z
     .string({
       invalid_type_error: "Github Link be a string",
-    }).url("Github link must be a url"),
+    }).url("Github link must be a url").optional().or(z.literal('')),
     others: z
     .string({
       required_error: "Other Links is required",
