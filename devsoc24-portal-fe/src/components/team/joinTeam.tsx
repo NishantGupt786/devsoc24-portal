@@ -10,7 +10,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRef } from "react";
 import axios from "axios";
-import { useTeamDataStore, useTeamStore } from "@/store/store";
+import {
+  useTeamDataStore,
+  useTeamStore,
+  IdeaStore,
+  useLeaderStore,
+  useTeamEditStore,
+} from "@/store/store";
 import { useRouter } from "next/navigation";
 import { type APIResponse } from "@/schemas/api";
 
@@ -18,7 +24,9 @@ function JoinTeam() {
   const inputRef = useRef<HTMLInputElement>(null);
   const { team, setTeam } = useTeamStore();
   const { teamData, setTeamData } = useTeamDataStore();
-
+  const { isLeader, setIsLeader } = useLeaderStore();
+  const { getIdea, SetIdea } = IdeaStore();
+  const { edit, setEdit } = useTeamEditStore();
   const router = useRouter();
   const handleClick = async () => {
     try {
@@ -32,14 +40,17 @@ function JoinTeam() {
         },
       );
       void fetchTeam();
+      setEdit(false);
+      SetIdea("idea found");
+      setIsLeader(false);
       setTeam(false);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
           case 202:
-            // console.log("Accepted");
+          // console.log("Accepted");
           default:
-            // console.log(e);
+          // console.log(e);
         }
       }
     }
