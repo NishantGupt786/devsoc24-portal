@@ -23,9 +23,8 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useSearchParams } from "next/navigation";
-import { BadRequest, ServerError } from "@/components/toast";
 import axios, { type AxiosError } from "axios";
 import { type APIResponse } from "@/schemas/api";
 import ToastContainer from "../ToastContainer";
@@ -68,7 +67,7 @@ export default function VitianForm({
       room: data.roomNumber,
       vit_email: data.vitEmail,
     };
-    console.log(updatedData);
+    // console.log(updatedData);
     const handleSubmit = async () => {
       await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/user/complete-profile`,
@@ -80,7 +79,7 @@ export default function VitianForm({
     };
     void toast.promise(handleSubmit(), {
       loading: "Cooking...",
-      success: (temp) => {
+      success: () => {
         setTimeout(() => setForm(2), 1500);
         return `Profile completed successfully!`;
       },

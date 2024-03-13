@@ -12,13 +12,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { EyeIcon, EyeOffIcon, LockKeyholeIcon, MailIcon } from "lucide-react";
 import Link from "next/link";
-import { type LoginResponse } from "@/schemas/api";
 import axios, { type AxiosError } from "axios";
-import { BadRequest, ServerError } from "@/components/toast";
 import ToastContainer from "@/components/ToastContainer";
 
 type LoginFormValues = z.infer<typeof loginSchema>;
@@ -44,7 +42,7 @@ export default function LoginForm() {
   }
   async function onSubmit(formVal: LoginFormValues) {
     const submitForm = async () => {
-      const { data } = await axios.post<APIResponse>(
+      await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/login`,
         { email: formVal.email, password: formVal.password },
         {
@@ -55,12 +53,12 @@ export default function LoginForm() {
 
     void toast.promise(submitForm(), {
       loading: "Cooking...",
-      success: (temp) => {
-        void router.push("/");
+      success: () => {
+        void router.push("/home");
         return `Logged in successfully!`;
       },
       error: (err: AxiosError) => {
-        console.log("ERR", err);
+        // console.log("ERR", err);
         switch (err.response?.status) {
           case 404:
             return `Account not found!`;

@@ -1,5 +1,9 @@
 import { create } from "zustand";
-import { type userProps, type joinTeamModal, type teamDataProps } from "@/interfaces";
+import {
+  type userProps,
+  type joinTeamModal,
+  type teamDataProps,
+} from "@/interfaces";
 
 export const useJoinModalStore = create<joinTeamModal>((set) => ({
   showModal: "",
@@ -53,7 +57,6 @@ interface userStore {
 
 export const useUserStore = create<userStore>((set) => ({
   user: {
-    is_leader: false,
     data: {
       id: "",
       first_name: "",
@@ -64,10 +67,14 @@ export const useUserStore = create<userStore>((set) => ({
       college: "",
       city: "",
       state: "",
+      country: "",
       gender: "",
       role: "",
-      team_id: "",
       is_leader: false,
+      team_id: "",
+      vit_email: "",
+      block: "",
+      room: "",
     },
     message: "",
     status: "",
@@ -118,3 +125,23 @@ export const useTeamDataStore = create<teamDataStore>((set) => ({
       teamData: teamDataTemp,
     })),
 }));
+
+interface showModalStore {
+  showModal: string;
+  setShowModal: (showModal: string) => void;
+}
+
+export const showModalStore = create<showModalStore>((set) => ({
+  showModal: "",
+  setShowModal: (showModal: string) => set({ showModal }),
+})); 
+
+interface kickStore {
+  kickMate: string;
+  setKickMate: (kickMate: string) => void;
+}
+
+export const showkickStore = create<kickStore>((set) => ({
+  kickMate: "",
+  setKickMate: (kickMate: string) => set({ kickMate }),
+})); 

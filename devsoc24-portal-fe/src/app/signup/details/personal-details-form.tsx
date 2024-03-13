@@ -49,30 +49,22 @@ export default function PersonalDetails({
     mode: "onChange",
     shouldUnregister: false,
   });
-  const [gender, setGender] = useState("");
+
   useEffect(() => {
     form.setValue("firstName", localStorage.getItem("first_name") ?? "");
     form.setValue("lastName", localStorage.getItem("last_name") ?? "");
     form.setValue("email", email ?? "");
     form.setValue("phoneNumber", localStorage.getItem("phone_number") ?? "");
     form.setValue("country", localStorage.getItem("country") ?? "+91");
-    const temp = localStorage.getItem("gender") as
-      | "Male"
-      | "Female"
-      | "Others"
-      | "Prefer Not to Say";
-
-    setGender(temp);
-  }, []);
-
-  useEffect(() => {
     form.setValue(
       "gender",
-      gender as "Male" | "Female" | "Others" | "Prefer Not to Say",
+      (localStorage.getItem("gender") as
+        | "Male"
+        | "Female"
+        | "Others"
+        | "Prefer Not to Say") ?? "",
     );
-    setGender(form.getValues("gender"));
-    console.log("Form Values:", form.getValues());
-  }, [gender]);
+  }, []);
 
   async function onSubmit(data: PersonalDetailsFormValues) {
     localStorage.setItem("first_name", data.firstName);
@@ -228,7 +220,11 @@ export default function PersonalDetails({
               <FormLabel>Gender</FormLabel>
               <Select
                 onValueChange={field.onChange}
-                defaultValue={form.getValues("gender")}
+                defaultValue={
+                  typeof localStorage !== "undefined"
+                    ? localStorage.getItem("gender") ?? undefined
+                    : undefined
+                }
               >
                 <FormControl>
                   <SelectTrigger>

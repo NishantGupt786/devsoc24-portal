@@ -15,11 +15,10 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import axios, { Axios, type AxiosError } from "axios";
-import toast, { Toaster } from "react-hot-toast";
+import axios, { type AxiosError } from "axios";
+import toast from "react-hot-toast";
 import { type APIResponse } from "@/schemas/api";
 import { useRouter } from "next/navigation";
-import { BadRequest, ServerError } from "@/components/toast";
 import ToastContainer from "../ToastContainer";
 
 type CreateTeamFormValues = z.infer<typeof joinTeamSchema>;
@@ -35,7 +34,7 @@ export default function JoinTeamForm() {
   });
 
   async function onSubmit(data: CreateTeamFormValues) {
-    console.log(data);
+    // console.log(data);
     const handleSubmit = async () => {
       await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/refresh`,
@@ -56,8 +55,8 @@ export default function JoinTeamForm() {
     };
     void toast.promise(handleSubmit(), {
       loading: "Cooking...",
-      success: (temp) => {
-        void router.push("/");
+      success: () => {
+        void router.push("/home");
         return `Team joined successfully!`;
       },
       error: (err: AxiosError) => {

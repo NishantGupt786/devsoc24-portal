@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, Controller } from "react-hook-form";
-import { type z } from "zod";
+
 import {
   Form,
   FormControl,
@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { profileSchema } from "@/schemas/profile";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import blocks from "@/../public/hostels.json";
 import axios, { type AxiosResponse } from "axios";
 import { type userProps } from "@/interfaces";
@@ -42,7 +42,6 @@ interface SubmitProjectResponse {
 import send from "@/assets/images/Send.svg";
 import Image from "next/image";
 import { useEffect } from "react";
-const tracks = ["Track 1", "Track 2", "Track 3"];
 
 export default function Profile() {
   useEffect(() => {
@@ -54,10 +53,10 @@ export default function Profile() {
             withCredentials: true,
           },
         );
-        console.log(response.data.data);
+        // console.log(response.data.data);
         form.reset(response.data.data);
       } catch (error) {
-        console.log("Error getting idea submission:", error);
+        // console.log("Error getting idea submission:", error);
       }
     }
     void getIdeaSubmission();
@@ -78,7 +77,7 @@ export default function Profile() {
   });
 
   async function onSubmit(data: FormValues) {
-    console.log(data);
+    // console.log(data);
     const handleSubmit = async () => {
       const res = await axios.patch<SubmitProjectResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/user/update`,
@@ -87,7 +86,7 @@ export default function Profile() {
           withCredentials: true,
         },
       );
-      console.log(res.data);
+      // console.log(res.data);
     };
     void toast.promise(handleSubmit(), {
       loading: `Cooking...`,

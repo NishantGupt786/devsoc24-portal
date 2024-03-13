@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, Controller } from "react-hook-form";
-import { type z } from "zod";
+
 import {
   Form,
   FormControl,
@@ -13,8 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { ideaSchema } from "@/schemas/idea";
-import toast, { Toaster } from "react-hot-toast";
-
+import toast from "react-hot-toast";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 
@@ -55,7 +54,7 @@ export default function SubmitIdeaForm() {
 
   async function onSubmit(data: FormValues) {
     const handleSubmit = async () => {
-      const res = await axios.post<SubmitProjectResponse>(
+      await axios.post<SubmitProjectResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/idea/create`,
         data,
         {
@@ -65,8 +64,8 @@ export default function SubmitIdeaForm() {
     };
     void toast.promise(handleSubmit(), {
       loading: "Cooking...",
-      success: (temp) => {
-        void router.push("/");
+      success: () => {
+        void router.push("/home");
         return `Idea submitted successfully!`;
       },
       error: (err: AxiosError) => {

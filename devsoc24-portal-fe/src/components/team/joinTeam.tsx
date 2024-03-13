@@ -9,23 +9,20 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRef } from "react";
-import axios, { AxiosResponse } from "axios";
-import { useIdeaStore, useTeamDataStore, useTeamStore, useUserStore } from "@/store/store";
-import { userProps } from "@/interfaces";
+import axios from "axios";
+import { useTeamDataStore, useTeamStore } from "@/store/store";
 import { useRouter } from "next/navigation";
-import { APIResponse } from "@/schemas/api";
+import { type APIResponse } from "@/schemas/api";
 
 function JoinTeam() {
   const inputRef = useRef<HTMLInputElement>(null);
   const { team, setTeam } = useTeamStore();
-  const { idea, setIdea } = useIdeaStore();
-  const { user, setUser } = useUserStore();
   const { teamData, setTeamData } = useTeamDataStore();
 
   const router = useRouter();
   const handleClick = async () => {
     try {
-      const response = await axios.post(
+      await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/team/join`,
         {
           code: inputRef.current?.value,
@@ -40,9 +37,9 @@ function JoinTeam() {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
           case 202:
-            console.log("Accepted");
+            // console.log("Accepted");
           default:
-            console.log(e);
+            // console.log(e);
         }
       }
     }
@@ -60,17 +57,17 @@ function JoinTeam() {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
           case 401:
-            void router.push("/login");
+            void router.push("/");
             break;
           case 417:
             setTeam(true);
-            console.log("no team");
+            // console.log("no team");
             break;
           case 200:
             setTeam(true);
             break;
           default:
-            console.log(e);
+            // console.log(e);
             break;
         }
       }

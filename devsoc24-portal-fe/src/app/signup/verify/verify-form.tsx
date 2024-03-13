@@ -16,10 +16,9 @@ import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { KeyRoundIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import axios, { type AxiosError } from "axios";
 import { type APIResponse } from "@/schemas/api";
-import { BadRequest, ServerError } from "@/components/toast";
 import { secondsToHms } from "@/lib/utils";
 import ToastContainer from "@/components/ToastContainer";
 
@@ -40,9 +39,9 @@ export default function ForgotForm() {
   });
 
   async function onSubmit(data: VerifyFormValues) {
-    console.log(data);
+    // console.log(data);
     const handleSubmit = async () => {
-      const res = await axios.post<APIResponse>(
+      await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/verify`,
         {
           email: email,
@@ -55,8 +54,14 @@ export default function ForgotForm() {
     };
     void toast.promise(handleSubmit(), {
       loading: "Cooking...",
-      success: (temp) => {
-        return `Email verified successfully!`;
+      success: () => {
+        setTimeout(() => {
+          toast.dismiss();
+        }, 1000);
+        setTimeout(() => {
+          router.push(`/signup/details?email=${email}`);
+        }, 1500);
+        return `Success`;
       },
       error: (err: AxiosError) => {
         switch (err.response?.status) {
@@ -75,12 +80,6 @@ export default function ForgotForm() {
         }
       },
     });
-    setTimeout(() => {
-      toast.dismiss();
-    }, 1000);
-    setTimeout(() => {
-      router.push(`/signup/verify?email=${email}`);
-    }, 1500);
   }
 
   const resendOTP = async () => {
@@ -99,7 +98,7 @@ export default function ForgotForm() {
 
     void toast.promise(handleResentOTP(), {
       loading: "Loading...",
-      success: (temp) => {
+      success: () => {
         return `OTP Sent`;
       },
       error: (err: AxiosError) => {

@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, Controller } from "react-hook-form";
-import { type z } from "zod";
+
 import {
   Form,
   FormControl,
@@ -15,12 +15,9 @@ import { Button } from "@/components/ui/button";
 import { ideaSchema } from "@/schemas/idea";
 import send from "@/assets/images/Send.svg";
 import Image from "next/image";
-import toast, { Toaster } from "react-hot-toast";
-
+import toast from "react-hot-toast";
 import axios, { AxiosError } from "axios";
-import { useRouter } from "next/navigation";
 import ToastContainer from "@/components/ToastContainer";
-
 interface FormValues {
   title: string;
   track: string;
@@ -39,7 +36,7 @@ interface SubmitProjectResponse {
 const tracks = ["Track 1", "Track 2", "Track 3"];
 
 export default function SubmitProjectForm() {
-  const router = useRouter();
+
   const form = useForm<FormValues>({
     resolver: zodResolver(ideaSchema),
     defaultValues: {
@@ -55,7 +52,7 @@ export default function SubmitProjectForm() {
 
   async function onSubmit(data: FormValues) {
     const handleSubmit = async () => {
-      const res = await axios.post<SubmitProjectResponse>(
+await axios.post<SubmitProjectResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/project/create`,
         data,
         {
@@ -65,7 +62,7 @@ export default function SubmitProjectForm() {
     };
     void toast.promise(handleSubmit(), {
       loading: "Cooking...",
-      success: (temp) => {
+      success: () => {
         return `Project submitted successfully!`;
       },
       error: (err: AxiosError) => {

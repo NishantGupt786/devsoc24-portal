@@ -15,10 +15,9 @@ import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { EyeIcon, EyeOffIcon, KeyRoundIcon, LockKeyhole } from "lucide-react";
 import Link from "next/link";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import axios, { type AxiosError } from "axios";
 import { type APIResponse } from "@/schemas/api";
-import { BadRequest, ServerError } from "@/components/toast";
 import ToastContainer from "@/components/ToastContainer";
 
 type ResetFormValues = z.infer<typeof resetSchema>;
@@ -41,7 +40,7 @@ export default function ResetForm() {
   });
 
   async function onSubmit(form: ResetFormValues) {
-    console.log(form);
+    // console.log(form);
     // const toastId = toast.loading("Reseting...", { autoClose: false });
     const handleSubmit = async () => {
       await axios.patch<APIResponse>(
@@ -58,9 +57,9 @@ export default function ResetForm() {
     };
     void toast.promise(handleSubmit(), {
       loading: "Cooking...",
-      success: (temp) => {
+      success: () => {
         setTimeout(() => {
-          void router.push("/login");
+          void router.push("/");
         }, 1500);
         return `Password reset successfully!`;
       },
@@ -222,7 +221,7 @@ export default function ResetForm() {
 
           <p className="text-center text-sm text-muted-foreground">
             Already have an account?{" "}
-            <Link href="/login" className="font-medium text-primary">
+            <Link href="/" className="font-medium text-primary">
               Login
             </Link>
           </p>

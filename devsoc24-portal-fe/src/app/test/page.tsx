@@ -1,10 +1,11 @@
-import TrackComponent from "@/components/track/TrackComponent";
+"use client"
+import TimelineComponent from "@/components/timeline/timelineComponent";
 import React from "react";
 
 const Page = () => {
   return (
-    <div className="h-screen w-screen bg-black flex items-center justify-center">
-      <TrackComponent />
+    <div className="flex h-screen w-screen items-center justify-center bg-black">
+      <TimelineComponent count={2} />
     </div>
   );
 };

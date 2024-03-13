@@ -8,34 +8,23 @@ import {
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import axios, { AxiosResponse } from "axios";
-import z from "zod";
+import axios, { AxiosError } from "axios";
 import { useRef } from "react";
-import {
-  useIdeaStore,
-  useTeamDataStore,
-  useTeamStore,
-  useUserStore,
-} from "@/store/store";
-import { userProps } from "@/interfaces";
+import { useTeamDataStore, useTeamStore } from "@/store/store";
 import { useRouter } from "next/navigation";
 import { APIResponse } from "@/schemas/api";
-
-const teamNameSchema = z.object({
-  name: z.string(),
-});
+import toast from "react-hot-toast";
 
 function CreateTeam() {
   const { team, setTeam } = useTeamStore();
   const inputRef = useRef<HTMLInputElement>(null);
-  const { user, setUser } = useUserStore();
-  const { idea, setIdea } = useIdeaStore();
   const { teamData, setTeamData } = useTeamDataStore();
 
   const router = useRouter();
+
   const handleClick = async () => {
     try {
-      const response = await axios.post(
+      await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/team/create`,
         {
           name: inputRef.current?.value,
@@ -44,20 +33,29 @@ function CreateTeam() {
           withCredentials: true,
         },
       );
-
+      toast.success("Team created successfully!");
+      await fetchTeam();
       setTeam(false);
-    } catch (e) {
-      if (axios.isAxiosError(e)) {
-        switch (e.response?.status) {
-          case 202:
-            console.log("Accepted");
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        switch (err.response?.status) {
+          case 404:
+            toast.error("Account not found!");
+            break;
+          case 409:
+            toast.error("Team name already exists!");
+            break;
+          case 400:
+            toast.error("Please check your input and try again!");
+            break;
           default:
-            console.log(e);
+            toast.error("Something went wrong!");
+            break;
         }
       }
-      await fetchTeam();
     }
   };
+
   const fetchTeam = async () => {
     try {
       const response = await axios.get<APIResponse>(
@@ -67,26 +65,24 @@ function CreateTeam() {
         },
       );
       setTeamData(response.data);
+      setTeam(true);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
           case 401:
-            void router.push("/login");
+            router.push("/");
             break;
           case 417:
-            setTeam(true);
-            console.log("no team");
-            break;
-          case 200:
-            setTeam(true);
+            setTeam(false);
             break;
           default:
-            console.log(e);
+            console.error(e);
             break;
         }
       }
     }
   };
+
   return (
     <>
       <DialogContent className="sm:max-w-[425px]">
@@ -107,14 +103,7 @@ function CreateTeam() {
         <div className="flex justify-center">
           <DialogFooter className="sm:justify-start">
             <DialogClose>
-              <Button
-                type="submit"
-                className="bg-[#458B71]"
-                onClick={async () => {
-                  await handleClick();
-                  await fetchTeam();
-                }}
-              >
+              <Button className="bg-[#458B71]" onClick={handleClick}>
                 Confirm
               </Button>
             </DialogClose>

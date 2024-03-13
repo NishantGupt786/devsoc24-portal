@@ -15,7 +15,7 @@ export async function signup(email: string, password: string) {
     );
     return data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     if (axios.isAxiosError(err)) {
       const error = err as AxiosError;
       return error.response?.status ?? 500;

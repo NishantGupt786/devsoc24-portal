@@ -35,7 +35,7 @@ export default function TeamDetailsForm() {
       {isNewTeam ? <CreateTeamForm /> : <JoinTeamForm />}
       <Button
         className="mx-auto mt-10 w-fit"
-        onClick={() => void router.push("/")}
+        onClick={() => void router.push("/home")}
       >
         Skip
       </Button>
