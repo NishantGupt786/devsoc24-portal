@@ -8,17 +8,39 @@ import {
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { useRef } from "react";
-import { useTeamDataStore, useTeamStore } from "@/store/store";
+import {
+  useTeamDataStore,
+  useTeamStore,
+  useIdeaStore,
+  useLeaderStore,
+  IdeaStore,
+} from "@/store/store";
 import { useRouter } from "next/navigation";
 import { APIResponse } from "@/schemas/api";
 import toast from "react-hot-toast";
+
+interface ideaProps {
+  message: string;
+  status: boolean;
+  data?: {
+    title: string;
+    description: string;
+    track: string;
+    github_link: string;
+    figma_link: string;
+    others: string;
+  };
+}
 
 function CreateTeam() {
   const { team, setTeam } = useTeamStore();
   const inputRef = useRef<HTMLInputElement>(null);
   const { teamData, setTeamData } = useTeamDataStore();
+  const { idea, setIdea } = useIdeaStore();
+  const { isLeader, setIsLeader } = useLeaderStore();
+  const { getIdea, SetIdea } = IdeaStore();
 
   const router = useRouter();
 
@@ -33,9 +55,13 @@ function CreateTeam() {
           withCredentials: true,
         },
       );
-      toast.success("Team created successfully!");
-      await fetchTeam();
+      
+      setIsLeader(true);
+      SetIdea("");
+      setIdea(409);
       setTeam(false);
+      await fetchTeam();
+      toast.success("Team created successfully!");
     } catch (err) {
       if (axios.isAxiosError(err)) {
         switch (err.response?.status) {
@@ -65,7 +91,6 @@ function CreateTeam() {
         },
       );
       setTeamData(response.data);
-      setTeam(true);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {

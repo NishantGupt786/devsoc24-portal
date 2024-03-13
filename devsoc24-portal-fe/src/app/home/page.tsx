@@ -14,6 +14,7 @@ import {
   useTeamStore,
   useUserStore,
   showModalStore,
+  IdeaStore,
 } from "@/store/store";
 import TrackComponent from "@/components/track/TrackComponent";
 import toast from "react-hot-toast";
@@ -32,6 +33,7 @@ import Link from "next/link";
 import TimelineComponent from "@/components/timeline/timelineComponent";
 import LeaveTeam from "@/components/team/leaveTeam";
 import Kick from "@/components/team/kick";
+import Sponsors from "@/components/sponsors";
 
 interface ideaProps {
   message: string;
@@ -51,7 +53,7 @@ export default function HomePage() {
   const { idea, setIdea } = useIdeaStore();
   const { team, setTeam } = useTeamStore();
   const { user, setUser } = useUserStore();
-  const [getIdea, SetIdea] = useState("");
+  const {getIdea, SetIdea} = IdeaStore();
   const { teamData, setTeamData } = useTeamDataStore();
   const { isLeader, setIsLeader } = useLeaderStore();
   const { showModal, setShowModal } = showModalStore();
@@ -250,7 +252,7 @@ export default function HomePage() {
   const ideaCard = [
     {
       text: "Submit An Idea",
-      showModal: getIdea !== "idea found",
+      showModal: getIdea !== "idea found" && getIdea !== "",
       modalType: idea === 409 ? "Choice" : "JoinTeam",
       routeTo: "/submit-idea",
     },
@@ -267,7 +269,7 @@ export default function HomePage() {
   return (
     <>
       <ToastContainer />
-      <main className="flex h-fit flex-col items-start overflow-x-hidden bg-[#F4F5FA] lg:h-screen max-w-screen">
+      <main className="max-w-screen flex h-fit flex-col items-start overflow-x-hidden bg-[#F4F5FA] lg:h-screen">
         <div className="flex h-[10%] w-full items-center justify-between gap-x-8 bg-background px-6 py-2">
           <div className="flex flex-row gap-8">
             <Logo className="h-9/10 w-auto" />
@@ -337,7 +339,10 @@ export default function HomePage() {
                   : ideaCard
               }
             />
-            <TrackComponent />
+            <div>
+              <Sponsors />
+              <TrackComponent />
+            </div>
           </div>
         </div>
       </main>
