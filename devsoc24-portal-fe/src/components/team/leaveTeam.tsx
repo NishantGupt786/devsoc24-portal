@@ -3,16 +3,32 @@ import {
   useTeamStore,
   useTeamDataStore,
   showModalStore,
+  IdeaStore,
 } from "@/store/store";
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import toast from "react-hot-toast";
 import { userProps } from "@/interfaces";
 import { useRouter } from "next/navigation";
+import { type APIResponse } from "@/schemas/api";
+
+interface ideaProps {
+  message: string;
+  status: boolean;
+  data?: {
+    title: string;
+    description: string;
+    track: string;
+    github_link: string;
+    figma_link: string;
+    others: string;
+  };
+}
 
 const LeaveTeam = () => {
   const { team, setTeam } = useTeamStore();
   const { showModal, setShowModal } = showModalStore();
   const { teamData, setTeamData } = useTeamDataStore();
+  const { getIdea, SetIdea } = IdeaStore();
 
   const router = useRouter();
 
@@ -26,6 +42,7 @@ const LeaveTeam = () => {
         },
       );
       setTeamData(response.data);
+      
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
@@ -46,29 +63,30 @@ const LeaveTeam = () => {
     }
   };
 
+
   const leaveTeam = async () => {
     const handleClick = async () => {
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/team/leave`, {
         withCredentials: true,
       });
-      setShowModal("")
+      console.log("left team");
+      SetIdea("left team");
+      void fetchTeam();
+      setTeam(true);
+      setShowModal("");
     };
 
     await toast.promise(handleClick(), {
       loading: "Loading...",
       success: () => {
-        setTeam(true);
-        void fetchTeam();
         return `Accepted`;
       },
       error: `Something went wrong`,
     });
-
-    
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm backdrop-filter backdrop-brightness-50 z-[60]">
+    <div className="fixed inset-0 z-[60] flex items-center justify-center backdrop-blur-sm backdrop-brightness-50 backdrop-filter">
       <div className="rounded-lg bg-white p-8">
         <button
           className="absolute right-0 top-0 p-2 text-gray-500"

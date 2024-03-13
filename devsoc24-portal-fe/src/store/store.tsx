@@ -144,4 +144,14 @@ interface kickStore {
 export const showkickStore = create<kickStore>((set) => ({
   kickMate: "",
   setKickMate: (kickMate: string) => set({ kickMate }),
-})); 
+}));
+
+interface ideaInterface {
+  getIdea: string;
+  SetIdea: (idea: string) => void;
+}
+
+export const IdeaStore = create<ideaInterface>((set) => ({
+  getIdea: "",
+  SetIdea: (getIdea: string) => set({ getIdea }),
+}));
