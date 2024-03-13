@@ -152,6 +152,6 @@ interface ideaInterface {
 }
 
 export const IdeaStore = create<ideaInterface>((set) => ({
-  getIdea: "",
+  getIdea: "a",
   SetIdea: (getIdea: string) => set({ getIdea }),
 }));

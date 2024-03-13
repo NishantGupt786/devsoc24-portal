@@ -161,48 +161,12 @@ export default function HomePage() {
     }
   };
 
-  const fetchIdea = async () => {
-    try {
-      const response: AxiosResponse<ideaProps> = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/idea`,
-        {
-          withCredentials: true,
-        },
-      );
-      SetIdea("idea found");
-      // console.log("FETCH IDEA: ", response);
-    } catch (e) {
-      if (axios.isAxiosError(e)) {
-        const axiosError = e as AxiosError<APIResponse>;
-        switch (axiosError.response?.status) {
-          case 401:
-            router.push("/");
-            break;
-          case 404:
-            if (axiosError.response?.data.message === "user does not exist") {
-              router.push("/");
-            }
-            // console.log("no team");
-            break;
-          case 417:
-            // console.log("team no idea");
-            break;
-          case 409:
-            setIdea(409);
-            break;
-          default:
-            // console.log(e);
-            break;
-        }
-      }
-    }
-  };
 
   useEffect(() => {
     const fetchDataAndLogin = async () => {
       // await login();
       await fetchData();
-      await fetchIdea();
+      SetIdea("idea found");
     };
     void fetchDataAndLogin();
   }, []);
@@ -214,14 +178,6 @@ export default function HomePage() {
     } else {
       void fetchTeam();
     }
-    if (user.data.is_leader) {
-      // console.log("Leader saala");
-      setIsLeader(true);
-    }
-    if (user.data.is_leader)
-      if (user.data.id === teamData.team?.leader_id) {
-        setIsLeader(true);
-      }
   }, []);
 
   const noTeamCard = [
@@ -253,7 +209,7 @@ export default function HomePage() {
     {
       text: "Submit An Idea",
       showModal: getIdea !== "idea found" && getIdea !== "",
-      modalType: idea === 409 ? "Choice" : "JoinTeam",
+      modalType: "Choice",
       routeTo: "/submit-idea",
     },
   ];
