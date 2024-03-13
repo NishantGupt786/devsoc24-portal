@@ -125,6 +125,43 @@ export default function HomePage() {
     }
   };
 
+  const fetchIdea = async () => {
+    try {
+      const response: AxiosResponse<ideaProps> = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/idea`,
+        {
+          withCredentials: true,
+        },
+      );
+      SetIdea("idea found");
+      // console.log("FETCH IDEA: ", response);
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        const axiosError = e as AxiosError<APIResponse>;
+        switch (axiosError.response?.status) {
+          case 401:
+            router.push("/");
+            break;
+          case 404:
+            if (axiosError.response?.data.message === "user does not exist") {
+              router.push("/");
+            }
+            // console.log("no team");
+            break;
+          case 417:
+            // console.log("team no idea");
+            break;
+          case 409:
+            setIdea(409);
+            break;
+          default:
+            // console.log(e);
+            break;
+        }
+      }
+    }
+  };
+
   const fetchTeam = async () => {
     try {
       const response = await axios.get<APIResponse>(
@@ -166,7 +203,7 @@ export default function HomePage() {
     const fetchDataAndLogin = async () => {
       // await login();
       await fetchData();
-      SetIdea("idea found");
+      
     };
     void fetchDataAndLogin();
   }, []);
