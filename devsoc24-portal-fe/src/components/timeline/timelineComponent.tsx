@@ -30,7 +30,7 @@ const TimelineComponent = (props: { count: number }) => {
                   key={index}
                 >
                   <Image
-                    src={img1}
+                    src={img1 as HTMLImageElement}
                     alt="completed"
                     height={50}
                     width={50}
@@ -48,7 +48,7 @@ const TimelineComponent = (props: { count: number }) => {
                   key={index}
                 >
                   <Image
-                    src={img2}
+                    src={img2 as HTMLImageElement}
                     alt="half"
                     height={50}
                     width={50}
@@ -66,7 +66,7 @@ const TimelineComponent = (props: { count: number }) => {
                   key={index}
                 >
                   <Image
-                    src={img3}
+                    src={img3 as HTMLImageElement}
                     alt="none"
                     height={50}
                     width={50}
