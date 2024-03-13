@@ -39,7 +39,7 @@ export const refresh = async () => {
             // console.log("REFESH: ", e);
           }
         default:
-          console.log(e);
+          // console.log(e);
       }
     }
   }

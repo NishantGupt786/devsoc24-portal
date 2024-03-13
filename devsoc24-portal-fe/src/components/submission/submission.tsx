@@ -33,7 +33,7 @@ function Submission() {
         // console.log(res.data.data);
         setIdeaDetails(res.data.data);
       } catch (error) {
-        console.log("Error getting idea submission:", error)
+        // console.log("Error getting idea submission:", error)
       }
     }
     void getIdeaSubmission();

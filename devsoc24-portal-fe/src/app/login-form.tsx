@@ -58,7 +58,7 @@ export default function LoginForm() {
         return `Logged in successfully!`;
       },
       error: (err: AxiosError) => {
-        console.log("ERR", err);
+        // console.log("ERR", err);
         switch (err.response?.status) {
           case 404:
             return `Account not found!`;

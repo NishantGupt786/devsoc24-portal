@@ -55,7 +55,7 @@ export default function EditProjectForm() {
         // console.log(res.data.data);
         form.reset(res.data.data);
       } catch (error) {
-        console.log("Error getting idea submission:", error);
+        // console.log("Error getting idea submission:", error);
       }
     }
     void getIdeaSubmission();

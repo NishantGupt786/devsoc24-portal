@@ -56,7 +56,7 @@ export default function Profile() {
         // console.log(response.data.data);
         form.reset(response.data.data);
       } catch (error) {
-        console.log("Error getting idea submission:", error);
+        // console.log("Error getting idea submission:", error);
       }
     }
     void getIdeaSubmission();

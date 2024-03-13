@@ -31,7 +31,7 @@ export default function RootLayout({
           // console.log(res);
         })
         .catch((e) => {
-          console.log(e);
+          // console.log(e);
         });
     }, 270000);
   }, []);

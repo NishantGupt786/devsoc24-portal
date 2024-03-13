@@ -76,7 +76,7 @@ export default function HomePage() {
             // console.log("401");
             break;
           default:
-            console.log(e);
+            // console.log(e);
             break;
         }
       }
@@ -116,7 +116,7 @@ export default function HomePage() {
             // console.log("Not in team");
             break;
           default:
-            console.log(e);
+            // console.log(e);
             break;
         }
       }
@@ -152,7 +152,7 @@ export default function HomePage() {
             setTeam(true);
             break;
           default:
-            console.log(e);
+            // console.log(e);
             break;
         }
       }
@@ -189,7 +189,7 @@ export default function HomePage() {
             setIdea(409);
             break;
           default:
-            console.log(e);
+            // console.log(e);
             break;
         }
       }

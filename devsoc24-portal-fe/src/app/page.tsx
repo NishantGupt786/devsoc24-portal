@@ -1,5 +1,4 @@
-"use client";
-
+"use client"
 import React, { useEffect, useState } from "react";
 import Logo from "@/components/logo";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -34,7 +33,7 @@ export default function Page() {
       <div className="flex max-w-[90vw] grow items-center justify-center">
         <Card className="w-fit">
           <CardHeader className="items-center">
-            <Image src={titles[currentTitleIndex] as string} alt="title" />
+            <Image src={titles[currentTitleIndex] as string} alt="title" priority />
           </CardHeader>
           <div className="mt-3 flex flex-col items-center">
             <p className="text-2xl font-semibold text-black">Welcome back!</p>

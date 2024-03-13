@@ -39,7 +39,7 @@ const LeaveTeam = () => {
             // console.log("Not in team");
             break;
           default:
-            console.log(e);
+            // console.log(e);
             break;
         }
       }

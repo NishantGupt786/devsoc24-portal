@@ -39,7 +39,7 @@ function JoinTeam() {
           case 202:
             // console.log("Accepted");
           default:
-            console.log(e);
+            // console.log(e);
         }
       }
     }
@@ -67,7 +67,7 @@ function JoinTeam() {
             setTeam(true);
             break;
           default:
-            console.log(e);
+            // console.log(e);
             break;
         }
       }
