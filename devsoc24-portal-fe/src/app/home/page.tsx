@@ -267,7 +267,7 @@ export default function HomePage() {
   return (
     <>
       <ToastContainer />
-      <main className="flex h-fit flex-col items-start overflow-x-hidden bg-[#F4F5FA] lg:h-screen">
+      <main className="flex h-fit flex-col items-start overflow-x-hidden bg-[#F4F5FA] lg:h-screen max-w-screen">
         <div className="flex h-[10%] w-full items-center justify-between gap-x-8 bg-background px-6 py-2">
           <div className="flex flex-row gap-8">
             <Logo className="h-9/10 w-auto" />
@@ -303,10 +303,10 @@ export default function HomePage() {
         <div className="flex flex-col">
           {showModal === "leave" && <LeaveTeam />}
           {showModal === "kick" && <Kick />}
-          <div className="mt-5 mb-1 px-4">
+          <div className="mt-4 flex h-fit w-screen flex-col justify-between gap-4 px-4">
             <TimelineComponent count={4} />
           </div>
-          <div className="mt-4 flex h-fit w-full flex-col justify-between gap-4 overflow-y-auto px-4 md:flex-row lg:h-[85%]">
+          <div className="mt-4 flex h-fit w-screen flex-col justify-between gap-4 overflow-y-auto px-4 md:flex-row lg:h-[85%]">
             {team ? (
               <CustomCard
                 title="Your Devsoc Team"
