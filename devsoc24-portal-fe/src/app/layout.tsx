@@ -39,6 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans ${inter.className}`}>
+        <div className="w-screen bg-[#2463EB] h-auto flex items-center justify-center font-bold">*For Internal Testing Purposes Only*</div>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
