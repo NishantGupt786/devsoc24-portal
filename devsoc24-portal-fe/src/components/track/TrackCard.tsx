@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const TrackCard = (props: { name: string; imagesrc: string }) => {
   return (
-    <div className="md:h-[200px] h-[200px]  md:w-full w-[70vw] overflow-hidden rounded-2xl flex flex-col items-center relative border-2 border-black">
+    <div className="md:h-[200px] h-[200px]  md:w-full w-[70vw] overflow-hidden rounded-2xl flex flex-col items-center relative border-2 border-black mb-4">
       <Image
         src={props.imagesrc}
         alt="track image"

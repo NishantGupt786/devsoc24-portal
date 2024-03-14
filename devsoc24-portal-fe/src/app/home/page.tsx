@@ -263,13 +263,14 @@ export default function HomePage() {
     <>
       <ToastContainer />
       <main className="max-w-screen flex h-fit flex-col items-start overflow-x-hidden bg-[#F4F5FA] lg:h-screen">
-        <div className="flex h-[10%] w-full items-center justify-between gap-x-8 bg-background px-6 py-2">
-          <div className="flex flex-row gap-8">
-            <Logo className="h-9/10 w-auto" />
-            <Image src={Dashtitle as HTMLImageElement} alt="title" />
+        <div className="flex h-[8vh] w-full  items-center justify-between gap-x-8 bg-background  px-2 lg:px-6 py-2">
+          <div className="flex flex-row lg:gap-8 gap-4">
+            <Logo className="h-9/10 w-auto scale-[0.75] lg:scale-[1] " />
+            <Image src={Dashtitle as HTMLImageElement} alt="title" className="lg:w-auto w-[30vw]"/>
+
           </div>
           <DropdownMenu>
-            <DropdownMenuTrigger className="mr-10">
+            <DropdownMenuTrigger className="mr-2 lg:mr-10">
               {/* This bkl is causing Hydration Error */}
               {/* <Button variant="ghost" size="icon">
                 <User />

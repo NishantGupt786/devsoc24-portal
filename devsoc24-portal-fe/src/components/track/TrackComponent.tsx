@@ -49,7 +49,7 @@ const tracks = [
 ];
 const TrackComponent = () => {
   return (
-    <div className="trackComponent h-full w-full rounded-xl bg-white px-6 md:w-[32vw] lg:h-[57vh] overflow-auto">
+    <div className="trackComponent h-full w-full rounded-xl bg-white px-6 md:w-[32vw] lg:h-[57vh] overflow-auto my-4">
 
       <div className="pt-3 font-semibold text-[#45464E]">Track Details</div>
       <div className="my-6 flex w-full flex-row md:flex-col items-center gap-6 -z-10 overflow-auto trackComponent">
