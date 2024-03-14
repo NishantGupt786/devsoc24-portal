@@ -5,14 +5,17 @@ import quillbot from "@/assets/images/quillbot.svg";
 
 function Sponsors() {
   return (
-    <div className="mb-4 h-full w-full overflow-auto rounded-xl bg-white md:w-[32vw] lg:h-[36vh]">
-      <div className="pl-6 pt-4 font-semibold text-[#45464E] mb-2">Sponsors</div>
+    <div className="mb-4 h-full w-full overflow-auto rounded-xl bg-white md:w-[32vw] lg:h-fit">
+      <div className="mb-2 pl-6 pt-4 font-semibold text-[#45464E]">
+        Sponsors
+      </div>
       <div className="flex flex-col items-center justify-center pt-3">
-        <div className="flex flex-col items-center justify-center my-6">
+        <div className="my-6 flex flex-col items-center justify-center">
           <Image
             src={contentstack as HTMLImageElement}
             alt="titlesponsor"
             width={200}
+            className="scale-[1.2] mb-4"
           />
         </div>
 

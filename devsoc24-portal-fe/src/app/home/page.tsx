@@ -53,7 +53,7 @@ export default function HomePage() {
   const { idea, setIdea } = useIdeaStore();
   const { team, setTeam } = useTeamStore();
   const { user, setUser } = useUserStore();
-  const {getIdea, SetIdea} = IdeaStore();
+  const { getIdea, SetIdea } = IdeaStore();
   const { teamData, setTeamData } = useTeamDataStore();
   const { isLeader, setIsLeader } = useLeaderStore();
   const { showModal, setShowModal } = showModalStore();
@@ -198,12 +198,10 @@ export default function HomePage() {
     }
   };
 
-
   useEffect(() => {
     const fetchDataAndLogin = async () => {
       // await login();
       await fetchData();
-      
     };
     void fetchDataAndLogin();
   }, []);
@@ -263,11 +261,14 @@ export default function HomePage() {
     <>
       <ToastContainer />
       <main className="max-w-screen flex h-fit flex-col items-start overflow-x-hidden bg-[#F4F5FA] lg:h-screen">
-        <div className="flex h-[8vh] w-full  items-center justify-between gap-x-8 bg-background  px-2 lg:px-6 py-2">
-          <div className="flex flex-row lg:gap-8 gap-4">
+        <div className="flex h-[8vh] w-full  items-center justify-between gap-x-8 bg-background  px-2 py-2 lg:px-6">
+          <div className="flex flex-row gap-4 lg:gap-8">
             <Logo className="h-9/10 w-auto scale-[0.75] lg:scale-[1] " />
-            <Image src={Dashtitle as HTMLImageElement} alt="title" className="lg:w-auto w-[30vw]"/>
-
+            <Image
+              src={Dashtitle as HTMLImageElement}
+              alt="title"
+              className="w-[30vw] lg:w-auto"
+            />
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger className="mr-2 lg:mr-10">
@@ -296,7 +297,7 @@ export default function HomePage() {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-        <div className="flex flex-col">
+        <div className="flex h-full  flex-col">
           {showModal === "leave" && <LeaveTeam />}
           {showModal === "kick" && <Kick />}
           <div className="mt-4 flex h-fit w-screen flex-col justify-between gap-4 px-4">
@@ -333,9 +334,12 @@ export default function HomePage() {
                   : ideaCard
               }
             />
-            <div>
+            <div className="flex max-h-full flex-col rounded-xl">
               <Sponsors />
-              <TrackComponent />
+              <div className="flex flex-grow overflow-auto ">
+                {/* <div className="flex-grow">hello</div> */}
+                <TrackComponent />
+              </div>
             </div>
           </div>
         </div>

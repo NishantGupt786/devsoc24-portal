@@ -49,10 +49,9 @@ const tracks = [
 ];
 const TrackComponent = () => {
   return (
-    <div className="trackComponent h-full w-full rounded-xl bg-white px-6 md:w-[32vw] lg:h-[57vh] overflow-auto my-4">
-
+    <div className="trackComponent h-[41vh] w-full overflow-auto rounded-xl  bg-white px-6">
       <div className="pt-3 font-semibold text-[#45464E]">Track Details</div>
-      <div className="my-6 flex w-full flex-row md:flex-col items-center gap-6 -z-10 overflow-auto trackComponent">
+      <div className="trackComponent -z-10 my-6 flex w-full flex-row items-center gap-6 overflow-auto md:flex-col">
         {tracks.map((item, index) => (
           <Dialog>
             <DialogTrigger key={index} className="w-full">
