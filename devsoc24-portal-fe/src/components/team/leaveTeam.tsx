@@ -42,7 +42,6 @@ const LeaveTeam = () => {
         },
       );
       setTeamData(response.data);
-      
     } catch (e) {
       if (axios.isAxiosError(e)) {
         switch (e.response?.status) {
@@ -63,13 +62,12 @@ const LeaveTeam = () => {
     }
   };
 
-
   const leaveTeam = async () => {
     const handleClick = async () => {
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/team/leave`, {
         withCredentials: true,
       });
-      console.log("left team");
+      // console.log("left team");
       SetIdea("left team");
       void fetchTeam();
       setTeam(true);

@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRef } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import {
   useTeamDataStore,
   useTeamStore,
@@ -19,6 +19,7 @@ import {
 } from "@/store/store";
 import { useRouter } from "next/navigation";
 import { type APIResponse } from "@/schemas/api";
+import toast from "react-hot-toast";
 
 function JoinTeam() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -29,7 +30,7 @@ function JoinTeam() {
   const { edit, setEdit } = useTeamEditStore();
   const router = useRouter();
   const handleClick = async () => {
-    try {
+    const handleSubmit = async () => {
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/team/join`,
         {
@@ -44,16 +45,30 @@ function JoinTeam() {
       SetIdea("idea found");
       setIsLeader(false);
       setTeam(false);
-    } catch (e) {
-      if (axios.isAxiosError(e)) {
-        switch (e.response?.status) {
-          case 202:
-          // console.log("Accepted");
+    };
+    void toast.promise(handleSubmit(), {
+      loading: "Cooking...",
+      success: () => {
+        void router.push("/home");
+        return `Team joined successfully!`;
+      },
+      error: (err: AxiosError) => {
+        switch (err.response?.status) {
+          case 404:
+            return `Account not found!`;
+          case 417:
+            return `User is already in a team!`;
+          case 409:
+            return `Invalid Team Code!`;
+          case 424:
+            return `Team is full!`;
+          case 400:
+            return `Please check your input and try again!`;
           default:
-          // console.log(e);
+            return `Something went wrong!`;
         }
-      }
-    }
+      },
+    });
   };
   const fetchTeam = async () => {
     try {
