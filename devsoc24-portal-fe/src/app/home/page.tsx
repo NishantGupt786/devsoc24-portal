@@ -6,7 +6,9 @@ import Logo from "@/components/logo";
 import Dashtitle from "@/assets/images/titleDashboard.svg";
 import CustomCard from "@/components/customCard";
 import TeamCard from "@/components/teamCard";
+import contentstack from "@/assets/images/contentstack.svg";
 import axios, { AxiosError, type AxiosResponse } from "axios";
+
 import {
   useIdeaStore,
   useLeaderStore,
@@ -260,42 +262,50 @@ export default function HomePage() {
   return (
     <>
       <ToastContainer />
-      <main className="max-w-screen flex h-fit flex-col items-start overflow-x-hidden bg-[#F4F5FA] lg:h-screen">
+      <main className="max-w-screen flex h-fit flex-col items-center overflow-x-hidden bg-[#F4F5FA] lg:h-screen">
         <div className="flex h-[8vh] w-full  items-center justify-between gap-x-8 bg-background  px-2 py-2 lg:px-6">
           <div className="flex flex-row gap-4 lg:gap-8">
-            <Logo className="h-9/10 w-auto scale-[0.75] lg:scale-[1] " />
+            <Logo className="h-9/10 b flex w-auto scale-[0.75] lg:scale-[1]" />
             <Image
               src={Dashtitle as HTMLImageElement}
               alt="title"
               className="w-[30vw] lg:w-auto"
             />
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger className="mr-2 lg:mr-10">
-              {/* This bkl is causing Hydration Error */}
-              {/* <Button variant="ghost" size="icon">
+          <div className="flex flex-row gap-8">
+            <Image
+              src={contentstack as HTMLImageElement}
+              alt="titlesponsor"
+              width={200}
+              className="scale-[1.2]"
+            />
+            <DropdownMenu>
+              <DropdownMenuTrigger className="mr-2 lg:mr-10">
+                {/* This bkl is causing Hydration Error */}
+                {/* <Button variant="ghost" size="icon">
                 <User />
               </Button> */}
 
-              <div>
-                <User />
-              </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <Link href="/profile">
-                <DropdownMenuLabel className="cursor-pointer">
-                  Profile
+                <div>
+                  <User />
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <Link href="/profile">
+                  <DropdownMenuLabel className="cursor-pointer">
+                    Profile
+                  </DropdownMenuLabel>
+                </Link>
+                <DropdownMenuSeparator />
+                <DropdownMenuLabel
+                  className="cursor-pointer text-red-500"
+                  onClick={handleLogout}
+                >
+                  Logout
                 </DropdownMenuLabel>
-              </Link>
-              <DropdownMenuSeparator />
-              <DropdownMenuLabel
-                className="cursor-pointer text-red-500"
-                onClick={handleLogout}
-              >
-                Logout
-              </DropdownMenuLabel>
-            </DropdownMenuContent>
-          </DropdownMenu>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
         <div className="flex h-full  flex-col">
           {showModal === "leave" && <LeaveTeam />}
@@ -334,13 +344,16 @@ export default function HomePage() {
                   : isLeader ? ideaCard : notLeader
               }
             />
-            <div className="flex max-h-full flex-col rounded-xl">
+            <div className="h-full ">
+              <TrackComponent />
+            </div>
+
+            {/* <div className="flex max-h-full flex-col rounded-xl">
               <Sponsors />
               <div className="flex flex-grow overflow-auto ">
-                {/* <div className="flex-grow">hello</div> */}
                 <TrackComponent />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </main>
