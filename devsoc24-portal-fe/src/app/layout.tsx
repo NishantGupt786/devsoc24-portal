@@ -17,29 +17,26 @@ export default function RootLayout({
 }) {
   useEffect(() => {
     // Ensure useEffect runs only on the client side
-    if (typeof window !== "undefined") {
-      const interval = setInterval(() => {
-        axios
-          .post(
-            `${process.env.NEXT_PUBLIC_API_URL}/refresh`,
-            {
-              nallaData: "",
-            },
-            {
-              withCredentials: true,
-            },
-          )
-          .then((res) => {
-            // console.log(res);
-          })
-          .catch((e) => {
-            // console.log(e);
-          });
-      }, 270000);
+    const interval = setInterval(() => {
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_API_URL}/refresh`,
+          {
+            nallaData: "",
+          },
+          {
+            withCredentials: true,
+          },
+        )
+        .then((res) => {
+          // console.log(res);
+        })
+        .catch((e) => {
+          // console.log(e);
+        });
+    }, 270000);
 
-      // Clean up interval on component unmount
-      return () => clearInterval(interval);
-    }
+    return () => clearInterval(interval);
   }, []);
 
   return (

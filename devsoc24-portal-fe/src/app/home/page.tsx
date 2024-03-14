@@ -323,15 +323,15 @@ export default function HomePage() {
               }
               cardDesc={
                 getIdea === "idea found"
-                  ? "Edit or View Idea"
-                  : "Submit an Idea"
+                  ? isLeader ? "Edit or View Idea" : "View Idea"
+                  : isLeader ? "Submit an Idea" : "View Idea"
               }
               buttonDetails={
                 getIdea === "idea found"
                   ? isLeader
                     ? ideaTherecard
                     : notLeader
-                  : ideaCard
+                  : isLeader ? ideaCard : notLeader
               }
             />
             <div className="flex max-h-full flex-col rounded-xl">

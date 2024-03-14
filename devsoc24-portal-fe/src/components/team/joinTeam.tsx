@@ -30,6 +30,10 @@ function JoinTeam() {
   const { edit, setEdit } = useTeamEditStore();
   const router = useRouter();
   const handleClick = async () => {
+    if (!inputRef.current?.value || inputRef.current?.value.length === 0) {
+      toast.error("Please enter a team code!");
+      return;
+    }
     const handleSubmit = async () => {
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/team/join`,
@@ -114,6 +118,7 @@ function JoinTeam() {
             placeholder="Team code"
             className="col-span-3"
             ref={inputRef}
+            maxLength={6}
           />
         </div>
         <div className="flex justify-center">

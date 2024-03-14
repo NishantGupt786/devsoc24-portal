@@ -13,7 +13,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { ideaSchema } from "@/schemas/idea";
 import toast from "react-hot-toast";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
+import { type APIResponse } from "@/schemas/api";
 
 interface FormValues {
   title: string;
@@ -43,6 +45,7 @@ import ToastContainer from "@/components/ToastContainer";
 const tracks = ["Track 1", "Track 2", "Track 3"];
 
 export default function EditIdeaForm() {
+  const router = useRouter();
   useEffect(() => {
     async function getIdeaSubmission() {
       try {
@@ -54,8 +57,19 @@ export default function EditIdeaForm() {
         );
         // console.log(res.data.data);
         form.reset(res.data.data);
-      } catch (error) {
-        // console.log("Error getting idea submission:", error);
+      } catch (e) {
+        if (axios.isAxiosError(e)) {
+          const axiosError = e as AxiosError<APIResponse>;
+          switch (axiosError.response?.status) {
+            case 409:
+              void router.push("/home");
+              break;
+            case 401:
+              void router.push("/");
+              break;
+            
+          }
+        }
       }
     }
     void getIdeaSubmission();
@@ -221,7 +235,7 @@ export default function EditIdeaForm() {
                           <Input
                             type="text"
                             id="figmaLink"
-                            placeholder="Figma link"
+                            placeholder="https://google.com"
                             {...field}
                             className={`h-14 bg-white pl-5 ${
                               form.getFieldState("figma_link").invalid
@@ -254,7 +268,7 @@ export default function EditIdeaForm() {
                             type="text"
                             id="githubLink"
                             {...field}
-                            placeholder="Github link"
+                            placeholder="https://google.com"
                             className={`h-14 bg-white pl-5 ${
                               form.getFieldState("github_link").invalid
                                 ? "border-red-500 focus:border-input focus:!ring-red-500"

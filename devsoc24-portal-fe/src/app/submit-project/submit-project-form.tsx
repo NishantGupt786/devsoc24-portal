@@ -205,7 +205,7 @@ await axios.post<SubmitProjectResponse>(
                           <Input
                             type="text"
                             id="figmaLink"
-                            placeholder="Figma link"
+                            placeholder="https://google.com"
                             {...field}
                             className={`h-14 bg-white pl-5 ${
                               form.getFieldState("figma_link").invalid
@@ -238,7 +238,7 @@ await axios.post<SubmitProjectResponse>(
                             type="text"
                             id="githubLink"
                             {...field}
-                            placeholder="Github link"
+                            placeholder="https://google.com"
                             className={`h-14 bg-white pl-5 ${
                               form.getFieldState("github_link").invalid
                                 ? "border-red-500 focus:border-input focus:!ring-red-500"
