@@ -27,13 +27,13 @@ export const resetSchema = z
         required_error: "Password is required",
         invalid_type_error: "Password must be a string",
       })
-      .min(6, "Password must be atleat 6 characters long"),
+      .min(6, "Password must be atleast 6 characters long"),
     confirmPassword: z
       .string({
         required_error: "Password is required",
         invalid_type_error: "Password must be a string",
       })
-      .min(6, "Password must be atleat 6 characters long"),
+      .min(6, "Password must be atleast 6 characters long"),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
