@@ -45,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>NDEVSOC&apos;24 | Portal</title>
+        <title>DEVSOC&apos;24 | Portal</title>
         <meta title="DEVSOC'24 | Portal"></meta>
         <meta
           name="description"

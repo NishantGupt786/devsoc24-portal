@@ -42,8 +42,9 @@ interface SubmitProjectResponse {
 import send from "@/assets/images/Send.svg";
 import Image from "next/image";
 import { useEffect } from "react";
-
+import { useRouter } from "next/navigation";
 export default function Profile() {
+  const router = useRouter();
   useEffect(() => {
     async function getIdeaSubmission() {
       try {
@@ -55,7 +56,24 @@ export default function Profile() {
         );
         // console.log(response.data.data);
         form.reset(response.data.data);
-      } catch (error) {
+      } catch (e) {
+        if (axios.isAxiosError(e)) {
+          switch (e.response?.status) {
+            case 401:
+              void router.push("/");
+              break;
+            case 404:
+              // console.log("no team");
+              break;
+            case 409:
+              // console.log("Not in team");
+              break;
+            default:
+              toast.error("Something went wrong"); //I just hope this works, check karlo bhay
+              // console.log(e);
+              break;
+          }
+        }
         // console.log("Error getting idea submission:", error);
       }
     }
@@ -94,6 +112,9 @@ export default function Profile() {
       error: `Something went wrong!`,
     });
   }
+  useEffect(() => {
+    form.setValue("block", "men's hostel - c block");
+  }, []);
 
   return (
     <>
@@ -280,6 +301,7 @@ export default function Profile() {
                                 Block
                                 <span className="text-[#FF0000]">*</span>
                               </Label>
+
                               <select
                                 value={form.watch("block")}
                                 onChange={(e) =>
@@ -287,9 +309,48 @@ export default function Profile() {
                                 }
                                 className="rounded-md border border-gray-200 p-4 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
                               >
-                                <option value="">Select Block</option>
+                                {form.getValues("gender") === "Male"
+                                  ? hostelDetails.mens.map((block) => (
+                                      <option
+                                        key={block}
+                                        value={block}
+                                        selected={
+                                          block === form.getValues("block")
+                                        }
+                                      >
+                                        {block}
+                                      </option>
+                                    ))
+                                  : form.getValues("gender") === "Female"
+                                    ? hostelDetails.ladies.map((block) => (
+                                        <option
+                                          key={block}
+                                          value={block}
+                                          selected={
+                                            block === form.getValues("block")
+                                          }
+                                        >
+                                          {block}
+                                        </option>
+                                      ))
+                                    : hostelDetails.all.map((block) => (
+                                        <option
+                                          key={block}
+                                          value={block}
+                                          selected={
+                                            block === form.getValues("block")
+                                          }
+                                        >
+                                          {block}
+                                        </option>
+                                      ))}
+
                                 {hostelDetails.all.map((block) => (
-                                  <option key={block} value={block}>
+                                  <option
+                                    key={block}
+                                    value={block}
+                                    selected={block === form.getValues("block")}
+                                  >
                                     {block}
                                   </option>
                                 ))}
