@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, Controller } from "react-hook-form";
-
+import {IdeaStore} from "@/store/store";
 import {
   Form,
   FormControl,
@@ -38,6 +38,7 @@ import ToastContainer from "@/components/ToastContainer";
 const tracks = ["Track 1", "Track 2", "Track 3"];
 
 export default function SubmitIdeaForm() {
+  const { getIdea, SetIdea } = IdeaStore();
   const router = useRouter();
   const form = useForm<FormValues>({
     resolver: zodResolver(ideaSchema),
@@ -65,6 +66,7 @@ export default function SubmitIdeaForm() {
     void toast.promise(handleSubmit(), {
       loading: "Cooking...",
       success: () => {
+        SetIdea("idea found");
         void router.push("/home");
         return `Idea submitted successfully!`;
       },

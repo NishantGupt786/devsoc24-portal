@@ -37,7 +37,7 @@ import Sponsors from "@/components/sponsors";
 
 interface ideaProps {
   message: string;
-  status: boolean;
+  status: string;
   data?: {
     title: string;
     description: string;
@@ -134,8 +134,9 @@ export default function HomePage() {
           withCredentials: true,
         },
       );
-      SetIdea("idea found");
-      // console.log("FETCH IDEA: ", response);
+      if (response.data.status === "success") {
+        SetIdea("idea found");
+      }
     } catch (e) {
       if (axios.isAxiosError(e)) {
         const axiosError = e as AxiosError<APIResponse>;
@@ -144,10 +145,7 @@ export default function HomePage() {
             router.push("/");
             break;
           case 404:
-            if (axiosError.response?.data.message === "user does not exist") {
-              router.push("/");
-            }
-            // console.log("no team");
+            SetIdea("");
             break;
           case 417:
             // console.log("team no idea");
