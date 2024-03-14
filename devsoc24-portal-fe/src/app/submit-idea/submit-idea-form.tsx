@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, Controller } from "react-hook-form";
-import {IdeaStore} from "@/store/store";
+import { IdeaStore } from "@/store/store";
 import {
   Form,
   FormControl,
@@ -78,6 +78,9 @@ export default function SubmitIdeaForm() {
             return `Incorrect credentials`;
           case 400:
             return `Please check your input and try again!`;
+          case 401:
+            void router.push("/");
+            return `Session Expired`;
           default:
             return `Something went wrong!`;
         }
@@ -301,18 +304,16 @@ export default function SubmitIdeaForm() {
               </div>
             </div>
           </div>
-<div className="w-screen flex items-center justify-center">
-
-          <Button
-            className="my-5 bg-[#0019FF]"
-            type="submit"
-            //   disabled={isSubmitting}
-          >
-            <Image src={send as HTMLImageElement} alt="b" />
-            <span className="pl-2">Submit Idea</span>
-          </Button>
-</div>
-
+          <div className="flex w-screen items-center justify-center">
+            <Button
+              className="my-5 bg-[#0019FF]"
+              type="submit"
+              //   disabled={isSubmitting}
+            >
+              <Image src={send as HTMLImageElement} alt="b" />
+              <span className="pl-2">Submit Idea</span>
+            </Button>
+          </div>
         </form>
       </Form>
     </>
