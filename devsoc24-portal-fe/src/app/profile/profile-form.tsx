@@ -13,10 +13,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { profileSchema } from "@/schemas/profile";
 import toast from "react-hot-toast";
-import blocks from "public/hostels";
 import axios, { type AxiosResponse } from "axios";
 import { type userProps } from "@/interfaces";
 import ToastContainer from "@/components/ToastContainer";
+import { hostelDetails } from "public/hostels";
 
 interface FormValues {
   first_name: string;
@@ -288,7 +288,7 @@ export default function Profile() {
                                 className="rounded-md border border-gray-200 p-4 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
                               >
                                 <option value="">Select Block</option>
-                                {blocks.map((block) => (
+                                {hostelDetails.all.map((block) => (
                                   <option key={block} value={block}>
                                     {block}
                                   </option>

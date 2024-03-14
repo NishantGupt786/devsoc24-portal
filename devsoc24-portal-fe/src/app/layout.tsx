@@ -16,30 +16,67 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   useEffect(() => {
-    setInterval(() => {
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_API_URL}/refresh`,
-          {
-            nallaData: "",
-          },
-          {
-            withCredentials: true,
-          },
-        )
-        .then((res) => {
-          // console.log(res);
-        })
-        .catch((e) => {
-          // console.log(e);
-        });
-    }, 270000);
+    // Ensure useEffect runs only on the client side
+    if (typeof window !== "undefined") {
+      const interval = setInterval(() => {
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_API_URL}/refresh`,
+            {
+              nallaData: "",
+            },
+            {
+              withCredentials: true,
+            },
+          )
+          .then((res) => {
+            // console.log(res);
+          })
+          .catch((e) => {
+            // console.log(e);
+          });
+      }, 270000);
+
+      // Clean up interval on component unmount
+      return () => clearInterval(interval);
+    }
   }, []);
 
   return (
     <html lang="en">
+      <head>
+        <title>NDEVSOC&apos;24 | Portal</title>
+        <meta title="DEVSOC'24 | Portal"></meta>
+        <meta
+          name="description"
+          content={
+            "Welcome to the DEVSOC-24 Portal! From idea submission to your final project, the portal is your guide for DEVSOC. Happy Hacking!"
+          }
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon.ico"
+        ></link>
+
+        {/* Open Graph tags */}
+        <meta property="og:title" content={"DEVSOC'24 | Portal"} />
+        <meta
+          property="og:description"
+          content={
+            "Welcome to the DEVSOC-24 Portal! From idea submission to your final project, the portal is your guide for DEVSOC. Happy Hacking!"
+          }
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={"/thumbnail.png"} />
+        <meta property="og:url" content={""} />
+        <meta property="og:site_name" content={"DEVSOC'24 | Portal"} />
+      </head>
       <body className={`font-sans ${inter.className}`}>
-        <div className="w-screen bg-[#2463EB] h-auto flex items-center justify-center font-bold">*For Internal Testing Purposes Only*</div>
+        <div className="flex h-auto w-screen items-center justify-center bg-[#2463EB] font-bold">
+          *For Internal Testing Purposes Only*
+        </div>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
