@@ -8,13 +8,13 @@ export const profileSchema = z.object({
       invalid_type_error: "First Name must be a string",
     })
     .min(3, "First Name must be atleast 3 characters long")
-    .max(50, "First Name cannot be longer than 50 characters"),
+    .max(20, "First Name cannot be longer than 20 characters"),
   last_name: z
     .string({
       required_error: "Last Name is required",
       invalid_type_error: "Last Name must be a string",
     })
-    .max(50, "Last Name cannot be longer than 50 characters"),
+    .max(20, "Last Name cannot be longer than 20 characters"),
   vit_email: z.string({
     invalid_type_error: "VIT Email must be a string",
   }),

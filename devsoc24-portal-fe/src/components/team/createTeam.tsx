@@ -45,6 +45,14 @@ function CreateTeam() {
   const router = useRouter();
 
   const handleClick = async () => {
+    if (!inputRef.current?.value || inputRef.current?.value.length === 0) {
+      toast.error("Please enter a team name!");
+      return;
+    }
+    if (inputRef.current?.value.length >= 20) {
+      toast.error("Team name should not be more than 20 characters!");
+      return;
+    }
     try {
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/team/create`,
@@ -55,7 +63,7 @@ function CreateTeam() {
           withCredentials: true,
         },
       );
-      
+
       setIsLeader(true);
       SetIdea("");
       setIdea(409);
