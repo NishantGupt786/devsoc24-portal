@@ -118,6 +118,7 @@ export default function HomePage() {
             // console.log("Not in team");
             break;
           default:
+            toast.error("Something went wrong"); //I just hope this works, check karlo bhay
             // console.log(e);
             break;
         }
@@ -211,6 +212,7 @@ export default function HomePage() {
       // console.log("Loner saala");
       setTeam(true);
     } else {
+      void fetchIdea();
       void fetchTeam();
     }
   }, []);
