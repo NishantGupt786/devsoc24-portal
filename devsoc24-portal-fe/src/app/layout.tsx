@@ -71,9 +71,6 @@ export default function RootLayout({
         <meta property="og:site_name" content={"DEVSOC'24 | Portal"} />
       </head>
       <body className={`font-sans ${inter.className}`}>
-        <div className="flex h-auto w-[100%] items-center justify-center bg-[#2463EB] font-bold">
-          *For Internal Testing Purposes Only*
-        </div>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
