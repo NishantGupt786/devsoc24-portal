@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { profileSchema } from "@/schemas/profile";
 import toast from "react-hot-toast";
-import blocks from "@/../public/hostels.json";
+import blocks from "public/hostels";
 import axios, { type AxiosResponse } from "axios";
 import { type userProps } from "@/interfaces";
 import ToastContainer from "@/components/ToastContainer";

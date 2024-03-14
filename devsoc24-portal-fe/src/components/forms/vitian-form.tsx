@@ -1,8 +1,8 @@
 "use client";
 
-import blocks from "@/../public/hostels.json";
+import { hostelDetails } from "public/hostels";
 import { vitianDetails } from "@/schemas/signup";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type z } from "zod";
@@ -48,6 +48,7 @@ export default function VitianForm({
     },
     mode: "onChange",
   });
+  const [gender, setGender] = useState("");
 
   async function onSubmit(data: VitianDetailsFormValues) {
     // const toastId = toast.loading("Saving...", { autoClose: false });
@@ -99,6 +100,11 @@ export default function VitianForm({
       },
     });
   }
+  useEffect(() => {
+    const temp = localStorage.getItem("gender");
+    setGender(temp!);
+  }, []);
+
   return (
     <>
       <ToastContainer />
@@ -173,15 +179,35 @@ export default function VitianForm({
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {blocks.map((block, index) => (
-                          <SelectItem
-                            key={index}
-                            value={block}
-                            className="rounded-none border-b border-border/30"
-                          >
-                            <span>{block}</span>
-                          </SelectItem>
-                        ))}
+                        {gender === "Male"
+                          ? hostelDetails.mens.map((block, index) => (
+                              <SelectItem
+                                key={index}
+                                value={block}
+                                className="rounded-none border-b border-border/30"
+                              >
+                                <span>{block}</span>
+                              </SelectItem>
+                            ))
+                          : gender === "Female"
+                            ? hostelDetails.ladies.map((block, index) => (
+                                <SelectItem
+                                  key={index}
+                                  value={block}
+                                  className="rounded-none border-b border-border/30"
+                                >
+                                  <span>{block}</span>
+                                </SelectItem>
+                              ))
+                            : hostelDetails.all.map((block, index) => (
+                                <SelectItem
+                                  key={index}
+                                  value={block}
+                                  className="rounded-none border-b border-border/30"
+                                >
+                                  <span>{block}</span>
+                                </SelectItem>
+                              ))}
                       </SelectContent>
                     </Select>
                   </div>
