@@ -13,7 +13,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { ideaSchema } from "@/schemas/idea";
 import toast from "react-hot-toast";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
+import { type APIResponse } from "@/schemas/api";
 
 interface FormValues {
   title: string;
@@ -43,6 +45,7 @@ import ToastContainer from "@/components/ToastContainer";
 const tracks = ["Track 1", "Track 2", "Track 3"];
 
 export default function EditProjectForm() {
+  const router = useRouter();
   useEffect(() => {
     async function getIdeaSubmission() {
       try {
@@ -54,8 +57,19 @@ export default function EditProjectForm() {
         );
         // console.log(res.data.data);
         form.reset(res.data.data);
-      } catch (error) {
-        // console.log("Error getting idea submission:", error);
+      } catch (e) {
+        if (axios.isAxiosError(e)) {
+          const axiosError = e as AxiosError<APIResponse>;
+          switch (axiosError.response?.status) {
+            case 409:
+              void router.push("/home");
+              break;
+            case 401:
+              void router.push("/");
+              break;
+            
+          }
+        }
       }
     }
     void getIdeaSubmission();

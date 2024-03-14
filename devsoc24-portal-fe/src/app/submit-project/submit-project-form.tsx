@@ -18,6 +18,7 @@ import Image from "next/image";
 import toast from "react-hot-toast";
 import axios, { AxiosError } from "axios";
 import ToastContainer from "@/components/ToastContainer";
+import {useRouter} from "next/navigation";
 interface FormValues {
   title: string;
   track: string;
@@ -36,7 +37,7 @@ interface SubmitProjectResponse {
 const tracks = ["Track 1", "Track 2", "Track 3"];
 
 export default function SubmitProjectForm() {
-
+  const router = useRouter();
   const form = useForm<FormValues>({
     resolver: zodResolver(ideaSchema),
     defaultValues: {
@@ -52,7 +53,7 @@ export default function SubmitProjectForm() {
 
   async function onSubmit(data: FormValues) {
     const handleSubmit = async () => {
-await axios.post<SubmitProjectResponse>(
+      await axios.post<SubmitProjectResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/project/create`,
         data,
         {
@@ -69,6 +70,9 @@ await axios.post<SubmitProjectResponse>(
         switch (err.response?.status) {
           case 404:
             return `Account not found!`;
+          case 401:
+            void router.push("/");
+            return `Session Expired`;
           default:
             return `Project Submission failed!`;
         }
