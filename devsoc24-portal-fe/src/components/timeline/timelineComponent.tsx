@@ -5,20 +5,61 @@ import img3 from "@/assets/images/timeline/none.svg";
 import Image from "next/image";
 
 const timelineData = [
-  "label1",
-  "label2",
-  "label3",
-  "label4",
-  "label5",
-  "label6",
-  "label7",
-  "label8",
-  "label9",
+  {
+    date: "17th March",
+    time: "18:00",
+    desc: "Entry and Registration",
+  },
+  {
+    date: "17th March",
+    time: "20:00",
+    desc: "Hacking Starts",
+  },
+  {
+    date: "18th March",
+    time: "3:00",
+    desc: "Review 1",
+  },
+  {
+    date: "18th March",
+    time: "12:00",
+    desc: "ContentStack speaker session",
+  },
+  {
+    date: "18th March",
+    time: "16:00",
+    desc: "Akhil Sharma speaker session",
+  },
+  {
+    date: "18th March",
+    time: "22:00",
+    desc: "Saurabh Soni speaker session",
+  },
+  {
+    date: "19th March",
+    time: "2:00",
+    desc: "Review 2",
+  },
+  {
+    date: "19th March",
+    time: "13:00",
+    desc: "End of Hacking",
+  },
+  {
+    date: "19th March",
+    time: "14:00",
+    desc: "Final Pitches",
+  },
+  {
+    date: "19th March",
+    time: "16:00",
+    desc: "Prize distribution and Closing",
+  },
 ];
 
 const TimelineComponent = (props: { count: number }) => {
   return (
-    <div className="trackComponent flex h-[25vh] rounded-xl bg-white w-full overflow-auto">
+    <div className="trackComponent flex h-[25vh] w-full overflow-auto rounded-xl bg-white">
       <div className="flex flex-col items-center justify-between pl-6 pt-4 font-semibold text-[#45464E] ">
         <p className="self-start">Timeline</p>
         <div className=" flex h-full flex-row items-center overflow-x-auto">
@@ -36,9 +77,11 @@ const TimelineComponent = (props: { count: number }) => {
                     width={50}
                     className="h-auto w-fit min-w-[300px]"
                   />
-                  <p className="m-1 w-full text-center">
-                    {timelineData[index]}
-                  </p>
+                  <div className="flex-col m-1 flex w-full text-center">
+                    <p>{timelineData[index]?.desc}</p>
+                    <p className="text-[12px] text-black/70">{timelineData[index]?.time}</p>
+                    <p className="text-[12px] text-black/70">{timelineData[index]?.date}</p>
+                  </div>
                 </div>
               );
             } else if (index === props.count) {
@@ -54,9 +97,11 @@ const TimelineComponent = (props: { count: number }) => {
                     width={50}
                     className="h-auto w-fit min-w-[320px]"
                   />
-                  <p className="m-1 w-full text-center">
-                    {timelineData[index]}
-                  </p>
+                  <div className="flex-col m-1 flex w-full text-center">
+                    <p>{timelineData[index]?.desc}</p>
+                    <p className="text-[12px] text-black/70">{timelineData[index]?.time}</p>
+                    <p className="text-[12px] text-black/70">{timelineData[index]?.date}</p>
+                  </div>
                 </div>
               );
             } else {
@@ -72,9 +117,11 @@ const TimelineComponent = (props: { count: number }) => {
                     width={50}
                     className="h-auto w-fit min-w-[320px]"
                   />
-                  <p className="m-1 w-full text-center">
-                    {timelineData[index]}
-                  </p>
+                  <div className="flex-col m-1 flex w-full text-center">
+                    <p>{timelineData[index]?.desc}</p>
+                    <p className="text-[12px] text-black/70">{timelineData[index]?.time}</p>
+                    <p className="text-[12px] text-black/70">{timelineData[index]?.date}</p>
+                  </div>
                 </div>
               );
             }
