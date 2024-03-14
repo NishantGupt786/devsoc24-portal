@@ -61,7 +61,7 @@ const Kick = () => {
     await toast.promise(handleClick(), {
       loading: "Loading...",
       success: () => {
-        return `Accepted`;
+        return `Kicked`;
       },
       error: `Something went wrong`,
     });

@@ -77,7 +77,7 @@ const LeaveTeam = () => {
     await toast.promise(handleClick(), {
       loading: "Loading...",
       success: () => {
-        return `Accepted`;
+        return `Successful`;
       },
       error: `Something went wrong`,
     });

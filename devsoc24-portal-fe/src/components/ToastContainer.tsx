@@ -3,7 +3,7 @@ import { Toaster } from "react-hot-toast";
 
 const ToastContainer = () => {
   return (
-    <div>
+    <div className="fixed">
       <Toaster
         position="top-right"
         reverseOrder={false}
@@ -14,6 +14,7 @@ const ToastContainer = () => {
           className: "",
           duration: 3000,
           style: {
+            position: "fixed",
             background: "#FFFFFF",
             color: "#000000",
           },
