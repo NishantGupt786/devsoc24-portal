@@ -265,16 +265,19 @@ export default function HomePage() {
             <Image
               src={Dashtitle as HTMLImageElement}
               alt="title"
-              className="w-[30vw] lg:w-auto hidden sm:block"
+              className="hidden w-[30vw] sm:block lg:w-auto"
             />
           </div>
           <div className="flex flex-row gap-8">
-            <Image
-              src={contentstack as HTMLImageElement}
-              alt="titlesponsor"
-              width={200}
-              className="scale-[1.2]"
-            />
+            <Link href="https://www.contentstack.com/">
+              <Image
+                src={contentstack as HTMLImageElement}
+                alt="titlesponsor"
+                width={200}
+                className="scale-[1.2]"
+              />
+            </Link>
+
             <DropdownMenu>
               <DropdownMenuTrigger className="mr-2 lg:mr-10">
                 {/* This bkl is causing Hydration Error */}
@@ -329,8 +332,12 @@ export default function HomePage() {
               }
               cardDesc={
                 getIdea === "idea found"
-                  ? isLeader ? "Edit or View Idea" : "View Idea"
-                  : isLeader ? "Submit an Idea" : "View Idea"
+                  ? isLeader
+                    ? "Edit or View Idea"
+                    : "View Idea"
+                  : isLeader
+                    ? "Submit an Idea"
+                    : "View Idea"
               }
               buttonDetails={
                 getIdea === "idea found" && !team

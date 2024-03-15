@@ -34,7 +34,7 @@ export default function RootLayout({
         .catch((e) => {
           // console.log(e);
         });
-    }, 270000);
+    }, 200000);
 
     return () => clearInterval(interval);
   }, []);
