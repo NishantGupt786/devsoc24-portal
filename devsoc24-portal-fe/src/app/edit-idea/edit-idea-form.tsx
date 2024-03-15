@@ -177,7 +177,9 @@ export default function EditIdeaForm() {
                                 }
                                 className="rounded-md border border-gray-200 p-4 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
                               >
-                                <option value="">Select Project Track</option>
+                                <option value="" disabled selected hidden>
+                                  Select Project Track
+                                </option>
                                 {tracks.map((track) => (
                                   <option key={track} value={track}>
                                     {track}

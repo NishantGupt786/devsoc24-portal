@@ -8,16 +8,19 @@ export const ideaSchema = z.object({
     })
     .max(30, "Title cannot be longer than 50 characters")
     .refine((value) => value.trim().length > 1, {
-      message: "Title must not be empty",
+      message: "Invalid title",
     })
     .refine((value) => value.trim().length < 100, {
       message: "Invalid title",
     }),
 
-  track: z.string({
-    required_error: "Project track is required",
-    invalid_type_error: "Project track be a string",
-  }),
+  track: z
+    .literal("Interactive Engagement")
+    .or(z.literal("Eco-Innovations"))
+    .or(z.literal("Future of Work"))
+    .or(z.literal("Community Building"))
+    .or(z.literal("Ethical Technology"))
+    .or(z.literal("Open Innovation")),
 
   description: z
     .string({
@@ -58,7 +61,8 @@ export const ideaSchema = z.object({
     .max(100, "Other links cannot be longer than 200 characters")
     .refine((value) => value.trim().length > 0, {
       message: "Others must not be empty",
-    }).refine((value) => value.trim().length < 200, {
+    })
+    .refine((value) => value.trim().length < 200, {
       message: "Invalid others",
     })
     .or(z.literal("")),
