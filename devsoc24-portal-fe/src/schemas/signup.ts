@@ -45,8 +45,8 @@ export const personalDetailsSchema = z.object({
     })
     .min(3, "First Name must be atleast 3 characters long")
     .max(50, "First Name cannot be longer than 50 characters")
-    .refine((value) => value.trim().length > 0, {
-      message: "First Name must not be empty",
+    .refine((value) => value.trim().length > 3, {
+      message: "First Name invalid",
     }),
   lastName: z
     .string({
@@ -54,8 +54,8 @@ export const personalDetailsSchema = z.object({
       invalid_type_error: "Last Name must be a string",
     })
     .max(50, "Last Name cannot be longer than 50 characters")
-    .refine((value) => value.trim().length > 0, {
-      message: "Last Name must not be empty",
+    .refine((value) => value.trim().length > 3, {
+      message: "Last Name invalid",
     }),
   email: z
     .string({
