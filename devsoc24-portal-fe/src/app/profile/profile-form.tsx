@@ -145,7 +145,6 @@ export default function Profile() {
                             type="text"
                             id="first-name"
                             {...field}
-                            placeholder="John"
                             className={`h-10 bg-white pl-5 ${
                               form.getFieldState("first_name").invalid
                                 ? "border-red-500 focus:border-input focus:!ring-red-500"
@@ -175,7 +174,6 @@ export default function Profile() {
                             type="text"
                             id="last-name"
                             {...field}
-                            placeholder="Doe"
                             className={`h-10 bg-white pl-5 ${
                               form.getFieldState("last_name").invalid
                                 ? "border-red-500 focus:border-input focus:!ring-red-500"
@@ -236,7 +234,6 @@ export default function Profile() {
                             type="text"
                             id="phone"
                             {...field}
-                            placeholder="9098909876"
                             className={`h-10 bg-white pl-5 ${
                               form.getFieldState("phone_number").invalid
                                 ? "border-red-500 focus:border-input focus:!ring-red-500"
@@ -268,7 +265,6 @@ export default function Profile() {
                             type="text"
                             id="reg_no"
                             {...field}
-                            placeholder="22BBB0000"
                             className={`h-10 bg-white pl-5 ${
                               form.getFieldState("reg_no").invalid
                                 ? "border-red-500 focus:border-input focus:!ring-red-500"
@@ -371,7 +367,6 @@ export default function Profile() {
                           <Input
                             type="text"
                             id="room"
-                            placeholder="1000"
                             {...field}
                             className={`h-10 bg-white pl-5 ${
                               form.getFieldState("room").invalid

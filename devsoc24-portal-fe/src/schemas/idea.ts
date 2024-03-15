@@ -22,15 +22,15 @@ export const ideaSchema = z.object({
       invalid_type_error: "Description be a string",
     })
     .min(50, "Description must be at least 50 characters")
-    .max(2500, "Description cannot be longer than 500 characters")
+    .max(2500, "Description cannot be longer than 2500 characters")
     .refine((value) => value.trim().length > 0, {
       message: "Description must not be empty",
-      path: ["description"],
     }),
   figma_link: z
     .string({
       invalid_type_error: "Figma Link be a string",
     })
+    .max(200, "Figma link cannot be longer than 100 characters")
     .url("Figma link must be a url")
     .optional()
     .or(z.literal("")),
