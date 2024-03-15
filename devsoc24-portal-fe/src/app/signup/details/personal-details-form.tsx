@@ -42,7 +42,7 @@ export default function PersonalDetails({
       firstName: "",
       lastName: "",
       email: email ?? "",
-      phoneNumber: "",
+      phone_number: "",
       country: "+91",
       gender: undefined,
     },
@@ -54,7 +54,7 @@ export default function PersonalDetails({
     form.setValue("firstName", localStorage.getItem("first_name") ?? "");
     form.setValue("lastName", localStorage.getItem("last_name") ?? "");
     form.setValue("email", email ?? "");
-    form.setValue("phoneNumber", localStorage.getItem("phone_number") ?? "");
+    form.setValue("phone_number", localStorage.getItem("phone_number") ?? "");
     form.setValue("country", localStorage.getItem("country") ?? "+91");
     form.setValue(
       "gender",
@@ -69,7 +69,7 @@ export default function PersonalDetails({
   async function onSubmit(data: PersonalDetailsFormValues) {
     localStorage.setItem("first_name", data.firstName);
     localStorage.setItem("last_name", data.lastName);
-    localStorage.setItem("phone_number", data.phoneNumber);
+    localStorage.setItem("phone_number", data.phone_number);
     localStorage.setItem("country", data.country);
     localStorage.setItem("gender", data.gender);
     setForm(1);
@@ -163,7 +163,7 @@ export default function PersonalDetails({
 
         <FormField
           control={form.control}
-          name="phoneNumber"
+          name="phone_number"
           render={({ field }) => (
             <FormItem className="grow">
               <FormLabel>Phone Number</FormLabel>
@@ -176,7 +176,7 @@ export default function PersonalDetails({
                     required
                     {...field}
                     className={`pl-[80px] ${
-                      form.getFieldState("phoneNumber").invalid
+                      form.getFieldState("phone_number").invalid
                         ? "border-red-500 focus:border-input focus:!ring-red-500"
                         : ""
                     }`}

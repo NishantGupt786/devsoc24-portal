@@ -65,7 +65,7 @@ export const personalDetailsSchema = z.object({
     .email({
       message: "Email must be a valid email address",
     }),
-  phoneNumber: z
+  phone_number: z
     .string({
       required_error: "Required",
       invalid_type_error: "Phone number must be a string",
