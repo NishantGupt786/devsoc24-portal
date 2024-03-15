@@ -35,7 +35,29 @@ export const profileSchema = z.object({
   block: z
     .literal("Ladies' Hostel - A Block")
     .or(z.literal("Ladies' Hostel - B Block"))
-    // Rest of the blocks definitions
+    .or(z.literal("Ladies' Hostel - C Block"))
+    .or(z.literal("Ladies' Hostel - D Block"))
+    .or(z.literal("Ladies' Hostel - E Block"))
+    .or(z.literal("Ladies' Hostel - F Block"))
+    .or(z.literal("Ladies' Hostel - G Block"))
+    .or(z.literal("Ladies' Hostel - H Block"))
+    .or(z.literal("Men's Hostel - A Block"))
+    .or(z.literal("Men's Hostel - B Block"))
+    .or(z.literal("Men's Hostel - B Annex"))
+    .or(z.literal("Men's Hostel - C Block"))
+    .or(z.literal("Men's Hostel - D Block"))
+    .or(z.literal("Men's Hostel - D Annex"))
+    .or(z.literal("Men's Hostel - E Block"))
+    .or(z.literal("Men's Hostel - F Block"))
+    .or(z.literal("Men's Hostel - G Block"))
+    .or(z.literal("Men's Hostel - H Block"))
+    .or(z.literal("Men's Hostel - J Block"))
+    .or(z.literal("Men's Hostel - K Block"))
+    .or(z.literal("Men's Hostel - L Block"))
+    .or(z.literal("Men's Hostel - M Block"))
+    .or(z.literal("Men's Hostel - N Block"))
+    .or(z.literal("Men's Hostel - P Block"))
+    .or(z.literal("Men's Hostel - Q Block"))
     .or(z.literal("Men's Hostel - R Block")),
   room: z
     .string({
