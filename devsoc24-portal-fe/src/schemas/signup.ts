@@ -44,13 +44,19 @@ export const personalDetailsSchema = z.object({
       invalid_type_error: "First Name must be a string",
     })
     .min(3, "First Name must be atleast 3 characters long")
-    .max(50, "First Name cannot be longer than 50 characters"),
+    .max(50, "First Name cannot be longer than 50 characters")
+    .refine((value) => value.trim().length > 0, {
+      message: "First Name must not be empty",
+    }),
   lastName: z
     .string({
       required_error: "Last Name is required",
       invalid_type_error: "Last Name must be a string",
     })
-    .max(50, "Last Name cannot be longer than 50 characters"),
+    .max(50, "Last Name cannot be longer than 50 characters")
+    .refine((value) => value.trim().length > 0, {
+      message: "Last Name must not be empty",
+    }),
   email: z
     .string({
       required_error: "Email is required",
@@ -64,6 +70,7 @@ export const personalDetailsSchema = z.object({
       required_error: "Required",
       invalid_type_error: "Phone number must be a string",
     })
+    .regex(/^\d{10}$/, "Enter a valid 10-digit phone number")
     .min(10, "Enter a valid phone number")
     .max(10, "Enter a valid phone number"),
   country: z
@@ -128,7 +135,10 @@ export const vitianDetails = z.object({
       invalid_type_error: "Room number must be a string",
     })
     .min(1, "Enter a valid room number")
-    .max(10, "Enter a valid room number"),
+    .max(4, "Enter a valid room number")
+    .refine((value) => value.trim().length > 0, {
+      message: "First Name must not be empty",
+    }),
 });
 
 export const externalDetails = z.object({
@@ -208,5 +218,8 @@ export const createTeamSchema = z.object({
       required_error: "Required",
       invalid_type_error: "Team name must be a string",
     })
-    .max(50, "Enter a valid team name"),
+    .max(50, "Enter a valid team name")
+    .refine((value) => value.trim().length > 0, {
+      message: "Team Name must not be empty",
+    }),
 });
