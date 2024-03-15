@@ -66,7 +66,6 @@ export const profileSchema = z.object({
     })
     .min(1, "Enter a valid room number")
     .max(4, "Enter a valid room number")
-    .regex(/^\d{4}$/, "Enter a valid room number")
     .refine((value) => value.trim().length > 0, {
       message: "Room number must not be empty or contain only spaces",
     }),

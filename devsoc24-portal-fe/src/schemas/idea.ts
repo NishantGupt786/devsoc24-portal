@@ -50,5 +50,5 @@ export const ideaSchema = z.object({
     })
     .refine(value => value.trim().length > 0, {
         message: "Others must not be empty",
-    }),
+    }).or(z.literal('')),
 });

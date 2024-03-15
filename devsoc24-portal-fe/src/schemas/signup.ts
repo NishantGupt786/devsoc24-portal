@@ -136,7 +136,6 @@ export const vitianDetails = z.object({
     })
     .min(1, "Enter a valid room number")
     .max(4, "Enter a valid room number")
-    .regex(/^\d{4}$/, "Enter a valid room number")
     .refine((value) => value.trim().length > 0, {
       message: "First Name must not be empty",
     }),
