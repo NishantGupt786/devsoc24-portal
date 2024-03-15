@@ -186,7 +186,7 @@ export default function HomePage() {
             break;
           case 417:
             setTeam(true);
-            // console.log("no team");
+            
             break;
           case 200:
             setTeam(true);
@@ -337,11 +337,11 @@ export default function HomePage() {
                   : isLeader ? "Submit an Idea" : "View Idea"
               }
               buttonDetails={
-                getIdea === "idea found"
+                getIdea === "idea found" && !team
                   ? isLeader
                     ? ideaTherecard
                     : notLeader
-                  : isLeader ? ideaCard : notLeader
+                  : ideaCard
               }
             />
             <div className="h-full ">

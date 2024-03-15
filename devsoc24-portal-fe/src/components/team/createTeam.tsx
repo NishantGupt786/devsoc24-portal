@@ -45,7 +45,7 @@ function CreateTeam() {
   const router = useRouter();
 
   const handleClick = async () => {
-    if (!inputRef.current?.value || inputRef.current?.value.length === 0) {
+    if (!inputRef.current?.value || inputRef.current?.value.trim().length === 0) {
       toast.error("Please enter a team name!");
       return;
     }
