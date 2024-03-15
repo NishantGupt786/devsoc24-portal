@@ -18,7 +18,7 @@ import Image from "next/image";
 import toast from "react-hot-toast";
 import axios, { AxiosError } from "axios";
 import ToastContainer from "@/components/ToastContainer";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 interface FormValues {
   title: string;
   track: string;
@@ -34,7 +34,14 @@ interface SubmitProjectResponse {
   data: unknown;
 }
 
-const tracks = ["Track 1", "Track 2", "Track 3"];
+const tracks = [
+  "Interactive Engagement",
+  "Eco-Innovations",
+  "Community Building",
+  "Future of Work",
+  "Ethical Technology",
+  "Open Innovation",
+];
 
 export default function SubmitProjectForm() {
   const router = useRouter();

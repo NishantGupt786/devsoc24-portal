@@ -35,7 +35,14 @@ interface SubmitProjectResponse {
 import send from "@/assets/images/Send.svg";
 import Image from "next/image";
 import ToastContainer from "@/components/ToastContainer";
-const tracks = ["Track 1", "Track 2", "Track 3"];
+const tracks = [
+  "Interactive Engagement",
+  "Eco-Innovations",
+  "Community Building",
+  "Future of Work",
+  "Ethical Technology",
+  "Open Innovation",
+];
 
 export default function SubmitIdeaForm() {
   const { getIdea, SetIdea } = IdeaStore();
