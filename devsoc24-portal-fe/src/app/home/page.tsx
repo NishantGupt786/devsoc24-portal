@@ -186,10 +186,6 @@ export default function HomePage() {
             break;
           case 417:
             setTeam(true);
-            
-            break;
-          case 200:
-            setTeam(true);
             break;
           default:
             // console.log(e);

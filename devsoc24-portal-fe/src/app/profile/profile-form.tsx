@@ -22,7 +22,7 @@ interface FormValues {
   first_name: string;
   last_name: string;
   email: string;
-  phone: string;
+  phone_number: string;
   gender: string;
   vit_email: string;
   block: string;
@@ -85,7 +85,7 @@ export default function Profile() {
     defaultValues: {
       first_name: "",
       last_name: "",
-      phone: "",
+      phone_number: "",
       vit_email: "",
       block: "",
       room: "",
@@ -223,7 +223,7 @@ export default function Profile() {
               <div>
                 <FormField
                   control={form.control}
-                  name="phone"
+                  name="phone_number"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
@@ -238,7 +238,7 @@ export default function Profile() {
                             {...field}
                             placeholder="9098909876"
                             className={`h-10 bg-white pl-5 ${
-                              form.getFieldState("phone").invalid
+                              form.getFieldState("phone_number").invalid
                                 ? "border-red-500 focus:border-input focus:!ring-red-500"
                                 : ""
                             }`}

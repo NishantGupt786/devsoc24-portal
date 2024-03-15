@@ -52,7 +52,7 @@ export interface userProps {
     last_name: string;
     reg_no: string;
     email: string;
-    phone: string;
+    phone_number: string;
     college: string;
     city: string;
     state: string;

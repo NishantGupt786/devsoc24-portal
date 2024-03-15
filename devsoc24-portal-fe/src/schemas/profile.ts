@@ -24,7 +24,7 @@ export const profileSchema = z.object({
   vit_email: z.string({
     invalid_type_error: "VIT Email must be a string",
   }),
-  phone: z
+  phone_number: z
     .string({
       required_error: "Required",
       invalid_type_error: "Phone number must be a string",

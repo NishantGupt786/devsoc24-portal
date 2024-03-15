@@ -51,14 +51,14 @@ function Submission() {
               Project Name
             </Label>
             <div id="projectName" className="p-2 rounded-md bg-[#F1F1F1]  text-[#ABAFB1]">
-              {ideaDetails?.title ?? viewStatus}
+              {!ideaDetails?.title || ideaDetails?.title === "" ? viewStatus : ideaDetails?.title}
             </div>
 
             <Label htmlFor="projectTrack" className="text-xs font-semibold">
               Project Track
             </Label>
             <div id="projectTrack" className="p-2 rounded-md bg-[#F1F1F1]  text-[#ABAFB1]">
-              {ideaDetails?.track ?? viewStatus}
+              {!ideaDetails?.track || ideaDetails?.track === "" ? viewStatus : ideaDetails?.track}
             </div>
 
             <Label htmlFor="description" className="text-xs font-semibold">
@@ -68,27 +68,27 @@ function Submission() {
               id="description"
               className="p-2 rounded-md bg-[#F1F1F1] text-[#ABAFB1] text-wrap break-words" 
             >
-              {ideaDetails?.description ?? viewStatus}
+              {!ideaDetails?.description || ideaDetails?.description === "" ? viewStatus : ideaDetails?.description}
             </div>
             <Label htmlFor="figmaLink" className="text-xs font-semibold">
               Figma Link
             </Label>
             <div id="figmaLink" className="p-2 rounded-md bg-[#F1F1F1]  text-[#ABAFB1]">
-              {ideaDetails?.figma_link ?? viewStatus}
+              {!ideaDetails?.figma_link || ideaDetails?.figma_link === "" ? viewStatus : ideaDetails?.figma_link}
             </div>
 
             <Label htmlFor="githubLink" className="text-xs font-semibold">
               Github Link
             </Label>
             <div id="githubLink" className="p-2 rounded-md bg-[#F1F1F1]  text-[#ABAFB1]">
-              {ideaDetails?.github_link ?? viewStatus}
+              {!ideaDetails?.github_link || ideaDetails?.github_link === "" ? viewStatus : ideaDetails?.github_link}
             </div>
 
             <Label htmlFor="otherLinks" className="text-xs font-semibold">
               Other Links
             </Label>
             <div id="otherLinks" className="p-2 rounded-md bg-[#F1F1F1]  text-[#ABAFB1]">
-              {ideaDetails?.others ?? viewStatus}
+              {!ideaDetails?.others || ideaDetails?.others === "" ? viewStatus : ideaDetails?.others}
             </div>
           </div>
         </div>
