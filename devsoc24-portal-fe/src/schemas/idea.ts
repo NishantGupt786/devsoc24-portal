@@ -7,8 +7,11 @@ export const ideaSchema = z.object({
       invalid_type_error: "Project must be a string",
     })
     .max(30, "Title cannot be longer than 50 characters")
-    .refine((value) => value.trim().length > 0, {
+    .refine((value) => value.trim().length > 1, {
       message: "Title must not be empty",
+    })
+    .refine((value) => value.trim().length > 100, {
+      message: "Invalid title",
     }),
 
   track: z.string({
@@ -30,6 +33,7 @@ export const ideaSchema = z.object({
     .string({
       invalid_type_error: "Figma Link be a string",
     })
+    .min(10, "Figma link must be a url")
     .max(200, "Figma link cannot be longer than 100 characters")
     .url("Figma link must be a url")
     .optional()
@@ -39,6 +43,7 @@ export const ideaSchema = z.object({
     .string({
       invalid_type_error: "Github Link be a string",
     })
+    .min(10, "Github link must be a url")
     .max(100, "Github link cannot be longer than 100 characters")
     .url("Github link must be a url")
     .optional()
@@ -49,6 +54,7 @@ export const ideaSchema = z.object({
       required_error: "Other Links is required",
       invalid_type_error: "Other Links be a string",
     })
+    .min(10, "Other links must be a url")
     .max(100, "Other links cannot be longer than 200 characters")
     .refine((value) => value.trim().length > 0, {
       message: "Others must not be empty",
