@@ -63,7 +63,7 @@ export const useUserStore = create<userStore>((set) => ({
       last_name: "",
       reg_no: "",
       email: "",
-      phone: "",
+      phone_number: "",
       college: "",
       city: "",
       state: "",
