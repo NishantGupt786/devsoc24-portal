@@ -1,54 +1,57 @@
 import * as z from "zod";
 
 export const ideaSchema = z.object({
-    title: z
+  title: z
     .string({
       required_error: "Project name is required",
       invalid_type_error: "Project must be a string",
     })
-    .refine(value => value.trim().length > 0, {
-        message: "Title must not be empty",
+    .max(30, "Title cannot be longer than 50 characters")
+    .refine((value) => value.trim().length > 0, {
+      message: "Title must not be empty",
     }),
 
-    track: z
-    .string({
-      required_error: "Project track is required",
-      invalid_type_error: "Project track be a string",
-    }),
+  track: z.string({
+    required_error: "Project track is required",
+    invalid_type_error: "Project track be a string",
+  }),
 
-    description: z
+  description: z
     .string({
       required_error: "Description is required",
       invalid_type_error: "Description be a string",
     })
     .min(50, "Description must be at least 50 characters")
-    .refine(value => value.trim().length > 0, {
-        message: "Description must not be empty",
-        path: ['description']
+    .max(2500, "Description cannot be longer than 500 characters")
+    .refine((value) => value.trim().length > 0, {
+      message: "Description must not be empty",
+      path: ["description"],
     }),
-
-    figma_link: z
+  figma_link: z
     .string({
       invalid_type_error: "Figma Link be a string",
     })
     .url("Figma link must be a url")
     .optional()
-    .or(z.literal('')),
+    .or(z.literal("")),
 
-    github_link: z
+  github_link: z
     .string({
       invalid_type_error: "Github Link be a string",
     })
+    .max(100, "Github link cannot be longer than 100 characters")
     .url("Github link must be a url")
     .optional()
-    .or(z.literal('')),
+    .or(z.literal("")),
 
-    others: z
+  others: z
     .string({
       required_error: "Other Links is required",
       invalid_type_error: "Other Links be a string",
     })
-    .refine(value => value.trim().length > 0, {
-        message: "Others must not be empty",
-    }).or(z.literal('')),
+    .max(100, "Other links cannot be longer than 200 characters")
+    .refine((value) => value.trim().length > 0, {
+      message: "Others must not be empty",
+    })
+    .or(z.literal("")),
 });
