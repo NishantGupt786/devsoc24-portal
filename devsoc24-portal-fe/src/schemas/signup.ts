@@ -70,6 +70,7 @@ export const personalDetailsSchema = z.object({
       required_error: "Required",
       invalid_type_error: "Phone number must be a string",
     })
+    .regex(/^\d{10}$/, "Enter a valid 10-digit phone number")
     .min(10, "Enter a valid phone number")
     .max(10, "Enter a valid phone number"),
   country: z
@@ -135,6 +136,7 @@ export const vitianDetails = z.object({
     })
     .min(1, "Enter a valid room number")
     .max(4, "Enter a valid room number")
+    .regex(/^\d{4}$/, "Enter a valid room number")
     .refine((value) => value.trim().length > 0, {
       message: "First Name must not be empty",
     }),
