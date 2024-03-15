@@ -309,51 +309,44 @@ export default function Profile() {
                                 }
                                 className="rounded-md border border-gray-200 p-4 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
                               >
-                                {form.getValues("gender") === "Male"
-                                  ? hostelDetails.mens.map((block) => (
-                                      <option
-                                        key={block}
-                                        value={block}
-                                        selected={
-                                          block === form.getValues("block")
-                                        }
-                                      >
-                                        {block}
-                                      </option>
-                                    ))
-                                  : form.getValues("gender") === "Female"
-                                    ? hostelDetails.ladies.map((block) => (
-                                        <option
-                                          key={block}
-                                          value={block}
-                                          selected={
-                                            block === form.getValues("block")
-                                          }
-                                        >
-                                          {block}
-                                        </option>
-                                      ))
-                                    : hostelDetails.all.map((block) => (
-                                        <option
-                                          key={block}
-                                          value={block}
-                                          selected={
-                                            block === form.getValues("block")
-                                          }
-                                        >
-                                          {block}
-                                        </option>
-                                      ))}
+                                {form.getValues("gender") === "Male" &&
+                                  hostelDetails.mens.map((block) => (
+                                    <option
+                                      key={block}
+                                      value={block}
+                                      selected={
+                                        block === form.getValues("block")
+                                      }
+                                    >
+                                      {block}
+                                    </option>
+                                  ))}
+                                {form.getValues("gender") === "Female" &&
+                                  hostelDetails.ladies.map((block) => (
+                                    <option
+                                      key={block}
+                                      value={block}
+                                      selected={
+                                        block === form.getValues("block")
+                                      }
+                                    >
+                                      {block}
+                                    </option>
+                                  ))}
 
-                                {hostelDetails.all.map((block) => (
-                                  <option
-                                    key={block}
-                                    value={block}
-                                    selected={block === form.getValues("block")}
-                                  >
-                                    {block}
-                                  </option>
-                                ))}
+                                {form.getValues("gender") ===
+                                  "Prefer Not to Say" &&
+                                  hostelDetails.all.map((block) => (
+                                    <option
+                                      key={block}
+                                      value={block}
+                                      selected={
+                                        block === form.getValues("block")
+                                      }
+                                    >
+                                      {block}
+                                    </option>
+                                  ))}
                               </select>
                             </div>
                           </FormControl>

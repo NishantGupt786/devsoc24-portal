@@ -55,7 +55,7 @@ export default function VitianForm({
     const updatedData = {
       first_name: localStorage.getItem("first_name"),
       last_name: localStorage.getItem("last_name"),
-      phone: localStorage.getItem("phone_number"),
+      phoneNumber: localStorage.getItem("phone_number"),
       gender: localStorage.getItem("gender"),
       country: localStorage.getItem("country"),
       is_vitian: true,

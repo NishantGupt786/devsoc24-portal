@@ -168,31 +168,7 @@ export default function PersonalDetails({
             <FormItem className="grow">
               <FormLabel>Phone Number</FormLabel>
               <FormControl>
-                <div className="relative">
-                  <Select
-                    onValueChange={(value: string) =>
-                      form.setValue("country", value)
-                    }
-                    value={form.getValues().country}
-                  >
-                    <SelectTrigger
-                      className={`absolute w-[70px] rounded-r-none px-2 transition-all duration-500 `}
-                    >
-                      <SelectValue>{form.getValues().country}</SelectValue>
-                    </SelectTrigger>
-                    <SelectContent>
-                      {countries.map((country, index) => (
-                        <SelectItem
-                          key={index}
-                          value={country.code}
-                          className="rounded-none border-b border-border/30"
-                        >
-                          <span>{country.name}</span>{" "}
-                          <span className="opacity-70">{country.code}</span>
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                <div className="">
                   <Input
                     type="text"
                     placeholder="Phone Number"
