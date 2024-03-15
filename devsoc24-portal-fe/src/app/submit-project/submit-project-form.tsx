@@ -191,7 +191,7 @@ export default function SubmitProjectForm() {
                   )}
                 ></FormField>
 
-                <p className="pr-2 text-right">500 max words</p>
+                <p className="pr-2 text-right">2500 characters max</p>
               </div>
             </div>
             <div className="flex w-96 flex-col gap-6 max-[445px]:w-[87vw]">

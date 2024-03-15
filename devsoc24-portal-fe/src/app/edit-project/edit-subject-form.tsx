@@ -129,9 +129,7 @@ export default function EditProjectForm() {
                           </Label>
                           <Input
                             type="text"
-                            id="project-name"
                             {...field}
-                            placeholder="Shuttle tracker"
                             className={`h-14 bg-white pl-5 ${
                               form.getFieldState("title").invalid
                                 ? "border-red-500 focus:border-input focus:!ring-red-500"
@@ -216,7 +214,7 @@ export default function EditProjectForm() {
                   )}
                 ></FormField>
 
-                <p className="pr-2 text-right">500 max words</p>
+                <p className="pr-2 text-right">2500 characters max</p>
               </div>
             </div>
             <div className="flex w-96 flex-col gap-6 max-[445px]:w-[87vw]">
@@ -234,7 +232,6 @@ export default function EditProjectForm() {
                           <Input
                             type="text"
                             id="figmaLink"
-                            placeholder="https://google.com"
                             {...field}
                             className={`h-14 bg-white pl-5 ${
                               form.getFieldState("figma_link").invalid
@@ -267,7 +264,6 @@ export default function EditProjectForm() {
                             type="text"
                             id="githubLink"
                             {...field}
-                            placeholder="https://google.com"
                             className={`h-14 bg-white pl-5 ${
                               form.getFieldState("github_link").invalid
                                 ? "border-red-500 focus:border-input focus:!ring-red-500"
@@ -298,7 +294,6 @@ export default function EditProjectForm() {
 
                           <Textarea
                             id="otherLinks"
-                            placeholder="Other links"
                             {...field}
                             className="col-span-12 mb-6 min-h-10 pl-5 text-black md:col-span-6 md:mb-0"
                           />
