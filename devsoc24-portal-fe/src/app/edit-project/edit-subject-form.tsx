@@ -42,7 +42,14 @@ import send from "@/assets/images/Send.svg";
 import Image from "next/image";
 import { useEffect } from "react";
 import ToastContainer from "@/components/ToastContainer";
-const tracks = ["Track 1", "Track 2", "Track 3"];
+const tracks = [
+  "Interactive Engagement",
+  "Eco-Innovations",
+  "Community Building",
+  "Future of Work",
+  "Ethical Technology",
+  "Open Innovation",
+];
 
 export default function EditProjectForm() {
   const router = useRouter();
