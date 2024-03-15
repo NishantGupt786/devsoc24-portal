@@ -10,7 +10,7 @@ export const ideaSchema = z.object({
     .refine((value) => value.trim().length > 1, {
       message: "Title must not be empty",
     })
-    .refine((value) => value.trim().length > 100, {
+    .refine((value) => value.trim().length < 100, {
       message: "Invalid title",
     }),
 
@@ -58,6 +58,8 @@ export const ideaSchema = z.object({
     .max(100, "Other links cannot be longer than 200 characters")
     .refine((value) => value.trim().length > 0, {
       message: "Others must not be empty",
+    }).refine((value) => value.trim().length < 200, {
+      message: "Invalid others",
     })
     .or(z.literal("")),
 });

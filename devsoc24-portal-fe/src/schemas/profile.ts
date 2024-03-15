@@ -11,6 +11,9 @@ export const profileSchema = z.object({
     .max(20, "First Name cannot be longer than 20 characters")
     .refine((value) => value.trim().length > 0, {
       message: "First Name must not be empty",
+    })
+    .refine((value) => value.trim().length < 100, {
+      message: "Invalid First Name",
     }),
   last_name: z
     .string({
@@ -20,6 +23,8 @@ export const profileSchema = z.object({
     .max(20, "Last Name cannot be longer than 20 characters")
     .refine((value) => value.trim().length > 0, {
       message: "Last Name must not be empty",
+    }).refine((value) => value.trim().length < 100, {
+      message: "Invalid Last Name",
     }),
   vit_email: z.string({
     invalid_type_error: "VIT Email must be a string",
