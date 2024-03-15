@@ -175,7 +175,7 @@ export default function PersonalDetails({
                     autoComplete="phone"
                     required
                     {...field}
-                    className={`pl-[80px] ${
+                    className={` ${
                       form.getFieldState("phone_number").invalid
                         ? "border-red-500 focus:border-input focus:!ring-red-500"
                         : ""
