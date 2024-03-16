@@ -7,13 +7,6 @@ import SubmitIdeaForm from "./submit-idea-form";
 import { ArrowLeft, User } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
 import contentstack from "@/assets/images/contentstack.svg";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";

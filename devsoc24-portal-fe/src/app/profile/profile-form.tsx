@@ -122,7 +122,7 @@ export default function Profile() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="rounded-lg bg-white p-4"
+          className="rounded-lg bg-white p-4 w-fit"
         >
           <div className="flex justify-start gap-16 max-[931px]:flex-col max-[931px]:gap-6">
             <div className="flex w-96 flex-col gap-6 max-[445px]:w-[87vw]">
