@@ -68,6 +68,7 @@ export default function RootLayout({
         <meta property="og:type" content="website" />
         <meta property="og:image" content={"https://portal.devsoc.codechefvit.com/thumbnail.png"} />
         <meta property="og:url" content={"https://portal.devsoc.codechefvit.com"} />
+        <meta property="og:image:alt" content={"DEVSOC'24 | Portal"} />
         <meta property="og:site_name" content={"DEVSOC'24 | Portal"} />
       </head>
       <body className={`font-sans ${inter.className}`}>
