@@ -35,7 +35,6 @@ import Link from "next/link";
 import TimelineComponent from "@/components/timeline/timelineComponent";
 import LeaveTeam from "@/components/team/leaveTeam";
 import Kick from "@/components/team/kick";
-import Sponsors from "@/components/sponsors";
 
 interface ideaProps {
   message: string;

@@ -32,10 +32,16 @@ export default function Page() {
                 Discord Server to socialize and form your dream team!
               </p>
             </div>
-            <Button className="bg-[#6366F1] px-2">
-              <DiscordIcon />
-              <p className="ml-1">Join Discord</p>
-            </Button>
+            <a
+              href="https://discord.com/invite/AUHFPXEhjC"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <Button className="bg-[#6366F1] px-2">
+                <DiscordIcon />
+                <p className="ml-1">Join Discord</p>
+              </Button>
+            </a>
           </div>
           <XIcon
             size={24}

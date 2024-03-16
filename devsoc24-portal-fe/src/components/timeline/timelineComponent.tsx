@@ -59,10 +59,10 @@ const timelineData = [
 
 const TimelineComponent = (props: { count: number }) => {
   return (
-    <div className="trackComponent flex h-[25vh] w-full overflow-auto rounded-xl bg-white">
+    <div className="trackComponent flex min-h-[25vh] h-fit w-full overflow-auto rounded-xl bg-white">
       <div className="flex flex-col items-center justify-between pl-6 pt-4 font-semibold text-[#45464E] ">
         <p className="self-start">Timeline</p>
-        <div className=" flex h-[25vh] flex-row items-center overflow-x-auto">
+        <div className=" flex min-h-[25vh] h-fit flex-row items-center overflow-x-auto">
           {timelineData.map((item, index) => {
             if (index < props.count) {
               return (
@@ -75,7 +75,7 @@ const TimelineComponent = (props: { count: number }) => {
                     alt="completed"
                     height={50}
                     width={50}
-                    className="h-auto w-fit min-w-[300px]"
+                    className="h-auto min-h-[100px] w-fit min-w-[300px]"
                   />
                   <div className="flex-col m-1 flex w-full text-center">
                     <p>{timelineData[index]?.desc}</p>
