@@ -29,10 +29,10 @@ export default function RootLayout({
           },
         )
         .then((res) => {
-          // console.log(res);
+          console.log("Then: ", res);
         })
         .catch((e) => {
-          // console.log(e);
+          console.log("Catch: ", e);
         });
     }, 150000);
 

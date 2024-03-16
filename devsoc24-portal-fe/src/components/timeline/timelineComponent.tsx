@@ -62,7 +62,7 @@ const TimelineComponent = (props: { count: number }) => {
     <div className="trackComponent flex h-[25vh] w-full overflow-auto rounded-xl bg-white">
       <div className="flex flex-col items-center justify-between pl-6 pt-4 font-semibold text-[#45464E] ">
         <p className="self-start">Timeline</p>
-        <div className=" flex h-full flex-row items-center overflow-x-auto">
+        <div className=" flex h-[25vh] flex-row items-center overflow-x-auto">
           {timelineData.map((item, index) => {
             if (index < props.count) {
               return (
