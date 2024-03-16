@@ -212,7 +212,7 @@ export default function EditProjectForm() {
                           <Textarea
                             id="description"
                             {...field}
-                            placeholder="Don't forget to include your inspiration, learnings, project construction method, and difficulties you encountered in your writing. "
+                            placeholder="Include your inspiration, brief introduction to the Problem and your proposed solution, learnings, project construction method, and difficulties you encountered in the process. "
                             className="col-span-12 mb-6 max-h-72 min-h-40 pl-5 text-black md:col-span-6 md:mb-0"
                           />
                         </div>
@@ -313,7 +313,7 @@ export default function EditProjectForm() {
                 ></FormField>
 
                 <p>
-                  Canva PPTs, Videos, Drive or Supporting Material can be shared
+                  Canva PPTs, Videos, Drive Links or Supporting Material can be shared
                 </p>
               </div>
             </div>
@@ -325,7 +325,7 @@ export default function EditProjectForm() {
             //   disabled={isSubmitting}
           >
             <Image src={send as HTMLImageElement} alt="b" />
-            <span className="pl-2">Submit Idea</span>
+            <span className="pl-2">Submit Project</span>
           </Button>
         </form>
       </Form>

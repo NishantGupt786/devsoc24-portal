@@ -131,7 +131,7 @@ export default function EditIdeaForm() {
                             htmlFor="project-name"
                             className="text-[#0019FF]"
                           >
-                            Project Name
+                            Idea Name
                             <span className="text-[#FF0000]">*</span>
                           </Label>
                           <Input
@@ -167,7 +167,7 @@ export default function EditIdeaForm() {
                                 htmlFor="project-track"
                                 className="text-[#0019FF] "
                               >
-                                Project Track
+                                Idea Track
                                 <span className="text-[#FF0000]">*</span>
                               </Label>
                               <select
@@ -178,7 +178,7 @@ export default function EditIdeaForm() {
                                 className="rounded-md border border-gray-200 p-4 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
                               >
                                 <option value="" disabled selected hidden>
-                                  Select Project Track
+                                  Select Idea Track
                                 </option>
                                 {tracks.map((track) => (
                                   <option key={track} value={track}>
@@ -207,14 +207,14 @@ export default function EditIdeaForm() {
                             htmlFor="description"
                             className="text-[#0019FF]"
                           >
-                            Description of Project
+                            Description of Idea
                             <span className="text-[#FF0000]">*</span>
                           </Label>
 
                           <Textarea
                             id="description"
                             {...field}
-                            placeholder="Don't forget to include your inspiration, learnings, project construction method, and difficulties you encountered in your writing. "
+                            placeholder="Include your inspiration, brief introduction to the Problem and your proposed solution, learnings, project construction method, and difficulties you encountered in the process. "
                             className="col-span-12 mb-6 max-h-72 min-h-40 pl-5 text-black md:col-span-6 md:mb-0"
                           />
                         </div>
@@ -315,7 +315,7 @@ export default function EditIdeaForm() {
                 ></FormField>
 
                 <p>
-                  Canva PPTs, Videos, Drive or Supporting Material can be shared
+                  Canva PPTs, Videos, Drive Links or Supporting Material can be shared
                 </p>
               </div>
             </div>
