@@ -228,6 +228,7 @@ export default function VitianForm({
                       type="text"
                       placeholder="Room Number"
                       {...field}
+                      // Value
                       className={` ${
                         vitianForm.getFieldState("roomNumber").invalid
                           ? "border-red-500 focus:border-input focus:!ring-red-500"

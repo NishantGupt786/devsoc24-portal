@@ -7,7 +7,7 @@ export const profileSchema = z.object({
       required_error: "First Name is required",
       invalid_type_error: "First Name must be a string",
     })
-    .min(3, "First Name must be at least 3 characters long")
+    .min(1, "First Name must be at least 1 character long")
     .max(20, "First Name cannot be longer than 20 characters")
     .refine((value) => value.trim().length > 0, {
       message: "First Name must not be empty",
@@ -19,7 +19,7 @@ export const profileSchema = z.object({
     .string({
       required_error: "Last Name is required",
       invalid_type_error: "Last Name must be a string",
-    }).min(3, "Last Name must be at least 3 characters long")
+    }).min(1, "Last Name must be at least 1 character long")
     .max(20, "Last Name cannot be longer than 20 characters")
     .refine((value) => value.trim().length > 0, {
       message: "Last Name must not be empty",
