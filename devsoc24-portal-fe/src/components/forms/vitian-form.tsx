@@ -105,6 +105,16 @@ export default function VitianForm({
     setGender(temp!);
   }, []);
 
+  const [day, setDay] = useState(false);
+
+  // useEffect(() => {
+  //   if (vitianForm.getValues("block") === "Day Scholar") {
+  //     setDay(true);
+  //   } else {
+  //     setDay(false);
+  //   }
+  // }, [vitianForm.getValues("block")]);
+
   return (
     <>
       <ToastContainer />
@@ -170,7 +180,16 @@ export default function VitianForm({
                 <FormControl>
                   <div className="relative">
                     <Select
-                      onValueChange={field.onChange}
+                      onValueChange={(e) => {
+                        field.onChange(e);
+                        console.log(e);
+                        if (e === "Day Scholar") {
+                          vitianForm.setValue("roomNumber", "0");
+                          setDay(true);
+                        } else {
+                          setDay(false);
+                        }
+                      }}
                       defaultValue={field.value}
                     >
                       <FormControl>
@@ -228,7 +247,8 @@ export default function VitianForm({
                       type="text"
                       placeholder="Room Number"
                       {...field}
-                      // Value
+                      disabled={day}
+                      value={day ? "-" : field.value}
                       className={` ${
                         vitianForm.getFieldState("roomNumber").invalid
                           ? "border-red-500 focus:border-input focus:!ring-red-500"

@@ -1,5 +1,5 @@
 import countries from "@/../public/countries.json";
-import { personalDetailsSchema } from "@/schemas/signup";
+import { personalDetailsSchema, vitianDetails } from "@/schemas/signup";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { type z } from "zod";
@@ -49,6 +49,8 @@ export default function PersonalDetails({
     mode: "onChange",
     shouldUnregister: false,
   });
+
+
 
   useEffect(() => {
     form.setValue("firstName", localStorage.getItem("first_name") ?? "");
