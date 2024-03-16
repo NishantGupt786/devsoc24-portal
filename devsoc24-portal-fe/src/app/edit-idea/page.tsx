@@ -21,7 +21,7 @@ export default function Page() {
         </div>
         <div className="absolute ml-[4.7rem] mt-[11vh] flex w-[91.9vw] flex-col bg-[#F4F5FA] pl-5 pt-5 max-[931px]:justify-center max-[445px]:ml-[3.7rem]  ">
           <p className="mb-4 text-4xl font-medium text-black">
-            Idea Updation For DEVSOC'24
+            Idea Updation For DEVSOC&apos;24
           </p>
           <EditIdeaForm />
         </div>
