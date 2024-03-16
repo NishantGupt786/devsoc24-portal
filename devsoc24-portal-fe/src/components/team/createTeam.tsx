@@ -108,6 +108,9 @@ function CreateTeam() {
           case 401:
             router.push("/");
             break;
+          case 502:
+            router.push("/");
+            break;
           case 417:
             setTeam(false);
             break;

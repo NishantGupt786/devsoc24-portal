@@ -89,6 +89,9 @@ function JoinTeam() {
           case 401:
             void router.push("/");
             break;
+          case 502:
+            void router.push("/");
+            break;
           case 417:
             setTeam(true);
             // console.log("no team");

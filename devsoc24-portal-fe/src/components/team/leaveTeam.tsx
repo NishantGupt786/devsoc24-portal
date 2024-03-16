@@ -48,6 +48,9 @@ const LeaveTeam = () => {
           case 401:
             void router.push("/");
             break;
+          case 502:
+            void router.push("/");
+            break;
           case 404:
             // console.log("Idea Not found, but in a team");
             break;
