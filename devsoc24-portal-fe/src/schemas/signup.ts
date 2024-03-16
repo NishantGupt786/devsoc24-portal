@@ -128,7 +128,8 @@ export const vitianDetails = z.object({
     .or(z.literal("Men's Hostel - N Block"))
     .or(z.literal("Men's Hostel - P Block"))
     .or(z.literal("Men's Hostel - Q Block"))
-    .or(z.literal("Men's Hostel - R Block")),
+    .or(z.literal("Men's Hostel - R Block"))
+    .or(z.literal("Day Scholar")),
   roomNumber: z
     .string({
       required_error: "Required",

@@ -1,5 +1,6 @@
 export const  hostelDetails = {
   all: [
+    "Day Scholar",
     "Ladies' Hostel - A Block",
     "Ladies' Hostel - B Block",
     "Ladies' Hostel - C Block",
@@ -28,6 +29,7 @@ export const  hostelDetails = {
     "Men's Hostel - R Block",
   ],
   mens: [
+    "Day Scholar",
     "Men's Hostel - A Block",
     "Men's Hostel - B Block",
     "Men's Hostel - B Annex",
@@ -48,6 +50,7 @@ export const  hostelDetails = {
     "Men's Hostel - R Block",
   ],
   ladies: [
+    "Day Scholar",
     "Ladies' Hostel - A Block",
     "Ladies' Hostel - B Block",
     "Ladies' Hostel - C Block",
