@@ -288,7 +288,7 @@ export default function HomePage() {
               ) : gender === "Female" ? (
                 <div>
                   Girls are to give attendance at their respective
-                  hostels blocks and report to Anna Auditorium by 9:00 PM.
+                  hostels blocks by 8:30 PM and report to Anna Auditorium.
                 </div>
               ) : (
                 <>
@@ -298,8 +298,8 @@ export default function HomePage() {
                   You have to give your biometric attendance at Anna Auditorium. 
                     </li>
                     <li>
-                      Girls are to give attendance at their respective
-                      hostels blocks and report to Anna Auditorium by 9:00 PM.
+                    Girls are to give attendance at their respective
+                  hostels blocks by 8:30 PM and report to Anna Auditorium.
                     </li>
                   </ul>
                 </>
