@@ -20,7 +20,7 @@ import axios, { AxiosError } from "axios";
 import ToastContainer from "@/components/ToastContainer";
 import { useRouter } from "next/navigation";
 interface FormValues {
-  title: string;
+  name: string;
   track: string;
   description: string;
   figma_link: string;
@@ -48,7 +48,7 @@ export default function SubmitProjectForm() {
   const form = useForm<FormValues>({
     resolver: zodResolver(ideaSchema),
     defaultValues: {
-      title: "",
+      name: "",
       track: "",
       description: "",
       figma_link: "",
@@ -101,7 +101,7 @@ export default function SubmitProjectForm() {
               <div>
                 <FormField
                   control={form.control}
-                  name="title"
+                  name="name"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
@@ -119,7 +119,7 @@ export default function SubmitProjectForm() {
                             {...field}
                             placeholder="Shuttle tracker"
                             className={`h-14 bg-white pl-5 ${
-                              form.getFieldState("title").invalid
+                              form.getFieldState("name").invalid
                                 ? "border-red-500 focus:border-input focus:!ring-red-500"
                                 : ""
                             }`}

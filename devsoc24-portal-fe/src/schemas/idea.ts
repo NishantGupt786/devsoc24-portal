@@ -1,7 +1,7 @@
 import * as z from "zod";
 
 export const ideaSchema = z.object({
-  title: z
+  name: z
     .string({
       required_error: "Project name is required",
       invalid_type_error: "Project must be a string",

@@ -18,7 +18,7 @@ import { useRouter } from "next/navigation";
 import { type APIResponse } from "@/schemas/api";
 
 interface FormValues {
-  title: string;
+  name: string;
   track: string;
   description: string;
   figma_link?: string;
@@ -84,7 +84,7 @@ export default function EditProjectForm() {
   const form = useForm<FormValues>({
     resolver: zodResolver(ideaSchema),
     defaultValues: {
-      title: "",
+      name: "",
       track: "",
       description: "",
       figma_link: "",
@@ -137,7 +137,7 @@ export default function EditProjectForm() {
               <div>
                 <FormField
                   control={form.control}
-                  name="title"
+                  name="name"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
@@ -153,7 +153,7 @@ export default function EditProjectForm() {
                             type="text"
                             {...field}
                             className={`h-14 bg-white pl-5 ${
-                              form.getFieldState("title").invalid
+                              form.getFieldState("name").invalid
                                 ? "border-red-500 focus:border-input focus:!ring-red-500"
                                 : ""
                             }`}
