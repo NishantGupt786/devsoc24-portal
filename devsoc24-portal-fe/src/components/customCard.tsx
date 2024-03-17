@@ -3,6 +3,7 @@ import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { type CardProps } from "@/interfaces";
 import JoinTeam from "@/components/team/joinTeam";
 import IdeaSubmission from "@/components/submission/submission";
+import IdeaSubmission2 from "@/components/submission/submission2";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -63,6 +64,7 @@ function CustomCard(props: CardProps) {
               {showModal === "JoinTeam" && <JoinTeam />}
               {showModal === "CreateTeam" && <CreateTeam />}
               {showModal === "IdeaSubmit" && <IdeaSubmission />}
+              {showModal === "IdeaView" && <IdeaSubmission2 />}
             </Dialog>
           </div>
         </div>
