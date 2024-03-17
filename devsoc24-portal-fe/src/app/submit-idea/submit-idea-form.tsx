@@ -81,8 +81,10 @@ export default function SubmitIdeaForm() {
         switch (err.response?.status) {
           case 404:
             return `Account not found!`;
+          case 403:
+            return `User is not a leader`;
           case 409:
-            return `Incorrect credentials`;
+            return `User is not in a team`;
           case 400:
             return `Please check your input and try again!`;
           case 401:

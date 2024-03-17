@@ -75,6 +75,10 @@ export default function SubmitProjectForm() {
       },
       error: (err: AxiosError) => {
         switch (err.response?.status) {
+          case 403:
+            return `User is not a leader`;
+          case 409:
+            return `User is not in a team`;
           case 404:
             return `Account not found!`;
           case 401:

@@ -108,7 +108,23 @@ export default function EditIdeaForm() {
     void toast.promise(handleSubmit(), {
       loading: `Cooking..`,
       success: `Idea updated successfully!`,
-      error: `Something went wrong!`,
+      error: (err: AxiosError) => {
+        switch (err.response?.status) {
+          case 404:
+            return `Account not found!`;
+          case 403:
+            return `User is not a leader`;
+          case 409:
+            return `User is not in a team`;
+          case 400:
+            return `Please check your input and try again!`;
+          case 401:
+            void router.push("/");
+            return `Session Expired`;
+          default:
+            return `Something went wrong!`;
+        }
+      },
     });
   }
 
