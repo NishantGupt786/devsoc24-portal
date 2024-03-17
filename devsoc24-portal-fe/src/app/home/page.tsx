@@ -242,10 +242,9 @@ export default function HomePage() {
   ];
   const ideaCard = [
     {
-      text: "Submit An Idea",
-      showModal: getIdea !== "idea found" && getIdea !== "",
+      text: "Submit an Idea",
+      showModal: true,
       modalType: "Choice",
-      routeTo: "/submit-idea",
     },
   ];
 
@@ -330,16 +329,16 @@ export default function HomePage() {
               title="Idea Submission"
               cardImage="ideaSubmissionImg"
               cardContent={
-                getIdea === "idea found" ? "Idea Submitted" : "No Idea Yet"
+                getIdea === "idea found" ? "Idea Submitted" : "Idea submission closed"
               }
               cardDesc={
                 getIdea === "idea found"
                   ? isLeader
                     ? "Edit or View Idea"
                     : "View Idea"
-                  : isLeader
-                    ? "Submit an Idea"
-                    : "View Idea"
+                  : "closed"
+                    
+                    
               }
               buttonDetails={
                 getIdea === "idea found" && !team
