@@ -29,12 +29,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { User } from "lucide-react";
+import { Check, User, X, XIcon } from "lucide-react";
 import ToastContainer from "@/components/ToastContainer";
 import Link from "next/link";
 import TimelineComponent from "@/components/timeline/timelineComponent";
 import LeaveTeam from "@/components/team/leaveTeam";
 import Kick from "@/components/team/kick";
+import { Button } from "@/components/ui/button";
+import { DiscordIcon } from "@/assets/images/discord";
 
 interface ideaProps {
   message: string;
@@ -46,6 +48,7 @@ interface ideaProps {
     github_link: string;
     figma_link: string;
     others: string;
+    is_selected: boolean;
   };
 }
 
@@ -58,6 +61,9 @@ export default function HomePage() {
   const { teamData, setTeamData } = useTeamDataStore();
   const { isLeader, setIsLeader } = useLeaderStore();
   const { showModal, setShowModal } = showModalStore();
+  const [selected, setSelected] = useState(false);
+  const [showBanner, setShowBanner] = useState(true);
+
   const logout = async () => {
     try {
       await axios.post(
@@ -136,6 +142,7 @@ export default function HomePage() {
         },
       );
       if (response.data.status === "success") {
+        setShowBanner(response.data.data!.is_selected);
         SetIdea("idea found");
       }
     } catch (e) {
@@ -308,12 +315,49 @@ export default function HomePage() {
             </DropdownMenu>
           </div>
         </div>
+        {showBanner ? (
+          <>
+            <div className="flex w-full items-center justify-between bg-[#0019FF] p-2">
+              <div className="flex grow flex-col items-center justify-between gap-2 md:flex-row">
+                <div className="flex items-center">
+                  {selected ? (
+                    <>
+                      <Check className="h-8 w-8 text-white" />
+                      <p className="pl-2 text-xl text-white">
+                        Congratulations! Your idea has been shortlisted for next
+                        round. Please check your email for more details
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <X className="h-8 w-8 text-white" />
+                      <p className="pl-2 text-xl text-white">
+                        We regret to inform you that your idea has not been
+                        shortlisted for next round. Please check your email for
+                        more details
+                      </p>
+                    </>
+                  )}
+                </div>
+              </div>
+              <XIcon
+                size={24}
+                className="cursor-pointer text-white"
+                onClick={() => setShowBanner(false)}
+              />
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
+
         <div className="flex h-full  flex-col">
           {showModal === "leave" && <LeaveTeam />}
           {showModal === "kick" && <Kick />}
           <div className="mt-4 flex h-fit w-screen flex-col justify-between gap-4 px-4">
             <TimelineComponent count={0} />
           </div>
+
           <div className="mt-4 flex h-fit w-screen flex-col justify-between gap-4 overflow-y-auto px-4 md:flex-row lg:h-[85%]">
             {team ? (
               <CustomCard
