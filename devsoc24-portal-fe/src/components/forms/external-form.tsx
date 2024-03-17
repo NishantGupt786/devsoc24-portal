@@ -85,7 +85,7 @@ export default function ExternalForm({
       error: (err: AxiosError) => {
         switch (err.response?.status) {
           case 404:
-            return `Account not found!`;
+            return `Account not found! `;
           case 409:
             return `Incorrect credentials`;
           case 403:
