@@ -146,7 +146,7 @@ export default function HomePage() {
       );
       if (response.data.status === "success") {
         // setShowBanner(response.data.data!.is_selected);
-        // setShowNotice(response.data.data!.is_selected);
+        setShowNotice(true);
         SetIdea("idea found");
       }
     } catch (e) {
