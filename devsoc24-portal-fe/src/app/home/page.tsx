@@ -48,7 +48,6 @@ interface ideaProps {
     github_link: string;
     figma_link: string;
     others: string;
-    is_selected: boolean;
   };
 }
 
@@ -147,6 +146,7 @@ export default function HomePage() {
       if (response.data.status === "success") {
         setShowBanner(true);
         setShowNotice(true);
+        setSelected(true);
         SetIdea("idea found");
       }
     } catch (e) {
