@@ -7,12 +7,12 @@ import Image from "next/image";
 const timelineData = [
   {
     date: "17th March",
-    time: "18:00",
+    time: "20:00",
     desc: "Entry and Registration",
   },
   {
     date: "17th March",
-    time: "20:00",
+    time: "21:00",
     desc: "Hacking Starts",
   },
   {

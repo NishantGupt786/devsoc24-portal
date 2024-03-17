@@ -29,12 +29,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { User } from "lucide-react";
+import { Check, User, X, XIcon } from "lucide-react";
 import ToastContainer from "@/components/ToastContainer";
 import Link from "next/link";
 import TimelineComponent from "@/components/timeline/timelineComponent";
 import LeaveTeam from "@/components/team/leaveTeam";
 import Kick from "@/components/team/kick";
+import { Button } from "@/components/ui/button";
+import { DiscordIcon } from "@/assets/images/discord";
 
 interface ideaProps {
   message: string;
@@ -46,6 +48,7 @@ interface ideaProps {
     github_link: string;
     figma_link: string;
     others: string;
+    is_selected: boolean;
   };
 }
 
@@ -58,6 +61,11 @@ export default function HomePage() {
   const { teamData, setTeamData } = useTeamDataStore();
   const { isLeader, setIsLeader } = useLeaderStore();
   const { showModal, setShowModal } = showModalStore();
+  const [selected, setSelected] = useState(false);
+  const [showBanner, setShowBanner] = useState(false);
+  const [showNotice, setShowNotice] = useState(false);
+  const [gender, setGender] = useState("");
+
   const logout = async () => {
     try {
       await axios.post(
@@ -105,6 +113,7 @@ export default function HomePage() {
       );
       // console.log(response.data.data.is_leader);
       setIsLeader(response.data.data.is_leader);
+      setGender(response.data.data.gender);
       // console.log(isLeader);
     } catch (e) {
       if (axios.isAxiosError(e)) {
@@ -136,6 +145,8 @@ export default function HomePage() {
         },
       );
       if (response.data.status === "success") {
+        // setShowBanner(response.data.data!.is_selected);
+        // setShowNotice(response.data.data!.is_selected);
         SetIdea("idea found");
       }
     } catch (e) {
@@ -258,6 +269,47 @@ export default function HomePage() {
 
   return (
     <>
+      {showNotice ? (
+        <>
+          <div className="fixed z-[100] flex h-screen w-screen items-center justify-center bg-black/50">
+            <div className="flex w-[90vw] flex-col rounded-xl bg-white p-4 lg:w-[50vw]">
+              <div className="flex h-fit w-full items-center justify-between text-lg">
+                <p>Notice</p>
+                <X
+                  className="mb-5 h-4 w-4 text-black hover:cursor-pointer"
+                  onClick={() => setShowNotice(false)}
+                />
+              </div>
+              {gender === "Male" ? (
+                <div>
+                  All boys are to report before 9:00 PM. 
+                  You have to give your biometric attendance at Anna Auditorium. 
+                </div>
+              ) : gender === "Female" ? (
+                <div>
+                  Girls are to give attendance at their respective
+                  hostels blocks and report to Anna Auditorium by 9:00 PM.
+                </div>
+              ) : (
+                <>
+                  <ul className="m-4 list-disc">
+                    <li>
+                    All boys are to report before 9:00 PM. 
+                  You have to give your biometric attendance at Anna Auditorium. 
+                    </li>
+                    <li>
+                      Girls are to give attendance at their respective
+                      hostels blocks and report to Anna Auditorium by 9:00 PM.
+                    </li>
+                  </ul>
+                </>
+              )}
+            </div>
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
       <ToastContainer />
       <main className="max-w-screen flex h-fit flex-col items-center overflow-x-hidden bg-[#F4F5FA] lg:h-screen">
         <div className="flex h-fit min-h-[8vh] w-full items-center justify-between gap-x-8 bg-background  px-2 py-2 lg:px-6">
@@ -307,16 +359,52 @@ export default function HomePage() {
             </DropdownMenu>
           </div>
         </div>
+        {showBanner ? (
+          <>
+            <div className="flex w-full items-center justify-between bg-[#0019FF] p-2">
+              <div className="flex grow flex-col items-center justify-between gap-2 md:flex-row">
+                <div className="flex items-center">
+                  {selected ? (
+                    <>
+                      <Check className="h-8 w-8 text-white" />
+                      <p className="pl-2 text-xl text-white">
+                        Congratulations! Your idea has been shortlisted for next
+                        round. Please check your email for more details.
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <X className="h-8 w-8 text-white" />
+                      <p className="pl-2 text-xl text-white">
+                        We regret to inform you that your idea has not been
+                        shortlisted for the next round. Please check your mail for further information.
+                      </p>
+                    </>
+                  )}
+                </div>
+              </div>
+              <XIcon
+                size={24}
+                className="cursor-pointer text-white"
+                onClick={() => setShowBanner(false)}
+              />
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
+
         <div className="flex h-full  flex-col">
           {showModal === "leave" && <LeaveTeam />}
           {showModal === "kick" && <Kick />}
           <div className="mt-4 flex h-fit w-screen flex-col justify-between gap-4 px-4">
             <TimelineComponent count={0} />
           </div>
+
           <div className="mt-4 flex h-fit w-screen flex-col justify-between gap-4 overflow-y-auto px-4 md:flex-row lg:h-[85%]">
             {team ? (
               <CustomCard
-                title="Your Devsoc Team"
+                title="Your Team"
                 cardImage="user"
                 cardContent="No Team Members Yet?"
                 cardDesc="Start A New Team or Join One"

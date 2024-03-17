@@ -85,13 +85,15 @@ export default function ExternalForm({
       error: (err: AxiosError) => {
         switch (err.response?.status) {
           case 404:
-            return `Account not found!`;
+            return `Account not found! `;
           case 409:
             return `Incorrect credentials`;
           case 403:
             return `Email not verified\nRedirecting...`;
           case 400:
             return `Please check your input and try again!`;
+          case 417:
+            return `VIT Email already exists!`;
           default:
             return `Something went wrong!`;
         }

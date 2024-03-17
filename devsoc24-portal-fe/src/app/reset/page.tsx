@@ -9,6 +9,10 @@ import title2 from "@/assets/images/glitchtitle1.svg";
 import title3 from "@/assets/images/glitchtitle2.svg";
 import title4 from "@/assets/images/glitchtitle3.svg";
 import ResetForm from "./reset-form";
+import axios, { AxiosError } from "axios";
+import toast from "react-hot-toast";
+import { APIResponse } from "@/schemas/api";
+import { useSearchParams } from "next/navigation";
 
 export default function Page() {
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
@@ -25,6 +29,44 @@ export default function Page() {
       clearInterval(interval);
     };
   }, [currentTitleIndex, titles.length]);
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
+
+  const resendOTP = async () => {
+    const handleResentOTP = async () => {
+      await axios.post<APIResponse>(
+        `${process.env.NEXT_PUBLIC_API_URL}/resend`,
+        {
+          email: email,
+          type: "verification",
+        },
+        {
+          withCredentials: true,
+        },
+      );
+    };
+
+    void toast.promise(handleResentOTP(), {
+      loading: "Loading...",
+      success: () => {
+        return `OTP Sent`;
+      },
+      error: (err: AxiosError) => {
+        switch (err.response?.status) {
+          case 404:
+            return `Account Not Found`;
+          case 409:
+            return `Incorrect Credentials`;
+          case 403:
+            return `User Already Verified`;
+          case 400:
+            return `Please check your input and try again`;
+          default:
+            return `Something went wrong`;
+        }
+      },
+    });
+  };
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-[url('/images/bg.svg')] bg-cover bg-no-repeat">
@@ -37,7 +79,7 @@ export default function Page() {
             <Image src={titles[currentTitleIndex] as string} alt="title" />
           </CardHeader>
           <div className="mt-3 flex flex-col items-center">
-            <p className="text-2xl font-semibold text-black">Welcome back!</p>
+            <p className="text-2xl font-semibold text-black">Reset Password</p>
             <p className="mt-1 text-sm">Login to your account</p>
           </div>
           <CardContent className="mt-4">
