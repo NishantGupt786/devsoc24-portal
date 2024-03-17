@@ -282,24 +282,24 @@ export default function HomePage() {
               </div>
               {gender === "Male" ? (
                 <div>
-                  All boys are to report before 9:00 PM. 
+                  All boys are to report before 8:30 PM. 
                   You have to give your biometric attendance at Anna Auditorium. 
                 </div>
               ) : gender === "Female" ? (
                 <div>
                   Girls are to give attendance at their respective
-                  hostels blocks and report to Anna Auditorium by 9:00 PM.
+                  hostels blocks by 8:40 PM and report to Anna Auditorium.
                 </div>
               ) : (
                 <>
                   <ul className="m-4 list-disc">
                     <li>
-                    All boys are to report before 9:00 PM. 
+                    All boys are to report before 8:30 PM. 
                   You have to give your biometric attendance at Anna Auditorium. 
                     </li>
                     <li>
-                      Girls are to give attendance at their respective
-                      hostels blocks and report to Anna Auditorium by 9:00 PM.
+                    Girls are to give attendance at their respective
+                  hostels blocks by 8:40 PM and report to Anna Auditorium.
                     </li>
                   </ul>
                 </>
