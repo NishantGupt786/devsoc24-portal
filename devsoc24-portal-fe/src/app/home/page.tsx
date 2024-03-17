@@ -63,6 +63,8 @@ export default function HomePage() {
   const { showModal, setShowModal } = showModalStore();
   const [selected, setSelected] = useState(false);
   const [showBanner, setShowBanner] = useState(false);
+  const [showNotice, setShowNotice] = useState(false);
+  const [gender, setGender] = useState("");
 
   const logout = async () => {
     try {
@@ -111,6 +113,9 @@ export default function HomePage() {
       );
       // console.log(response.data.data.is_leader);
       setIsLeader(response.data.data.is_leader);
+      setGender(response.data.data.gender);
+      setShowNotice(true);
+
       // console.log(isLeader);
     } catch (e) {
       if (axios.isAxiosError(e)) {
@@ -266,6 +271,47 @@ export default function HomePage() {
 
   return (
     <>
+      {showNotice ? (
+        <>
+          <div className="fixed z-[100] flex h-screen w-screen items-center justify-center bg-black/50">
+            <div className="flex w-[90vw] flex-col rounded-xl bg-white p-4 lg:w-[50vw]">
+              <div className="flex h-fit w-full items-center justify-between text-lg">
+                <p>Notice</p>
+                <X
+                  className="mb-5 h-4 w-4 text-black hover:cursor-pointer"
+                  onClick={() => setShowNotice(false)}
+                />
+              </div>
+              {gender === "Male" ? (
+                <div>
+                  All boys are to report before 9:00 PM. 
+                  You have to give your biometric attendance at Anna Auditorium. 
+                </div>
+              ) : gender === "Female" ? (
+                <div>
+                  Girls are to give attendance at their respective
+                  hostels blocks and report to Anna Auditorium by 9:00 PM.
+                </div>
+              ) : (
+                <>
+                  <ul className="m-4 list-disc">
+                    <li>
+                    All boys are to report before 9:00 PM. 
+                  You have to give your biometric attendance at Anna Auditorium. 
+                    </li>
+                    <li>
+                      Girls are to give attendance at their respective
+                      hostels blocks and report to Anna Auditorium by 9:00 PM.
+                    </li>
+                  </ul>
+                </>
+              )}
+            </div>
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
       <ToastContainer />
       <main className="max-w-screen flex h-fit flex-col items-center overflow-x-hidden bg-[#F4F5FA] lg:h-screen">
         <div className="flex h-fit min-h-[8vh] w-full items-center justify-between gap-x-8 bg-background  px-2 py-2 lg:px-6">
@@ -325,7 +371,7 @@ export default function HomePage() {
                       <Check className="h-8 w-8 text-white" />
                       <p className="pl-2 text-xl text-white">
                         Congratulations! Your idea has been shortlisted for next
-                        round. Please check your email for more details
+                        round. Please check your email for more details.
                       </p>
                     </>
                   ) : (
@@ -333,8 +379,7 @@ export default function HomePage() {
                       <X className="h-8 w-8 text-white" />
                       <p className="pl-2 text-xl text-white">
                         We regret to inform you that your idea has not been
-                        shortlisted for next round. Please check your email for
-                        more details
+                        shortlisted for the next round. Please check your mail for further information.
                       </p>
                     </>
                   )}
@@ -361,7 +406,7 @@ export default function HomePage() {
           <div className="mt-4 flex h-fit w-screen flex-col justify-between gap-4 overflow-y-auto px-4 md:flex-row lg:h-[85%]">
             {team ? (
               <CustomCard
-                title="Your Devsoc Team"
+                title="Your Team"
                 cardImage="user"
                 cardContent="No Team Members Yet?"
                 cardDesc="Start A New Team or Join One"
