@@ -145,7 +145,7 @@ export default function HomePage() {
         },
       );
       if (response.data.status === "success") {
-        // setShowBanner(response.data.data!.is_selected);
+        setShowBanner(true);
         setShowNotice(true);
         SetIdea("idea found");
       }
