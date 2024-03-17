@@ -8,7 +8,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 interface FormValues {
-  title: string;
+  name: string;
   track: string;
   description: string;
   figma_link?: string;
@@ -28,7 +28,7 @@ function Submission() {
     async function getIdeaSubmission() {
       try {
         const res = await axios.get<GetIdea>(
-          `${process.env.NEXT_PUBLIC_API_URL}/idea`,
+          `${process.env.NEXT_PUBLIC_API_URL}/project`,
           {
             withCredentials: true,
           },
@@ -58,9 +58,9 @@ function Submission() {
               id="projectName"
               className="rounded-md bg-[#F1F1F1] p-2  text-[#ABAFB1]"
             >
-              {!ideaDetails?.title || ideaDetails?.title === ""
+              {!ideaDetails?.name || ideaDetails?.name === ""
                 ? viewStatus
-                : ideaDetails?.title}
+                : ideaDetails?.name}
             </div>
 
             <Label htmlFor="projectTrack" className="text-xs font-semibold">

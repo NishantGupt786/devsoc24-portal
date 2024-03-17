@@ -138,7 +138,7 @@ export default function HomePage() {
   const fetchIdea = async () => {
     try {
       const response: AxiosResponse<ideaProps> = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/idea`,
+        `${process.env.NEXT_PUBLIC_API_URL}/project`,
         {
           withCredentials: true,
         },
@@ -240,30 +240,38 @@ export default function HomePage() {
   ];
   const ideaTherecard = [
     {
-      text: "View Idea",
+      text: "View Project",
       showModal: true,
       modalType: "IdeaSubmit",
     },
     {
-      text: "Edit idea",
+      text: "Edit Project",
       showModal: false,
       modalType: "EditIdea",
-      routeTo: "/edit-idea",
+      routeTo: "/edit-project",
     },
   ];
   const ideaCard = [
     {
-      text: "Submit an Idea",
-      showModal: true,
+      text: "Submit A Project",
+      showModal: getIdea !== "idea found" && getIdea !== "",
       modalType: "Choice",
+      routeTo: "/submit-project",
     },
   ];
 
   const notLeader = [
     {
-      text: "View Idea",
+      text: "View Project",
       showModal: true,
       modalType: "IdeaSubmit",
+    },
+  ];
+  const ideaView = [
+    {
+      text: "View Idea",
+      showModal: true,
+      modalType: "IdeaView",
     },
   ];
 
@@ -395,14 +403,14 @@ export default function HomePage() {
           <></>
         )}
 
-        <div className="flex h-full  flex-col">
+        <div className="flex h-full flex-col">
           {showModal === "leave" && <LeaveTeam />}
           {showModal === "kick" && <Kick />}
           <div className="mt-4 flex h-fit w-screen flex-col justify-between gap-4 px-4">
             <TimelineComponent count={1} />
           </div>
 
-          <div className="mt-4 flex h-fit w-screen flex-col justify-between gap-4 overflow-y-auto px-4 md:flex-row lg:h-[85%]">
+          <div className="mt-4 flex h-fit w-screen flex-col justify-between gap-4 px-4 md:flex-row lg:h-[85%]">
             {team ? (
               <CustomCard
                 title="Your Team"
@@ -414,29 +422,41 @@ export default function HomePage() {
             ) : (
               <TeamCard {...teamData} />
             )}
-            <CustomCard
-              title="Idea Submission"
-              cardImage="ideaSubmissionImg"
-              cardContent={
-                getIdea === "idea found"
-                  ? "Idea Submitted"
-                  : "Idea submission closed"
-              }
-              cardDesc={
-                getIdea === "idea found"
-                  ? isLeader
-                    ? "Edit or View Idea"
-                    : "View Idea"
-                  : "closed"
-              }
-              buttonDetails={
-                getIdea === "idea found" && !team
-                  ? isLeader
-                    ? ideaTherecard
-                    : notLeader
-                  : ideaCard
-              }
-            />
+            <div className="flex flex-col gap-y-4">
+              <CustomCard
+                title="Project Submission"
+                cardImage="ideaSubmissionImg"
+                cardContent={
+                  getIdea === "idea found"
+                    ? "Project Submitted"
+                    : "No Project Yet"
+                }
+                cardDesc={
+                  getIdea === "idea found"
+                    ? isLeader
+                      ? "Edit or View Project"
+                      : "View Project"
+                    : isLeader
+                      ? "Submit a Project"
+                      : "View Project"
+                }
+                buttonDetails={
+                  getIdea === "idea found" && !team
+                    ? isLeader
+                      ? ideaTherecard
+                      : notLeader
+                    : ideaCard
+                }
+              />
+              <CustomCard
+                title="Idea Submission"
+                cardImage="ideaSubmissionImg"
+                cardContent="Idea Submitted"
+                cardDesc="View Idea"
+                buttonDetails={ideaView}
+              />
+            </div>
+
             <div className="h-full ">
               <TrackComponent />
             </div>

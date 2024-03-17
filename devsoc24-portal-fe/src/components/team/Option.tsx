@@ -4,8 +4,7 @@ function Choice() {
   return (
     <>
       <DialogContent className="flex min-h-[100px] flex-col items-center justify-center sm:max-w-[425px]">
-        <DialogTitle>Idea submission Closed.</DialogTitle>
-
+        <DialogTitle>Only team leader can submit project.</DialogTitle>
         {/* <div className="flex justify-evenly w-full ">
             <Button type="submit" className="bg-[#458B71] w-[30%]">
               Create Team
