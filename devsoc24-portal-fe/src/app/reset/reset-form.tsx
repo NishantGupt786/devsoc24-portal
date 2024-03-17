@@ -19,6 +19,7 @@ import toast from "react-hot-toast";
 import axios, { type AxiosError } from "axios";
 import { type APIResponse } from "@/schemas/api";
 import ToastContainer from "@/components/ToastContainer";
+import { secondsToHms } from "@/lib/utils";
 
 type ResetFormValues = z.infer<typeof resetSchema>;
 
@@ -28,6 +29,7 @@ export default function ResetForm() {
   const email = searchParams.get("email");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isCPasswordVisible, setIsCPasswordVisible] = useState(false);
+  const [timer, setTimer] = useState(0);
 
   const form = useForm<ResetFormValues>({
     resolver: zodResolver(resetSchema),
@@ -84,6 +86,42 @@ export default function ResetForm() {
       },
     });
   }
+
+  const resendOTP = async () => {
+    const handleResentOTP = async () => {
+      await axios.post<APIResponse>(
+        `${process.env.NEXT_PUBLIC_API_URL}/resend`,
+        {
+          email: email,
+          type: "resetpass",
+        },
+        {
+          withCredentials: true,
+        },
+      );
+    };
+
+    void toast.promise(handleResentOTP(), {
+      loading: "Loading...",
+      success: () => {
+        return `OTP Sent`;
+      },
+      error: (err: AxiosError) => {
+        switch (err.response?.status) {
+          case 404:
+            return `Account Not Found`;
+          case 409:
+            return `Incorrect Credentials`;
+          case 403:
+            return `User Already Verified`;
+          case 400:
+            return `Please check your input and try again`;
+          default:
+            return `Something went wrong`;
+        }
+      },
+    });
+  };
 
   return (
     <>
@@ -220,10 +258,19 @@ export default function ResetForm() {
           />
 
           <p className="text-center text-sm text-muted-foreground">
-            Already have an account?{" "}
-            <Link href="/" className="font-medium text-primary">
-              Login
-            </Link>
+            Haven&apos;t received OTP?{" "}
+            {timer <= 0 ? (
+              <span
+                onClick={resendOTP}
+                className="cursor-pointer font-medium text-primary hover:underline"
+              >
+                Resend
+              </span>
+            ) : (
+              <span className="font-medium">
+                Resend in {secondsToHms(timer)}
+              </span>
+            )}
           </p>
 
           <Button
