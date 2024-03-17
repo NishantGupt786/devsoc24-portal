@@ -92,6 +92,8 @@ export default function ExternalForm({
             return `Email not verified\nRedirecting...`;
           case 400:
             return `Please check your input and try again!`;
+          case 417:
+            return `VIT Email already exists!`;
           default:
             return `Something went wrong!`;
         }
