@@ -51,7 +51,7 @@ const TeamCard: React.FC<teamDataProps> = (props) => {
       <div>
         <div className="h-fit w-full rounded-xl bg-white md:w-[32vw]">
           <div className="flex w-full items-center justify-between pl-6 pt-4 font-semibold text-[#45464E]">
-            <p>Your Devsoc Team</p>
+            <p>Your Team</p>
             {isLeader ? (
               <div
                 className="mx-2 flex flex-row items-center justify-between gap-3 rounded-lg border-2 border-[#53545C] px-2 py-1 transition-all duration-150 ease-in-out hover:cursor-pointer hover:bg-black/10"
