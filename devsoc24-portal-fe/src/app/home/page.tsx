@@ -282,24 +282,24 @@ export default function HomePage() {
               </div>
               {gender === "Male" ? (
                 <div>
-                  All boys are to report before 8:30 PM. 
-                  You have to give your biometric attendance at Anna Auditorium. 
+                  All boys are to report before 8:30 PM. You have to give your
+                  biometric attendance at Anna Auditorium.
                 </div>
               ) : gender === "Female" ? (
                 <div>
-                  Girls are to give attendance at their respective
-                  hostels blocks by 8:40 PM and report to Anna Auditorium.
+                  Girls are to give attendance at their respective hostels
+                  blocks by 8:45 PM and report to Anna Auditorium.
                 </div>
               ) : (
                 <>
                   <ul className="m-4 list-disc">
                     <li>
-                    All boys are to report before 8:30 PM. 
-                  You have to give your biometric attendance at Anna Auditorium. 
+                      All boys are to report before 8:30 PM. You have to give
+                      your biometric attendance at Anna Auditorium.
                     </li>
                     <li>
-                    Girls are to give attendance at their respective
-                  hostels blocks by 8:40 PM and report to Anna Auditorium.
+                      Girls are to give attendance at their respective hostels
+                      blocks by 8:45 PM and report to Anna Auditorium.
                     </li>
                   </ul>
                 </>
@@ -377,7 +377,8 @@ export default function HomePage() {
                       <X className="h-8 w-8 text-white" />
                       <p className="pl-2 text-xl text-white">
                         We regret to inform you that your idea has not been
-                        shortlisted for the next round. Please check your mail for further information.
+                        shortlisted for the next round. Please check your mail
+                        for further information.
                       </p>
                     </>
                   )}
@@ -417,7 +418,9 @@ export default function HomePage() {
               title="Idea Submission"
               cardImage="ideaSubmissionImg"
               cardContent={
-                getIdea === "idea found" ? "Idea Submitted" : "Idea submission closed"
+                getIdea === "idea found"
+                  ? "Idea Submitted"
+                  : "Idea submission closed"
               }
               cardDesc={
                 getIdea === "idea found"
@@ -425,8 +428,6 @@ export default function HomePage() {
                     ? "Edit or View Idea"
                     : "View Idea"
                   : "closed"
-                    
-                    
               }
               buttonDetails={
                 getIdea === "idea found" && !team
