@@ -1,14 +1,10 @@
-import {
-  DialogContent,
-  DialogTitle,
-} from "@/components/ui/dialog";
-
+import { DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 function Choice() {
   return (
     <>
-      <DialogContent className="min-h-[100px] sm:max-w-[425px] flex flex-col justify-center items-center">
-        <DialogTitle>You must join or create a team first.</DialogTitle>
+      <DialogContent className="flex min-h-[100px] flex-col items-center justify-center sm:max-w-[425px]">
+        <DialogTitle>Idea submission Closed.</DialogTitle>
 
         {/* <div className="flex justify-evenly w-full ">
             <Button type="submit" className="bg-[#458B71] w-[30%]">
