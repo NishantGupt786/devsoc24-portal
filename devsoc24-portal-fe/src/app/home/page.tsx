@@ -114,8 +114,6 @@ export default function HomePage() {
       // console.log(response.data.data.is_leader);
       setIsLeader(response.data.data.is_leader);
       setGender(response.data.data.gender);
-      setShowNotice(true);
-
       // console.log(isLeader);
     } catch (e) {
       if (axios.isAxiosError(e)) {
@@ -148,6 +146,7 @@ export default function HomePage() {
       );
       if (response.data.status === "success") {
         // setShowBanner(response.data.data!.is_selected);
+        // setShowNotice(response.data.data!.is_selected);
         SetIdea("idea found");
       }
     } catch (e) {
