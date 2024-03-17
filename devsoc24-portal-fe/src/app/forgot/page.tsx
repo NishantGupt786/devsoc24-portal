@@ -38,7 +38,7 @@ export default function Page() {
           </CardHeader>
           <div className="mt-3 flex flex-col items-center">
             <p className="text-2xl font-semibold text-black">Welcome back!</p>
-            <p className="mt-1 text-sm">Login to your account</p>
+            <p className="mt-1 text-sm">Reset Password</p>
           </div>
           <CardContent className="mt-4">
             <ForgotForm />

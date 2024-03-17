@@ -62,7 +62,7 @@ export default function HomePage() {
   const { isLeader, setIsLeader } = useLeaderStore();
   const { showModal, setShowModal } = showModalStore();
   const [selected, setSelected] = useState(false);
-  const [showBanner, setShowBanner] = useState(true);
+  const [showBanner, setShowBanner] = useState(false);
 
   const logout = async () => {
     try {
@@ -142,7 +142,7 @@ export default function HomePage() {
         },
       );
       if (response.data.status === "success") {
-        setShowBanner(response.data.data!.is_selected);
+        // setShowBanner(response.data.data!.is_selected);
         SetIdea("idea found");
       }
     } catch (e) {
