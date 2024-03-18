@@ -173,6 +173,44 @@ export default function HomePage() {
     }
   };
 
+  const fetchBanner = async () => {
+    try {
+      const response: AxiosResponse<ideaProps> = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/idea`,
+        {
+          withCredentials: true,
+        },
+      );
+      if (response.data.status === "success") {
+        setShowBanner(true);
+        // setShowNotice(true);
+        setSelected(true);
+        SetIdea("idea found");
+      }
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        const axiosError = e as AxiosError<APIResponse>;
+        switch (axiosError.response?.status) {
+          case 401:
+            router.push("/");
+            break;
+          case 404:
+            SetIdea("");
+            break;
+          case 417:
+            // console.log("team no idea");
+            break;
+          case 409:
+            setIdea(409);
+            break;
+          default:
+            // console.log(e);
+            break;
+        }
+      }
+    }
+  };
+
   const fetchTeam = async () => {
     try {
       const response = await axios.get<APIResponse>(
@@ -223,6 +261,7 @@ export default function HomePage() {
     } else {
       void fetchIdea();
       void fetchTeam();
+      void fetchBanner();
     }
   }, []);
 
@@ -376,8 +415,8 @@ export default function HomePage() {
                     <>
                       <Check className="h-8 w-8 text-white" />
                       <p className="pl-2 text-xl text-white">
-                        Congratulations! Your idea has been shortlisted for round 2.
-                        Report to Anna Auditorium before 11:45 AM.
+                        Congratulations! Your idea has been shortlisted for
+                        round 2. Report to Anna Auditorium before 11:45 AM.
                       </p>
                     </>
                   ) : (
