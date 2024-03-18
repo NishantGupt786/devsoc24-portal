@@ -407,7 +407,7 @@ export default function HomePage() {
           {showModal === "leave" && <LeaveTeam />}
           {showModal === "kick" && <Kick />}
           <div className="mt-4 flex h-fit w-screen flex-col justify-between gap-4 px-4">
-            <TimelineComponent count={2} />
+            <TimelineComponent count={3} />
           </div>
 
           <div className="mt-4 flex h-fit w-screen flex-col justify-between gap-4 px-4 md:flex-row lg:h-[85%]">
