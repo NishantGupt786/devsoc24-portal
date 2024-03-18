@@ -95,7 +95,7 @@ const TimelineComponent = (props: { count: number }) => {
                     alt="half"
                     height={50}
                     width={50}
-                    className="h-auto w-fit min-w-[320px]"
+                    className="h-auto min-h-[100px] w-fit min-w-[300px]"
                   />
                   <div className="flex-col m-1 flex w-full text-center">
                     <p>{timelineData[index]?.desc}</p>
@@ -115,7 +115,7 @@ const TimelineComponent = (props: { count: number }) => {
                     alt="none"
                     height={50}
                     width={50}
-                    className="h-auto w-fit min-w-[320px]"
+                    className="h-auto min-h-[100px] w-fit min-w-[300px]"
                   />
                   <div className="flex-col m-1 flex w-full text-center">
                     <p>{timelineData[index]?.desc}</p>
