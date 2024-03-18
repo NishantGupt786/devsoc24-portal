@@ -376,8 +376,8 @@ export default function HomePage() {
                     <>
                       <Check className="h-8 w-8 text-white" />
                       <p className="pl-2 text-xl text-white">
-                        Congratulations! Your idea has been shortlisted for next
-                        round. Please check your email for more details.
+                        Congratulations! Your idea has been shortlisted for round 2.
+                        Report to Anna Auditorium before 11:45 AM.
                       </p>
                     </>
                   ) : (
