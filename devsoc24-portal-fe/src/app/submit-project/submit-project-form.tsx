@@ -19,6 +19,7 @@ import toast from "react-hot-toast";
 import axios, { AxiosError } from "axios";
 import ToastContainer from "@/components/ToastContainer";
 import { useRouter } from "next/navigation";
+import { IdeaStore } from "@/store/store";
 interface FormValues {
   name: string;
   track: string;
@@ -44,6 +45,7 @@ const tracks = [
 ];
 
 export default function SubmitProjectForm() {
+  const { getIdea, SetIdea } = IdeaStore();
   const router = useRouter();
   const form = useForm<FormValues>({
     resolver: zodResolver(ideaSchema),
@@ -71,6 +73,8 @@ export default function SubmitProjectForm() {
     void toast.promise(handleSubmit(), {
       loading: "Cooking...",
       success: () => {
+        SetIdea("idea found");
+        void router.push("/home");
         return `Project submitted successfully!`;
       },
       error: (err: AxiosError) => {
