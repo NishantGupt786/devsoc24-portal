@@ -144,7 +144,7 @@ export default function HomePage() {
         },
       );
       if (response.data.status === "success") {
-        setShowBanner(true);
+        setShowBanner(false);
         // setShowNotice(true);
         setSelected(true);
         SetIdea("idea found");
@@ -182,7 +182,7 @@ export default function HomePage() {
         },
       );
       if (response.data.status === "success") {
-        setShowBanner(true);
+        setShowBanner(false);
         // setShowNotice(true);
         setSelected(true);
         SetIdea("idea found");
