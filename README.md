@@ -8,7 +8,7 @@
 
 ## ⚙️ Tech Stack:
 
-- T3
+- Next.js
 - TypeScript
 - Tailwind CSS
 - Framer Motion
