@@ -6,6 +6,9 @@
 
 > <p>Welcome to the code DEVSOC'24 Portal, your one-stop solution where participants manage all their event related logistics, from creating a team to submitting the final project, Our powerful and user-friendly tools are poised to facilitate your every step with utmost efficiency and ease.</p>
 
+## 🌐 Deploy
+[https://portal.devsoc.codechefvit.com/](https://portal.devsoc.codechefvit.com/)
+
 ## ⚙️ Tech Stack:
 
 - Next.js
