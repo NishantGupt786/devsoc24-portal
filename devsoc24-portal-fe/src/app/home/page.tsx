@@ -282,12 +282,12 @@ export default function HomePage() {
   ];
   const ideaTherecard = [
     {
-      text: "View Project",
+      text: "View Idea",
       showModal: true,
       modalType: "IdeaSubmit",
     },
     {
-      text: "Edit Project",
+      text: "Edit Idea",
       showModal: false,
       modalType: "EditIdea",
       routeTo: "/edit-project",
@@ -466,21 +466,19 @@ export default function HomePage() {
             )}
             <div className="flex flex-col gap-y-4 ">
               <CustomCard
-                title="Project Submission"
+                title="Idea Submission"
                 cardImage="ideaSubmissionImg"
                 cardContent={
-                  getIdea === "idea found"
-                    ? "Project Submitted"
-                    : "No Project Yet"
+                  getIdea === "idea found" ? "Idea Submitted" : "No Idea Yet"
                 }
                 cardDesc={
                   getIdea === "idea found"
                     ? isLeader
-                      ? "Edit or View Project"
-                      : "View Project"
+                      ? "Edit or View Idea"
+                      : "View Idea"
                     : isLeader
-                      ? "Submit a Project"
-                      : "View Project"
+                      ? "Submit a Idea"
+                      : "View Idea"
                 }
                 buttonDetails={
                   getIdea === "idea found" && !team
@@ -490,18 +488,18 @@ export default function HomePage() {
                     : ideaCard
                 }
               />
-              <CustomCard
-                title="Idea Submission"
-                cardImage="ideaSubmissionImg"
-                cardContent="Idea Submitted"
-                cardDesc="View Idea"
-                buttonDetails={ideaView}
-              />
+              {getIdea === "idea found" && (
+                <CustomCard
+                  title="Idea Submission"
+                  cardImage="ideaSubmissionImg"
+                  cardContent="Idea Submitted"
+                  cardDesc="View Idea"
+                  buttonDetails={ideaView}
+                />
+              )}
             </div>
-
             <div className="h-full ">
               <TrackComponent />
-              
             </div>
 
             {/* <div className="flex max-h-full flex-col rounded-xl">
