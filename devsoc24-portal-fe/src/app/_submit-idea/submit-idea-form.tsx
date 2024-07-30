@@ -37,11 +37,11 @@ import Image from "next/image";
 import ToastContainer from "@/components/ToastContainer";
 import refreshToken from "@/services/refreshtoken";
 const tracks = [
-  "Interactive Engagement",
-  "Eco-Innovations",
-  "Community Building",
-  "Future of Work",
-  "Ethical Technology",
+  // "Interactive Engagement",
+  // "Eco-Innovations",
+  // "Community Building",
+  // "Future of Work",
+  // "Ethical Technology",
   "Open Innovation",
 ];
 

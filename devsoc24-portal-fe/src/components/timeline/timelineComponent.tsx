@@ -6,54 +6,24 @@ import Image from "next/image";
 
 const timelineData = [
   {
-    date: "17th March",
+    date: "2nd August",
     time: "20:00",
-    desc: "Entry and Registration",
+    desc: "Hack Starts",
   },
   {
-    date: "17th March",
-    time: "21:00",
-    desc: "Hacking Starts",
+    date: "3rd August",
+    time: "00:00",
+    desc: "Review 1(idea based)",
   },
   {
-    date: "18th March",
-    time: "3:00",
-    desc: "Review 1",
-  },
-  {
-    date: "18th March",
-    time: "12:00",
-    desc: "ContentStack speaker session",
-  },
-  {
-    date: "18th March",
-    time: "16:00",
-    desc: "Akhil Sharma speaker session",
-  },
-  {
-    date: "18th March",
+    date: "3rd August",
     time: "22:00",
-    desc: "Saurabh Soni speaker session",
+    desc: "Review 2(implementation)",
   },
   {
-    date: "19th March",
-    time: "2:00",
-    desc: "Review 2",
-  },
-  {
-    date: "19th March",
-    time: "13:00",
-    desc: "End of Hacking",
-  },
-  {
-    date: "19th March",
-    time: "14:00",
-    desc: "Final Pitches",
-  },
-  {
-    date: "19th March",
-    time: "16:00",
-    desc: "Prize distribution and Closing",
+    date: "4th August",
+    time: "15:00",
+    desc: "Final reviews",
   },
 ];
 

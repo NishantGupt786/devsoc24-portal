@@ -37,11 +37,11 @@ interface SubmitProjectResponse {
 }
 
 const tracks = [
-  "Interactive Engagement",
-  "Eco-Innovations",
-  "Community Building",
-  "Future of Work",
-  "Ethical Technology",
+  // "Interactive Engagement",
+  // "Eco-Innovations",
+  // "Community Building",
+  // "Future of Work",
+  // "Ethical Technology",
   "Open Innovation",
 ];
 
