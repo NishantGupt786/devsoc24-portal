@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   useTeamDataStore,
   useTeamStore,
@@ -37,6 +37,7 @@ interface ideaProps {
 
 function CreateTeam() {
   const { team, setTeam } = useTeamStore();
+  const [teamName, setTeamName] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const { teamData, setTeamData } = useTeamDataStore();
   const { idea, setIdea } = useIdeaStore();
@@ -56,12 +57,10 @@ function CreateTeam() {
     }
     try {
       await refreshToken()
-      console.log(inputRef.current?.value);
+      console.log("name", teamName);
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/team/create`,
-        {
-          name: inputRef.current?.value,
-        },
+        { name: teamName },
         {
           withCredentials: true,
         },
@@ -136,11 +135,11 @@ function CreateTeam() {
           <Label htmlFor="name" className="text-sm font-normal text-[#53545C]">
             Enter team name
           </Label>
-          <input
+          <Input
             id="name"
             placeholder="Team Name"
             className="col-span-3"
-            ref={inputRef}
+            onChange={(e) => setTeamName(e.target.value)}
           />
         </div>
         <div className="flex justify-center">
