@@ -295,16 +295,16 @@ export default function HomePage() {
   ];
   const ideaCard = [
     {
-      text: "Submit A Project",
+      text: "Submit A Idea",
       showModal: getIdea !== "idea found" && getIdea !== "",
       modalType: "Choice",
-      routeTo: "/submit-project",
+      routeTo: "/submit-idea",
     },
   ];
 
   const notLeader = [
     {
-      text: "View Project",
+      text: "View Idea",
       showModal: true,
       modalType: "IdeaSubmit",
     },
