@@ -8,6 +8,7 @@ import {
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import refreshToken from "@/services/refreshtoken";
 
 const Kick = () => {
   const { showModal, setShowModal } = showModalStore();
@@ -18,7 +19,7 @@ const Kick = () => {
 
   const fetchTeam = async () => {
     try {
-      // console.log("fetch team");
+      await refreshToken()
       const response = await axios.get<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/team`,
         {
@@ -51,6 +52,7 @@ const Kick = () => {
 
   const leaveTeam = async () => {
     const handleClick = async () => {
+      await refreshToken()
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/team/kick`,
         { id: kickMate },

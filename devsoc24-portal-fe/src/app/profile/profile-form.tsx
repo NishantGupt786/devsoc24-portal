@@ -43,11 +43,13 @@ import send from "@/assets/images/Send.svg";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import refreshToken from "@/services/refreshtoken";
 export default function Profile() {
   const router = useRouter();
   useEffect(() => {
     async function getIdeaSubmission() {
       try {
+        await refreshToken()
         const response: AxiosResponse<userProps> = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/user/me`,
           {
@@ -97,6 +99,7 @@ export default function Profile() {
   async function onSubmit(data: FormValues) {
     // console.log(data);
     const handleSubmit = async () => {
+      await refreshToken()
       const res = await axios.patch<SubmitProjectResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/user/update`,
         data,

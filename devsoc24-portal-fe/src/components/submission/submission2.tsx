@@ -4,6 +4,7 @@ import {
     DialogTitle,
   } from "@/components/ui/dialog";
   import { Label } from "@/components/ui/label";
+import refreshToken from "@/services/refreshtoken";
   import axios from "axios";
   import { useEffect, useState } from "react";
   
@@ -27,6 +28,7 @@ import {
     useEffect(() => {
       async function getIdeaSubmission() {
         try {
+          await refreshToken()
           const res = await axios.get<GetIdea>(
             `${process.env.NEXT_PUBLIC_API_URL}/idea`,
             {

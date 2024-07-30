@@ -20,6 +20,7 @@ import axios, { type AxiosError } from "axios";
 import { type APIResponse } from "@/schemas/api";
 import { useRouter } from "next/navigation";
 import ToastContainer from "../ToastContainer";
+import refreshToken from "@/services/refreshtoken";
 
 type CreateTeamFormValues = z.infer<typeof createTeamSchema>;
 
@@ -35,6 +36,7 @@ export default function CreateTeamForm() {
 
   async function onSubmit(data: CreateTeamFormValues) {
     const handleSubmit = async () => {
+      await refreshToken()
       await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/team/create`,
         { name: data.teamName },

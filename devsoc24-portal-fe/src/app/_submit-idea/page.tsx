@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { refresh } from "@/interfaces";
 import axios from "axios";
+import refreshToken from "@/services/refreshtoken";
 
 export default function Page() {
   const [screenWidth, setScreenWidth] = useState<boolean>(false);
@@ -38,6 +39,7 @@ export default function Page() {
 
   const logout = async () => {
     try {
+      await refreshToken()
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/logout`,
         {

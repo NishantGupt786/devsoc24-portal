@@ -35,6 +35,7 @@ interface SubmitProjectResponse {
 import send from "@/assets/images/Send.svg";
 import Image from "next/image";
 import ToastContainer from "@/components/ToastContainer";
+import refreshToken from "@/services/refreshtoken";
 const tracks = [
   "Interactive Engagement",
   "Eco-Innovations",
@@ -62,6 +63,7 @@ export default function SubmitIdeaForm() {
 
   async function onSubmit(data: FormValues) {
     const handleSubmit = async () => {
+      await refreshToken()
       await axios.post<SubmitProjectResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/idea/create`,
         data,

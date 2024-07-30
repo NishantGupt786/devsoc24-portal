@@ -28,6 +28,7 @@ import { useSearchParams } from "next/navigation";
 import axios, { type AxiosError } from "axios";
 import { type APIResponse } from "@/schemas/api";
 import ToastContainer from "../ToastContainer";
+import refreshToken from "@/services/refreshtoken";
 
 type VitianDetailsFormValues = z.infer<typeof vitianDetails>;
 
@@ -70,6 +71,7 @@ export default function VitianForm({
     };
     // console.log(updatedData);
     const handleSubmit = async () => {
+      await refreshToken()
       await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/user/complete-profile`,
         updatedData,

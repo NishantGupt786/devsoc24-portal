@@ -20,6 +20,7 @@ import toast from "react-hot-toast";
 import { type APIResponse } from "@/schemas/api";
 import { useRouter } from "next/navigation";
 import ToastContainer from "../ToastContainer";
+import refreshToken from "@/services/refreshtoken";
 
 type CreateTeamFormValues = z.infer<typeof joinTeamSchema>;
 
@@ -36,15 +37,7 @@ export default function JoinTeamForm() {
   async function onSubmit(data: CreateTeamFormValues) {
     // console.log(data);
     const handleSubmit = async () => {
-      await axios.post<APIResponse>(
-        `${process.env.NEXT_PUBLIC_API_URL}/refresh`,
-        {
-          nallaData: "",
-        },
-        {
-          withCredentials: true,
-        },
-      );
+      await refreshToken()
       await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/team/join`,
         { code: data.teamCode },

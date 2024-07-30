@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { userProps } from "@/interfaces";
 import { useRouter } from "next/navigation";
 import { type APIResponse } from "@/schemas/api";
+import refreshToken from "@/services/refreshtoken";
 
 interface ideaProps {
   message: string;
@@ -34,7 +35,7 @@ const LeaveTeam = () => {
 
   const fetchTeam = async () => {
     try {
-      // console.log("fetching team")
+      await refreshToken()
       const response = await axios.get<userProps>(
         `${process.env.NEXT_PUBLIC_API_URL}/team`,
         {
@@ -67,6 +68,7 @@ const LeaveTeam = () => {
 
   const leaveTeam = async () => {
     const handleClick = async () => {
+      await refreshToken()
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/team/leave`, {
         withCredentials: true,
       });

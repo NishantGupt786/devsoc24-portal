@@ -37,6 +37,7 @@ import LeaveTeam from "@/components/team/leaveTeam";
 import Kick from "@/components/team/kick";
 import { Button } from "@/components/ui/button";
 import { DiscordIcon } from "@/assets/images/discord";
+import refreshToken from "@/services/refreshtoken";
 
 interface ideaProps {
   message: string;
@@ -67,6 +68,7 @@ export default function HomePage() {
 
   const logout = async () => {
     try {
+      await refreshToken()
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/logout`,
         {
@@ -213,6 +215,7 @@ export default function HomePage() {
 
   const fetchTeam = async () => {
     try {
+      await refreshToken()
       const response = await axios.get<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/team`,
         {

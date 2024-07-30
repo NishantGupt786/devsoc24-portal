@@ -20,6 +20,7 @@ import {
 import { useRouter } from "next/navigation";
 import { type APIResponse } from "@/schemas/api";
 import toast from "react-hot-toast";
+import refreshToken from "@/services/refreshtoken";
 
 function JoinTeam() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -35,6 +36,7 @@ function JoinTeam() {
       return;
     }
     const handleSubmit = async () => {
+      await refreshToken()
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/team/join`,
         {
@@ -76,6 +78,7 @@ function JoinTeam() {
   };
   const fetchTeam = async () => {
     try {
+      await refreshToken()
       const response = await axios.get<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/team`,
         {

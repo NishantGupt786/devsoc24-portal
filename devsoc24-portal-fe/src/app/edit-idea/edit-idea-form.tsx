@@ -42,6 +42,7 @@ import send from "@/assets/images/Send.svg";
 import Image from "next/image";
 import { useEffect } from "react";
 import ToastContainer from "@/components/ToastContainer";
+import refreshToken from "@/services/refreshtoken";
 const tracks = [
   "Interactive Engagement",
   "Eco-Innovations",
@@ -56,6 +57,7 @@ export default function EditIdeaForm() {
   useEffect(() => {
     async function getIdeaSubmission() {
       try {
+        await refreshToken()
         const res = await axios.get<GetIdea>(
           `${process.env.NEXT_PUBLIC_API_URL}/idea`,
           {
@@ -96,6 +98,7 @@ export default function EditIdeaForm() {
 
   async function onSubmit(data: FormValues) {
     const handleSubmit = async () => {
+      await refreshToken()
       await axios.patch<SubmitProjectResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/idea/update`,
         data,

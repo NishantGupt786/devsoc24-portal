@@ -20,6 +20,7 @@ import axios, { AxiosError } from "axios";
 import ToastContainer from "@/components/ToastContainer";
 import { useRouter } from "next/navigation";
 import { IdeaStore } from "@/store/store";
+import refreshToken from "@/services/refreshtoken";
 interface FormValues {
   name: string;
   track: string;
@@ -62,6 +63,7 @@ export default function SubmitProjectForm() {
 
   async function onSubmit(data: FormValues) {
     const handleSubmit = async () => {
+      await refreshToken()
       await axios.post<SubmitProjectResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/project/create`,
         data,
