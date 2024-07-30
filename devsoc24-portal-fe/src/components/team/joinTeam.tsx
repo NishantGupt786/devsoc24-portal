@@ -8,7 +8,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import axios, { AxiosError } from "axios";
 import {
   useTeamDataStore,
@@ -25,13 +25,14 @@ import refreshToken from "@/services/refreshtoken";
 function JoinTeam() {
   const inputRef = useRef<HTMLInputElement>(null);
   const { team, setTeam } = useTeamStore();
+  const [teamCode, setTeamCode] = useState("");
   const { teamData, setTeamData } = useTeamDataStore();
   const { isLeader, setIsLeader } = useLeaderStore();
   const { getIdea, SetIdea } = IdeaStore();
   const { edit, setEdit } = useTeamEditStore();
   const router = useRouter();
   const handleClick = async () => {
-    if (!inputRef.current?.value || inputRef.current?.value.length === 0) {
+    if (!teamCode.trim()) {
       toast.error("Please enter a team code!");
       return;
     }
@@ -40,7 +41,7 @@ function JoinTeam() {
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/team/join`,
         {
-          code: inputRef.current?.value,
+          code: teamCode,
         },
         {
           withCredentials: true,
@@ -123,7 +124,7 @@ function JoinTeam() {
             id="name"
             placeholder="Team code"
             className="col-span-3"
-            ref={inputRef}
+            onChange={(e) => setTeamCode(e.target.value)}
             maxLength={6}
           />
         </div>
