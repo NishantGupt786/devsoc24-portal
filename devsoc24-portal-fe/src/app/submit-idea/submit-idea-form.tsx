@@ -103,7 +103,7 @@ export default function SubmitIdeaForm() {
     <>
       <ToastContainer />
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form>
           <div className="flex w-fit flex-col items-center">
             <div className="flex  items-center justify-center ">
               <div className="flex w-min justify-start gap-16 max-[931px]:flex-col max-[931px]:gap-6">
@@ -317,7 +317,7 @@ export default function SubmitIdeaForm() {
             <div className="">
               <Button
                 className="my-5 bg-[#0019FF]"
-                type="submit"
+                onClick={form.handleSubmit(onSubmit)}
                 //   disabled={isSubmitting}
               >
                 <Image src={send as HTMLImageElement} alt="b" />
