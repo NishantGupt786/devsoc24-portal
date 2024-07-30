@@ -47,11 +47,11 @@ function CreateTeam() {
   const router = useRouter();
 
   const handleClick = async () => {
-    if (!inputRef.current?.value || inputRef.current?.value.trim().length === 0) {
+    if (!teamName.trim()) {
       toast.error("Please enter a team name!");
       return;
     }
-    if (inputRef.current?.value.length >= 20) {
+    if (teamName.length >= 20) {
       toast.error("Team name should not be more than 20 characters!");
       return;
     }
