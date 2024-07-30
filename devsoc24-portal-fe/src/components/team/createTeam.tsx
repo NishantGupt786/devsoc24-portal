@@ -56,6 +56,7 @@ function CreateTeam() {
     }
     try {
       await refreshToken()
+      console.log(inputRef.current?.value);
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/team/create`,
         {
