@@ -15,29 +15,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  useEffect(() => {
-    // Ensure useEffect runs only on the client side
-    const interval = setInterval(() => {
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_API_URL}/refresh`,
-          {
-            nallaData: "",
-          },
-          {
-            withCredentials: true,
-          },
-        )
-        .then((res) => {
-          console.log("Then: ", res);
-        })
-        .catch((e) => {
-          console.log("Catch: ", e);
-        });
-    }, 150000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <html lang="en">

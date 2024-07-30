@@ -449,7 +449,7 @@ export default function HomePage() {
           {showModal === "leave" && <LeaveTeam />}
           {showModal === "kick" && <Kick />}
           <div className="mt-4 flex h-fit w-screen flex-col justify-between gap-4 px-4">
-            <TimelineComponent count={1} />
+            <TimelineComponent count={0} />
           </div>
 
           <div className="mt-4 flex h-fit w-screen flex-col justify-between gap-4 px-4 md:flex-row lg:h-[85%]">
@@ -501,6 +501,7 @@ export default function HomePage() {
 
             <div className="h-full ">
               <TrackComponent />
+              
             </div>
 
             {/* <div className="flex max-h-full flex-col rounded-xl">
