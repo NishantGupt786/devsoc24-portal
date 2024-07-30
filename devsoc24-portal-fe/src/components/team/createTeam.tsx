@@ -136,7 +136,7 @@ function CreateTeam() {
           <Label htmlFor="name" className="text-sm font-normal text-[#53545C]">
             Enter team name
           </Label>
-          <Input
+          <input
             id="name"
             placeholder="Team Name"
             className="col-span-3"
