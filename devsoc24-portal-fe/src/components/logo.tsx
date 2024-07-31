@@ -6,8 +6,8 @@ export default function Logo({ className }: { className: string }) {
     <Image
       src="/images/cclogo.svg"
       alt=""
-      height={100}
-      width={100}
+      height={80}
+      width={80}
       className={className}
     />
   );

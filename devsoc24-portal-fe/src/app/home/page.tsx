@@ -283,6 +283,11 @@ export default function HomePage() {
   ];
   const ideaTherecard = [
     {
+      text: "View Idea",
+      showModal: true,
+      modalType: "IdeaView",
+    },
+    {
       text: "Edit Idea",
       showModal: false,
       modalType: "EditIdea",
@@ -391,13 +396,13 @@ export default function HomePage() {
                   getIdea === "idea found" && !team
                     ? isLeader
                       ? ideaTherecard
-                      : notLeader
+                      : ideaView
                     : isLeader
                       ? ideaCard
-                      : notLeader
+                      : ideaView
                 }
               />
-              {getIdea === "idea found" && (
+              {/* {getIdea === "idea found" && (
                 <CustomCard
                   title="Idea Submission"
                   cardImage="ideaSubmissionImg"
@@ -405,7 +410,7 @@ export default function HomePage() {
                   cardDesc="View Idea"
                   buttonDetails={ideaView}
                 />
-              )}
+              )} */}
             </div>
             <div className="h-full ">
               <TrackComponent />
