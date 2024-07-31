@@ -324,7 +324,7 @@ export default function HomePage() {
       <main className="max-w-screen flex h-fit flex-col items-center overflow-x-hidden bg-[#F4F5FA] lg:h-screen">
         <div className="flex h-fit min-h-[8vh] w-full items-center justify-between gap-x-8 bg-background  px-2 py-2 lg:px-6">
           <div className="flex flex-row gap-4 lg:gap-8">
-            <Logo className="h-9/10 b flex w-auto scale-[0.75] lg:scale-[1]" />
+            <Logo className="h-4/6 b flex w-auto scale-[0.75] lg:scale-[1]" />
           </div>
           <div className="flex flex-row gap-8">
 
