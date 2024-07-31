@@ -283,15 +283,10 @@ export default function HomePage() {
   ];
   const ideaTherecard = [
     {
-      text: "View Idea",
-      showModal: true,
-      modalType: "IdeaSubmit",
-    },
-    {
       text: "Edit Idea",
       showModal: false,
       modalType: "EditIdea",
-      routeTo: "/edit-project",
+      routeTo: "/edit-idea",
     },
   ];
   const ideaCard = [
