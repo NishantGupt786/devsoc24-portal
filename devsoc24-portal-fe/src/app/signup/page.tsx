@@ -11,18 +11,6 @@ import title4 from "@/assets/images/glitchtitle3.svg";
 import SignupForm from "./signup-form";
 
 export default function Page() {
-  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
-  const titles = [title, title2, title3, title4];
-  useEffect(() => {
-    const intervals = [2000, 400, 600, 400];
-    const interval = setInterval(() => {
-      setCurrentTitleIndex((prevIndex) => (prevIndex + 1) % titles.length);
-    }, intervals[currentTitleIndex]);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [currentTitleIndex, titles.length]);
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-[url('/images/bg.svg')] bg-cover bg-no-repeat">
@@ -32,7 +20,7 @@ export default function Page() {
       <div className="flex max-w-[90vw] grow items-center justify-center">
         <Card className="w-fit">
           <CardHeader className="items-center">
-            <Image src={titles[currentTitleIndex] as string} alt="title" />
+            <div className="flex items-center justify-center font-black text-4xl">Internal Hack 24</div>
           </CardHeader>
           <div className="mt-3 flex flex-col items-center">
             <p className="text-2xl font-semibold text-black">

@@ -319,47 +319,6 @@ export default function HomePage() {
 
   return (
     <>
-      {showNotice ? (
-        <>
-          <div className="fixed z-[100] flex h-screen w-screen items-center justify-center bg-black/50">
-            <div className="flex w-[90vw] flex-col rounded-xl bg-white p-4 lg:w-[50vw]">
-              <div className="flex h-fit w-full items-center justify-between text-lg">
-                <p>Notice</p>
-                <X
-                  className="mb-5 h-4 w-4 text-black hover:cursor-pointer"
-                  onClick={() => setShowNotice(false)}
-                />
-              </div>
-              {gender === "Male" ? (
-                <div>
-                  All boys are to report before 8:30 PM. You have to give your
-                  biometric attendance at Anna Auditorium.
-                </div>
-              ) : gender === "Female" ? (
-                <div>
-                  Girls are to give attendance at their respective hostels
-                  blocks by 8:45 PM and report to Anna Auditorium.
-                </div>
-              ) : (
-                <>
-                  <ul className="m-4 list-disc">
-                    <li>
-                      All boys are to report before 8:30 PM. You have to give
-                      your biometric attendance at Anna Auditorium.
-                    </li>
-                    <li>
-                      Girls are to give attendance at their respective hostels
-                      blocks by 8:45 PM and report to Anna Auditorium.
-                    </li>
-                  </ul>
-                </>
-              )}
-            </div>
-          </div>
-        </>
-      ) : (
-        <></>
-      )}
       <ToastContainer />
       <main className="max-w-screen flex h-fit flex-col items-center overflow-x-hidden bg-[#F4F5FA] lg:h-screen">
         <div className="flex h-fit min-h-[8vh] w-full items-center justify-between gap-x-8 bg-background  px-2 py-2 lg:px-6">
@@ -372,14 +331,6 @@ export default function HomePage() {
             />
           </div>
           <div className="flex flex-row gap-8">
-            <Link href="https://www.contentstack.com/">
-              <Image
-                src={contentstack as HTMLImageElement}
-                alt="titlesponsor"
-                width={200}
-                className="scale-[1.2]"
-              />
-            </Link>
 
             <DropdownMenu>
               <DropdownMenuTrigger className="mr-2 lg:mr-10">
@@ -409,41 +360,6 @@ export default function HomePage() {
             </DropdownMenu>
           </div>
         </div>
-        {showBanner ? (
-          <>
-            <div className="flex w-full items-center justify-between bg-[#0019FF] p-2">
-              <div className="flex grow flex-col items-center justify-between gap-2 md:flex-row">
-                <div className="flex items-center">
-                  {selected ? (
-                    <>
-                      <Check className="h-8 w-8 text-white" />
-                      <p className="pl-2 text-xl text-white">
-                        Congratulations! Your idea has been shortlisted for
-                        round 2. Report to Anna Auditorium before 11:45 AM.
-                      </p>
-                    </>
-                  ) : (
-                    <>
-                      <X className="h-8 w-8 text-white" />
-                      <p className="pl-2 text-xl text-white">
-                        We regret to inform you that your idea has not been
-                        shortlisted for the next round. Please check your mail
-                        for further information.
-                      </p>
-                    </>
-                  )}
-                </div>
-              </div>
-              <XIcon
-                size={24}
-                className="cursor-pointer text-white"
-                onClick={() => setShowBanner(false)}
-              />
-            </div>
-          </>
-        ) : (
-          <></>
-        )}
 
         <div className="flex h-full flex-col">
           {showModal === "leave" && <LeaveTeam />}
@@ -485,7 +401,9 @@ export default function HomePage() {
                     ? isLeader
                       ? ideaTherecard
                       : notLeader
-                    : ideaCard
+                    : isLeader
+                      ? ideaCard
+                      : notLeader
                 }
               />
               {getIdea === "idea found" && (
