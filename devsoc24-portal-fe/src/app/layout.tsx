@@ -19,12 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>DEVSOC&apos;24 | Portal</title>
-        <meta title="DEVSOC'24 | Portal"></meta>
+        <title>Internal Hack&apos;24 | Portal</title>
+        <meta title="Internal Hack'24 | Portal"></meta>
         <meta
           name="description"
           content={
-            "Welcome to the DEVSOC-24 Portal! From idea submission to your final project, the portal is your guide for DEVSOC. Happy Hacking!"
+            "Welcome to the Internal Hack-24 Portal! From idea submission to your final project, the portal is your guide for Internal Hack. Happy Hacking!"
           }
         />
         <link
@@ -35,11 +35,11 @@ export default function RootLayout({
         ></link>
 
         {/* Open Graph tags */}
-        <meta property="og:title" content={"DEVSOC'24 | Portal"} />
+        <meta property="og:title" content={"Internal Hack'24 | Portal"} />
         <meta
           property="og:description"
           content={
-            "Welcome to the DEVSOC-24 Portal! From idea submission to your final project, the portal is your guide for DEVSOC. Happy Hacking!"
+            "Welcome to the Internal Hack-24 Portal! From idea submission to your final project, the portal is your guide for Internal Hack. Happy Hacking!"
           }
         />
         <meta property="og:type" content="website" />

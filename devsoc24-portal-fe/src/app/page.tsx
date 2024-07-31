@@ -30,7 +30,7 @@ export default function Page() {
       <div className="flex max-w-[90vw] grow items-center justify-center">
         <Card className="w-fit">
           <CardHeader className="items-center">
-          <div className="flex items-center justify-center font-black text-7xl">Internal Hack 24</div>
+          <div className="flex items-center justify-center font-black text-7xl">Internal Hack &apos;24</div>
           </CardHeader>
           <div className="mt-3 flex flex-col items-center">
             <p className="text-2xl font-semibold text-black">Welcome back!</p>

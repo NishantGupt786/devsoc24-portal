@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Logo from "@/components/logo";
 import Dashtitle from "@/assets/images/titleDashboard.svg";
+import cclogo from "@/assets/images/cclogo.svg"
 import CustomCard from "@/components/customCard";
 import TeamCard from "@/components/teamCard";
 import contentstack from "@/assets/images/contentstack.svg";
@@ -325,7 +326,7 @@ export default function HomePage() {
           <div className="flex flex-row gap-4 lg:gap-8">
             <Logo className="h-9/10 b flex w-auto scale-[0.75] lg:scale-[1]" />
             <Image
-              src={Dashtitle as HTMLImageElement}
+              src={cclogo as HTMLImageElement}
               alt="title"
               className="hidden w-[30vw] sm:block lg:w-auto"
             />

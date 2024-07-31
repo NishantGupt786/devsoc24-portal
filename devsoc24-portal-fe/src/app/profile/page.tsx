@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Logo from "@/components/logo";
 import Dashtitle from "@/assets/images/titleDashboard.svg";
+import cclogo from "@/assets/images/cclogo.svg";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -75,7 +76,7 @@ export default function Page() {
             <div className="flex w-full flex-row gap-4 bg-white lg:gap-8">
               <Logo className="h-9/10 ml-3 w-auto scale-[0.75] lg:scale-[1]" />
               <Image
-                src={Dashtitle as HTMLImageElement}
+                src={cclogo as HTMLImageElement}
                 alt="title"
                 className="w-[30vw] lg:w-auto"
               />
@@ -105,7 +106,7 @@ export default function Page() {
                 <Logo className="h-9/10 b flex w-auto scale-[0.75] lg:scale-[1]" />
 
                 <Image
-                  src={Dashtitle as HTMLImageElement}
+                  src={cclogo as HTMLImageElement}
                   alt="title"
                   className="hidden w-[30vw] sm:block lg:w-auto"
                 />

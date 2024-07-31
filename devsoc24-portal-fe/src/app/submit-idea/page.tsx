@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Logo from "@/components/logo";
 import Dashtitle from "@/assets/images/titleDashboard.svg";
+import cclogo from "@/assets/images/cclogo.svg";
 import SubmitIdeaForm from "./submit-idea-form";
 import { ArrowLeft, User } from "lucide-react";
 import Link from "next/link";
@@ -75,7 +76,7 @@ export default function Page() {
             <div className="flex w-full flex-row gap-4 bg-white lg:gap-8">
               <Logo className="h-9/10 ml-3 w-auto scale-[0.75] lg:scale-[1]" />
               <Image
-                src={Dashtitle as HTMLImageElement}
+                src={cclogo as HTMLImageElement}
                 alt="title"
                 className="w-[30vw] lg:w-auto"
               />
@@ -87,7 +88,7 @@ export default function Page() {
             </div>
             <div className="absolute ml-[4.7rem] mt-[11vh] flex w-[91.9vw] flex-col bg-[#F4F5FA] pl-5 pt-5 max-[931px]:justify-center max-[445px]:ml-[3.7rem]  ">
               <p className="mb-4 text-4xl font-medium text-black">
-                Idea Submission For Devsoc24
+                Idea Submission For Internal Hack
               </p>
 
               <SubmitIdeaForm />
@@ -107,7 +108,7 @@ export default function Page() {
                 <Logo className="h-9/10 b flex w-auto scale-[0.75] lg:scale-[1]" />
 
                 <Image
-                  src={Dashtitle as HTMLImageElement}
+                  src={cclogo as HTMLImageElement}
                   alt="title"
                   className="hidden w-[30vw] sm:block lg:w-auto"
                 />
@@ -125,7 +126,7 @@ export default function Page() {
             </div>
             <div className="">
               <p className="m-4 mb-4 text-center text-4xl font-medium text-black md:my-12">
-                Idea Submission For Devsoc24
+                Idea Submission For Internal Hack
               </p>
               <div className="flex w-full items-center justify-center ">
                 <SubmitIdeaForm />
