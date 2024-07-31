@@ -22,7 +22,7 @@ import { useRouter } from "next/navigation";
 import { IdeaStore } from "@/store/store";
 import refreshToken from "@/services/refreshtoken";
 interface FormValues {
-  name: string;
+  title: string;
   track: string;
   description: string;
   figma_link: string;
@@ -51,7 +51,7 @@ export default function SubmitProjectForm() {
   const form = useForm<FormValues>({
     resolver: zodResolver(ideaSchema),
     defaultValues: {
-      name: "",
+      title: "",
       track: "",
       description: "",
       figma_link: "",
@@ -107,7 +107,7 @@ export default function SubmitProjectForm() {
               <div>
                 <FormField
                   control={form.control}
-                  name="name"
+                  name="title"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
@@ -125,7 +125,7 @@ export default function SubmitProjectForm() {
                             {...field}
                             placeholder="Shuttle tracker"
                             className={`h-14 bg-white pl-5 ${
-                              form.getFieldState("name").invalid
+                              form.getFieldState("title").invalid
                                 ? "border-red-500 focus:border-input focus:!ring-red-500"
                                 : ""
                             }`}
