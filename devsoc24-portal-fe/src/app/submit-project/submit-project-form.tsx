@@ -65,7 +65,7 @@ export default function SubmitProjectForm() {
     const handleSubmit = async () => {
       await refreshToken()
       await axios.post<SubmitProjectResponse>(
-        `${process.env.NEXT_PUBLIC_API_URL}/project/create`,
+        `${process.env.NEXT_PUBLIC_API_URL}/idea/create`,
         data,
         {
           withCredentials: true,
@@ -77,7 +77,7 @@ export default function SubmitProjectForm() {
       success: () => {
         SetIdea("idea found");
         void router.push("/home");
-        return `Project submitted successfully!`;
+        return `Idea submitted successfully!`;
       },
       error: (err: AxiosError) => {
         switch (err.response?.status) {
@@ -91,7 +91,7 @@ export default function SubmitProjectForm() {
             void router.push("/");
             return `Session Expired`;
           default:
-            return `Project Submission failed!`;
+            return `Idea Submission failed!`;
         }
       },
     });

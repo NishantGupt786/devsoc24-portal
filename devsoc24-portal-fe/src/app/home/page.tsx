@@ -298,7 +298,7 @@ export default function HomePage() {
       text: "Submit A Idea",
       showModal: getIdea !== "idea found" && getIdea !== "",
       modalType: "Choice",
-      routeTo: "/submit-idea",
+      routeTo: "/submit-project",
     },
   ];
 
