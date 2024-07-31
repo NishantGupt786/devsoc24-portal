@@ -22,34 +22,6 @@ export default function Page() {
       <div className="flex h-[10%] w-full items-center justify-between bg-background px-6 py-2">
         <Logo className="h-9/10 w-auto" />
       </div>
-      {form === 2 && isBannerVisible && (
-        <div className="flex w-full items-center justify-between bg-[#0019FF] p-2">
-          <div className="flex grow flex-col items-center justify-between gap-2 md:flex-row">
-            <div className="flex items-center">
-              <AlertTriangle className="h-8 w-8 text-white" />
-              <p className="pl-2 text-xs text-white">
-                If You do not have a team at the moment, consider joining the
-                Discord Server to socialize and form your dream team!
-              </p>
-            </div>
-            <a
-              href="https://discord.com/invite/AUHFPXEhjC"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <Button className="bg-[#6366F1] px-2">
-                <DiscordIcon />
-                <p className="ml-1">Join Discord</p>
-              </Button>
-            </a>
-          </div>
-          <XIcon
-            size={24}
-            className="cursor-pointer text-white"
-            onClick={() => setIsBannerVisible(false)}
-          />
-        </div>
-      )}
       <div className="flex w-full grow flex-col items-center bg-white/30 pt-10">
         <Image
           src={
