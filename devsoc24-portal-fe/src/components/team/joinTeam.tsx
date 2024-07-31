@@ -37,7 +37,6 @@ function JoinTeam() {
       return;
     }
     const handleSubmit = async () => {
-      await refreshToken()
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/team/join`,
         {
@@ -79,7 +78,6 @@ function JoinTeam() {
   };
   const fetchTeam = async () => {
     try {
-      await refreshToken()
       const response = await axios.get<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/team`,
         {

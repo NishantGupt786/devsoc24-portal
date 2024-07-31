@@ -40,7 +40,6 @@ export default function Page() {
 
   const logout = async () => {
     try {
-      await refreshToken()
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/logout`,
         {

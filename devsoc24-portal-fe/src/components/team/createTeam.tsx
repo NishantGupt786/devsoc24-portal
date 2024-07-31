@@ -56,7 +56,6 @@ function CreateTeam() {
       return;
     }
     try {
-      await refreshToken()
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/team/create`,
         { name: teamName },
@@ -96,7 +95,6 @@ function CreateTeam() {
 
   const fetchTeam = async () => {
     try {
-      await refreshToken()
       const response = await axios.get<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/team`,
         {

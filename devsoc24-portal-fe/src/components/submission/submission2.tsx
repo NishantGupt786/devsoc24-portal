@@ -28,7 +28,6 @@ import refreshToken from "@/services/refreshtoken";
     useEffect(() => {
       async function getIdeaSubmission() {
         try {
-          await refreshToken()
           const res = await axios.get<GetIdea>(
             `${process.env.NEXT_PUBLIC_API_URL}/idea`,
             {

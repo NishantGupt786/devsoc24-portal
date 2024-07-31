@@ -19,7 +19,6 @@ const Kick = () => {
 
   const fetchTeam = async () => {
     try {
-      await refreshToken()
       const response = await axios.get<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/team`,
         {
@@ -52,7 +51,6 @@ const Kick = () => {
 
   const leaveTeam = async () => {
     const handleClick = async () => {
-      await refreshToken()
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/team/kick`,
         { id: kickMate },

@@ -35,7 +35,6 @@ const LeaveTeam = () => {
 
   const fetchTeam = async () => {
     try {
-      await refreshToken()
       const response = await axios.get<userProps>(
         `${process.env.NEXT_PUBLIC_API_URL}/team`,
         {
@@ -68,7 +67,6 @@ const LeaveTeam = () => {
 
   const leaveTeam = async () => {
     const handleClick = async () => {
-      await refreshToken()
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/team/leave`, {
         withCredentials: true,
       });

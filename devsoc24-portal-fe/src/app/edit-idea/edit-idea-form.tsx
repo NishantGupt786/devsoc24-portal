@@ -57,7 +57,6 @@ export default function EditIdeaForm() {
   useEffect(() => {
     async function getIdeaSubmission() {
       try {
-        await refreshToken()
         const res = await axios.get<GetIdea>(
           `${process.env.NEXT_PUBLIC_API_URL}/idea`,
           {
@@ -98,7 +97,6 @@ export default function EditIdeaForm() {
 
   async function onSubmit(data: FormValues) {
     const handleSubmit = async () => {
-      await refreshToken()
       await axios.patch<SubmitProjectResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/idea/update`,
         data,

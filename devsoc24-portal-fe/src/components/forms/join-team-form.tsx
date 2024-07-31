@@ -37,7 +37,6 @@ export default function JoinTeamForm() {
   async function onSubmit(data: CreateTeamFormValues) {
     // console.log(data);
     const handleSubmit = async () => {
-      await refreshToken()
       await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/team/join`,
         { code: data.teamCode },

@@ -36,7 +36,6 @@ export default function CreateTeamForm() {
 
   async function onSubmit(data: CreateTeamFormValues) {
     const handleSubmit = async () => {
-      await refreshToken()
       await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/team/create`,
         { name: data.teamName },

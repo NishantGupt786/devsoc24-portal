@@ -71,7 +71,6 @@ export default function VitianForm({
     };
     // console.log(updatedData);
     const handleSubmit = async () => {
-      await refreshToken()
       await axios.post<APIResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/user/complete-profile`,
         updatedData,

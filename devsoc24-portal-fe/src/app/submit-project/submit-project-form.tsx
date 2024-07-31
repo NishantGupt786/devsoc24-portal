@@ -63,7 +63,6 @@ export default function SubmitProjectForm() {
 
   async function onSubmit(data: FormValues) {
     const handleSubmit = async () => {
-      await refreshToken()
       await axios.post<SubmitProjectResponse>(
         `${process.env.NEXT_PUBLIC_API_URL}/idea/create`,
         data,
