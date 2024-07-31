@@ -15,20 +15,6 @@ import { APIResponse } from "@/schemas/api";
 import { useSearchParams } from "next/navigation";
 
 export default function Page() {
-  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
-  const titles = [title, title2, title3, title4];
-
-  useEffect(() => {
-    const intervals = [2000, 400, 600, 400];
-
-    const interval = setInterval(() => {
-      setCurrentTitleIndex((prevIndex) => (prevIndex + 1) % titles.length);
-    }, intervals[currentTitleIndex]);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [currentTitleIndex, titles.length]);
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
 
@@ -76,7 +62,9 @@ export default function Page() {
       <div className="flex max-w-[90vw] grow items-center justify-center">
         <Card className="w-fit">
           <CardHeader className="items-center">
-            <Image src={titles[currentTitleIndex] as string} alt="title" />
+            <div className="flex items-center justify-center text-7xl font-black">
+              Internal Hack 24
+            </div>
           </CardHeader>
           <div className="mt-3 flex flex-col items-center">
             <p className="text-2xl font-semibold text-black">Reset Password</p>
