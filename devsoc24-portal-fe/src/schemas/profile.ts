@@ -64,6 +64,8 @@ export const profileSchema = z.object({
     .or(z.literal("Men's Hostel - P Block"))
     .or(z.literal("Men's Hostel - Q Block"))
     .or(z.literal("Men's Hostel - R Block"))
+    .or(z.literal("Men's Hostel - S Block"))
+    .or(z.literal("Men's Hostel - T Block"))
     .or(z.literal("Day Scholar")),
   room: z
     .string({

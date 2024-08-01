@@ -27,6 +27,8 @@ export const  hostelDetails = {
     "Men's Hostel - P Block",
     "Men's Hostel - Q Block",
     "Men's Hostel - R Block",
+    "Men's Hostel - S Block",
+    "Men's Hostel - T Block",
   ],
   mens: [
     "Day Scholar",
@@ -48,6 +50,8 @@ export const  hostelDetails = {
     "Men's Hostel - P Block",
     "Men's Hostel - Q Block",
     "Men's Hostel - R Block",
+    "Men's Hostel - S Block",
+    "Men's Hostel - T Block",
   ],
   ladies: [
     "Day Scholar",
