@@ -20,7 +20,7 @@ export default function Page() {
         <Card className="w-fit">
           <CardHeader className="items-center">
             <div className="flex items-center justify-center text-7xl font-black">
-              Internal Hack &apos;24
+              Internal Hack &apos;25
             </div>
           </CardHeader>
           <div className="mt-3 flex flex-col items-center">

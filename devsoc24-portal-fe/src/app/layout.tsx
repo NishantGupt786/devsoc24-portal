@@ -19,12 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>Internal Hack&apos;24 | Portal</title>
-        <meta title="Internal Hack'24 | Portal"></meta>
+        <title>Internal Hack&apos;25 | Portal</title>
+        <meta title="Internal Hack'25 | Portal"></meta>
         <meta
           name="description"
           content={
-            "Welcome to the Internal Hack-24 Portal! From idea submission to your final project, the portal is your guide for Internal Hack. Happy Hacking!"
+            "Welcome to the Internal Hack-25 Portal! From idea submission to your final project, the portal is your guide for Internal Hack. Happy Hacking!"
           }
         />
         <link
@@ -35,18 +35,18 @@ export default function RootLayout({
         ></link>
 
         {/* Open Graph tags */}
-        <meta property="og:title" content={"Internal Hack'24 | Portal"} />
+        <meta property="og:title" content={"Internal Hack'25 | Portal"} />
         <meta
           property="og:description"
           content={
-            "Welcome to the Internal Hack-24 Portal! From idea submission to your final project, the portal is your guide for Internal Hack. Happy Hacking!"
+            "Welcome to the Internal Hack-25 Portal! From idea submission to your final project, the portal is your guide for Internal Hack. Happy Hacking!"
           }
         />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={"https://gutgutu.codechefvit.com/inthacktn.jpeg"} />
         <meta property="og:url" content={"https://gutgutu.codechefvit.com"} />
-        <meta property="og:image:alt" content={"Internal Hack'24 | Portal"} />
-        <meta property="og:site_name" content={"Internal Hack'24 | Portal"} />
+        <meta property="og:image:alt" content={"Internal Hack'25 | Portal"} />
+        <meta property="og:site_name" content={"Internal Hack'25 | Portal"} />
       </head>
       <body className={`font-sans ${inter.className}`}>
         <ThemeProvider

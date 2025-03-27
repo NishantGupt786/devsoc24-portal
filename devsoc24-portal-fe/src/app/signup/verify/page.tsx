@@ -20,12 +20,12 @@ export default function Page() {
         <Card className="w-fit">
           <CardHeader className="items-center">
             <div className="flex items-center justify-center text-7xl font-black">
-              Internal Hack &apos;24
+              Internal Hack &apos;25
             </div>
           </CardHeader>
           <div className="mt-3 flex flex-col items-center">
             <p className="text-2xl font-semibold text-black">
-            Internal Hack&apos;24 Time Baby!
+            Internal Hack&apos;25 Time Baby!
             </p>
             <p className="mt-1 text-sm">Start hack-a-lacking!</p>
           </div>
