@@ -140,7 +140,7 @@ export default function HomePage() {
   const fetchIdea = async () => {
     try {
       const response: AxiosResponse<ideaProps> = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/project`,
+        `${process.env.NEXT_PUBLIC_API_URL}/idea`,
         {
           withCredentials: true,
         },
