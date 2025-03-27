@@ -6,22 +6,22 @@ import Image from "next/image";
 
 const timelineData = [
   {
-    date: "2nd August",
+    date: "29th March",
     time: "20:00",
     desc: "Hack Starts",
   },
   {
-    date: "3rd August",
+    date: "30th March",
     time: "00:00",
     desc: "Review 1(idea based)",
   },
   {
-    date: "3rd August",
+    date: "30th March",
     time: "22:00",
     desc: "Review 2(implementation)",
   },
   {
-    date: "4th August",
+    date: "31st March",
     time: "15:00",
     desc: "Final reviews",
   },
